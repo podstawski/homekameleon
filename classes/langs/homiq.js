@@ -121,7 +121,7 @@ module.exports = function(com,logger,callback) {
     
     self.cmd_I = function (line) {
         var cmd=line[pos_cmd].split('.');
-        if (cmd.length==2) callback('input',{address: line[pos_src]+'.'+cmd[1], value: line[pos_val]});
+        if (cmd.length==2) callback('input',{address: line[pos_src]+'.'+cmd[1], state: line[pos_val]});
     }
     
     
