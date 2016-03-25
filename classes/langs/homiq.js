@@ -46,25 +46,31 @@ module.exports = function(com,logger,callback) {
         return c;
     }
     
+    var deletefuture = function (params) {
+        for (var i=0; i<sendQueue.length; i++) {
+            if (sendQueue[i].str.length>0) continue;
+            
+            var pass=true;
+            for (var k in params) {
+                if (params[k]!=sendQueue[i].cmd[k]) {
+                    pass=false;
+                    break;
+                }
+            }
+            if (pass) {
+                sendQueue.splice(i,1);
+            }
+        }
+        
+    }
+    
     var send = function(cmd,delay) {
         now=Date.now()/1000;
         
         
         if (cmd!=null) {
-            var arr=new Array;
-            counter=(counter%510)+1;
-            arr[pos_cmd]=cmd.cmd;
-            arr[pos_val]=cmd.val;
-            arr[pos_src]='0';
-            arr[pos_dst]=cmd.dst;
-            arr[pos_pkt]=counter;
-            arr[pos_top]='s';
-            arr[pos_crc]=crc(arr);
-            var str='<;'+arr.join(';')+';>';
             
-            var search = arr[pos_cmd]+':'+arr[pos_dst]+':'+arr[pos_pkt];
-            
-            sendQueue.push({str: str, sent: 0, count: 0, when:now+parseFloat(delay), search: search});
+            sendQueue.push({str: '', sent: 0, count: 0, when:now+parseFloat(delay), search: '', cmd: cmd});
         }
         
         if (sendSemaphore) {
@@ -78,6 +84,21 @@ module.exports = function(com,logger,callback) {
             if ( sendQueue[i].when>now) continue;
             if ( now-sendQueue[i].sent<attempt_delay) continue;
             if ( sendQueue[i].count>=attempts) continue;
+            
+            if (sendQueue[i].str.length==0) {
+                var arr=new Array;
+                counter=(counter%510)+1;
+                arr[pos_cmd]=sendQueue[i].cmd.cmd;
+                arr[pos_val]=sendQueue[i].cmd.val;
+                arr[pos_src]='0';
+                arr[pos_dst]=sendQueue[i].cmd.dst;
+                arr[pos_pkt]=counter;
+                arr[pos_top]='s';
+                arr[pos_crc]=crc(arr);
+                
+                sendQueue[i].str='<;'+arr.join(';')+';>';
+                sendQueue[i].search = arr[pos_cmd]+':'+arr[pos_dst]+':'+arr[pos_pkt];
+            }
                 
             var msg=sendQueue[i].str;
             var res=com.send(msg+"\r\n");
@@ -129,6 +150,10 @@ module.exports = function(com,logger,callback) {
         'turnon': function(options) {
             var adr=options['address'].split('.');
             var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
+            deletefuture({
+                cmd: 'O.'+adr[1],
+                dst: adr[0],
+            });
             send({
                 cmd: 'O.'+adr[1],
                 dst: adr[0],
@@ -140,6 +165,10 @@ module.exports = function(com,logger,callback) {
         'turnoff': function(options) {
             var adr=options['address'].split('.');
             var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
+            deletefuture({
+                cmd: 'O.'+adr[1],
+                dst: adr[0],
+            });
             send({
                 cmd: 'O.'+adr[1],
                 dst: adr[0],
