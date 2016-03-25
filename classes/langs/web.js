@@ -40,8 +40,11 @@ var Web = function(com,logger,callback) {
                         }
                         else{
                             response.writeHead(200, {"Content-Type": "text/html"});
-                            response.write(data, "utf8");
-                            response.end();
+                            if (!response.finished) {
+                                response.write(data, "utf8");
+                                response.end();    
+                            }
+                            
                         }
                     });
                     break;
