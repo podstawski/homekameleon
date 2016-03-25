@@ -1,0 +1,50 @@
+{
+    "devices": [
+        {
+            "id": "HQP",
+            "name": "Homiq Promienko",
+            "protocol": "tcp",
+            "language": "homiq",
+            "com":{
+                "host": "10.10.20.201",
+                "port": "4001",
+                "latency": 20
+            }
+        },
+        {
+            "id": "WEB",
+            "name": "Web Server",
+            "protocol": "httpd",
+            "language": "web",
+            "com":{
+                "port": "8002",
+                "tunnel_port": "8001",
+                "tunnel_host": "homiq@homiq.webkameleon.com"
+            }
+        }
+    ],
+    "db": {
+        "inputs": {
+            "file":"inputs.json",
+            "index": ["device","address"]
+        },        
+        "outputs": {
+            "file":"outputs.json",
+            "index": ["device","address"]
+        },        
+        "ios": {
+            "file":"ios.json",
+            "index": ["device","address"]
+        },
+        "scenarios": {
+            "file":"scenarios.json",
+            "index": ["id"]
+        },
+        "actions": {
+            "file":"actions.json",
+            "index": ["device","address"]
+        }
+        
+    }
+    
+}
