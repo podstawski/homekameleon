@@ -1,5 +1,5 @@
 var attempts=5;
-var attempt_delay=1;
+var attempt_delay=1000;
 
 var pos_cmd=0;
 var pos_val=1;
@@ -18,6 +18,7 @@ module.exports = function(com,logger,callback) {
     var sendSemaphore=false;
     var buf='';
     var self=this;
+    var sendTimers=[];
 
     
     var crc = function (cmd) {
@@ -65,24 +66,42 @@ module.exports = function(com,logger,callback) {
     }
     
     var send = function(cmd,delay) {
-        now=Date.now()/1000;
         
+        for (var i=0; i<sendTimers.length; i++) {
+            clearTimeout(sendTimers[i]);
+        }
+        sendTimers=[];
         
-        if (cmd!=null) {
-            
-            sendQueue.push({str: '', sent: 0, count: 0, when:now+parseFloat(delay), search: '', cmd: cmd});
+        var now=Date.now();
+        
+        if (delay==null) delay=0;
+        
+        if (cmd!=null) {    
+            sendQueue.push({str: '', sent: 0, count: 0, when:now+1000*parseFloat(delay), search: '', cmd: cmd});
         }
         
         if (sendSemaphore) {
-            setTimeout(send,10);
+            sendTimers.push(setTimeout(send,10));
             return;
         }
         
         sendSemaphore=true;
+        var nextHop=10000;
         
         for (var i=0; i<sendQueue.length; i++) {
-            if ( sendQueue[i].when>now) continue;
-            if ( now-sendQueue[i].sent<attempt_delay) continue;
+            if ( sendQueue[i].when > now) {
+                if (sendQueue[i].when-now < nextHop) {
+                    nextHop=sendQueue[i].when-now;
+                }
+                continue;
+            }
+            
+            if ( now-sendQueue[i].sent < attempt_delay) {
+                if (nextHop > attempt_delay-now+sendQueue[i].sent) {
+                    nextHop = attempt_delay-now+sendQueue[i].sent;
+                }
+                continue;
+            }
             if ( sendQueue[i].count>=attempts) continue;
             
             if (sendQueue[i].str.length==0) {
@@ -102,11 +121,16 @@ module.exports = function(com,logger,callback) {
                 
             var msg=sendQueue[i].str;
             var res=com.send(msg+"\r\n");
-            if (!res) sendQueue[i].when=now+10;
-            sendQueue[i].count++;
-            sendQueue[i].sent=now;
+            if (!res) {
+                sendQueue[i].when=now+1000;
+                if (nextHop>1000) nextHop=1000;
+            } else {
+                sendQueue[i].count++;
+                sendQueue[i].sent=now;
+                logger.log('Sending: '+msg,'frame');
+            }
             
-            logger.log('Sending: '+msg,'frame');
+            
         }
         
         for (var i=0; i<sendQueue.length; i++) {
@@ -115,6 +139,7 @@ module.exports = function(com,logger,callback) {
             
             if ( sendQueue[i].count>=attempts ) {
                 sendQueue.splice(i,1);
+                continue;
             }
              
         }
@@ -122,7 +147,7 @@ module.exports = function(com,logger,callback) {
         
         
         sendSemaphore=false;
-        if (sendQueue.length>0) setTimeout(send,1000);
+        if (sendQueue.length>0) sendTimers.push(setTimeout(send,nextHop));
         
     }
     
