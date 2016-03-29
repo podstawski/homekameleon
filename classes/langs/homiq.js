@@ -65,6 +65,11 @@ module.exports = function(com,logger,callback) {
         
     }
     
+    var pkt = function() {
+        counter=(counter%255)+1;
+        return counter;
+    }
+    
     var send = function(cmd,delay) {
         
         for (var i=0; i<sendTimers.length; i++) {
@@ -106,12 +111,12 @@ module.exports = function(com,logger,callback) {
             
             if (sendQueue[i].str.length==0) {
                 var arr=new Array;
-                counter=(counter%510)+1;
+                
                 arr[pos_cmd]=sendQueue[i].cmd.cmd;
                 arr[pos_val]=sendQueue[i].cmd.val;
                 arr[pos_src]='0';
                 arr[pos_dst]=sendQueue[i].cmd.dst;
-                arr[pos_pkt]=counter;
+                arr[pos_pkt]=pkt();
                 arr[pos_top]='s';
                 arr[pos_crc]=crc(arr);
                 
@@ -151,10 +156,22 @@ module.exports = function(com,logger,callback) {
         
     }
     
-    var sendline = function (line,delay) {
-        if (delay==null) delay=0;
+    
+    
+    var hb=function() {
+        var line=[];
+        line[pos_cmd]='HB';
+        line[pos_val]='1';
+        line[pos_top]='s';
+        line[pos_dst]='yy';
+        line[pos_src]='0';
+        line[pos_pkt]=pkt();
+        line[pos_crc]=crc(line);
         var cmd='<;'+line.join(';')+';>';
-        send(cmd,delay,line[pos_top]=='s');
+        logger.log('Sending line: '+cmd,'frame');
+        com.send(cmd+"\r\n");
+        
+        setTimeout(hb,18000);
     }
     
     var linein = function (line) {
@@ -200,6 +217,58 @@ module.exports = function(com,logger,callback) {
                 val: 0
             },delay);
         },
+        'up': function(options) {
+            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
+            deletefuture({
+                cmd: 'UD',
+                dst: options['address'],
+            });
+            send({
+                cmd: 'UD',
+                dst: options['address'],
+                val: 'u',
+                setval: 'up'
+            },delay);
+        },
+        'down': function(options) {
+            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
+            deletefuture({
+                cmd: 'UD',
+                dst: options['address'],
+            });
+            send({
+                cmd: 'UD',
+                dst: options['address'],
+                val: 'd',
+                setval: 'down'
+            },delay);
+        },
+        'stop-u': function(options) {
+            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
+            deletefuture({
+                cmd: 'UD',
+                dst: options['address'],
+            });
+            send({
+                cmd: 'UD',
+                dst: options['address'],
+                val: 's',
+                setval: 'stop-u'
+            },delay);
+        },
+        'stop-d': function(options) {
+            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
+            deletefuture({
+                cmd: 'UD',
+                dst: options['address'],
+            });
+            send({
+                cmd: 'UD',
+                dst: options['address'],
+                val: 's',
+                setval: 'stop-d'
+            },delay);
+        },
         'data': function(data) {
             buf+=data.trim();
             
@@ -226,13 +295,16 @@ module.exports = function(com,logger,callback) {
                 if (line[pos_top]=='a') {
                     var search = line[pos_cmd]+':'+line[pos_src]+':'+line[pos_pkt];
                 
+                    var origin={};
                     for (var i=0;i<sendQueue.length; i++) {
                         if (sendQueue[i].search==search && sendQueue[i].sent>0) {
                             sendQueue[i].count=attempts;
+                            origin=sendQueue[i].cmd;
                             break;
                         }
                     }
                     var logicalstate='';
+                    var state=line[pos_val];
                     if (line[pos_val]=='1') logicalstate='on';
                     if (line[pos_val]=='0') logicalstate='off';
                     if (line[pos_val]=='u') logicalstate='up';
@@ -242,13 +314,20 @@ module.exports = function(com,logger,callback) {
                     var adr=line[pos_src];
                     if (cmd.length==2) adr+='.'+cmd[1];
                     
-                    var opt={address:adr,state:line[pos_val],logicalstate:logicalstate};
+                    if (typeof(origin.setval)!='undefined') {
+                        state=logicalstate=origin.setval;
+                    }
+                    
+                    var opt={address:adr,state:state,logicalstate:logicalstate};
                     callback('output',opt);
                 }
                 
             }
             
             
+        },
+        'initstate': function (db) {
+            setTimeout(hb,1000);
         }
     }
     
