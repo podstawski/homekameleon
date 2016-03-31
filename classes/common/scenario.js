@@ -1,7 +1,7 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
-
 var condition=require('./condition');
+var levenshtein=require('./levenshtein');
 
 var Scenario=function(logger) {
     var self=this;
@@ -101,6 +101,27 @@ var Scenario=function(logger) {
         
     } 
     
+    var find=function(str) {
+        var s=db.scenarios.get(str);
+        if (s!=null) return s.id;
+        
+        var all=db.scenarios.getAll();
+        
+        str=str.toLowerCase();
+        
+        var result={};
+        for (var id in all) {
+            var lev=levenshtein(str,all[id].name.toLowerCase());
+            if (lev==0) return id;
+            if (lev>4) continue;
+            if (typeof(result[lev])=='undefined') result[lev]=[];
+            result[lev].push(all[id]);
+            
+        }
+        
+        console.log(str,result);
+        return null;
+    }
     
     
     return {
@@ -114,6 +135,10 @@ var Scenario=function(logger) {
         
         run: function(scenario,delay) {
             run(scenario,delay);
+        },
+        
+        find: function(str) {
+            return find(str);
         }
     }
     

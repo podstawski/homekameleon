@@ -1,2 +1,4 @@
 node_modules/
 conf/
+homiq.pid
+npm-debug.log

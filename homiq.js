@@ -5,11 +5,12 @@ var Logger = require('./classes/common/logger');
 var Device = require('./classes/common/device');
 var Logic = require('./classes/common/logic');
 var Scenario = require('./classes/common/scenario');
-
+var Calendar = require('./classes/common/calendar');
 
 var logger = new Logger('./logs');
 var structure = new Structure(__dirname + '/conf/structure.json',logger);
 var scenario = new Scenario(logger);
+var calendar = new Calendar(logger,scenario);
 var logic = new Logic(scenario,logger);
 
 var structureData;
@@ -27,6 +28,11 @@ process.on('SIGHUP',function () {
         
         scenario.setdb(structure.db);
         logic.setdb(structure.db);
+        
+        if (typeof(structureData.calendars)!='undefined') {
+            calendar.reggister(structureData.calendars);
+            calendar.update();
+        }
         
         for(var i=0; i<structureData.devices.length; i++) {
             var id=structureData.devices[i].id;
@@ -60,6 +66,18 @@ process.on('SIGHUP',function () {
 
 process.kill(process.pid, 'SIGHUP');
 fs.writeFile(__dirname+'/homiq.pid',process.pid);
+
+var cron = function() {
+    var now=Math.round(Date.now()/1000);
+    var min=(now/60)%60;
+    if (min==0) calendar.update(); 
+    calendar.run();
+    setTimeout(cron,60000);    
+}
+
+var now=Math.round(Date.now()/1000);
+setTimeout(cron, 1000*(60-(now%60)));
+
 
 /*
  * wait before everything starts
