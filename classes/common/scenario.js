@@ -6,6 +6,7 @@ var levenshtein=require('./levenshtein');
 var Scenario=function(logger) {
     var self=this;
     var db;
+    var cache={};
     
     var scenariosQueue=[];
     var scenariosSemaphore=false;
@@ -102,8 +103,13 @@ var Scenario=function(logger) {
     } 
     
     var find=function(str) {
+        if (typeof(cache[str])!='undefined') return cache[str];
+        
         var s=db.scenarios.get(str);
-        if (s!=null) return s.id;
+        if (s!=null) {
+            cache[str]=s.id;
+            return s.id;
+        }
         
         var all=db.scenarios.getAll();
         
@@ -113,13 +119,60 @@ var Scenario=function(logger) {
         for (var id in all) {
             var lev=levenshtein(str,all[id].name.toLowerCase());
             if (lev==0) return id;
-            if (lev>4) continue;
+            if (lev>5) continue;
             if (typeof(result[lev])=='undefined') result[lev]=[];
             result[lev].push(all[id]);
-            
         }
         
-        console.log(str,result);
+        if (typeof(result[1])!='undefined') {
+            cache[str]=result[1][0].id;
+            return cache[str];
+        }
+        
+        if (typeof(result[2])!='undefined') {
+            cache[str]=result[2][0].id;
+            return cache[str];
+        }
+        
+
+        var results=[{},{}];
+        for (var i=3; i<=5; i++) {
+            
+            if (typeof(result[i])=='undefined') continue;
+            for (j=0;j<result[i].length;j++) {
+                lev1=levenshtein(str+' on',result[i][j].name.toLowerCase());
+                lev2=levenshtein(str+' off',result[i][j].name.toLowerCase());
+            
+                if (typeof(results[0][lev1])=='undefined') results[0][lev1]=[];
+                results[0][lev1].push(result[i][j]);
+                if (typeof(results[1][lev2])=='undefined') results[1][lev2]=[];
+                results[1][lev2].push(result[i][j]);
+            
+                lev1=levenshtein(str+' start',result[i][j].name.toLowerCase());
+                lev2=levenshtein(str+' stop',result[i][j].name.toLowerCase());
+            
+                if (typeof(results[0][lev1])=='undefined') results[0][lev1]=[];
+                results[0][lev1].push(result[i][j]);
+                if (typeof(results[1][lev2])=='undefined') results[1][lev2]=[];
+                results[1][lev2].push(result[i][j]);            
+            
+            }
+        }
+        var res=['',''];
+        
+        for (var i=0; i<2; i++) {
+            for (var j=0; j<=2; j++) {
+                if (typeof(results[i][j])!='undefined') {
+                    res[i]=results[i][j][0].id;
+                    break;
+                }
+            }
+        }
+        
+        if (res[0].length>0 && res[1].length) {
+            cache[str]=res;
+            return res;
+        }
         return null;
     }
     

@@ -93,7 +93,7 @@ module.exports = function(com,logger,callback) {
             } else {
                 sendQueue[i].count++;
                 sendQueue[i].sent=now;
-                logger.log('Sending: '+msg,'frame');
+                logger.log('EMU is sending: '+msg,'frame');
             }
             
             
@@ -128,7 +128,8 @@ module.exports = function(com,logger,callback) {
     }
     
     self.cmd_O = function (line) {
-        logger.log('Turning on '+line[pos_src],'emulator');
+        var cmd=line[pos_cmd].split('.');
+        logger.log('EMU swiches '+(line[pos_val]=='1'?'on':'off')+' '+line[pos_dst]+'.'+cmd[1],'emulator');
     }
     
     
@@ -140,7 +141,7 @@ module.exports = function(com,logger,callback) {
                 var begin=buf.indexOf('<;');
                 var end=buf.indexOf(';>');
                 
-                logger.log('Received: '+buf.substr(begin,end-begin+2),'emulator');
+                logger.log('EMU received: '+buf.substr(begin,end-begin+2),'emulator');
                 var line=buf.substr(begin+2,end-begin-2).split(';');
                 buf=buf.substr(end+2);
                 if (line[pos_top]=='s' && line[pos_cmd]!='HB') {
@@ -152,7 +153,7 @@ module.exports = function(com,logger,callback) {
                     var cmd='<;'+ack.join(';')+';>';
                     
                     linein(line);
-                    logger.log('Sending ack: '+cmd,'frame');
+                    logger.log('EMU is sending ack: '+cmd,'frame');
                     com.send(cmd+"\r\n");
                         
                 }
