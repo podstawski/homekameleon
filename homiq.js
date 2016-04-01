@@ -1,4 +1,5 @@
 var fs = require('fs');
+var checkactive=require('./classes/common/checkactive');
 
 var Structure = require('./classes/common/structure');
 var Logger = require('./classes/common/logger');
@@ -12,6 +13,8 @@ var structure = new Structure(__dirname + '/conf/structure.json',logger);
 var scenario = new Scenario(logger);
 var calendar = new Calendar(logger,scenario);
 var logic = new Logic(scenario,logger);
+
+
 
 var structureData;
 var devices=[];
@@ -35,6 +38,8 @@ process.on('SIGHUP',function () {
         }
         
         for(var i=0; i<structureData.devices.length; i++) {
+            if (!checkactive(structureData.devices[i])) continue;
+            
             var id=structureData.devices[i].id;
             if (typeof(devices[id])!='undefined') {
                 devices[id].disconnect();

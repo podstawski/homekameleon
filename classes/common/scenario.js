@@ -2,6 +2,7 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var condition=require('./condition');
 var levenshtein=require('./levenshtein');
+var checkactive=require('./checkactive');
 
 var Scenario=function(logger) {
     var self=this;
@@ -70,12 +71,8 @@ var Scenario=function(logger) {
          */
         scenario=db.scenarios.get(scenario);
         if (scenario==null) return;
-        
-        var typeofactive=typeof(scenario['active']);
-        if (typeofactive=='string') if (scenario.active=='0') return;
-        if (typeofactive=='boolean') if (scenario.active==false) return;
-        if (typeofactive=='integer') if (scenario.active==0) return;
-        
+        if (!checkactive(scenario)) return;
+    
         /*
          *queue scenario
          */
