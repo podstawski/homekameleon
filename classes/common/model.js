@@ -2,6 +2,17 @@ var fs = require('fs');
 
 var instances=[];
 
+var modelSaveTimer=null;
+
+var saveModel=function(stop) {
+    if(modelSaveTimer!=null) clearTimeout(modelSaveTimer);
+    for (var k in instances) instances[k].save();
+    if (stop==null) modelSaveTimer=setTimeout(saveModel,1000);
+}
+
+modelSaveTimer=setTimeout(saveModel,1000);
+
+
 
 var Model = function(file,index,logger) {
     var data=[];
@@ -28,12 +39,13 @@ var Model = function(file,index,logger) {
         
         var bak=file+'.bak';
         fs.renameSync(file, bak);
-        fs.writeFile(file,JSON.stringify(d),function() {
-            logger.log("Saved "+file,'db');
-            fs.unlink(bak);
-            lastSave=Date.now();
-            saveState=false;
-        });
+        fs.writeFileSync(file,JSON.stringify(d));
+        
+        logger.log("Saved "+file,'db');
+        fs.unlink(bak);
+        lastSave=Date.now();
+        saveState=false;
+    
     }
     
     
@@ -97,17 +109,18 @@ var Model = function(file,index,logger) {
         
         index: function(data) {
             return createIndex(data);
+        },
+        
+        ultimateSave: function () {
+            logger.log('Ultimate save','db');
+            saveModel(true);
         }
+ 
         
     }
     
 }
 
-var saveModel=function() {
-    for (var k in instances) instances[k].save();
-    setTimeout(saveModel,1000);
-}
 
-setTimeout(saveModel,1000);
 
 module.exports = Model;

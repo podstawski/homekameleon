@@ -29,6 +29,7 @@ process.on('SIGHUP',function () {
     if (typeof(data)=='object') {
         structureData=data;
         
+        logger.loadChannels(structureData['logger']);
         scenario.setdb(structure.db);
         logic.setdb(structure.db);
         
@@ -68,6 +69,24 @@ process.on('SIGHUP',function () {
         }
     }   
 });
+
+var cleanEndStarted=false;
+var cleanEnd=function() {
+    if (cleanEndStarted) return;
+    cleanEndStarted=true;
+    console.log('');
+    for (k in structure.db) {
+        structure.db[k].ultimateSave();
+        break;
+    }
+    logger.save();
+    process.exit(0);
+}
+
+process.on('SIGTERM',cleanEnd);
+process.on('SIGINT',cleanEnd);
+
+
 
 process.kill(process.pid, 'SIGHUP');
 fs.writeFile(__dirname+'/homiq.pid',process.pid);

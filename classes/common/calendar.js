@@ -36,15 +36,40 @@ module.exports = function(logger,scenario) {
                         return;
                     }
                     
+                    
+                    
                     for (var k in data){
                         if (data.hasOwnProperty(k)) {
                             var ev = data[k];
+                            if (typeof(ev.start)=='undefined') continue;
+                            
                             var start=ev.start.getTime();
                             var end=ev.end.getTime();
+                            var duration_ms=end-start;
+                            var duration=duration_ms/3600000;
+                            
+                            if (typeof(ev.rrule)!='undefined' && end<now) {
+                                var starts=ev.rrule.between(new Date(new Date().getTime()-3600*1000),new Date(new Date().getTime()+24*3600*1000));
+                                
+                                if (starts.length>0) {
+                                    var nStart=starts[0];
+                                    
+                                    nStart.setHours(ev.start.getHours());
+                                    nStart.setMinutes(ev.start.getMinutes());
+                                    nStart.setSeconds(ev.start.getSeconds());
+                                
+                                    start=nStart.getTime();
+                                    end=start+duration_ms;
+                                    ev.start=new Date(start);
+                                    ev.end=new Date(end);
+                                    
+                                }
+                                
+                            };
+                            
                             
                             if (end < now) continue;
                             if (start > now+24*3600*1000) continue;
-                            var duration=(end - start)/3600000;
                             
 
                             if (duration>=23 && duration<=25) {
@@ -94,7 +119,6 @@ module.exports = function(logger,scenario) {
                           
                         }
                     }                
-                
                 
                 });
             }

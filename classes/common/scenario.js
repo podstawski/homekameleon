@@ -31,7 +31,7 @@ var Scenario=function(logger) {
                 }
                 
                 if (pass) {
-                    logger.log(scenariosQueue[i].scenario.name,'scenario');
+                    logger.log(scenariosQueue[i].scenario.name,scenariosQueue[i].scenario.log||'scenario');
                     
 
                     for(var j=0;j<scenariosQueue[i].scenario.actions.length;j++) {
