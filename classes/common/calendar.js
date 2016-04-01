@@ -113,6 +113,7 @@ module.exports = function(logger,scenario) {
                 }
                 if (when<now) {
                     events.splice(i,1);
+                    i--;
                 }
             }
             

@@ -105,6 +105,7 @@ module.exports = function(com,logger,callback) {
             
             if ( sendQueue[i].count>=attempts ) {
                 sendQueue.splice(i,1);
+                i--;
                 continue;
             }
              

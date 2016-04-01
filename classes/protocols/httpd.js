@@ -85,6 +85,7 @@ var Httpd = function(options,logger) {
                     for (var x in httpClients) {
                          if (httpClients[x]==httpSocket) {
                             httpClients.splice(x,1);
+                            break;
                          }
                     }
                 });
