@@ -10,7 +10,7 @@
     $inputs=[];
     $ios=[];
 	$actions=[];
-	$scenarios=[];
+	$scripts=[];
 	
 	$outps=[];
     
@@ -38,7 +38,7 @@
                 'address'=>$m_adr,
                 'serial'=>$m_serial,
                 'name'=>$m_name,
-                'state'=>$m_state,
+                'state'=>'stop-u',
                 'timeout'=>$m_sleep,
                 'active'=>1
             ];
@@ -102,6 +102,7 @@
     }
 
 
+	$actionconditions=[];
 	$act=[];
     $sql="SELECT * FROM action ORDER BY a_pri,a_id";
 	$res=$adodb->execute($sql);
@@ -123,6 +124,14 @@
 				if (strlen($a_input_module_state)) {
 					if ($a_input_module_state=='0' || $a_input_module_state=='1') {
 						$c=['logicalstate','=',$a_input_module_state?'on':'off'];
+					} elseif ($a_input_module_state=='U') {
+						$c=['state','=','stop-u'];
+					} elseif ($a_input_module_state=='D') {
+						$c=['state','=','stop-d'];
+					} elseif ($a_input_module_state=='u') {
+						$c=['state','=','up'];
+					} elseif ($a_input_module_state=='d') {
+						$c=['state','=','down'];
 					} else {
 						$c=['state','=',$a_input_module_state];
 					}
@@ -159,28 +168,61 @@
 				if ($a_output_state=='U') $cmd='stop-u';
 				if ($a_output_state=='D') $cmd='stop-d';
 				
-				
-				if ($s) {
-					$scenarios[]=[
-						'id'=>$s,
-						'name'=>$a_name,
-						'conditions'=>[],
-						'active'=>true,
-						'actions'=> [[
+				$sact=[
 							'device'=>'HQP',
 							'address'=>$output_addr,
 							'command'=>$cmd,
 							'delay'=>$delay
-						]]
-					];
+				];
+				
+				
+				if ($s) {
+				
+					$cond_idx=array_search($cond,$actionconditions);
+					if ($cond_idx) {
+						$cond_idx=explode(':',$cond_idx);
+						
+					} else {
+						$cond_idx=['',''];
+					}
+					
+					if ($cond_idx[0]) {
+						$scripts_idx=$cond_idx[1];
+						if (!strlen(array_search($sact,$scripts[$scripts_idx]['actions']))) {
+							$scripts[$scripts_idx]['actions'][]=$sact;
+							$s=$scripts[$scripts_idx]['id'];
+						}
+						
+					} else {
+						$actionconditions["$idx:".count($scripts)]=$cond;
+						$scripts[]=[
+							'id'=>$s,
+							'name'=>$a_name,
+							'conditions'=>[],
+							'active'=>true,
+							'actions'=> [$sact]
+						];						
+					}
+					
+					if ($cond_idx[0]!=$idx) {
+					
+						$a=['active'=>$a_active,
+							'conditions'=>$cond,
+							'scripts'=>[['script'=>$s]]
+						];
+						
+						//if (strlen($a_macro)) $a['scripts'][]=['script'=>$a_macro];
+						
+						if (!isset($act[$idx])) $act[$idx]=['device'=>'HQP','address'=>$idx,'actions'=>[]];
+						
+						$act[$idx]['actions'][]=$a;						
+					
+					}
+					
+					
 				}
 				
-				$a=['active'=>$a_active,'conditions'=>$cond,'scenarios'=>$s?[['scenario'=>$s]]:[]];
 				
-				if (strlen($a_macro)) $a['scenarios'][]=['scenario'=>$a_macro];
-				
-				if (!isset($act[$idx])) $act[$idx]=['device'=>'HQP','address'=>$idx,'actions'=>[]];
-				$act[$idx]['actions'][]=$a;
 			}
 		}
 		
@@ -192,7 +234,7 @@
 
 	foreach ($act AS $a) $actions[]=$a;
 
-	//die(print_r(['a'=>$actions,'s'=>$scenarios],1));
+	print_r(['a'=>$actions,'s'=>$scripts]);
 
     
     
@@ -200,7 +242,7 @@
 	file_put_contents(__DIR__.'/conf/outputs.json', json_encode($outputs));
 	file_put_contents(__DIR__.'/conf/ios.json', json_encode($ios));
 	file_put_contents(__DIR__.'/conf/actions.json', json_encode($actions));
-	file_put_contents(__DIR__.'/conf/scenarios.json', json_encode($scenarios));
+	file_put_contents(__DIR__.'/conf/scripts.json', json_encode($scripts));
 	
     
     //print_r([$ios,$outputs,$inputs]);

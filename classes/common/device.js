@@ -49,6 +49,7 @@ var Device = function(id,protocol,language,options,logger) {
         
         initstate: function(socket,db) {
             if (typeof(com.initstate)=='function') com.initstate(socket,db);
+            if (typeof(trans.initstate)=='function') trans.initstate(db);
         },
         
         notify: function(type,data) {

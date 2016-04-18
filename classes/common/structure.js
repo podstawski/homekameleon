@@ -1,6 +1,8 @@
 var fs = require('fs');
 var path = require('path');
-var Model = require('./model');
+var models={};
+
+
 
 module.exports = function (conf,logger) {
     var config_file=conf;
@@ -28,7 +30,16 @@ module.exports = function (conf,logger) {
                    
                 for (var key in json.db) {    
                     try {
-                        db[key] = new Model(path.dirname(config_file)+'/'+json.db[key].file,json.db[key].index,logger);
+                        var model=json.db[key].model || './model';
+             
+                        if (typeof(models[model])=='undefined') {
+                            models[model]=require(model);
+                        }
+                        if (typeof(json.db[key].file)!='undefined' && json.db[key].file.indexOf('/')<0) {
+                            json.db[key].file=path.dirname(config_file)+'/'+json.db[key].file;
+                        }
+                  
+                        db[key] = new models[model](json.db[key],logger);
                         db[key].init();
                     } catch (e) {
                         logger.log('Error reading file '+json.db[key].file+' '+e,'error');

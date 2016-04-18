@@ -1,6 +1,7 @@
 var condition=require('./condition');
+var checkactive=require('./checkactive');
 
-var Logic = function(scenario,logger)
+var Logic = function(script,logger)
 {
     var db;
     
@@ -20,10 +21,7 @@ var Logic = function(scenario,logger)
                 case 'input': {
                     var inp=db.inputs.get(data);
                     if (inp==null) break;
-                    var typeofactive=typeof(inp['active']);
-                    if (typeofactive=='string') if (inp.active=='0') break;
-                    if (typeofactive=='boolean') if (inp.active==false) break;
-                    if (typeofactive=='integer') if (inp.active==0) break;
+                    if (!checkactive(inp)) break; 
                     
                     var actions=db.actions.get(data);
                     
@@ -51,9 +49,9 @@ var Logic = function(scenario,logger)
                                 
                                 if (pass) {
                                     
-                                    for (var j=0;j<actions.actions[i].scenarios.length; j++) {
+                                    for (var j=0;j<actions.actions[i].scripts.length; j++) {
                                         anypass=true;
-                                        scenario.run(actions.actions[i].scenarios[j]);
+                                        script.run(actions.actions[i].scripts[j]);
                                     }
                                 }
                                 

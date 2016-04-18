@@ -59,11 +59,19 @@ var Httpd = function(options,logger) {
                 self.emit('request',request,response);  
             });
             httpServer.listen(options.port);
+            
             logger.log('Listening on http://localhost:'+options.port,'net');
+            
+            httpServer.on('error',function(e){
+                logger.log('Can not listen on port '+options.port,'error');
+            });
+            
             
             if (typeof(options.tunnel_port)!='undefined' && typeof(options.tunnel_host)!='undefined') {
                 tunnel(options.tunnel_host,options.port,options.tunnel_port);
             }
+            
+            
             
             listener = io.listen(httpServer);
             
@@ -77,6 +85,7 @@ var Httpd = function(options,logger) {
                     for (var x in httpClients) {
                          if (httpClients[x]==httpSocket) {
                             httpClients.splice(x,1);
+                            break;
                          }
                     }
                 });

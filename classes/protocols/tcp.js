@@ -19,6 +19,7 @@ var Tcp = function(options,logger) {
             if (!connected) {
                 connected=true;
                 logger.log('Connected to '+options.host+':'+options.port,'init');
+                self.emit('connection');
             }
             
         });
