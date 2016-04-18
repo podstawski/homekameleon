@@ -46,6 +46,7 @@ module.exports = function(logdir) {
     
     return {
         log: function(contents,type) {
+            if (type==null) type='notype';
             log(contents,type);
         },
         

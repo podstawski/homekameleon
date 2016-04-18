@@ -5,14 +5,14 @@ var Structure = require('./classes/common/structure');
 var Logger = require('./classes/common/logger');
 var Device = require('./classes/common/device');
 var Logic = require('./classes/common/logic');
-var Scenario = require('./classes/common/scenario');
+var Script = require('./classes/common/script');
 var Calendar = require('./classes/common/calendar');
 
 var logger = new Logger('./logs');
 var structure = new Structure(__dirname + '/conf/structure.json',logger);
-var scenario = new Scenario(logger);
-var calendar = new Calendar(logger,scenario);
-var logic = new Logic(scenario,logger);
+var script = new Script(logger);
+var calendar = new Calendar(logger,script);
+var logic = new Logic(script,logger);
 
 
 
@@ -30,7 +30,7 @@ process.on('SIGHUP',function () {
         structureData=data;
         
         logger.loadChannels(structureData['logger']);
-        scenario.setdb(structure.db);
+        script.setdb(structure.db);
         logic.setdb(structure.db);
         
         if (typeof(structureData.calendars)!='undefined') {
@@ -61,7 +61,7 @@ process.on('SIGHUP',function () {
                 devices[id].initstate(data,structure.db);
             });
             
-            scenario.on(id,function(id,data) {
+            script.on(id,function(id,data) {
                 devices[id].command(data);
             });
             
@@ -89,7 +89,7 @@ process.on('SIGINT',cleanEnd);
 
 
 process.kill(process.pid, 'SIGHUP');
-fs.writeFile(__dirname+'/homiq.pid',process.pid);
+fs.writeFile(__dirname+'/app.pid',process.pid);
 
 var cron = function() {
     var now=Math.round(Date.now()/1000);

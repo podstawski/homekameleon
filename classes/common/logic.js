@@ -1,7 +1,7 @@
 var condition=require('./condition');
 var checkactive=require('./checkactive');
 
-var Logic = function(scenario,logger)
+var Logic = function(script,logger)
 {
     var db;
     
@@ -49,9 +49,9 @@ var Logic = function(scenario,logger)
                                 
                                 if (pass) {
                                     
-                                    for (var j=0;j<actions.actions[i].scenarios.length; j++) {
+                                    for (var j=0;j<actions.actions[i].scripts.length; j++) {
                                         anypass=true;
-                                        scenario.run(actions.actions[i].scenarios[j]);
+                                        script.run(actions.actions[i].scripts[j]);
                                     }
                                 }
                                 

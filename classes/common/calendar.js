@@ -1,6 +1,6 @@
 var ical = require('ical');
 
-module.exports = function(logger,scenario) {
+module.exports = function(logger,script) {
 
     var calendars=[];
     var events=[];
@@ -71,9 +71,11 @@ module.exports = function(logger,scenario) {
                             if (end < now) continue;
                             if (start > now+24*3600*1000) continue;
                             
+                            
 
                             if (duration>=23 && duration<=25) {
                             
+                                
                                 if (ev.summary.indexOf('unrise')>=0 && ev.summary.indexOf('unset')>=0) {
                                    
                                     var a=ev.summary.split(',');
@@ -88,11 +90,12 @@ module.exports = function(logger,scenario) {
                                             var str=today+' '+convertTo24Hour(a[j].substr(colon+1)).trim()+' GMT';
                                             var d=new Date(Date.parse(str));
                                             if (d.getTime()<now) continue;
-                                            var id=scenario.find(a[j].substr(0,colon));
+                                            var id=script.find(a[j].substr(0,colon));
+                    
                                             if (id!=null) {
-                                                events.push({when:d,scenario:id});
+                                                events.push({when:d,script:id});
                                             } else {
-                                                logger.log('Scenario "'+a[j].substr(0,colon)+'" unrecognizable','calendar');
+                                                logger.log('Script "'+a[j].substr(0,colon)+'" unrecognizable','calendar');
                                             }
                                             
                                         }
@@ -100,16 +103,16 @@ module.exports = function(logger,scenario) {
                                     }
                                 }
                             } else {
-                                var id=scenario.find(ev.summary);
+                                var id=script.find(ev.summary);
                                 if (id==null) {
-                                    logger.log('Scenario "'+ev.summary+'" unrecognizable','calendar');
+                                    logger.log('Script "'+ev.summary+'" unrecognizable','calendar');
                                 } else {
                                     if (typeof(id)=='object') {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,scenario:id[0]});
-                                        if (ev.end.getTime()>now) events.push({when:ev.end,scenario:id[1]});
+                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:id[0]});
+                                        if (ev.end.getTime()>now) events.push({when:ev.end,script:id[1]});
                                         
                                     } else {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,scenario:id});
+                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:id});
                                     }
                                 
                                 }
@@ -132,7 +135,7 @@ module.exports = function(logger,scenario) {
                 var when=events[i].when.getTime();
                 
                 if (Math.abs(now-when)<10000) {
-                    scenario.run(events[i].scenario,0);
+                    script.run(events[i].script,0);
                     
                 }
                 if (when<now) {

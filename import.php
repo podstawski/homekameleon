@@ -10,7 +10,7 @@
     $inputs=[];
     $ios=[];
 	$actions=[];
-	$scenarios=[];
+	$scripts=[];
 	
 	$outps=[];
     
@@ -187,15 +187,15 @@
 					}
 					
 					if ($cond_idx[0]) {
-						$scenarios_idx=$cond_idx[1];
-						if (!strlen(array_search($sact,$scenarios[$scenarios_idx]['actions']))) {
-							$scenarios[$scenarios_idx]['actions'][]=$sact;
-							$s=$scenarios[$scenarios_idx]['id'];
+						$scripts_idx=$cond_idx[1];
+						if (!strlen(array_search($sact,$scripts[$scripts_idx]['actions']))) {
+							$scripts[$scripts_idx]['actions'][]=$sact;
+							$s=$scripts[$scripts_idx]['id'];
 						}
 						
 					} else {
-						$actionconditions["$idx:".count($scenarios)]=$cond;
-						$scenarios[]=[
+						$actionconditions["$idx:".count($scripts)]=$cond;
+						$scripts[]=[
 							'id'=>$s,
 							'name'=>$a_name,
 							'conditions'=>[],
@@ -208,10 +208,10 @@
 					
 						$a=['active'=>$a_active,
 							'conditions'=>$cond,
-							'scenarios'=>[['scenario'=>$s]]
+							'scripts'=>[['script'=>$s]]
 						];
 						
-						//if (strlen($a_macro)) $a['scenarios'][]=['scenario'=>$a_macro];
+						//if (strlen($a_macro)) $a['scripts'][]=['script'=>$a_macro];
 						
 						if (!isset($act[$idx])) $act[$idx]=['device'=>'HQP','address'=>$idx,'actions'=>[]];
 						
@@ -234,7 +234,7 @@
 
 	foreach ($act AS $a) $actions[]=$a;
 
-	print_r(['a'=>$actions,'s'=>$scenarios]);
+	print_r(['a'=>$actions,'s'=>$scripts]);
 
     
     
@@ -242,7 +242,7 @@
 	file_put_contents(__DIR__.'/conf/outputs.json', json_encode($outputs));
 	file_put_contents(__DIR__.'/conf/ios.json', json_encode($ios));
 	file_put_contents(__DIR__.'/conf/actions.json', json_encode($actions));
-	file_put_contents(__DIR__.'/conf/scenarios.json', json_encode($scenarios));
+	file_put_contents(__DIR__.'/conf/scripts.json', json_encode($scripts));
 	
     
     //print_r([$ios,$outputs,$inputs]);

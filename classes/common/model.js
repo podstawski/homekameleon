@@ -14,11 +14,13 @@ modelSaveTimer=setTimeout(saveModel,1000);
 
 
 
-var Model = function(file,index,logger) {
+var Model = function(opt,logger) {
     var data=[];
     var lastSave=0;
     var lastSet=0;
     var saveState=false;
+    var file=opt.file;
+    var index=opt.index;
     instances[file]=this;
     
     var createIndex = function (data) {
@@ -73,7 +75,7 @@ var Model = function(file,index,logger) {
         },
         
         getAll: function() {
-            return data;    
+            return {data:data};    
         },
         
         get: function(idx) {

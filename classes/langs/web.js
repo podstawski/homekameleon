@@ -7,7 +7,7 @@ var root=__dirname+'/../../web';
 var Web = function(com,logger,callback) {
     
     com.on('initstate',function(socket,db) {
-        var outputs=db.outputs.getAll();
+        var outputs=db.outputs.getAll().data;
         for (var o in outputs) {
             socket.emit('output', outputs[o]);
         }

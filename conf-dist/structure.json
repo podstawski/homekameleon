@@ -6,10 +6,22 @@
             "protocol": "tcp",
             "language": "homiq",
             "com":{
-                "host": "10.10.20.201",
+                "host2": "10.10.20.201",
+                "host": "127.0.0.1",
                 "port": "4001",
                 "latency": 20
             }
+        },
+        {
+            "id": "EMU",
+            "name": "Homiq emulator",
+            "protocol": "tcpd",
+            "language": "hemulator",
+            "com":{
+                "port": "4001",
+                "latency": 20
+            },
+            "active": 1
         },
         {
             "id": "WEB",
@@ -21,26 +33,79 @@
                 "tunnel_port": "8001",
                 "tunnel_host": "homiq@homiq.webkameleon.com"
             }
+        },
+        {
+            "id": "ADM",
+            "name": "Admin Web Server",
+            "protocol": "httpd",
+            "language": "admin",
+            "com":{
+                "port": "3000"
+            },
+            "active": false
         }
+    ],
+    "logger": {
+        "init": {
+            "console": true
+        },
+        "emulator": {
+            "console": false
+        }
+        ,
+        "frame": {
+            "console": false
+        },
+        "init": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "net": {
+            "console": false,
+            "file": "homiq.txt"
+        },
+        "db": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "calendar": {
+            "console": true,
+            "file": "cal.txt"
+        },
+        "error": {
+            "console": true,
+            "file": "error.txt"
+        }
+        
+    },
+    "calendars": [
+        "https://calendar.google.com/calendar/ical/promienko.pl_udip7ebojkjs8abde9gokgphm8%40group.calendar.google.com/private-7657fb90a46096654cd353ca2c8b7787/basic.ics",
+        "https://calendar.google.com/calendar/ical/i_83.11.200.224%23sunrise%40group.v.calendar.google.com/public/basic.ics"
+        
     ],
     "db": {
         "inputs": {
+            "model": "../../admin/models/json",
             "file":"inputs.json",
             "index": ["device","address"]
         },        
         "outputs": {
+            "model": "../../admin/models/json",
             "file":"outputs.json",
             "index": ["device","address"]
         },        
         "ios": {
+            "model": "../../admin/models/json",
             "file":"ios.json",
             "index": ["device","address"]
         },
-        "scenarios": {
-            "file":"scenarios.json",
+        "scripts": {
+            "model": "../../admin/models/json",
+            "file":"scripts.json",
             "index": ["id"]
         },
         "actions": {
+            "model": "../../admin/models/json",
             "file":"actions.json",
             "index": ["device","address"]
         }

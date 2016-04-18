@@ -4,96 +4,96 @@ var condition=require('./condition');
 var levenshtein=require('./levenshtein');
 var checkactive=require('./checkactive');
 
-var Scenario=function(logger) {
+var Script=function(logger) {
     var self=this;
     var db;
     var cache={};
     
-    var scenariosQueue=[];
-    var scenariosSemaphore=false;
+    var scriptsQueue=[];
+    var scriptsSemaphore=false;
     
-    var runscenarios=function() {
-        if (scenariosQueue.length==0) return;
-        if (scenariosSemaphore) return;
+    var runscripts=function() {
+        if (scriptsQueue.length==0) return;
+        if (scriptsSemaphore) return;
         
-        scenariosSemaphore=true;
+        scriptsSemaphore=true;
         
-        for (var i=0;i<scenariosQueue.length;i++) {
-            if (scenariosQueue[i].when<=Date.now()) {
+        for (var i=0;i<scriptsQueue.length;i++) {
+            if (scriptsQueue[i].when<=Date.now()) {
                 
                 var pass=true;
                 
-                if (typeof(scenariosQueue[i].scenario.conditions)=='object') {
-                    for (var j=0; j<scenariosQueue[i].scenario.conditions.length; j++) {
-                        pass*=condition(db,scenariosQueue[i].scenario.conditions[j]);
+                if (typeof(scriptsQueue[i].script.conditions)=='object') {
+                    for (var j=0; j<scriptsQueue[i].script.conditions.length; j++) {
+                        pass*=condition(db,scriptsQueue[i].script.conditions[j]);
                         if (!pass) break;
                     }                    
                 }
                 
                 if (pass) {
-                    logger.log(scenariosQueue[i].scenario.name,scenariosQueue[i].scenario.log||'scenario');
+                    logger.log(scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
                     
 
-                    for(var j=0;j<scenariosQueue[i].scenario.actions.length;j++) {
+                    for(var j=0;j<scriptsQueue[i].script.actions.length;j++) {
                         
-                        self.emit(scenariosQueue[i].scenario.actions[j].device,
-                                  scenariosQueue[i].scenario.actions[j].device,
-                                  scenariosQueue[i].scenario.actions[j]);
+                        self.emit(scriptsQueue[i].script.actions[j].device,
+                                  scriptsQueue[i].script.actions[j].device,
+                                  scriptsQueue[i].script.actions[j]);
                     }
                 }
                 
-                scenariosQueue.splice(i,1);
-                scenariosSemaphore=false;
-                setTimeout(runscenarios,1);
+                scriptsQueue.splice(i,1);
+                scriptsSemaphore=false;
+                setTimeout(runscripts,1);
                 return;
             }
         }
         
-        scenariosSemaphore=false;
-        setTimeout(runscenarios,1000);
+        scriptsSemaphore=false;
+        setTimeout(runscripts,1000);
     }
     
-    var run = function(scenario,delay) {
+    var run = function(script,delay) {
         if (delay==null) delay=0;
         
         /*
-         *check if scenario is object and has delay defined
+         *check if script is object and has delay defined
          */
-        if (typeof(scenario)=='object' && typeof(scenario.scenario)=='string') {
-            if (typeof(scenario.delay)!='undefined') {
-                delay+=parseFloat(scenario.delay);
+        if (typeof(script)=='object' && typeof(script.script)=='string') {
+            if (typeof(script.delay)!='undefined') {
+                delay+=parseFloat(script.delay);
             }
-            scenario=scenario.scenario;
+            script=script.script;
         }
         
         /*
-         *get database for specified scenario id
+         *get database for specified script id
          */
-        scenario=db.scenarios.get(scenario);
-        if (scenario==null) return;
-        if (!checkactive(scenario)) return;
+        script=db.scripts.get(script);
+        if (script==null) return;
+        if (!checkactive(script)) return;
     
         /*
-         *queue scenario
+         *queue script
          */
         var when=Date.now()+1000*delay;
         
-        scenariosQueue.push({
+        scriptsQueue.push({
             when: when,
-            scenario: scenario
+            script: script
         });
         
         /*
          *run queue
          */
-        runscenarios();
+        runscripts();
         
         /*
-         *run subscenarios
+         *run subscripts
          */
-        if (typeof(scenario.scenarios)=='object' ) {
-            for (var i=0;i<scenario.scenarios.length;i++) {
-                run(scenario.scenarios[i],delay)
+        if (typeof(script.scripts)=='object' ) {
+            for (var i=0;i<script.scripts.length;i++) {
+                run(script.scripts[i],delay)
             }
         }
         
@@ -102,13 +102,13 @@ var Scenario=function(logger) {
     var find=function(str) {
         if (typeof(cache[str])!='undefined') return cache[str];
         
-        var s=db.scenarios.get(str);
+        var s=db.scripts.get(str);
         if (s!=null) {
             cache[str]=s.id;
             return s.id;
         }
         
-        var all=db.scenarios.getAll();
+        var all=db.scripts.getAll().data;
         
         str=str.toLowerCase();
         
@@ -183,8 +183,8 @@ var Scenario=function(logger) {
             self.on(event,fun);
         },
         
-        run: function(scenario,delay) {
-            run(scenario,delay);
+        run: function(script,delay) {
+            run(script,delay);
         },
         
         find: function(str) {
@@ -194,6 +194,6 @@ var Scenario=function(logger) {
     
 }
 
-util.inherits(Scenario, EventEmitter);
+util.inherits(Script, EventEmitter);
 
-module.exports=Scenario;
+module.exports=Script;
