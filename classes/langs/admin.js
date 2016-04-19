@@ -2,15 +2,16 @@ var url = require('url');
 var fs = require('fs');
 var admin = require('../../admin/admin.js');
 
+var root_path=__dirname+'/../../admin/public';
 
 var Web = function(com,logger,callback) {
     var database;
     
-    com.staticContent(__dirname+'/../../admin/public');
+    com.staticContent(root_path);
     
     com.on('initstate',function(opt,db) {
         database=db;
-        admin(opt.socket,opt.session,opt.hash,database); 
+        admin(opt.socket,opt.session,opt.hash,database,root_path); 
     });
     
     com.on('notify',function(sockets,type,data) {        
