@@ -9,7 +9,7 @@ var Script = require('./classes/common/script');
 var Calendar = require('./classes/common/calendar');
 
 var logger = new Logger('./logs');
-var structure = new Structure(__dirname + '/conf/structure.json',logger);
+var structure = new Structure(__dirname + '/conf/conf.json',logger);
 var script = new Script(logger);
 var calendar = new Calendar(logger,script);
 var logic = new Logic(script,logger);

@@ -42,7 +42,7 @@
             "com":{
                 "port": "3000"
             },
-            "active": false
+            "active": true
         }
     ],
     "logger": {
@@ -104,19 +104,29 @@
             "file":"scripts.json",
             "index": ["id"]
         },
-        "scripts": {
+        "langs": {
             "model": "../../admin/models/json",
-            "file":"scripts.json",
+            "file":"langs.json",
+            "index": ["label"]
+        },
+        "devices": {
+            "model": "../../admin/models/json",
+            "file":"devices.json",
+            "index": ["id"]
+        },        
+        "floor": {
+            "model": "../../admin/models/json",
+            "file":"floor.json",
             "index": ["id"]
         },
-        "scripts": {
+        "structure": {
             "model": "../../admin/models/json",
-            "file":"scripts.json",
+            "file":"structure.json",
             "index": ["id"]
         },
-        "scripts": {
+        "projects": {
             "model": "../../admin/models/json",
-            "file":"scripts.json",
+            "file":"projects.json",
             "index": ["id"]
         },
         "actions": {
