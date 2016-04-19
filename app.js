@@ -43,7 +43,9 @@ process.on('SIGHUP',function () {
             
             var id=structureData.devices[i].id;
             if (typeof(devices[id])!='undefined') {
+                logger.log('Disconnecting '+structureData.devices[i].name,'init');
                 devices[id].disconnect();
+                delete(devices[id]);
             }
             logger.log('Initializing '+structureData.devices[i].name,'init');
             devices[id] = new Device(id,structureData.devices[i].protocol,structureData.devices[i].language,structureData.devices[i].com,logger);

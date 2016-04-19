@@ -1,19 +1,39 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var http = require('http');
-var io = require('socket.io');
 var os = require('os');
 var exec = require('child_process').exec;
+var express = require('express');
+var crypto = require('crypto');
+
+
+function parseCookies (rc) {
+    var list = {};
+    rc && rc.split(';').forEach(function( cookie ) {
+        var parts = cookie.split('=');
+        list[parts.shift().trim()] = decodeURI(parts.join('='));
+    });
+    return list;
+}
+
+function md5(txt) {
+    var md5sum = crypto.createHash('md5');
+    md5sum.update(txt);
+    return md5sum.digest('hex');
+}
+
+
 
 var Httpd = function(options,logger) {
     var self=this;
-    
-    var httpServer;
-    var listener;
+    var httpServer,io;
     var httpClients=[];
     var ips=[];
     var tunnel_pid=0;
+    var session={};
+    var connected=false;
     
+    var app = express();
     var ifaces = os.networkInterfaces();
     
     Object.keys(ifaces).forEach(function (ifname) {
@@ -52,19 +72,46 @@ var Httpd = function(options,logger) {
         tunnel_pid=e.pid;
     }
     
+    var hb=function() {
+        
+        if (!connected) return; 
+        
+        for (var x in httpClients) {
+            httpClients[x].session.hb=Date.now();
+        }
+        
+        for (var hash in session) {
+            if (Date.now()-session[hash].hb > 24*3600*1000) {
+                //24 hour session
+                delete(session[hash]);
+            }
+        }
+        
+        setTimeout(hb,1000*60);
+    }
+    
+    
 
     return {
         connect: function() {
-            httpServer = http.createServer(function(request, response) {
-                self.emit('request',request,response);  
+
+            app.get('/', function (request, response) {
+                self.emit('request',request,response); 
             });
-            httpServer.listen(options.port);
             
-            logger.log('Listening on http://localhost:'+options.port,'net');
             
+            httpServer=app.listen(options.port, function () {
+                logger.log('Listening on http://localhost:'+options.port,'net');
+                connected=true;
+                hb();
+            });
+            
+            io=require('socket.io').listen(httpServer);
+
             httpServer.on('error',function(e){
                 logger.log('Can not listen on port '+options.port,'error');
             });
+            
             
             
             if (typeof(options.tunnel_port)!='undefined' && typeof(options.tunnel_host)!='undefined') {
@@ -72,18 +119,35 @@ var Httpd = function(options,logger) {
             }
             
             
-            
-            listener = io.listen(httpServer);
-            
-            listener.sockets.on('connection', function(httpSocket){
-                httpClients.push(httpSocket);
+            io.sockets.on('connection', function(httpSocket) {
+                
+                var cookies=parseCookies(httpSocket.handshake.headers.cookie);
+                
+                if (typeof(cookies.sessid)!='undefined') {
+                    var hash=cookies.sessid;
+                } else {
+                    var hash=md5(Math.random()+'_'+Date.now());
+                    httpSocket.emit('cookie','sessid',hash);
+                    
+                }
+                
+                if (typeof(session[hash])=='undefined') {
+                    session[hash]={};
+                }
+                
+                session[hash].socket=httpSocket;
+                session[hash].hb=Date.now();
+                
+                
+                httpClients.push({socket:httpSocket,session:session[hash]});
                 httpSocket.emit('web', {ips: ips, port:options.port});       
-                self.emit('connection',httpSocket);
+                self.emit('connection',httpSocket,session,hash);
                 
                 
                 httpSocket.on('disconnect', function() {                    
                     for (var x in httpClients) {
-                         if (httpClients[x]==httpSocket) {
+                         if (httpClients[x].socket==httpSocket) {
+                            httpClients[x].session.socket=null;
                             httpClients.splice(x,1);
                             break;
                          }
@@ -98,8 +162,8 @@ var Httpd = function(options,logger) {
             
         },
         disconnect: function() {
-            listener.close();
-            httpServer.close();
+            connected=false;
+            io.close();
         },
         on: function(event,fun) {
             self.on(event,fun);

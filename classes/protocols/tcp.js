@@ -20,6 +20,7 @@ var Tcp = function(options,logger) {
                 connected=true;
                 logger.log('Connected to '+options.host+':'+options.port,'init');
                 self.emit('connection');
+                send();
             }
             
         });
@@ -27,10 +28,8 @@ var Tcp = function(options,logger) {
     
     var send = function() {
         if (sendQueue.length==0) return;
-        if (!connected) {
-            setTimeout(send,options.latency);
-            return;
-        }
+        if (!connected) return;
+        
         if (sendSemaphore) {
             //setTimeout(send,options.latency);
             return;
@@ -69,6 +68,7 @@ var Tcp = function(options,logger) {
         disconnect: function() {
             connected=false;
             client.end();
+            sendQueue=[];
             
         },
         on: function(event,fun) {

@@ -29,7 +29,7 @@ var Device = function(id,protocol,language,options,logger) {
   
     
     return {
-        diconnect: function () {
+        disconnect: function () {
             com.disconnect();
         },
         
