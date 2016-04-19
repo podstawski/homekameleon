@@ -1,1 +1,130 @@
-[{"name":"Piwnica","project":1,"pri":1,"_updated":1461069212522,"_created":1461069154258,"id":1,"parent":null,"desc":"Promienko","_new":true,"_sub":false,"img":"images/structure-1.svg"},{"name":"Parter","project":1,"pri":2,"_updated":1461069212723,"_created":1461069165825,"id":2,"parent":null,"desc":"Promienko","_new":true,"_sub":false,"img":"images/structure-2.svg"},{"name":"Piętro","project":1,"pri":3,"_updated":1461069212916,"_created":1461069174567,"id":3,"parent":null,"desc":"Promienko","_new":true,"_sub":false,"img":"images/structure-3.svg"}]
+{
+    "devices": [
+        {
+            "id": "HQP",
+            "name": "Homiq Promienko",
+            "protocol": "tcp",
+            "language": "homiq",
+            "com":{
+                "host2": "10.10.20.201",
+                "host": "127.0.0.1",
+                "port": "4001",
+                "latency": 20
+            }
+        },
+        {
+            "id": "EMU",
+            "name": "Homiq emulator",
+            "protocol": "tcpd",
+            "language": "hemulator",
+            "com":{
+                "port": "4001",
+                "latency": 20
+            },
+            "active": 1
+        },
+        {
+            "id": "WEB",
+            "name": "Web Server",
+            "protocol": "httpd",
+            "language": "web",
+            "com":{
+                "port": "8002",
+                "tunnel_port": "8001",
+                "tunnel_host": "homiq@homiq.webkameleon.com"
+            }
+        },
+        {
+            "id": "ADM",
+            "name": "Admin Web Server",
+            "protocol": "httpd",
+            "language": "admin",
+            "com":{
+                "port": "3000"
+            },
+            "active": false
+        }
+    ],
+    "logger": {
+        "init": {
+            "console": true
+        },
+        "emulator": {
+            "console": false
+        }
+        ,
+        "frame": {
+            "console": false
+        },
+        "init": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "net": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "db": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "calendar": {
+            "console": true,
+            "file": "cal.txt"
+        },
+        "error": {
+            "console": true,
+            "file": "error.txt"
+        }
+        
+    },
+    "calendars": [
+        "https://calendar.google.com/calendar/ical/promienko.pl_udip7ebojkjs8abde9gokgphm8%40group.calendar.google.com/private-7657fb90a46096654cd353ca2c8b7787/basic.ics",
+        "https://calendar.google.com/calendar/ical/i_83.11.200.224%23sunrise%40group.v.calendar.google.com/public/basic.ics"
+        
+    ],
+    "db": {
+        "inputs": {
+            "model": "../../admin/models/json",
+            "file":"inputs.json",
+            "index": ["device","address"]
+        },        
+        "outputs": {
+            "model": "../../admin/models/json",
+            "file":"outputs.json",
+            "index": ["device","address"]
+        },        
+        "ios": {
+            "model": "../../admin/models/json",
+            "file":"ios.json",
+            "index": ["device","address"]
+        },
+        "scripts": {
+            "model": "../../admin/models/json",
+            "file":"scripts.json",
+            "index": ["id"]
+        },
+        "scripts": {
+            "model": "../../admin/models/json",
+            "file":"scripts.json",
+            "index": ["id"]
+        },
+        "scripts": {
+            "model": "../../admin/models/json",
+            "file":"scripts.json",
+            "index": ["id"]
+        },
+        "scripts": {
+            "model": "../../admin/models/json",
+            "file":"scripts.json",
+            "index": ["id"]
+        },
+        "actions": {
+            "model": "../../admin/models/json",
+            "file":"actions.json",
+            "index": ["device","address"]
+        }
+        
+    }
+    
+}
