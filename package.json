@@ -16,8 +16,8 @@
     "url": "https://github.com/podstawski/promienko/issues"
   },
   "dependencies": {
-    "express": "~4.13.4",
-    "socket.io": "^1.4.5",
-    "ical": "~0.5.0"
+    "express": "",
+    "socket.io": "",
+    "ical": ""
   }
 }

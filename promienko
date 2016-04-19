@@ -1,0 +1,16 @@
+#!/bin/sh /etc/rc.common
+# Example script
+# Copyright (C) 2007 OpenWrt.org
+ 
+START=70
+STOP=75
+ 
+start() {        
+	cd /root/promienko
+	node app.js >>/root/promienko.log &
+}                 
+ 
+stop() {          
+	killall -TERM node
+	killall -TERM ssh
+}
