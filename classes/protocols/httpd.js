@@ -93,6 +93,11 @@ var Httpd = function(options,logger) {
     
 
     return {
+        
+        staticContent: function (pub) {
+            app.use(express.static(pub));  
+        },
+        
         connect: function() {
 
             app.get('/', function (request, response) {
@@ -141,7 +146,7 @@ var Httpd = function(options,logger) {
                 
                 httpClients.push({socket:httpSocket,session:session[hash]});
                 httpSocket.emit('web', {ips: ips, port:options.port});       
-                self.emit('connection',httpSocket,session,hash);
+                self.emit('connection',{socket:httpSocket,session:session,hash:hash});
                 
                 
                 httpSocket.on('disconnect', function() {                    

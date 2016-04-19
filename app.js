@@ -105,9 +105,5 @@ var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
 
-/*
- * wait before everything starts
- */
-setTimeout(function() {}, 1000);
 
 

@@ -6,10 +6,10 @@ var root=__dirname+'/../../web';
 
 var Web = function(com,logger,callback) {
     
-    com.on('initstate',function(socket,db) {
+    com.on('initstate',function(opt,db) {
         var outputs=db.outputs.getAll().data;
         for (var o in outputs) {
-            socket.emit('output', outputs[o]);
+            opt.socket.emit('output', outputs[o]);
         }
     });
     
