@@ -170,7 +170,7 @@ var controlsStyle=function() {
 		if (type=='slider' && style!==undefined && state!==undefined && min!==undefined && max!=undefined) {
 			var prc=Math.round(100*(parseFloat(state)-parseFloat(min))/(parseFloat(max)-parseFloat(min)));
 			var rprc=100-prc;
-			style=style.replace('__PRC__',prc+'%').replace('__RPRC__',rprc+'%');
+			style=style.replace('__PRC__',prc).replace('__RPRC__',rprc);
 
 			
 			

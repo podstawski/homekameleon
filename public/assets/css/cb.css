@@ -307,8 +307,8 @@ aside .device-element {
     position: relative;
     width: 100%;
     cursor: move;
-    border: 1px solid black;
-    border-radius: 3px;
+    border: 0.5px solid black;
+    border-radius: 1px;
     background-color: rgba(255,0,0,0.6);
 }
 
@@ -343,46 +343,94 @@ aside .device-element {
     display: none;
 }
 
-/* Karol's CSS */
-.aside-menu .tab-content .all {
-    clear: both;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #f2f2f2;
-    margin-bottom: 5px;
+.control-edit .btn-danger {
+    display: none;
 }
 
-.aside-menu .tab-content {
+
+#edit-device .modal-body .device-controls-container .slider {
+    position: relative;
+    margin: 8% 4% 0 4%;
+    height: 60%;
+    border: 1px #909090 solid;
+    border-radius: 1%;
+}
+
+#edit-device .modal-body .device-controls-container .slider img {
+    position: absolute;
+    top: -20%;
+    height: 140%
+}
+
+#edit-device .modal-body .device-controls-container .slider .progressbar {
     height: 100%;
-}
-
-.aside-menu .tab-content .tab-pane {
-    overflow-y: scroll;
-    height: 90%;
+    background-color: #ffff00;
 }
 
 
-/* Media Queries */
-@media (max-height:600px) {
-body:not(.top-nav) .sidebar .sidebar-footer ul.sidebar-footer-menu .dropdown-menu {
-    overflow-y: scroll;
-    max-height: 60%;
+#edit-input .modal-body {
+    padding-top: 0;
 }
-}
-
-@media (max-width:991px) {
-header.navbar a.navbar-brand {
-    background-size: 20%;
-}
+#edit-input .modal-body .row {
+    border-bottom: solid 1px #d0d0d0;
+    padding-top: 10px;
 }
 
-@media print {
-   #floor-container {
+
+
+#edit-input .modal-body .row ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#edit-input .modal-body .row ul li {
+    border: dotted 1px #d0d0d0;
+}
+
+#edit-input .modal-body .row ul li .x {
+    content: "×";
+    position: absolute;
+    cursor: pointer;
+    right: 5px;
+    top: 0;
+}
+
+#edit-input .modal-body .row ul li .select2-container {
     width: 100%;
-   }
-   
-   .draggable-container.ui-draggable.ui-draggable-handle {
-    zoom: 0 !important;
-    left: 0 !important;
-    top: 0 !important;
-   }
 }
+
+
+.device-container .controls-container .control-slider {
+    position: relative;
+}
+
+.device-container .controls-container .control-slider .slider {
+    width: 90%;
+    margin: 4% 4% 0 4%;
+    height: 70%;
+    border: #909090 solid;
+    border-width: 0.1px;
+}
+
+.device-container .controls-container .control-slider .progressbar {
+    background-color: yellow;
+    height: 100%;
+    position: relative;
+}
+
+.device-container .controls-container .mouseclick {
+    cursor: crosshair;
+}
+
+.device-container .controls-container .control-slider img {
+    position: absolute;
+    height: 100%;
+    left: 40%;
+}
+
+
+
+
+
+

@@ -112,6 +112,30 @@ var Model = function(opt,logger) {
                 if (typeof(rec[c])=='undefined' && where[i][c]!=null) cond=false;
                 if (typeof(where[i][c])=='object' && where[i][c]!=null) {
                     
+                    switch (where[i][c][0]) {
+                        case '<>':
+                        case '!=': {
+                            if (where[i][c][1]==rec[c]) cond=false;
+                            break;
+                        }
+                        case '>': {
+                            if (where[i][c][1]>=rec[c]) cond=false;
+                            break;     
+                        }
+                        case '<': {
+                            if (where[i][c][1]<=rec[c]) cond=false;
+                            break;     
+                        }
+                        case '>=': {
+                            if (where[i][c][1]>rec[c]) cond=false;
+                            break;     
+                        }
+                        case '<=': {
+                            if (where[i][c][1]<rec[c]) cond=false;
+                            break;     
+                        }
+                    }
+                    
                 } else {
                     if (where[i][c]!=rec[c]) cond=false;
                 }
@@ -227,7 +251,7 @@ var Model = function(opt,logger) {
                 return;
             }
             var anythingChanged=false;
-            
+
             for (var k in d) {
                 if (typeof(data[idx][k])=='undefined' || data[idx][k]!=d[k]) {
                     data[idx][k]=d[k];

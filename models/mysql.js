@@ -134,8 +134,13 @@ var Model = function(opt,logger) {
                 ands=[];
                 for (var k in where[i]) {
                     if (where[i][k]!=null) {
-                        ands.push(k+'=?');
-                        v.push(where[i][k]);
+                        if (typeof(where[i][k])=='object') {
+                            ands.push(k+where[i][k][0]+'?');
+                            v.push(where[i][k][1]);
+                        } else {
+                            ands.push(k+'=?');
+                            v.push(where[i][k]);
+                        }
                     } else {
                         ands.push(k+' IS NULL');
                     }
