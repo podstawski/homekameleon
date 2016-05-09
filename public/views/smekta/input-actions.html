@@ -1,0 +1,36 @@
+[loop:actions]
+<div class="row">
+    <div class="col-md-2">
+        <label class="switch switch-default switch-success">
+            <input type="checkbox" class="switch-input" name="active" value="1" [if:active]checked[endif:active]/>
+            <span class="switch-label"></span>
+            <span class="switch-handle"></span>
+        </label>
+    </div>
+    
+    <div class="col-md-5">
+        <ul>
+        [loop:conditions]
+            <li>
+                <select class="inputoroutput" rel="[db],[device],[address]"></select>
+                <condition>[condition]</condition>
+            </li>
+        [endloop:conditions]
+        </ul>
+    </div>
+    
+    <div class="col-md-5">
+        <ul>
+        [loop:scripts]
+            <li>
+                <select rel="[script]" class="scripts">
+                    
+                </select>
+                <input type="text" size="2" [if:delay]value="[delay]"[endif:delay] class="translate" placeholder="delay"/>
+            </li>
+        [endloop:scripts]
+        </ul>
+    </div>
+</div>
+    
+[endloop:actions]

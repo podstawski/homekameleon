@@ -1,0 +1,59 @@
+<script>
+    var requireJS = [
+        'assets/js/libs/jquery-ui.min.js',
+        'assets/js/device.js'
+    ];
+    loadJS(requireJS, "assets/js/views/floor.js");
+</script>
+
+
+
+<div id="floor-container" class="animated fadeIn">
+    <div class="draggable-container">
+        <img class="svg"/>
+        
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="edit-element" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+            <input type="text" name="name" placeholder="Name" class="translate" value=""/>
+        </h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger translate" data-target="#confirm-delete" data-toggle="modal">Remove</button>
+        <button type="button" class="btn btn-default translate" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info translate">Save changes</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4></h4>
+            </div>
+            <div class="modal-body translate">Are you sure you want to delete it?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default translate" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok translate">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="file" id="img-input" accept="image/*" style="display: none" />

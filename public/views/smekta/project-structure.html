@@ -1,0 +1,77 @@
+<div class="row row-equal">
+    [loop:data]
+    [if:!_sub]
+    <div class="col-sm-6 col-lg-3">
+        <div class="card card-inverse card-warning">
+            <div class="card-block p-b-0">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-warning-outline active dropdown-toggle p-a-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-settings"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item svg translate" rel="[id]" href="#">Add SVG</a>
+                        <a class="dropdown-item add-sub translate" rel="[id]" href="#">Add subobject</a>
+                        <a class="dropdown-item translate remove" rel="[id]" href="#">Remove</a>
+   
+                    </div>
+                </div>
+                <h4 class="m-b-0"><input type="text" rel="[id]" value="[name]"/></h4>
+                <p>[description]</p>
+            </div>
+            
+        </div>
+    </div>
+    [endif:!_sub]
+    
+    [if:_sub]
+    
+    <div class="col-sm-12">
+        <div class="card card-inverse card-info">
+            <div class="card-block p-b-0">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-info-outline active dropdown-toggle p-a-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-settings"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item add-sub translate" rel="[id]" href="#">Add subobject</a>
+                    </div>
+                </div>
+                <h4 class="m-b-0"><input type="text" rel="[id]" value="[name]"/></h4>
+                <p>[description]</p>
+            </div>
+            
+        </div>
+    </div>    
+    
+    
+    
+    </div><div class="row row-equal">
+        [loop:_sub]
+ 
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-inverse card-warning">
+                <div class="card-block p-b-0">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-warning-outline active dropdown-toggle p-a-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon-settings"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item translate svg" rel="[id]" href="#">Add SVG</a>
+                            <a class="dropdown-item translate remove" rel="[id]" href="#">Remove</a>
+                        </div>
+                    </div>
+                    <h4 class="m-b-0"><input type="text" rel="[id]" value="[name]"/></h4>
+                    <p>[description]</p>
+                </div>
+            </div>
+        </div>
+ 
+
+        [endloop:_sub]
+        </div><div class="row row-equal">
+    [endif:_sub]
+    
+    [endloop:data]
+    
+        
+</div>

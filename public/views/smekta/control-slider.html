@@ -1,0 +1,69 @@
+
+<div class="card slider">
+    <div class="card-header">
+        <strong class="translate">Slider attributes</strong> 
+    </div>
+    <div class="card-block">
+
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="state">Default state</label>
+            <div class="col-md-9">
+                <input type="text" id="state" [if:state]value="[state]"[endif:state] name="state"
+                       class="form-control translate" placeholder="Default state">
+                <span class="help-block translate">State of slider if no state was emited</span>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate">Slider range</label>
+            <div class="col-md-4">
+                <input type="text" id="min" [if:min]value="[min]"[endif:min] name="min"
+                       class="form-control translate" placeholder="Min value">
+                <span class="help-block translate">Min value</span>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="max" [if:max]value="[max]"[endif:max] name="max"
+                       class="form-control translate" placeholder="Max value">
+                <span class="help-block translate">Max value</span>
+            </div>
+        </div>        
+
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="sstyle">Style line</label>
+            <div class="col-md-9">
+                <input type="text" id="sstyle" name="sstyle"
+                       [if:sstyle]value="[sstyle]"[endif:sstyle]
+                       class="form-control translate" placeholder="Style line">
+                <div class="help-block">
+                    CSS style depanding on state, e.g. <br/>
+                    <a href="#">background-color: rbg(__STATE__,__STATE__,__STATE__)</a><br/>
+                    <a href="#">-webkit-filter: grayscale(__RPRC__%)</a><br/>
+                    <a href="#">width: __PRC__%</a><br/>
+                </div>        
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="simage">Slider image</label>
+            <div class="col-md-9">
+                <input type="text" id="simage" [if:simage]value="[simage]"[endif:simage] name="simage"
+                       class="form-control translate" placeholder="Slider image">
+                <span class="help-block translate">If omitted device will work as progressbar</span>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="img-input">
+                <i class="fa fa-plus"></i>
+                <i class="fa fa-image"></i>
+            </label>
+            <div class="col-md-9">
+                <ul class="images">
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>

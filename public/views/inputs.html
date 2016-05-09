@@ -1,0 +1,98 @@
+<script>
+var requireJS = [
+    "assets/js/libs/jquery.dataTables.min.js",
+    "assets/js/libs/dataTables.bootstrap.min.js",
+    "assets/js/libs/select2.min.js",
+    'assets/js/libs/jquery-ui.min.js'
+];
+loadJS(requireJS, "assets/js/views/inputs.js");
+</script>
+
+<link rel="stylesheet" href="assets/css/jquery-ui.css"/>
+
+<div id="current-title" class="translate" hidden>Inputs</div>
+<div id="current-desc" class="translate" hidden>Global list of inputs</div>
+
+<div class="animated fadeIn inputs">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-edit"></i> <span class="translate">Inputs</span>
+            <div class="card-actions">
+                <a href="#">
+                    <small class="text-muted">docs</small>
+                </a>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped table-bordered inputtable">
+
+            </table>
+        </div>
+    </div>
+    
+
+    
+</div>
+
+<!-- Modal -->
+<div id="edit-input" class="modal fade" role="dialog" data-backdrop="static" >
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default translate" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info translate">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4></h4>
+            </div>
+            <div class="modal-body translate">Are you sure you want to delete it?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default translate" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok translate">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<input type="file" id="img-input" accept="image/*" style="display: none" />
+
+<!-- Modal -->
+<div id="edit-control" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+            <input type="text" name="addr" placeholder="Control address" class="addr translate" value=""/>
+        </h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default translate" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info translate">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

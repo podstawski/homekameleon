@@ -1,0 +1,61 @@
+
+
+<div class="card">
+    <div class="card-header">
+        <strong>Device attributes</strong> 
+    </div>
+    <div class="card-block">
+
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="vattr">Vissible attribute</label>
+            <div class="col-md-9">
+                <input type="text" id="vattr" [if:vattr]value="[vattr]"[endif:vattr] name="vattr"
+                       class="form-control translate" placeholder="Attribute">
+                <span class="help-block translate">Attribute name[:value1|value2|...]</span>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="tags">Tags</label>
+            <div class="col-md-9">
+                <input type="text" id="tags" [if:tags]value="[tags]"[endif:tags] name="tags"
+                       class="form-control translate" placeholder="Tags">
+                <span class="help-block translate">Space separated tags equivalent to icon names</span>
+            </div>
+        </div>
+        
+        <div class="row disable-toggle translate">
+            Input symbol first
+        </div>
+        
+        
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="image">Controls</label>
+            <div class="col-md-9">
+                <div class="row device-controls-top-container">
+                    
+                    <div class="col-md-10 device-controls-container"></div>
+                    
+                    <div class="col-md-2 device-controls-label-container">
+                        <div class="drg" type="inout">
+                            <span class="name">inout</span>
+                        </div>
+                        <div class="drg" type="slider">
+                            <span class="name">slider</span>
+                        </div>
+                        
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        
+        
+            
+         
+
+    </div>
+
+</div>
+
+            

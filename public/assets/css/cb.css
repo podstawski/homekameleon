@@ -1,0 +1,388 @@
+.after-login {
+    display: none !important;
+}
+
+.project-avatar,
+body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
+    width: 120px;
+    margin: 20px auto 10px;
+    border-radius: 50%;
+}
+
+.project-avatar {
+    cursor: pointer;
+}
+
+.add-item {
+    text-align: right;
+}
+
+.add-item a {
+    background-color: #20a8d8;
+    border-radius: 50%;
+    padding: 1.5em;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.add-item a:hover {
+    text-decoration: none;
+    opacity: 0.5;
+}
+.add-item a:active,.add-item a:focus {
+    text-decoration: none;
+}
+
+.add-item a:hover i {
+    color: #000;
+}
+
+.add-item a i {
+    color: white;
+    font-size: 3em;
+}
+
+#project-structure {
+    margin-top: 20px;
+}
+
+#project-structure input {
+    width: 80%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none;
+}
+#project-structure input:focus {
+    outline: none;
+}
+
+.project .form-actions {
+    margin-left: 3px;
+}
+
+#left-sidebar .nav-dropdown-items li {
+    margin-left: 10px;
+}
+
+#floor-container {
+    overflow: hidden;
+    position: relative;
+    width:100%;
+    padding: 0;
+}
+
+#floor-container .draggable-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 0;
+}
+
+
+#floor-container .draggable-container:active {
+    cursor: move;
+}
+
+#floor-container .draggable-container .polygon-dot {
+    position: absolute;
+}
+
+
+#floor-container .draggable-container .polygon {
+    position: absolute;
+    z-index: 100;
+}
+
+#floor-container .draggable-container .polygon svg {
+    width: 100%;
+    height: 100%;
+}
+
+#floor-container .draggable-container .polygon svg polygon {
+    fill:rgba(1, 1, 1, 0.1);
+    stroke:yellow;
+    stroke-width:2;
+    width: 100%;
+    height: 100%;    
+}
+
+.breadcrumb .breadcrumb-menu .active {
+    color: #20a8d8
+}
+
+#edit-element .modal-header input {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-element .img-input img {
+    max-width: 200px;
+}
+
+#edit-element .btn-danger {
+    float: left;
+}
+
+#edit-device .modal-header {
+    background-color: yellow;
+    border-radius: 3px 3px 0 0;
+}
+
+#edit-device .modal-footer {
+    background-color: yellow;
+    border-radius: 0 0 3px 3px;
+}
+
+#edit-device .modal-header input.name {
+    width: 69%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-device .modal-header input.symbol {
+    width: 20%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-device .img-input {
+    cursor: pointer;
+    padding: 3px;
+    border: solid 1px #808080;
+}
+
+#edit-device .img-input img {
+    max-width: 80px;
+}
+
+#edit-device .device-controls-top-container {
+    position: relative;
+}
+
+#edit-device .device-controls-container {
+    width: 200px;
+    height: 200px;
+    border: solid 1px black;
+    padding: 0;
+}
+
+#edit-device .device-controls-container div {
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#edit-device .device-controls-label-container {
+    padding: 10px;
+    background-color: rgba(0,0,0,0.1);
+    height: 200px;
+    border: black solid;
+    border-width: 1px 1px 1px 0;
+}
+ 
+ 
+#edit-device .drg {
+    width: 50px;
+    height: 50px;
+    border: dashed 1px red;
+    text-align: center;
+    xpadding-top: 8px;
+    color: #909090;
+}
+
+#edit-device .drg .name {
+    margin-top: 30%;
+    display: block;
+}
+ 
+#edit-device .device-controls-label-container div {
+    margin-bottom: 10px;
+
+}
+
+#edit-device .device-controls-container .drg {
+    margin: 0;
+    position: absolute;    
+}
+
+
+#edit-device .drg:hover {
+    cursor: move;
+}
+
+#edit-device .disable-toggle {
+    position: absolute;
+    width: 98%;
+    text-align: center;
+    background-color: rgba(0,0,0,0.3);
+    height: 199px;
+    z-index: 20;
+    cursor: wait;
+    font-size: 36px;
+    padding-top: 80px;
+    color: #ffff00;
+}
+
+#edit-control .modal-header input.addr {
+    width: 90%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-control .modal-body i {
+    font-size: 36px;
+    cursor: pointer;
+}
+
+#edit-control .modal-body ul.images {
+    list-style-type: none;
+}
+#edit-control .modal-body ul.images li {
+    border-bottom: 1px solid #909090;
+    padding: 3px;
+}
+
+#edit-control .modal-body ul.images li img {
+    max-width: 36px;
+}
+
+#edit-control .modal-body ul.images li i {
+    font-size: 12px;
+    float: right;
+    margin-top: 10px;
+}
+
+#edit-control .modal-body ul.images li input {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-control .modal-header {
+    background-color: green;
+    border-radius: 3px 3px 0 0;
+    color: white;
+}
+
+#edit-control .modal-footer {
+    background-color: green;
+    border-radius: 0 0 3px 3px;
+}
+
+
+aside .nav-tabs .nav-item + .nav-item {
+    margin: 0;
+}
+
+aside .avatar {
+    width: 35px;
+}
+
+aside .pull-left {
+    height: 70px;
+}
+
+aside hr {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+aside .device-element {
+    width: 35px;
+    height: 70px;
+}
+
+
+
+.device-container {
+    position: relative;
+    width: 100%;
+    cursor: move;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: rgba(255,0,0,0.6);
+}
+
+#floor-container .draggable-container .device-container {
+    width: 35px;
+    height: 70px;
+    position: absolute;
+    z-index: 200;
+}
+
+
+.device-container .controls-container {
+    width: 100%;
+    position: relative;
+}
+
+.device-container .controls-container div {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.device-container .device-label {
+    font-size: 10px;
+    text-align: center;
+    height: 32px;
+    color: #fff;
+    
+}
+
+.aside-edit .btn-danger {
+    display: none;
+}
+
+/* Karol's CSS */
+.aside-menu .tab-content .all {
+    clear: both;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #f2f2f2;
+    margin-bottom: 5px;
+}
+
+.aside-menu .tab-content {
+    height: 100%;
+}
+
+.aside-menu .tab-content .tab-pane {
+    overflow-y: scroll;
+    height: 90%;
+}
+
+
+/* Media Queries */
+@media (max-height:600px) {
+body:not(.top-nav) .sidebar .sidebar-footer ul.sidebar-footer-menu .dropdown-menu {
+    overflow-y: scroll;
+    max-height: 60%;
+}
+}
+
+@media (max-width:991px) {
+header.navbar a.navbar-brand {
+    background-size: 20%;
+}
+}
+
+@media print {
+   #floor-container {
+    width: 100%;
+   }
+   
+   .draggable-container.ui-draggable.ui-draggable-handle {
+    zoom: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+   }
+}

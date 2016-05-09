@@ -1,0 +1,45 @@
+
+<div class="card">
+    <div class="card-header">
+        <strong class="translate">Control attributes</strong> 
+    </div>
+    <div class="card-block">
+
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="haddr">Address</label>
+            <div class="col-md-9">
+                
+                <input type="text" id="haddr" value="[if:haddr][haddr][endif:haddr]" name="haddr"
+                       class="form-control translate" placeholder="enter unique address">
+                <span class="help-block translate"></span>
+            </div>
+            
+        </div>
+
+        [if:estate]
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate">Mouse behaviour</label>
+            
+            
+            <div class="col-md-4">
+                <input type="text" id="mdown" name="mdown"
+                       [if:mdown]value="[mdown]"[endif:mdown]
+                       [if:!mdown]value="[estate]"[endif:!mdown]
+                       class="form-control translate" placeholder="mouse down">
+                <span class="help-block translate"></span>
+            </div>
+            
+            <div class="col-md-4">
+                <input type="text" id="mup" name="mup"
+                       value="[if:mup][mup][endif:mup]" 
+                       class="form-control translate" placeholder="mouse down">
+                <span class="help-block translate"></span>
+            </div>
+            
+        </div>
+        [endif:estate]
+
+
+        
+    </div>
+</div>
