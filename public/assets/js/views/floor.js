@@ -213,7 +213,7 @@ var drawDeviceElement = function(data,element) {
             if (data.id) websocket.emit('db-remove','floor',data.id);
             return;
         }
-        var device=new Device(data);
+        var device=new Device(data, zoomContainer);
         device.parent($('#floor-container .draggable-container'));
         element={device: device, type: 'device', data: data, id: data.id};
         elements.push(element);
@@ -457,7 +457,7 @@ var drawAsideDevices = function() {
     $('aside .device-element').each(function(){
         $(this).text('');
         var symbol=$(this).attr('rel');
-        var device=new Device(globalDevices[symbol]);
+        var device=new Device(globalDevices[symbol],zoomContainer);
         device.parent($(this));
         device.draw({
             helper: "clone",

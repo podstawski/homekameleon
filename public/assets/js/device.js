@@ -1,4 +1,21 @@
-var Device = function(device) {
+var deviceDragging=null;
+
+var mouseUpCallback = function(e){
+    console.log('konie');
+    if (deviceDragging==null) return;
+    e.stopPropagation();
+    deviceDragging=null;
+    console.log('koniec :)');
+}
+
+if ($.mouseUpCallback===undefined) {
+    $(document).mouseup(mouseUpCallback);
+    $.mouseUpCallback=true;
+}
+
+
+
+var Device = function(device, zoomfun) {
     var _self=this;
     var _dom=null,_parent=null;
     var _attr={};
@@ -6,6 +23,12 @@ var Device = function(device) {
     
     _attr.name=$.translate(device.name);
     _attr.label=device.label || '';
+    
+    if (zoomfun==null) {
+        zoomfun=function() {
+            return 1;
+        }
+    }
     
     var redraw=function(ratio) {
         
@@ -58,7 +81,7 @@ var Device = function(device) {
                 if (device.controls[i].type=='slider') {
                     var slider='<div class="slider">';
                     if (device.controls[i].simage!==undefined && device.controls[i].simage.length>0) {
-                        slider+='</div><img class="dst" src="'+device.controls[i].simage+'"/>';
+                        slider+='</div><div class="img-container"><img class="dst" src="'+device.controls[i].simage+'"/></div>';
                     } else {
                         slider+='<div class="progressbar dst"></div></div>';
                     }
@@ -86,6 +109,41 @@ var Device = function(device) {
                         busSend($(this).attr('haddr'),state);
                     });
                 }
+                
+                if (device.controls[i].type=='slider' && device.controls[i].simage!==undefined && device.controls[i].simage.length>0) {
+                    control.addClass('mousemove');
+                
+                    control.find('.dst').mousedown(function (e) {
+                        e.stopPropagation();
+                        deviceDragging=_self;
+                    }).mousemove(function (e) {
+                        e.stopPropagation();
+                        if (deviceDragging==null) return;
+                        
+                        var zoom=zoomfun();
+                        var parent = $(this).parent();
+                        var relX = e.pageX - parent.offset().left*zoom - 5;
+                        
+                        var prc=relX/(parent.width()*zoom);
+                        if (prc>1) prc=1;
+                        if (prc<0.05) prc=0;
+                        $(this).css('left',(prc*100)+'%');
+                        
+                        var topcontrol=$(this).parent().parent();
+                        
+                        if (topcontrol.attr('haddr')!==undefined && topcontrol.attr('haddr').length>0) {
+                            var min=parseInt(topcontrol.attr('min'));
+                            var max=parseInt(topcontrol.attr('max'));
+                            busSend(topcontrol.attr('haddr'),Math.round(min+prc*(max-min)));
+                        }
+                        
+                        //console.log(relX,e.pageX,parent.width(),prc);
+                    
+                        
+                    });
+                }
+                
+                
                 
                 if (options.dblclickControl!==undefined) control.dblclick(options.dblclickControl);
         
@@ -148,6 +206,7 @@ var Device = function(device) {
             
             
             if (style.length>0) style+='; ';
+            if (dst!=element) style='';
             style+=sstyle.replace(/__STATE__/g,state).replace(/__PRC__/g,prc).replace(/__RPRC__/g,rprc);
             dst.attr('style',style);
         }
