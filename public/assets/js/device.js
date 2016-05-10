@@ -147,7 +147,7 @@ var Device = function(device, zoomfun) {
                             return false;
                         });
                         
-                        $(this).one('mouseup', function(e) {
+                        $(this).parent().parent().parent().parent().one('mouseup', function(e) {
                             console.log('Stop');
                             e.stopPropagation();
                             deviceDragging=null;
