@@ -55,8 +55,8 @@ var buildAsideMenu = function(data) {
 
 
 var pageCleanup=function() {
-    $('.breadcrumb i.icon-note').parent().hide();
-    $('.breadcrumb i.icon-menu').parent().hide();
+
+    $('.breadcrumb .btn-floor').hide();
     
     if ($('body').hasClass('aside-menu-open')) {
         $('body').removeClass('aside-menu-open');
@@ -87,3 +87,21 @@ $(function(){
     })();
 
 });
+
+
+var mediaQueryList = window.matchMedia('print');
+mediaQueryList.addListener(function(mql) {
+    
+    if (mql.matches) {
+        $('body').removeClass('sidebar-nav');
+        if (typeof(printFloor)=='function') printFloor(true);
+        
+    } else {
+        $('.breadcrumb').show();
+        $('body').addClass('sidebar-nav');
+        if (typeof(printFloor)=='function') printFloor(false);
+    }
+    
+    return false;
+});
+

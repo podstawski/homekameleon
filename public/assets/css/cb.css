@@ -84,6 +84,10 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     cursor: move;
 }
 
+#floor-container .draggable-container img.svg {
+    z-index: 10;
+}
+
 #floor-container .draggable-container .polygon-dot {
     position: absolute;
 }
@@ -105,6 +109,40 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     stroke-width:2;
     width: 100%;
     height: 100%;    
+}
+
+#floor-container .draggable-container .floor-debug-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: 150px;
+    border: 1px red solid;
+    background-color: rgba(255,0,0,0.1);
+    z-index: 30;
+    padding: 2px;
+}
+
+#floor-container .draggable-container .floor-debug-container a {
+    right: 2px;
+    position: absolute;
+    top: -5px;
+    color: red;
+}
+
+#floor-container .draggable-container .floor-debug-container a:hover {
+    text-decoration: none;
+}
+
+#floor-container .draggable-container .floor-debug-container .floor-debug-contents {
+    height: 100%;
+    overflow: auto;
+    font-size: 10px;
+    font-family: Courier;
+}
+
+#floor-container .draggable-container .floor-debug-container .floor-debug-contents p {
+    margin: 0;
 }
 
 .breadcrumb .breadcrumb-menu .active {
@@ -441,7 +479,29 @@ aside .device-element {
 }
 
 
+@media print {
+    body {
+        background-color: #fff;
+    }
+    body.navbar-fixed .main {
+        padding: 0 !important;
+    }
+    
+    .container-fluid {
+        padding: 0;
+    }
+    
+    .footer {
+        display: none;
+    }
 
-
+    .page-header {
+        display: none;
+    }
+    
+    #floor-container .draggable-container .floor-debug-container {
+        display: none;
+    }
+}
 
 
