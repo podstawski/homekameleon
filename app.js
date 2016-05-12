@@ -106,8 +106,8 @@ var initApp = function() {
         
 }
 
+
+fs.writeFile(__dirname+'/app.pid',process.pid);
+
 initApp();
-
-
-
 
