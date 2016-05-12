@@ -377,6 +377,11 @@ aside .device-element {
     
 }
 
+.device-container.ui-draggable-dragging {
+    z-index: 3000;
+    width: 35px;
+}
+
 .aside-edit .btn-danger {
     display: none;
 }
@@ -477,6 +482,8 @@ aside .device-element {
     height: 100%;
     left: 40%;
 }
+
+
 
 
 @media print {

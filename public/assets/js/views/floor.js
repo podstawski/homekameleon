@@ -475,6 +475,7 @@ var drawAsideDevices = function() {
         device.parent($(this));
         device.draw({
             helper: "clone",
+            appendTo: "body",
             stop: function(e,ui) {
                 var ctn=$('#floor-container');
                 

@@ -15,7 +15,7 @@
 
 
 .aside-menu .tab-content .tab-pane {
-    /*overflow-y: scroll;*/
+    overflow-y: scroll;
     height: 90%;
 }
 
