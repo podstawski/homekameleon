@@ -42,11 +42,13 @@
     $.fn.translate = function () {
         this.each (function() {
         
-            var txt=$(this).attr('original-text')||$(this).attr('placeholder')||$(this).text();
+            var txt=$(this).attr('original-text')||$(this).attr('placeholder')||$(this).attr('title')||$(this).text();
             var trans=$.translate(txt);
     
             if ($(this).is('input')) {
                 $(this).attr('placeholder',trans);
+            } else if ($(this).attr('title')!==undefined) {
+                $(this).attr('title',trans);
             } else {
                 $(this).text(trans);
             }
