@@ -17,7 +17,7 @@ if ($.mouseUpCallback===undefined) {
 */
 
 
-var Device = function(device, zoomfun) {
+var Device = function(device, zoomfun, isInputable) {
     var _self=this;
     var _dom=null,_parent=null;
     var _attr={};
@@ -29,6 +29,12 @@ var Device = function(device, zoomfun) {
     if (zoomfun==null) {
         zoomfun=function() {
             return 1;
+        }
+    }
+    
+    if (isInputable==null) {
+        isInputable=function() {
+            return false;
         }
     }
     
@@ -101,6 +107,7 @@ var Device = function(device, zoomfun) {
                     && device.controls[i].mdown!==undefined && device.controls[i].mdown.length>0) {
                     control.addClass('mouseclick');
                     control.mousedown(function() {
+                        if (!isInputable()) return;
                         var lastIdx=$(this).attr('_counter');
                         if (lastIdx===undefined) lastIdx=0;
                         var mdown=$(this).attr('mdown').split(',');
@@ -117,6 +124,7 @@ var Device = function(device, zoomfun) {
                 
                     control.find('.dst').mousedown(function (e) {
                         e.stopPropagation();
+                        if (!isInputable()) return;
                         deviceDragging=_self;
                         
                        
@@ -148,7 +156,7 @@ var Device = function(device, zoomfun) {
                         });
                         
                         $(this).parent().parent().parent().parent().one('mouseup', function(e) {
-                            console.log('Stop');
+                            //console.log('Stop');
                             e.stopPropagation();
                             deviceDragging=null;
     

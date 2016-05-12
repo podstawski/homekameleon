@@ -69,6 +69,10 @@ var zoomContainer = function(z,set) {
 
 }
 
+var devicesMayInput = function() {
+    return !editmode;
+}
+
 var calculatePoint = function(p) {
     var zoom=zoomContainer();
     var w=parseFloat($('#floor-container .draggable-container').width());
@@ -230,7 +234,7 @@ var drawDeviceElement = function(data,element) {
             if (data.id) websocket.emit('db-remove','floor',data.id);
             return;
         }
-        var device=new Device(data, zoomContainer);
+        var device=new Device(data, zoomContainer, devicesMayInput);
         device.parent($('#floor-container .draggable-container'));
         element={device: device, type: 'device', data: data, id: data.id};
         elements.push(element);
