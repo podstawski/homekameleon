@@ -1,8 +1,51 @@
+<div class="container-flud">
 [loop:actions]
-<div class="row">
+    <div class="row">
+        <div class="col-md-2">
+            <label class="switch switch-default switch-success">
+                <input type="checkbox" class="switch-input" name="active" value="1" [if:active]checked[endif:active]/>
+                <span class="switch-label"></span>
+                <span class="switch-handle"></span>
+            </label>
+        </div>
+        
+        <div class="col-md-5">
+            <ul>
+            [loop:conditions]
+                <li>
+                    <select class="inputoroutput" rel="[db],[device],[address]"></select>
+                    <condition>[condition]</condition>
+                </li>
+            [endloop:conditions]
+                <li class="add"><i class="icon-plus"></i></li>
+            </ul>
+        </div>
+        
+        <div class="col-md-5">
+            <ul>
+            [loop:scripts]
+                <li>
+                    <select rel="[script]" class="scripts">
+                        
+                    </select>
+                    <input type="text" size="2" [if:delay]value="[delay]"[endif:delay] class="translate" placeholder="delay"/>
+                </li>
+            [endloop:scripts]
+                <li class="add"><i class="icon-plus"></i></li>
+            </ul>
+        </div>
+    </div>
+    
+[endloop:actions]
+</div>
+
+<div class="add plus-action"><i class="icon-plus"></i></div>
+
+
+<div class="row new-row" style="display: none">
     <div class="col-md-2">
         <label class="switch switch-default switch-success">
-            <input type="checkbox" class="switch-input" name="active" value="1" [if:active]checked[endif:active]/>
+            <input type="checkbox" class="switch-input" name="active" value="1" checked/>
             <span class="switch-label"></span>
             <span class="switch-handle"></span>
         </label>
@@ -10,27 +53,26 @@
     
     <div class="col-md-5">
         <ul>
-        [loop:conditions]
             <li>
-                <select class="inputoroutput" rel="[db],[device],[address]"></select>
-                <condition>[condition]</condition>
+                <select class="inputoroutput"></select>
+                <condition></condition>
             </li>
-        [endloop:conditions]
+            <li class="add"><i class="icon-plus"></i></li>
         </ul>
     </div>
     
     <div class="col-md-5">
         <ul>
-        [loop:scripts]
+
             <li>
-                <select rel="[script]" class="scripts">
-                    
-                </select>
-                <input type="text" size="2" [if:delay]value="[delay]"[endif:delay] class="translate" placeholder="delay"/>
+                <select class="scripts"></select>
+                <input type="text" size="2" class="translate" placeholder="delay"/>
             </li>
-        [endloop:scripts]
+
+            <li class="add"><i class="icon-plus"></i></li>
         </ul>
     </div>
 </div>
-    
-[endloop:actions]
+
+
+

@@ -431,18 +431,29 @@ aside .device-element {
     border: dotted 1px #d0d0d0;
 }
 
+#edit-input .modal-body .row ul li.add {
+    border: 0;
+}
+
 #edit-input .modal-body .row ul li .x {
     content: "×";
     position: absolute;
     cursor: pointer;
-    right: 5px;
+    right: 2px;
     top: 0;
+
 }
 
 #edit-input .modal-body .row ul li .select2-container {
     width: 100%;
 }
 
+
+#edit-input .modal-body .add {
+    cursor: pointer;
+    float: right;
+    margin: 5px 0 3px 0;
+}
 
 .device-container .controls-container .control-slider {
     position: relative;

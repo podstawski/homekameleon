@@ -78,7 +78,7 @@ var inputsTableDraw = function(data) {
 		data[i].id='input,'+data[i].device+','+data[i].address;
 	}
 	
-	inputsDataArray=data.data;
+	inputsDataArray=data;
 	
 	
 	datatable.clear();
@@ -107,8 +107,7 @@ var drawIOSelects = function(selection) {
 		
 		var id=$(this).attr('rel');
 		var select=$(this);
-		
-		
+
 
 		$.smekta_file('views/smekta/inputoutput-select.html',{inputs:inputsDataArray,outputs:outputsDataArray},this,function(){
 			select.val(id);
@@ -205,14 +204,15 @@ $(function(){
                 }
 				console.log(actions);
 				$.smekta_file('views/smekta/input-actions.html',actions,'#edit-input .modal-body',function(){
+					
 					$('#edit-input .modal-body .translate').translate();
 					
-					$('#edit-input .modal-body li').append('<a class="x">×</a>');
+					$('#edit-input .modal-body li').not('.add').append('<a class="x">×</a>');
 					$('#edit-input .modal-body li a.x').click( function(){
 						$(this).parent().remove();
 					});
-					drawScriptSelects('#edit-input .modal-body');
-					drawIOSelects('#edit-input .modal-body');
+					drawScriptSelects('#edit-input .modal-body .container-flud');
+					drawIOSelects('#edit-input .modal-body .container-flud');
 					
 				});
 
@@ -221,6 +221,16 @@ $(function(){
 			
 
 			
+		});
+		
+		$(document).on('click','#edit-input .modal-body .plus-action',function(e){
+			
+			$('#edit-input .modal-body .new-row').clone().appendTo('#edit-input .modal-body .container-flud').show();
+			
+			drawScriptSelects('#edit-input .modal-body .container-flud .new-row');
+			drawIOSelects('#edit-input .modal-body .container-flud .new-row');
+			
+			$('#edit-input .modal-body .container-flud .new-row').removeClass('new-row');
 		});
 		
 		$.inputsInitiated=true;
