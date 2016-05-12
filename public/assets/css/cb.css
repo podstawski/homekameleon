@@ -484,6 +484,10 @@ aside .device-element {
 }
 
 
+.breadcrumb .edit-mode-hidden {
+    display: none;
+}
+
 
 
 @media print {

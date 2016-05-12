@@ -14,6 +14,10 @@ var uploadImage=null;
 var originalSvgWidth;
 var callingDevice;
 var lastDraggedElement=null;
+var editmode=false;
+var deviceRatio=5;
+var minDeviceRatio=3;
+var maxDeviceRatio=10;
 
 var lastFloorDebugTxt='';
 
@@ -201,6 +205,7 @@ var drawPolygon = function(points,id,name,element) {
     }
     
     poli.dblclick(function(e){
+        if (!editmode) return;
         $('#edit-element .modal-header input').val(name);
         $('#edit-element').attr('rel',id);
         $('#edit-element .modal-body').html('');
@@ -233,7 +238,7 @@ var drawDeviceElement = function(data,element) {
         var device=element.device;
     }
     
-    var ratio=0.6*$('#floor-container').width()/originalSvgWidth;
+    var ratio=0.1*deviceRatio*$('#floor-container').width()/originalSvgWidth;
     
     device.draw({
         stop: function(e,ui) {
@@ -249,6 +254,7 @@ var drawDeviceElement = function(data,element) {
             lastDraggedElement={id: data.id,element: $(this)};
         },
         dblclickDevice: function(e) {
+            if (!editmode) return;
             modalCleanup();
             $('#edit-element').addClass('device-edit');
             $('#edit-element .modal-header input').val(data.name);
@@ -265,6 +271,7 @@ var drawDeviceElement = function(data,element) {
             });
         },
         dblclickControl: function (e) {
+            if (!editmode) return;
             modalCleanup();
             $('#edit-element').addClass('control-edit');
             $('#edit-element .modal-header input').val(data.name);
@@ -294,6 +301,7 @@ var drawDeviceElement = function(data,element) {
     
     element.element = device.dom();
     device.dom().addClass('element');
+    if (!editmode) device.dom().draggable('disable');
     
     var point=calculatePoint(data.point);
     
@@ -515,6 +523,8 @@ var drawAsideDevices = function() {
         
         device.dom().dblclick(function(){
             
+            if (!editmode) return;
+            
             callingDevice=device;
             modalCleanup();
             $('#edit-element').addClass('aside-edit');
@@ -555,7 +565,13 @@ $(function(){
 
     var icon_selector='.breadcrumb .breadcrumb-menu i.icon-note';
     $(icon_selector).removeClass('active');
-    $('.breadcrumb .btn-floor').fadeIn(200);
+    
+    $('.breadcrumb .btn-floor').not('.edit-mode-only').fadeIn(200);
+   
+    
+
+    
+
     
     
     if (typeof($.breadcrumbIconClick)=='undefined') {
@@ -583,7 +599,42 @@ $(function(){
             
             window.print();
         });
+        
+        $(document).on('click','.breadcrumb .edit-mode-toggle',function(){
+            $(this).toggleClass('active');
+            $(this).children().toggleClass('active');
+            editmode=$(this).hasClass('active');
+            
+            if (editmode) {
+                $('.breadcrumb .edit-mode-only').show();
+                $('#floor-container .draggable-container .device-container').draggable('enable');
+            } else {
+                $('.breadcrumb .edit-mode-only').hide();
+                $('#floor-container .draggable-container .device-container').draggable('disable');
+            }
+        });      
+        
+        $(document).on('click','.breadcrumb .aside-toggle',function(){
+            $(this).children().toggleClass('active');
+        });
+        
+        $(document).on('click','.breadcrumb .device-plus',function(){
+            if (deviceRatio<=maxDeviceRatio) {
+                deviceRatio++;
+                moveElements();
+            }
+            
+        });
 
+        $(document).on('click','.breadcrumb .device-minus',function(){
+            if (deviceRatio>=minDeviceRatio) {
+                deviceRatio--;
+                moveElements();
+            }
+            
+        });
+
+        
         $(document).keydown(function(e){
             
             if (lastDraggedElement && e.which>=37 && e.which<=40) {
