@@ -1,23 +1,8 @@
 var deviceDragging=null;
 
-/*
-var mouseUpCallback = function(e){
-  
-    if (deviceDragging==null) return;
-    e.stopPropagation();
-    deviceDragging=null;
-
-}
-
-if ($.mouseUpCallback===undefined) {
-    $('body').mouseup(mouseUpCallback);
-    $.mouseUpCallback=true;
-}
-
-*/
 
 
-var Device = function(device, zoomfun, isInputable) {
+var Device = function(device, zoomfun, emiterfun) {
     var _self=this;
     var _dom=null,_parent=null;
     var _attr={};
@@ -32,8 +17,8 @@ var Device = function(device, zoomfun, isInputable) {
         }
     }
     
-    if (isInputable==null) {
-        isInputable=function() {
+    if (emiterfun==null) {
+        emiterfun=function() {
             return false;
         }
     }
@@ -107,7 +92,7 @@ var Device = function(device, zoomfun, isInputable) {
                     && device.controls[i].mdown!==undefined && device.controls[i].mdown.length>0) {
                     control.addClass('mouseclick');
                     control.mousedown(function() {
-                        if (!isInputable()) return;
+                        if (!emiterfun()) return;
                         var lastIdx=$(this).attr('_counter');
                         if (lastIdx===undefined) lastIdx=0;
                         var mdown=$(this).attr('mdown').split(',');
@@ -115,7 +100,7 @@ var Device = function(device, zoomfun, isInputable) {
                         var state=mdown[lastIdx%size];
                         lastIdx++;
                         $(this).attr('_counter',lastIdx);
-                        busSend($(this).attr('haddr'),state);
+                        emiterfun($(this).attr('haddr'),state);
                     });
                 }
                 
@@ -124,7 +109,7 @@ var Device = function(device, zoomfun, isInputable) {
                 
                     control.find('.dst').mousedown(function (e) {
                         e.stopPropagation();
-                        if (!isInputable()) return;
+                        if (!emiterfun()) return;
                         deviceDragging=_self;
                         
                        
@@ -147,7 +132,7 @@ var Device = function(device, zoomfun, isInputable) {
                             if (topcontrol.attr('haddr')!==undefined && topcontrol.attr('haddr').length>0) {
                                 var min=parseInt(topcontrol.attr('min'));
                                 var max=parseInt(topcontrol.attr('max'));
-                                busSend(topcontrol.attr('haddr'),Math.round(min+prc*(max-min)));
+                                emiterfun(topcontrol.attr('haddr'),Math.round(min+prc*(max-min)));
                             }
                             
                             //console.log(relX,e.pageX,parent.width(),prc);

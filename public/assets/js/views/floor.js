@@ -69,8 +69,9 @@ var zoomContainer = function(z,set) {
 
 }
 
-var devicesMayInput = function() {
-    return !editmode;
+var devicesStateEmiter = function(addr,state) {
+    if (addr==null) return !editmode;
+    busSend(addr,state);
 }
 
 var calculatePoint = function(p) {
@@ -234,7 +235,7 @@ var drawDeviceElement = function(data,element) {
             if (data.id) websocket.emit('db-remove','floor',data.id);
             return;
         }
-        var device=new Device(data, zoomContainer, devicesMayInput);
+        var device=new Device(data, zoomContainer, devicesStateEmiter);
         device.parent($('#floor-container .draggable-container'));
         element={device: device, type: 'device', data: data, id: data.id};
         elements.push(element);
