@@ -529,6 +529,19 @@ aside .device-element {
 }
 
 
+#confirm-delete {
+    top: 20%
+}
+
+#confirm-delete .modal-header {
+    background-color: #f53b3b;
+    color: #fff;
+    border-radius: 3px 3px 0 0;
+}
+#confirm-delete .modal-header h4 {
+    margin: 0;
+}
+
 
 @media print {
     body {

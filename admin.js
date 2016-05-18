@@ -107,7 +107,7 @@ var Admin = function(socket,session,hash,database,public_path) {
                             sub.data[j]._new=false;
                             sub.data[j].description=structure.data[sub.ctx].name;
                         
-                            if (typeof(sub.data[j]._created)!='undefined' && sub.data[j]._created+30*60*1000>new Date.now()) {
+                            if (typeof(sub.data[j]._created)!='undefined' && sub.data[j]._created+30*60*1000>Date.now()) {
                                 sub.data[j]._new=true;
                             }        
                         }

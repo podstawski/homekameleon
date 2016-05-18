@@ -422,7 +422,7 @@ $(function(){
 	 */
 	$('#confirm-delete .btn-danger').click(function(e){
 		$('#confirm-delete').modal('hide');
-		websocket.emit('db-remove','devices',$('#confirm-delete').attr('rel'));
+		websocket.emit('db-remove',$('#confirm-delete').attr('table'),$('#confirm-delete').attr('rel'));
 	});
 
 	/*

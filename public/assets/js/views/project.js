@@ -72,9 +72,22 @@ $(function() {
             
         });
 
+        $(document).on('click', '#project-structure .remove', function(e) {
+            var id=$(this).attr('rel');
+            $('#confirm-delete').attr('rel',id);
+            $('#confirm-delete').modal('show');
+            var name=$(this).parent().parent().parent().parent().find('input').val();
+            $('#confirm-delete .modal-header h4').text(name);
+        });
+        
+        
     }
     
     
+    $('#confirm-delete .btn-danger').click(function(e){
+        $('#confirm-delete').modal('hide');
+		websocket.emit('db-remove',$('#confirm-delete').attr('table'),$('#confirm-delete').attr('rel'));
+    });
     
 });
 
