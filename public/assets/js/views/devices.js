@@ -82,8 +82,21 @@ var toggleDisabled = function() {
  *obj: object in DOM, if null: we should add one
  */
 var addControl = function (obj,data) {
+
+	var activate = function(obj) {
+		$('#edit-device .device-controls-container .drg').removeClass('drg-active');
+		obj.addClass('drg-active');
+		
+		$('#edit-device .device-controls-label-container .dim').show();
+		$('#edit-device .device-controls-label-container .dim .x').val(parseInt(obj.css('left')));
+		$('#edit-device .device-controls-label-container .dim .y').val(parseInt(obj.css('top')));
+		$('#edit-device .device-controls-label-container .dim .w').val(parseInt(obj.width()));
+		$('#edit-device .device-controls-label-container .dim .h').val(parseInt(obj.height()));
+	}
+
 	
 	var dst=$('#edit-device .device-controls-container');
+
 	
 	if (obj==null) {
         obj=$('<div class="drg"><span class="name"></span></div>');
@@ -100,13 +113,28 @@ var addControl = function (obj,data) {
 		});
 	
 		
+	} else {
+		activate(obj);
 	}
 	
+
 	obj.appendTo(dst);
-	obj.resizable({containment:'parent'});
-	obj.draggable({containment:'parent'});
+	obj.resizable({containment:'parent',
+				  start: function() {activate($(this));},
+				  stop: function() {activate($(this));}
+				  });
+	obj.draggable({containment:'parent',
+				  start: function() {activate($(this));},
+				  stop: function() {activate($(this));}
+				  });
+	
+	obj.click(function() {
+		activate($(this));
+	});
 	
 	obj.dblclick(function(){
+		activate($(this));
+		
 		$('#edit-control').modal('show');
 		$('#edit-control').attr('symbol',$('#edit-device input[name="symbol"]').val());
 		var type=$(this).attr('type');
@@ -347,6 +375,41 @@ $(function(){
 						addControl(null,devicesData[id].controls[i]);
 					}
                 }
+				
+				/*
+				 *dimension inputs behavior
+				 */
+				
+				$('#edit-device .device-controls-label-container .dim input').focus(function(){
+					$(this).attr('prev',$(this).val());
+				});
+				
+				$('#edit-device .device-controls-label-container .dim input').change(function(){
+					// -2: border
+					var w=$('#edit-device .device-controls-container').width()-2;
+					var h=$('#edit-device .device-controls-container').height()-2;
+					
+					if (
+						parseInt($(this).val())<0
+						||
+						parseInt($('#edit-device .device-controls-label-container .dim input.x').val()) + parseInt($('#edit-device .device-controls-label-container .dim input.w').val()) > w
+						||
+						parseInt($('#edit-device .device-controls-label-container .dim input.y').val()) + parseInt($('#edit-device .device-controls-label-container .dim input.h').val()) > h
+					) {
+                        $(this).val($(this).attr('prev'));
+						return false;
+                    }
+					
+			
+					$('#edit-device .device-controls-container .drg-active').css({
+						left: $('#edit-device .device-controls-label-container .dim input.x').val()+'px',
+						top: $('#edit-device .device-controls-label-container .dim input.y').val()+'px',
+						width: $('#edit-device .device-controls-label-container .dim input.w').val()+'px',
+						height: $('#edit-device .device-controls-label-container .dim input.h').val()+'px'
+					});
+					
+				});
+				
 			});
 			
 		});

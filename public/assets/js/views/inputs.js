@@ -109,7 +109,11 @@ var drawIOSelects = function(selection) {
 		var select=$(this);
 
 
-		$.smekta_file('views/smekta/inputoutput-select.html',{inputs:inputsDataArray,outputs:outputsDataArray},this,function(){
+		$.smekta_file('views/smekta/inputoutput-select.html',{
+			inputs:inputsDataArray,
+			outputs:outputsDataArray
+			},this,function(){
+			
 			select.val(id);
 			select.select2();
 		});
@@ -202,6 +206,7 @@ $(function(){
 				if (actions.actions===undefined) {
                     actions.actions=[];
                 }
+				actions.id=id;
 				console.log(actions);
 				$.smekta_file('views/smekta/input-actions.html',actions,'#edit-input .modal-body',function(){
 					
@@ -211,8 +216,8 @@ $(function(){
 					$('#edit-input .modal-body li a.x').click( function(){
 						$(this).parent().remove();
 					});
-					drawScriptSelects('#edit-input .modal-body .container-flud');
-					drawIOSelects('#edit-input .modal-body .container-flud');
+					drawScriptSelects('#edit-input .modal-body .container-fluid');
+					drawIOSelects('#edit-input .modal-body .container-fluid');
 					
 				});
 
@@ -225,12 +230,12 @@ $(function(){
 		
 		$(document).on('click','#edit-input .modal-body .plus-action',function(e){
 			
-			$('#edit-input .modal-body .new-row').clone().appendTo('#edit-input .modal-body .container-flud').show();
+			$('#edit-input .modal-body .new-row').clone().appendTo('#edit-input .modal-body .container-fluid').show();
 			
-			drawScriptSelects('#edit-input .modal-body .container-flud .new-row');
-			drawIOSelects('#edit-input .modal-body .container-flud .new-row');
+			drawScriptSelects('#edit-input .modal-body .container-fluid .new-row');
+			drawIOSelects('#edit-input .modal-body .container-fluid .new-row');
 			
-			$('#edit-input .modal-body .container-flud .new-row').removeClass('new-row');
+			$('#edit-input .modal-body .container-fluid .new-row').removeClass('new-row');
 		});
 		
 		$.inputsInitiated=true;

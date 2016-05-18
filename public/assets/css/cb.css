@@ -165,6 +165,14 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     float: left;
 }
 
+@media screen and (min-width: 768px) {
+    #edit-device .modal-dialog {
+        width: 80%;
+    }
+}
+
+
+
 #edit-device .modal-header {
     background-color: yellow;
     border-radius: 3px 3px 0 0;
@@ -206,8 +214,8 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 }
 
 #edit-device .device-controls-container {
-    width: 200px;
-    height: 200px;
+    width: 364px;
+    height: 364px;
     border: solid 1px black;
     padding: 0;
 }
@@ -220,7 +228,7 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 #edit-device .device-controls-label-container {
     padding: 10px;
     background-color: rgba(0,0,0,0.1);
-    height: 200px;
+    height: 364px;
     border: black solid;
     border-width: 1px 1px 1px 0;
 }
@@ -229,15 +237,22 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 #edit-device .drg {
     width: 50px;
     height: 50px;
-    border: dashed 1px red;
+    border: dashed 1px green;
     text-align: center;
-    xpadding-top: 8px;
     color: #909090;
+}
+
+#edit-device .drg-active {
+    border-color: red;
 }
 
 #edit-device .drg .name {
     margin-top: 30%;
     display: block;
+}
+
+#edit-device .device-controls-label-container {
+    position: relative;
 }
  
 #edit-device .device-controls-label-container div {
@@ -248,6 +263,20 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 #edit-device .device-controls-container .drg {
     margin: 0;
     position: absolute;    
+}
+
+
+#edit-device .device-controls-label-container .dim {
+    position: absolute;
+    bottom: 0;
+    border: dashed 1px red;
+    padding: 4px;
+    text-align: right;
+    display: none;
+}
+#edit-device .device-controls-label-container .dim input{
+    width: 40px;
+    display: inline-block;
 }
 
 
