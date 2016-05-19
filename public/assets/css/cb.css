@@ -543,6 +543,10 @@ aside .device-element {
 }
 
 
+.picker-frame {
+    z-index: 1500;
+}
+
 @media print {
     body {
         background-color: #fff;

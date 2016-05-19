@@ -44,6 +44,7 @@ websocket.on('projects',function(data){
     
     $('.sidebar .sidebar-header div strong').text(data.name);
     $('.sidebar .sidebar-header div small').text(data.description);
+    $('.sidebar a.a-avatar').attr('href','project.html,'+data.id);
     
     if (typeof(data.img)!='undefined' && data.img.length>0) {
         $('#img_img,.sidebar .sidebar-header .img-avatar').attr('src',data.img);
@@ -65,6 +66,8 @@ websocket.on('projects',function(data){
         });
         
         $('.project .add-item').show();
+        
+        thisproject=data;
 
     }
     

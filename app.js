@@ -97,10 +97,16 @@ var initApp = function() {
         });
                   
 
+        socket.on('credentials',function(){
+            fs.readFile('credentials.json',function(error,d) {
+                socket.emit('credentials',JSON.parse(d));
+            });
+        });
+                  
         console.log('Hello new client',hash); 
         admin(socket,session,hash,database,'./public');
         server.run(socket);
-      
+        
     });
 
         

@@ -1,3 +1,5 @@
+var thisproject;
+
 $(function() {
 
     var data={};
@@ -29,7 +31,7 @@ $(function() {
     hash=hash.split(',');
     if (hash.length>1 && parseInt(hash[1])>0) {
         websocket.emit('db-get','projects',parseInt(hash[1]));
-        $('.sidebar a.a-avatar').attr('href','project.html,'+hash[1]);
+        
     }
 
     $('.project .add-item a').click(function(e) {
@@ -82,6 +84,10 @@ $(function() {
         });
         
         
+        $(document).on('click', '.breadcrumb .export-project', function(e) {
+            exportToSpreadsheet(thisproject);
+        });
+        
     }
     
     
@@ -90,5 +96,7 @@ $(function() {
 		websocket.emit('db-remove',$('#confirm-delete').attr('table'),$('#confirm-delete').attr('rel'));
     });
     
+    
+    $('.breadcrumb .btn-project').fadeIn(300);
 });
 
