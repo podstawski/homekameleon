@@ -74,6 +74,48 @@ var devicesStateEmiter = function(addr,state) {
     busSend(addr,state);
 }
 
+
+var pointInPolygonCheck = function (point, vs) {
+    // ray-casting algorithm based on
+    // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+
+    var x = point[0], y = point[1];
+
+    var inside = false;
+    for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+        var xi = vs[i][0], yi = vs[i][1];
+        var xj = vs[j][0], yj = vs[j][1];
+
+        var intersect = ((yi > y) != (yj > y))
+            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+
+    return inside;
+};
+
+var roomOfDevice = function(obj) {
+    for (var i=0; i<elements.length; i++) {
+        if (elements[i].type!='polygon') continue;
+        var points=[];
+        for (var j=0; j<elements[i].points.length; j++) {
+            points.push([elements[i].points[j].x,elements[i].points[j].y]);
+        }
+        var p1=calculatePoint({x:parseInt(obj.css('left')),y:parseInt(obj.css('top'))});
+        var p2=calculatePoint({x:parseInt(obj.css('left'))+parseInt(obj.css('width')),y:parseInt(obj.css('top'))});
+        var p3=calculatePoint({x:parseInt(obj.css('left'))+parseInt(obj.css('width')),y:parseInt(obj.css('top'))+parseInt(obj.css('height'))});
+        var p4=calculatePoint({x:parseInt(obj.css('left')),y:parseInt(obj.css('top'))+parseInt(obj.css('height'))});
+        
+        if (pointInPolygonCheck([p1.x,p1.y],points)) return elements[i].id; 
+        if (pointInPolygonCheck([p2.x,p2.y],points)) return elements[i].id; 
+        if (pointInPolygonCheck([p3.x,p3.y],points)) return elements[i].id; 
+        if (pointInPolygonCheck([p4.x,p4.y],points)) return elements[i].id; 
+        
+    }
+    return null;    
+}
+
+
 var calculatePoint = function(p) {
     var zoom=zoomContainer();
     var w=parseFloat($('#floor-container .draggable-container').width());
@@ -239,6 +281,7 @@ var drawDeviceElement = function(data,element) {
         device.parent($('#floor-container .draggable-container'));
         element={device: device, type: 'device', data: data, id: data.id};
         elements.push(element);
+
     } else {
         var device=element.device;
     }
@@ -254,7 +297,8 @@ var drawDeviceElement = function(data,element) {
             p.x=p.left;
             p.y=p.top;
             d.point=calculatePoint(p);
-
+            d.room=roomOfDevice($(this));
+            
             websocket.emit('db-save','floor',d);
             lastDraggedElement={id: data.id,element: $(this)};
         },
@@ -429,7 +473,19 @@ var floorDrawElements=function(data) {
                     break;
                 }
                 default: {
-                    drawDeviceElement(data[i]);
+                    var dom=drawDeviceElement(data[i]);
+                    
+                    if (typeof(data[i].room)=='undefined'|| data[i].room==null) {
+                        setTimeout(function(dom,data){
+                            var room=roomOfDevice(dom);
+                            if (room!=null) {
+                                data.room=room;
+                                websocket.emit('db-save','floor',data);           
+                            }
+                        },1000,dom,data[i]);
+                        
+                    }
+                    
                     break;
                 }
             }        
