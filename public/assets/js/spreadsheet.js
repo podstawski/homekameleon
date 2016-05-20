@@ -3,7 +3,18 @@ var credentials=null;
 var userauth=null;
 var projectdata;
 
-loadJS(['https://apis.google.com/js/api.js','https://apis.google.com/js/client.js']);
+loadJS(['https://apis.google.com/js/api.js?onload=apiLoaded','https://apis.google.com/js/client.js']);
+
+websocket.emit('credentials');
+websocket.once('credentials',function(data){
+    credentials=data;
+});
+
+var apiLoaded=function() {
+    gapi.load('auth');
+}
+
+
 
 var filePicked = function (data) {
     if (data!=null && data.action=='picked') {
@@ -159,32 +170,21 @@ var pickFile = function() {
         filePicked();
     }
 }
-
-var userAuthorized = function (auth) {
-    userauth=auth;
-    pickFile();
-}
+ 
 
 var exportToSpreadsheet = function (project) {
     projectdata=project;
     
     if (userauth==null) {
-        websocket.emit('credentials');
-        websocket.once('credentials',function(data){
-            credentials=data;
- 
-            
-            gapi.load('auth', {
-                'callback': function() {
-              
-                    window.gapi.auth.authorize({
-                        'client_id': credentials.clientId,
-                        'scope': credentials.scope,
-                        'immediate': false
-                    },userAuthorized);
-            }});
-            
-        });        
+        window.gapi.auth.authorize({
+            'client_id': credentials.clientId,
+            'scope': credentials.scope,
+            'immediate': false
+        },function (auth) {
+            userauth=auth;
+            pickFile();
+        });
+  
     } else {
         pickFile();
     }
