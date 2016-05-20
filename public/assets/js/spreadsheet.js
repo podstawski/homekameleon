@@ -12,25 +12,128 @@ var filePicked = function (data) {
 
     if (spreadsheetId==null) return;
     
+    toastr.info($.translate('Please wait'), $.translate('Exporting data to the sheet'), {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "showDuration": "5000",
+        "hideDuration": "500",
+        "timeOut": "10000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    });
     
-    gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
     
-        //https://developers.google.com/sheets/samples/sheet#add_a_sheet
-        gapi.client.sheets.spreadsheets.batchUpdate({
-            spreadsheetId: spreadsheetId,
-            requests: [{
-                addSheet:{
-                    properties: {
-                        title: projectdata.name
+    websocket.emit('project',projectdata.id);
+    websocket.once('project',function(structure){
+       
+        console.log(structure);
+        var data=[
+            ['','','','','','','']
+        ],row;
+        for (var i=0;i<structure.data.length;i++) {
+            if (!structure.data[i]._sub) structure.data[i]._sub=[{name:'',_elements:structure.data[i]._elements}];
+            row=[structure.data[i].name,'','','','','',''];
+            
+            for(var j=0; j<structure.data[i]._sub.length; j++) {
+                if (j==0) row[1]=structure.data[i]._sub[j].name;
+                else row=['',structure.data[i]._sub[j].name,'','','','',''];
+                
+                for (var k=0; k<structure.data[i]._sub[j]._elements.length; k++) {
+                    if (k==0) row[2]=structure.data[i]._sub[j]._elements[k].name;
+                    else row=['','',structure.data[i]._sub[j]._elements[k].name,'','','',''];
+                    
+                    for (var l=0; l<structure.data[i]._sub[j]._elements[k].elements.length; l++) {
+                    
+                        if (l>0) {
+                            row=['','','','','','',''];
+                        }
+                        row[3]=structure.data[i]._sub[j]._elements[k].elements[l].type;
+                        row[4]=structure.data[i]._sub[j]._elements[k].elements[l].name;
+                        row[5]=structure.data[i]._sub[j]._elements[k].elements[l].label;
+
+                        data.push(row);    
+                    }
+                    
+                }
+            }
+        }
+        
+        gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
+        
+            //https://developers.google.com/sheets/samples/sheet#add_a_sheet
+            var d=new Date();
+            var sheetName=projectdata.name+' - '+d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' / '+d.getHours()+'-'+d.getMinutes();
+            
+            sheetName=projectdata.name;
+            sheetName=sheetName.replace('\!','');
+            
+            var pasteData = function(data,name) {
+                
+                gapi.client.sheets.spreadsheets.values.update({
+                    spreadsheetId: spreadsheetId,
+                    range: sheetName+'!'+'A1:G'+data.length,
+                    valueInputOption: 'USER_ENTERED',
+                    majorDimension: 'ROWS',
+                    values: data
+                }).then(function(resp){
+                    
+                    toastr.clear();
+                    toastr.success(resp.result.updatedRange, name, {
+                        closeButton: true,
+                        progressBar: true,
+                    });
+                    
+                });             
+            }
+            
+            
+            gapi.client.sheets.spreadsheets.get({
+                spreadsheetId: spreadsheetId
+            }).then(function(resp){
+                
+            
+                
+                var found=false;
+                for (var i=0; i<resp.result.sheets.length; i++) {
+                    
+                    if (resp.result.sheets[i].properties.title==sheetName) {
+                        found=true;
+                        break;
                     }
                 }
+                if (!found) {
+                    gapi.client.sheets.spreadsheets.batchUpdate({
+                        spreadsheetId: spreadsheetId,
+                        requests: [{
+                            addSheet:{
+                                properties: {
+                                    title: sheetName
+                                }
+                            }
+                        
+                        }]
+                    }).then(function(respSheet) {
+                        pasteData(data,resp.result.properties.title);
+                    });
+                } else {
+                    pasteData(data,resp.result.properties.title);
+                }
+            });   
             
-            }]
-        }).then(function(resp) {
-            console.log(resp);
+    
         });
 
+    
     });
+    
+
 }
 
 
@@ -47,11 +150,14 @@ var pickFile = function() {
                     .addView(view)
                     .addView(new google.picker.DocsUploadView())
                     .setLocale($.translateLang())
+                    .setDeveloperKey(credentials.apikey)
                     .setCallback(filePicked)
                     .build();
                  picker.setVisible(true);
             }
         });
+    } else {
+        filePicked();
     }
 }
 

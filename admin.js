@@ -75,7 +75,111 @@ var Admin = function(socket,session,hash,database,public_path) {
         }
                 
         return true;
+    };
+    
+    var getFloorElements = function(elements) {
+        
+        var ret=[],rooms={0:{id:0, name:'_unassigned'}};
+        
+        for(var i=0; i<elements.length; i++) {
+            if (elements[i].type=='polygon') {
+                rooms[elements[i].id] = elements[i];
+            }
+        }
+        
+        for(var i=0; i<elements.length; i++) {
+            if (elements[i].type=='polygon') continue;
+            if (typeof(elements[i].room)=='undefined' || elements[i].room==null) elements[i].room=0;
+        
+            var dst=null;
+            for (var j=0; j<ret.length; j++) {
+                if (ret[j].id==elements[i].room) {
+                    dst=ret[j];
+                    break;
+                }
+            }
+            if (dst==null) {
+                ret.push(rooms[elements[i].room]);
+                dst=ret[ret.length-1];
+            }
+
+            if (typeof(dst.elements)=='undefined') dst.elements=[];
+            
+            dst.elements.push(elements[i]);
+        }
+        
+        return ret;
     }
+    
+    var getProjectStructure = function(project,name,withelements,cb) {
+        
+        database.structure.select([{project:project,parent:null}],['pri','name'],function(structure){
+
+            var subs=structure.data.length;
+            for (var i=0; i<structure.data.length; i++) {
+              
+                structure.data[i].parent=null;
+                structure.data[i].description=name;
+                structure.data[i]._new=false;
+                if (typeof(structure.data[i]._created)!='undefined' && structure.data[i]._created+30*60*1000> Date.now()) {
+                    structure.data[i]._new=true;
+                }
+              
+                structure.data[i]._sub=false;
+                
+                if (withelements) {
+                    subs++;
+                    database.floor.select([{floor:structure.data[i].id}],null,function(el){
+                        structure.data[el.ctx]._elements=getFloorElements(el.data);
+                        subs--;
+                    },i);
+                }
+                
+                database.structure.select([{project:project,parent:structure.data[i].id}],['pri','name'],function(sub) {
+
+                    for (var j=0; j<sub.data.length; j++) {
+                        sub.data[j]._new=false;
+                        sub.data[j].description=structure.data[sub.ctx].name;
+                    
+                        if (typeof(sub.data[j]._created)!='undefined' && sub.data[j]._created+30*60*1000>Date.now()) {
+                            sub.data[j]._new=true;
+                        }
+                        
+                        if (withelements) {
+                            subs++;
+                            database.floor.select([{floor:sub.data[j].id}],null,function(el){
+                                sub.data[el.ctx]._elements=getFloorElements(el.data);
+                                subs--;
+                            },j);
+                        }       
+                        
+                    }
+                    
+                    if (sub.data.length>0) {
+                          structure.data[sub.ctx]._sub=sub.data;
+                    }
+                    
+                
+                    subs--;
+                    
+                },i);
+              
+            }
+
+            setTimeout(function(){
+                if (subs>0) {
+                    setTimeout(this._onTimeout,100);
+                    return;
+                }
+                
+                cb(structure);
+            },0);
+
+
+
+        });
+        
+    };
  
  
     var wallStructure = function (project,all) {
@@ -85,63 +189,17 @@ var Admin = function(socket,session,hash,database,public_path) {
         database.projects.get(project,function(rec){
             if (rec==null) return;
             
-            var name=rec.name;
-
-            database.structure.select([{project:project,parent:null}],['pri','name'],function(structure){
-
-                var subs=structure.data.length;
-                for (var i=0; i<structure.data.length; i++) {
-                  
-                    structure.data[i].parent=null;
-                    structure.data[i].description=name;
-                    structure.data[i]._new=false;
-                    if (typeof(structure.data[i]._created)!='undefined' && structure.data[i]._created+30*60*1000> Date.now()) {
-                        structure.data[i]._new=true;
-                    }
-                  
-                    structure.data[i]._sub=false;
-                    database.structure.select([{project:project,parent:structure.data[i].id}],['pri','name'],function(sub) {
-                        
-                        
-                        for (var j=0; j<sub.data.length; j++) {
-                            sub.data[j]._new=false;
-                            sub.data[j].description=structure.data[sub.ctx].name;
-                        
-                            if (typeof(sub.data[j]._created)!='undefined' && sub.data[j]._created+30*60*1000>Date.now()) {
-                                sub.data[j]._new=true;
-                            }        
+            getProjectStructure(project,rec.name,false,function(structure){
+                if (!all) socket.emit('structure-all',structure);
+                else {
+                    for (var h in session) {    
+                        if (typeof(session[h].socket)!='undefined' && session[h].socket!=null && typeof(session[h].project)!='undefined' && session[h].project==project) {
+                            session[h].socket.emit('structure-all',structure);
                         }
-                        
-                        if (sub.data.length>0) {
-                              structure.data[sub.ctx]._sub=sub.data;
-                        }
-                    
-                        subs--;
-                        
-                    },i);
-                  
+                    }      
                 }
-                
-                setTimeout(function(){
-                    if (subs>0) {
-                        setTimeout(this._onTimeout,100);
-                        return;
-                    }
-
-                    if (!all) socket.emit('structure-all',structure);
-                    else {
-                        for (var h in session) {    
-                            if (typeof(session[h].socket)!='undefined' && session[h].socket!=null && typeof(session[h].project)!='undefined' && session[h].project==project) {
-                                session[h].socket.emit('structure-all',structure);
-                            }
-                        }      
-                    }
-                
-                },0);
-                
-            
             });
-
+                
         });
         
 
@@ -390,6 +448,13 @@ var Admin = function(socket,session,hash,database,public_path) {
     });
     
     
+    socket.on('project',function(project){
+        getProjectStructure(project,'',true,function(structure){
+            socket.emit('project',structure);
+        });
+    });
+    
+    
     //loggedIn=true;return;
     //INIT STATE
 
@@ -407,6 +472,12 @@ var Admin = function(socket,session,hash,database,public_path) {
         socket.emit('logout');
     }
     
+    
+    return {
+        debug: function(p,cb) {
+            getProjectStructure(p,'nic nie wiem',true,cb);
+        }
+    }
 }
 
 

@@ -104,9 +104,16 @@ var initApp = function() {
         });
                   
         console.log('Hello new client',hash); 
-        admin(socket,session,hash,database,'./public');
+        var adm=admin(socket,session,hash,database,'./public');
         server.run(socket);
         
+        /*
+        adm.debug(1,function(d){
+            console.log(d);
+            console.log(d.data[0]._elements);
+            
+        });
+        */
     });
 
         

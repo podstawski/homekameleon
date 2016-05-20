@@ -226,7 +226,7 @@ var Model = function(opt,logger) {
                 }
             }
             
-            var ret={recordsTotal:0,data:ret2,ctx:ctx};
+            var ret={recordsTotal:0,data:JSON.parse(JSON.stringify(ret2)),ctx:ctx};
             ret.recordsTotal=ret.data.length;
             
             
