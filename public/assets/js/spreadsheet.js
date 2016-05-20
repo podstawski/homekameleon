@@ -32,8 +32,7 @@ var filePicked = function (data) {
     
     websocket.emit('project',projectdata.id);
     websocket.once('project',function(structure){
-       
-        console.log(structure);
+
         var data=[
             ['','','','','','','']
         ],row;
