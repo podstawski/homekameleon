@@ -475,8 +475,8 @@ $(function(){
 		/*
 		 *count inputs and outputs
 		 */
-		data.inputs=$('#edit-device .device-controls-container div:not([estate=""])').length;
-		data.outputs=$('#edit-device .device-controls-container div:not([state=""])').length;
+		data.inputs=$('#edit-device .device-controls-container div.drg:not([estate=""])').length;
+		data.outputs=$('#edit-device .device-controls-container div.drg:not([state=""])').length;
 	
 		/*
 		 *send save request

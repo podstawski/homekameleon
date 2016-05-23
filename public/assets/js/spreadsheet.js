@@ -169,6 +169,7 @@ var pickFile = function() {
                     .setLocale($.translateLang())
                     .setDeveloperKey(credentials.apikey)
                     .setCallback(filePicked)
+                    .setOrigin(window.location.protocol+'//'+window.location.host)
                     .build();
                  picker.setVisible(true);
             }
