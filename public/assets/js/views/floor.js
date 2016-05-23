@@ -755,8 +755,17 @@ $(function(){
     
     
 
+    if ($.calculateWHbound===undefined) {
+        $.calculateWHbound=true;
+        $(window).bind('resize', function() {
+            if (window.location.hash.indexOf('floor')>=0) {
+                calculateWH(); 
+            }
+            
+        });
+    
+    }
 
-    $(window).bind('resize', calculateWH);
     
     
     /*
