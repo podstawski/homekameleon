@@ -26,16 +26,16 @@
     
     
       $data=str_replace('"','',$data);
-      $data=str_replace(',','|',$data);
+      $data=str_replace(',','~',$data);
       $data=str_replace('ZJEBANY_PRZECINEK',',',$data);
 	
-      while ($data[strlen($data)-1]=='|') $data=substr($data,0,strlen($data)-1);
+      while ($data[strlen($data)-1]=='~') $data=substr($data,0,strlen($data)-1);
       
-      if (!$len) $len=substr_count($data,'|');
+      if (!$len) $len=substr_count($data,'~');
       
-      if (substr_count($data,'|')!=$len)
+      if (substr_count($data,'~')!=$len)
       {
-          $data=str_replace('||','|',$data);
+          $data=str_replace('~~','~',$data);
     
       }
 	
@@ -45,12 +45,12 @@
     
     
     $data=explode("\n",$data);
-    $header=explode("|",przecinek2strumien(trim($data[0])));
+    $header=explode("~",przecinek2strumien(trim($data[0])));
   
     $langs=array();
     for($i=1;$i<count($data);$i++)
     {
-        $line=explode("|",przecinek2strumien(trim($data[$i])));
+        $line=explode("~",przecinek2strumien(trim($data[$i])));
         
         $label=$line[0];
         for ($j=1;$j<count($line);$j++)
