@@ -45,30 +45,37 @@ var filePicked = function (data) {
     websocket.once('project',function(structure){
 
         var data=[
-            ['','','','','','','']
+            ['Object name','','Room name','Device type','Device name','Label','Inputs','Outputs']
         ],row;
+        
+        for (var i=0;i<data[0].length;i++) data[0][i]=$.translate(data[0][i]);
+        
         for (var i=0;i<structure.data.length;i++) {
             if (!structure.data[i]._sub) structure.data[i]._sub=[{name:'',_elements:structure.data[i]._elements}];
-            row=[structure.data[i].name,'','','','','',''];
+            row=[structure.data[i].name,'','','','','','',''];
             
             for(var j=0; j<structure.data[i]._sub.length; j++) {
                 if (j==0) row[1]=structure.data[i]._sub[j].name;
-                else row=['',structure.data[i]._sub[j].name,'','','','',''];
+                else row=['',structure.data[i]._sub[j].name,'','','','','',''];
                 
                 for (var k=0; k<structure.data[i]._sub[j]._elements.length; k++) {
                     if (k==0) row[2]=structure.data[i]._sub[j]._elements[k].name;
-                    else row=['','',structure.data[i]._sub[j]._elements[k].name,'','','',''];
+                    else row=['','',structure.data[i]._sub[j]._elements[k].name,'','','','',''];
                     
                     for (var l=0; l<structure.data[i]._sub[j]._elements[k].elements.length; l++) {
                     
                         if (l>0) {
-                            row=['','','','','','',''];
+                            row=['','','','','','','',''];
                         }
                         row[3]=structure.data[i]._sub[j]._elements[k].elements[l].type;
                         row[4]=structure.data[i]._sub[j]._elements[k].elements[l].name;
                         row[5]=structure.data[i]._sub[j]._elements[k].elements[l].label;
 
-                        data.push(row);    
+                        row[6]=structure.data[i]._sub[j]._elements[k].elements[l].inputs||0;
+                        row[7]=structure.data[i]._sub[j]._elements[k].elements[l].outputs||0;
+                                     
+                        data.push(row);
+           
                     }
                     
                 }
@@ -88,7 +95,7 @@ var filePicked = function (data) {
                 
                 gapi.client.sheets.spreadsheets.values.update({
                     spreadsheetId: spreadsheetId,
-                    range: sheetName+'!'+'A1:G'+data.length,
+                    range: sheetName+'!'+'A1:H'+data.length,
                     valueInputOption: 'USER_ENTERED',
                     majorDimension: 'ROWS',
                     values: data

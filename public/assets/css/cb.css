@@ -543,8 +543,8 @@ aside .device-element {
 }
 
 
-.picker-frame {
-    z-index: 1500;
+.picker-dialog {
+    z-index: 1500 !important;
 }
 
 @media print {

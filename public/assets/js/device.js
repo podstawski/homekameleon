@@ -10,6 +10,9 @@ var Device = function(device, zoomfun, emiterfun) {
     
     _attr.name=$.translate(device.name);
     _attr.label=device.label || '';
+    _attr.inputs=device.inputs || '';
+    _attr.outputs=device.outputs || '';
+    
     
     if (zoomfun==null) {
         zoomfun=function() {
