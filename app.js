@@ -107,13 +107,15 @@ var initApp = function() {
         var adm=admin(socket,session,hash,database,'./public');
         server.run(socket);
         
+        
         /*
-        adm.debug(1,function(d){
+        adm.debug(2,function(d){
             console.log(d);
             console.log(d.data[0]._elements);
             
         });
         */
+        
     });
 
         

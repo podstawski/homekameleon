@@ -33,6 +33,7 @@ var modalCleanup = function() {
     $('#edit-element').removeClass('aside-edit');
     $('#edit-element').removeClass('device-edit');
     $('#edit-element').removeClass('control-edit');
+    $('#edit-element').removeClass('polygon-edit');
 };
 
 
@@ -253,6 +254,9 @@ var drawPolygon = function(points,id,name,element) {
     
     poli.dblclick(function(e){
         if (!editmode) return;
+    
+        modalCleanup();
+        $('#edit-element').addClass('polygon-edit');
         $('#edit-element .modal-header input').val(name);
         $('#edit-element').attr('rel',id);
         $('#edit-element .modal-body').html('');
@@ -767,6 +771,14 @@ $(function(){
             $('#edit-element input,#edit-element select').each(function(){
                 data[$(this).attr('name')]=$(this).val();
             });
+        }
+        
+        if ($('#edit-element').hasClass('polygon-edit')) {
+            if (uploadImage!=null) {
+                data.img=uploadImage;
+            }
+            
+            websocket.emit('db-save','floor',data);
         }
         
         if ($('#edit-element').hasClass('aside-edit')) {

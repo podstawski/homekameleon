@@ -56,7 +56,8 @@ var buildAsideMenu = function(data) {
 
 var pageCleanup=function() {
 
-    $('.breadcrumb .btn').hide();
+    $('.breadcrumb .btn').hide().removeClass('active').find('i').removeClass('active');
+ 
     
     if ($('body').hasClass('aside-menu-open')) {
         $('body').removeClass('aside-menu-open');

@@ -44,6 +44,7 @@ var filePicked = function (data) {
     websocket.emit('project',projectdata.id);
     websocket.once('project',function(structure){
 
+
         var data=[
             ['Object name','','Room name','Device type','Device name','Label','Inputs','Outputs']
         ],row;
