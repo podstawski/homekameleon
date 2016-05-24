@@ -1,5 +1,6 @@
 
 var globalDevices={};
+var globalProjects=[];
 
 $('#logout').click(function () {
     websocket.emit('logout');

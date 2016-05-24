@@ -10,7 +10,11 @@ var ini = require('./ini.default.js');
 try {
     fs.lstatSync('./ini.js');
     var ini2 = require('./ini.js');
-    for (var k in ini2) ini[k]=ini2[k];
+    for (var k in ini2) if (k!='database') ini[k]=ini2[k];
+    
+    if (ini2.database !== undefined) {
+        for (var k in ini2.database) ini.database[k]=ini2.database[k];
+    }
         
 } catch(e) {
     console.log('File ini.js missing!');

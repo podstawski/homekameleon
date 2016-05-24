@@ -28,6 +28,8 @@ websocket.on('logout',function() {
 });
 
 websocket.on('projects-all', function(pr) {
+    globalProjects=pr.data;
+
     $.smekta_file('views/smekta/projects.html',pr,'#projects-footer',function() {
         $('#projects-footer .translate').translate();
     });

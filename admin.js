@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path=require('path');
+var crypto = require('crypto');
 
 var images='images';
 
@@ -7,6 +8,11 @@ var images='images';
 var Admin = function(socket,session,hash,database,public_path) {
     var loggedIn=false;
 
+    var hashPass=function(txt) {
+        var md5sum = crypto.createHash('md5');
+        md5sum.update(txt);
+        return md5sum.digest('hex');
+    }
  
     var fileUploadData = function(data) {
 
@@ -245,6 +251,23 @@ var Admin = function(socket,session,hash,database,public_path) {
         }
     }
     
+    var updateUserSessionData = function(u) {
+        for (var h in session) {    
+            if (session[h].username==u.username) {
+                if (u.admin!==undefined) {
+                    session[h].admin=u.admin;
+                }
+                if (u.active!==undefined && u.active==0 ) {
+                    if (typeof(session[h].socket)!='undefined' && session[h].socket!=null) {
+                      session[h].socket.emit('logout');
+                    }
+                }
+                
+                break;
+            }
+        }    
+    }
+    
     var wallFloor = function (floor) {
       
         if (loggedIn) {
@@ -259,18 +282,51 @@ var Admin = function(socket,session,hash,database,public_path) {
         }
     }
 
+    var login = function (data) {
+        loggedIn=true;
+        session[hash].username=data.username;
+        session[hash].admin=data.admin;
+        socket.emit('login',data);
+        wallProjects();
+    }
     
     socket.on('login',function (data) {
+        loggedIn=false;
+        var err_txt1='Login error',err_txt2="Username or password doesn't match",err_txt3='Account blocked';
+        
       
-        if (data.username.length && data.username==data.password) {
-            loggedIn=true;
-            session[hash].username=data.username;
-            socket.emit('login',data);
-            wallProjects();
+        if (data.username.length>0 && data.password.length>0) {
+            database.users.get(data.username,function(u){
+                if (u==null) {
+                    database.users.count(null,function(c){
+                        if (c==0) {
+                            var user={
+                                username: data.username,
+                                password: hashPass(data.password),
+                                admin: 1,
+                                active: 1
+                            };
+                            database.users.add(user);
+                            login(user);
+                        } else {
+                            socket.emit('err',err_txt1,err_txt2);
+                        }
+                    });
+                } else {
+                    if (hashPass(data.password)==u.password) {
+                        if (u.active==1) login(u);
+                        else socket.emit('err',err_txt1,err_txt3);
+                    } else {
+                        socket.emit('err',err_txt1,err_txt2);
+                    }
+                }
+                
+            });
+            
               
         } else {
-            loggedIn=false;
-            socket.emit('err','Login error',"Username or password doesn't match");
+            
+            socket.emit('err',err_txt1,err_txt2);
         }
       
     });
@@ -282,14 +338,21 @@ var Admin = function(socket,session,hash,database,public_path) {
     });
     
     
-    socket.on('db-save',function(db,d) {
+    socket.on('db-save',function(db,d,idxName) {
         if (!loggedIn) return;
         if (typeof(database[db])=='undefined') return;
-        if (typeof(d.id)=='undefined') d.id=0;
+        
+        if (typeof(idxName)=='undefined') idxName='id';
+        
+        if (typeof(d[idxName])=='undefined') d[idxName]=0;
         
         var dependencies=0;
         
-        if (db=='structure' && parseInt(d.id)==0) {
+        if (db=='users' && d.password!==undefined && d.password.length>0) {
+            d.password=hashPass(d.password);
+        }
+        
+        if (db=='structure' && parseInt(d[idxName])==0) {
             d.project=parseInt(session[hash].project);
             dependencies++;
                   
@@ -316,8 +379,8 @@ var Admin = function(socket,session,hash,database,public_path) {
             }
             
             var fun;
-            if (parseInt(d.id)==0) {
-                delete(d.id);
+            if (parseInt(d[idxName])==0) {
+                delete(d[idxName]);
                 fun=database[db].add;
             } else {
                 fun=database[db].set;
@@ -329,8 +392,8 @@ var Admin = function(socket,session,hash,database,public_path) {
                 
                 if (img_blob!=null) {
                     var i=0;
-                    while (fileExists(db+'-'+d.id+'-'+i+'.'+img_blob.ext)) i++; 
-                    img_blob.name=db+'-'+d.id+'-'+i;
+                    while (fileExists(db+'-'+d[idxName]+'-'+i+'.'+img_blob.ext)) i++; 
+                    img_blob.name=db+'-'+d[idxName]+'-'+i;
                     d.img=fileSaveData(img_blob);
                     database[db].set(d);
                 }
@@ -338,12 +401,14 @@ var Admin = function(socket,session,hash,database,public_path) {
                 socket.emit(db,d);
                 
                 if (db=='projects') {
-                    session[hash].project=d.id;
+                    session[hash].project=d[idxName];
                     wallProjects();
                 }
                 if (db=='structure') wallStructure(session[hash].project,true);
                 if (db=='devices') wallDevices();
                 if (db=='floor' && typeof(d.floor)!='undefined') wallFloor(d.floor);
+                
+                if (db=='users') updateUserSessionData(d);
 
             });
             
@@ -360,13 +425,21 @@ var Admin = function(socket,session,hash,database,public_path) {
         
         if (typeof(database[db])=='undefined') return;
         
+        
+        if (db=='users' && session[hash].username==idx) {
+            socket.emit('err','Remove user error','You must not remove yourself');
+            return;
+        }
+        
         database[db].get(idx,function(rec){
             database[db].remove(idx,function(){
                 if (db=='projects') wallProjects(true);
                 if (db=='structure') wallStructure(session[hash].project);
                 if (db=='devices') wallDevices();    
                 if (db=='floor') wallFloor(rec.floor);
-            
+                if (db=='users') database.users.getAll(function(all){
+                    socket.emit('users-all',all);
+                });
             });
         });
         
@@ -451,6 +524,24 @@ var Admin = function(socket,session,hash,database,public_path) {
     socket.on('project',function(project){
         getProjectStructure(project,'',true,function(structure){
             socket.emit('project',structure);
+        });
+    });
+    
+    socket.on('add-user',function(data) {
+        if (data.username===undefined || data.password===undefined || data.username.length==0 || data.password.length==0) {
+            socket.emit('err','Add user error','Username and password should not be empty');            
+            return;
+        }
+        database.users.get(data.username,function(u){
+            if (u!=null) {
+                socket.emit('err','Add user error','Username exists');            
+                return;
+            }
+            data.password=hashPass(data.password);
+            data.active=1;
+            database.users.add(data,function(d) {
+                socket.emit('add-user',d);
+            });
         });
     });
     

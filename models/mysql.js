@@ -191,7 +191,9 @@ var Model = function(opt,logger) {
                     if (rows.length==0) {
                         sql='CREATE TABLE '+opt.table+' (';
                         for (var i=0;i<opt.index.length;i++) {
-                            sql+=opt.index[i]+' INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ';
+                            sql+=opt.index[i];
+                            if (opt.index[i]=='id') sql+=' INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, ';
+                            else sql+=' varchar(128) PRIMARY KEY,';
                         }
                         sql+='_created BIGINT, ';
                         sql+='_updated BIGINT';

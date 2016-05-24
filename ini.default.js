@@ -21,6 +21,11 @@ module.exports = {
             file:'./data/devices',
             index:['id']
         },
+        users: {
+            model: 'json',
+            file:'./data/users',
+            index:['username']
+        },
         langs: {
             model: 'json',
             file:'./data/langs',
