@@ -293,8 +293,13 @@ var drawDeviceElement = function(data,element) {
     var ratio=0.1*deviceRatio*$('#floor-container').width()/originalSvgWidth;
     
     device.draw({
+        start: function() {
+            $(this).css('cursor','none').parent().css('cursor','none');  
+        },
         stop: function(e,ui) {
 
+            $(this).css('cursor','move').parent().css('cursor','move');
+            
             var d={id:data.id};
             var p=$(this).position();
             

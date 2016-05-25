@@ -313,7 +313,9 @@ var Admin = function(socket,session,hash,database,public_path) {
                         }
                     });
                 } else {
+        
                     if (hashPass(data.password)==u.password) {
+                        
                         if (u.active==1) login(u);
                         else socket.emit('err',err_txt1,err_txt3);
                     } else {
