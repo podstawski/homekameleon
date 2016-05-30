@@ -59,9 +59,12 @@ var Device = function(device, zoomfun, emiterfun) {
         var controls=$('<div class="controls-container"></div>');
         _dom.append(controls);
         
+        controls.attr('wh',device.wh||1);
+        
         var label=$('<div class="device-label">'+_attr.label+'</div>');
         _dom.append(label);
         if (options.dblclickDevice!==undefined) label.dblclick(options.dblclickDevice);
+        
         
         if (device.controls!==undefined) {
             for (var i=0;i<device.controls.length;i++) {
@@ -163,7 +166,7 @@ var Device = function(device, zoomfun, emiterfun) {
             }
             
             _dom.find('.controls-container').each(function(){
-                $(this).height($(this).width());
+                $(this).height($(this).width()/parseFloat($(this).attr('wh')));
             });
         }
         
@@ -173,7 +176,7 @@ var Device = function(device, zoomfun, emiterfun) {
         
         _default.labelHeight=label.height();
         _default.width=_dom.width();
-        _default.height=_dom.height();
+        _default.height=_dom.find('.controls-container').height() + _dom.find('.device-label').height();
         
         _default.devicesHeight=controls.height();
         

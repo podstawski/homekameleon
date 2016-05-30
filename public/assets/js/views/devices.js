@@ -24,6 +24,21 @@ var devicesColumns=[
 var devicesData={};
 
 /*
+ *device grouping select
+ *
+ */
+
+var deviceGroups = [
+        {value:'bolt',label:'Power'},
+        {value:'bell',label:'Alarms'},
+        {value:'dashboard',label:'Counters'},
+        {value:'sun-o', label:'Lights'},
+        {value:'toggle-on', label:'Switches'},
+        {value:'television', label:'Multimedia'},
+        {value:'cloud', label:'Temperature'}
+];
+
+/*
  *callingControl
  *after fireing control edit we need context - id
  */
@@ -87,11 +102,11 @@ var addControl = function (obj,data) {
 		$('#edit-device .device-controls-container .drg').removeClass('drg-active');
 		obj.addClass('drg-active');
 		
-		$('#edit-device .device-controls-label-container .dim').show();
-		$('#edit-device .device-controls-label-container .dim .x').val(parseInt(obj.css('left')));
-		$('#edit-device .device-controls-label-container .dim .y').val(parseInt(obj.css('top')));
-		$('#edit-device .device-controls-label-container .dim .w').val(parseInt(obj.width()));
-		$('#edit-device .device-controls-label-container .dim .h').val(parseInt(obj.height()));
+		$('#edit-device .device-controls-top-container .dim').show();
+		$('#edit-device .device-controls-top-container .dim .x').val(parseInt(obj.css('left')));
+		$('#edit-device .device-controls-top-container .dim .y').val(parseInt(obj.css('top')));
+		$('#edit-device .device-controls-top-container .dim .w').val(parseInt(obj.width()));
+		$('#edit-device .device-controls-top-container .dim .h').val(parseInt(obj.height()));
 	}
 
 	
@@ -273,17 +288,23 @@ var startDraggingLabels = function() {
 		stop: function() {
 			var hlp=$('#edit-device .ui-draggable-dragging').position();
 			var top=$('#edit-device .device-controls-top-container').offset();
+			var lbl=$('#edit-device .device-controls-label-container').offset();
 			var sqr=$(this).offset();
 			var pos=$(this).position();
 			
 			var dst=$('#edit-device .device-controls-container');
+			var dstoffs=dst.offset();
+			
+			var _left=hlp.left - (dstoffs.left -top.left) + (lbl.left-top.left);
+			var _top=sqr.top - top.top + hlp.top - pos.top;
+		
 			
 			var obj=$(this).clone();
-			obj.appendTo('#edit-device .device-controls-top-container');
+			obj.appendTo(dst);
 			obj.css({
 				position: 'absolute',
-				left: sqr.left - top.left + hlp.left - pos.left,
-				top: sqr.top - top.top + hlp.top - pos.top
+				left: _left,
+				top: _top
 			});
 			
 
@@ -358,33 +379,80 @@ $(function(){
 			$('#edit-device input[name="name"]').val(devicesData[id].name);
 			$('#edit-device input[name="symbol"]').val(devicesData[id].symbol);
 
+			
+			devicesData[id].groups=JSON.parse(JSON.stringify(deviceGroups));
+			
+			var tags=devicesData[id].tags;
+			if (typeof(tags)=='string') tags=tags.split(' ');
+			
+			for (var i=0; i< tags.length; i++) {
+				for (var j=0;j<devicesData[id].groups.length; j++) {
+                    if (devicesData[id].groups[j].value==tags[i]) {
+                        devicesData[id].groups[j].selected=true;
+						continue;
+                    }
+                }
+			}
+			
+			
 			/*
 			 *draw edit body
 			 */
 			$.smekta_file('views/smekta/device.html',devicesData[id],'#edit-device .modal-body',function(){
 				$('#edit-device .modal-body .translate').translate();
+				$('#edit-device .modal-body #tags').select2();
+				
 				startDraggingLabels();
 				toggleDisabled();
 				$('#edit-device input[name="symbol"]').change(toggleDisabled);
 				
-				/*
-				 *draw controls
-				 */
-				if (devicesData[id].controls !== undefined) {
-                    for (var i=0; i<devicesData[id].controls.length; i++) {
-						addControl(null,devicesData[id].controls[i]);
-					}
-                }
+				setTimeout(
+					function() {
+						
+						var wh=devicesData[id].wh||1;
+								
+						var w=$('#edit-device .device-controls-container').width();
+						$('#edit-device .device-controls-container').height(w);
+						$('#edit-device .device-attrinutes-container').height(w);
+						
+						if (wh>1) {
+                            $('#edit-device .device-controls-container').height(w/wh);
+                        }
+						
+						if (wh<1) {
+                            $('#edit-device .device-controls-container').width(w/wh);
+                        }
+						
+						
+						$('#edit-device .device-controls-container').resizable({
+							stop: function() {
+								if ($(this).width()>w) $(this).width(w);
+								if ($(this).height()>w) $(this).height(w);
+							}
+						});
+						
+						/*
+						 *draw controls
+						 */
+						if (devicesData[id].controls !== undefined) {
+							for (var i=0; i<devicesData[id].controls.length; i++) {
+								addControl(null,devicesData[id].controls[i]);
+							}
+						}
+						
+						/*
+						 *dimension inputs behavior
+						 */
+						
+						$('#edit-device .device-controls-top-container .dim input').focus(function(){
+							$(this).attr('prev',$(this).val());
+						});
+					},
+					400);
+								
+
 				
-				/*
-				 *dimension inputs behavior
-				 */
-				
-				$('#edit-device .device-controls-label-container .dim input').focus(function(){
-					$(this).attr('prev',$(this).val());
-				});
-				
-				$('#edit-device .device-controls-label-container .dim input').change(function(){
+				$('#edit-device .device-controls-top-container .dim input').change(function(){
 					// -2: border
 					var w=$('#edit-device .device-controls-container').width()-2;
 					var h=$('#edit-device .device-controls-container').height()-2;
@@ -392,9 +460,9 @@ $(function(){
 					if (
 						parseInt($(this).val())<0
 						||
-						parseInt($('#edit-device .device-controls-label-container .dim input.x').val()) + parseInt($('#edit-device .device-controls-label-container .dim input.w').val()) > w
+						parseInt($('#edit-device .device-controls-top-container .dim input.x').val()) + parseInt($('#edit-device .device-controls-top-container .dim input.w').val()) > w
 						||
-						parseInt($('#edit-device .device-controls-label-container .dim input.y').val()) + parseInt($('#edit-device .device-controls-label-container .dim input.h').val()) > h
+						parseInt($('#edit-device .device-controls-top-container .dim input.y').val()) + parseInt($('#edit-device .device-controls-top-container .dim input.h').val()) > h
 					) {
                         $(this).val($(this).attr('prev'));
 						return false;
@@ -402,10 +470,10 @@ $(function(){
 					
 			
 					$('#edit-device .device-controls-container .drg-active').css({
-						left: $('#edit-device .device-controls-label-container .dim input.x').val()+'px',
-						top: $('#edit-device .device-controls-label-container .dim input.y').val()+'px',
-						width: $('#edit-device .device-controls-label-container .dim input.w').val()+'px',
-						height: $('#edit-device .device-controls-label-container .dim input.h').val()+'px'
+						left: $('#edit-device .device-controls-top-container .dim input.x').val()+'px',
+						top: $('#edit-device .device-controls-top-container .dim input.y').val()+'px',
+						width: $('#edit-device .device-controls-top-container .dim input.w').val()+'px',
+						height: $('#edit-device .device-controls-top-container .dim input.h').val()+'px'
 					});
 					
 				});
@@ -435,6 +503,10 @@ $(function(){
 		$('#edit-device input,#edit-device select').each(function(){
 			data[$(this).attr('name')]=$(this).val();
 		});
+		
+		if (typeof(data.tags)=='object') data.tags=data.tags.join(' ');
+		
+		data.wh = $('#edit-device .device-controls-container').width() / $('#edit-device .device-controls-container').height();
 		
 		var controls=[];
 		
@@ -466,7 +538,15 @@ $(function(){
                 control.h=1;
             }
 	
+			if (position.left==1) {
+                control.x=0;
+            }
+			
+			if (position.top==1) {
+                control.y=0;
+            }
 					
+		
 			controls.push(control);
 		});
 

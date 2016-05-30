@@ -166,8 +166,12 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 }
 
 @media screen and (min-width: 768px) {
+    #edit-device {
+        top: 5px;
+    }
     #edit-device .modal-dialog {
-        width: 80%;
+        width: 78%;
+        margin: 5px auto;
     }
 }
 
@@ -213,8 +217,12 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     position: relative;
 }
 
+#edit-device .device-controls-parent-container {
+    padding: 0;
+}
+
 #edit-device .device-controls-container {
-    width: 364px;
+    width: 100%;
     height: 364px;
     border: solid 1px black;
     padding: 0;
@@ -227,10 +235,11 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 
 #edit-device .device-controls-label-container {
     padding: 10px;
-    background-color: rgba(0,0,0,0.1);
-    height: 364px;
-    border: black solid;
-    border-width: 1px 1px 1px 0;
+    background-color: rgba(0,0,0,0.15);
+    border: #909090 solid;
+    border-width: 1px;
+    position: absolute;
+    bottom: 0;
 }
  
  
@@ -240,6 +249,7 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     border: dashed 1px green;
     text-align: center;
     color: #909090;
+    display: inline-block;
 }
 
 #edit-device .drg-active {
@@ -251,9 +261,6 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     display: block;
 }
 
-#edit-device .device-controls-label-container {
-    position: relative;
-}
  
 #edit-device .device-controls-label-container div {
     margin-bottom: 10px;
@@ -265,16 +272,17 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     position: absolute;    
 }
 
+#edit-device .device-controls-top-container .device-attrinutes-container {
+    height: 100%;
+}
 
-#edit-device .device-controls-label-container .dim {
-    position: absolute;
-    bottom: 0;
+#edit-device .device-controls-top-container .dim {
     border: dashed 1px red;
     padding: 4px;
     text-align: right;
     display: none;
 }
-#edit-device .device-controls-label-container .dim input{
+#edit-device .device-controls-top-container .dim input{
     width: 40px;
     display: inline-block;
 }
@@ -282,6 +290,10 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 
 #edit-device .drg:hover {
     cursor: move;
+}
+
+#edit-device .select2-container {
+    width: 100%;
 }
 
 #edit-device .disable-toggle {

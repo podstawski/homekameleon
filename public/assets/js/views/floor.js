@@ -281,6 +281,8 @@ var drawDeviceElement = function(data,element) {
             if (data.id) websocket.emit('db-remove','floor',data.id);
             return;
         }
+        data.wh=globalDevices[data.type].wh||1;
+        
         var device=new Device(data, zoomContainer, devicesStateEmiter);
         device.parent($('#floor-container .draggable-container'));
         element={device: device, type: 'device', data: data, id: data.id};

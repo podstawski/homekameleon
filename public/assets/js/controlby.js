@@ -24,11 +24,13 @@ var buildAsideMenu = function(data) {
     var tags={};
 
     for (var i=0;i<data.length; i++) {
-        data[i].tags=data[i].tags.replace(',',' ');
-        data[i].tags=data[i].tags.replace(/ +/,' ');
-        var t=data[i].tags.split(' ');
-        for (var j=0; j<t.length; j++) {
-            if (t[j].length) tags[t[j]]=true;
+        if (typeof(data[i].tags)=='string') {
+            data[i].tags=data[i].tags.replace(',',' ');
+            data[i].tags=data[i].tags.replace(/ +/,' ');
+            var t=data[i].tags.split(' ');
+            for (var j=0; j<t.length; j++) {
+                if (t[j].length) tags[t[j]]=true;
+            }
         }
         
         globalDevices[data[i].symbol]=data[i];

@@ -2,6 +2,7 @@
 var requireJS = [
     "assets/js/libs/jquery.dataTables.min.js",
     "assets/js/libs/dataTables.bootstrap.min.js",
+    "assets/js/libs/select2.min.js",
     'assets/js/libs/jquery-ui.min.js'
 ];
 loadJS(requireJS, "assets/js/views/devices.js");
@@ -49,7 +50,6 @@ loadJS(requireJS, "assets/js/views/devices.js");
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">
             <input type="text" name="name" placeholder="Device name" class="name translate" value=""/>
-            [<input type="text" name="symbol" placeholder="symbol" class="symbol translate" value=""/>]
         </h4>
       </div>
       <div class="modal-body">
