@@ -101,7 +101,20 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 #floor-container .draggable-container .polygon svg {
     width: 100%;
     height: 100%;
+    position: absolute;
 }
+
+#floor-container .draggable-container .polygon div {
+    position: absolute;
+    color: yellow;
+    font-weight: bold;
+    font-size: 14px;
+    top: 40%;
+    left: 20%;
+    z-index: 50;
+}
+
+
 
 #floor-container .draggable-container .polygon svg polygon {
     fill:rgba(1, 1, 1, 0.1);
@@ -143,6 +156,29 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 
 #floor-container .draggable-container .floor-debug-container .floor-debug-contents p {
     margin: 0;
+}
+
+#floor-container .floor-polygon-dashboard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    cursor: crosshair;
+    display: none;
+}
+
+#floor-container .draggable-container .line {
+    position: absolute;
+    z-index: 120;
+}
+
+#floor-container .draggable-container .line svg line {
+    stroke:red;
+    stroke-width:1;
+    width: 100%;
+    height: 100%;    
 }
 
 .breadcrumb .breadcrumb-menu .active {
@@ -558,6 +594,9 @@ aside .device-element {
 .picker-dialog {
     z-index: 1500 !important;
 }
+
+
+
 
 @media print {
     body {

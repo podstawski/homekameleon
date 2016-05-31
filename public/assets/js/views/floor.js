@@ -200,7 +200,17 @@ var calculateWH = function () {
     moveElements();
 }
 
-var drawPolygon = function(points,id,name,element) {
+var drawPolygon = function(points,id,name,element,labelpoint) {
+    
+    if (labelpoint==null && element!=null && typeof(element.lx)!='undefined') {
+        labelpoint={x:element.lx,y:element.ly};
+    }
+    var labelstyle='';
+    if (labelpoint!=null) {
+        var lp=calculatePoint(labelpoint);
+        labelstyle='style="left: '+lp.x+'px; top: '+lp.y+'px;"';
+    }
+    
     
     var points2=[],p='';
     for (var i=0; i<points.length; i++) points2.push(calculatePoint(points[i]));
@@ -227,8 +237,16 @@ var drawPolygon = function(points,id,name,element) {
         p+=Math.round(points2[i].x - minx) + ',' + Math.round(points2[i].y - miny) + ' ';
     }
     
-    var polygon='<div class="polygon element"><svg><polygon points="'+p.trim()+'"/></svg></div>';
-
+    var polygon;
+    if (points2.length>2) {
+        polygon='<div class="polygon element"><div '+labelstyle+'>'+name+'</div><svg><polygon points="'+p.trim()+'"/></svg></div>';
+    } else if (points2.length==2) {
+        polygon='<div class="line element"><svg><line x1="'+Math.round(points2[0].x - minx)+'" y1="'+Math.round(points2[0].y - miny)+'" x2="'+Math.round(points2[1].x - minx)+'" y2="'+Math.round(points2[1].y - miny)+'"/></svg></div>';
+    } else {
+        return;
+    }
+    
+    
     var poli = $(polygon).appendTo('#floor-container .draggable-container').css({left: minx, top:miny});
     poli.width(maxx-minx);
     poli.height(maxy-miny);
@@ -238,6 +256,8 @@ var drawPolygon = function(points,id,name,element) {
     
     poli.attr('id',id);
     poli.attr('title',name);
+    
+    if (points2.length==2) return poli;
     
     if(element==null) {
         element={
@@ -252,8 +272,15 @@ var drawPolygon = function(points,id,name,element) {
         element.element=poli;
     }
     
+    if (labelpoint!=null) {
+        element.lx=labelpoint.x;
+        element.ly=labelpoint.y;
+    }
+    
+    
     poli.dblclick(function(e){
         if (!editmode) return;
+        if (polygonMode) return;
     
         modalCleanup();
         $('#edit-element').addClass('polygon-edit');
@@ -268,8 +295,24 @@ var drawPolygon = function(points,id,name,element) {
             $('#edit-element .modal-body .translate').translate();
         });
         
-        
     });
+    
+    var label=poli.find('div');
+    label.draggable({
+        containment: 'parent',
+        stop: function(){
+            
+            var point=calculatePoint({x:$(this).position().left, y:$(this).position().top});
+            var data={id: $(this).parent().attr('id'),lx: point.x, ly: point.y};
+            
+            websocket.emit('db-save','floor',data);
+        }    
+    });
+    
+    if (!editmode) label.draggable('disable');
+    
+    
+    
     return poli;
 }
 
@@ -378,7 +421,8 @@ var removePolygonPoints=function() {
         polygonPoints[i].dot.remove();
         delete(polygonPoints[i].dot);
     }
-    polygonPoints=[]; 
+    polygonPoints=[];
+    $('#floor-container .draggable-container .line').remove();
 };
 
 var createPolygonFromPoints = function() {
@@ -388,7 +432,8 @@ var createPolygonFromPoints = function() {
     
     polygonMode=false;
     $('.breadcrumb .icon-note').removeClass('active');
-    $('#floor-container .draggable-container .element').show();    
+    $('#floor-container .floor-polygon-dashboard').hide();
+    $('#floor-container .draggable-container .line').remove();
     
     websocket.emit('db-save','floor',{floor: thisfloor, type:'polygon', points:polygonPoints});
     removePolygonPoints();
@@ -419,18 +464,22 @@ var floorDraw=function(data) {
     });
     
     
-    $('#floor-container .svg').click(function(e){
+    $('#floor-container .floor-polygon-dashboard').click(function(e){
         
         if (polygonMode && Date.now()-lastDragEvent>1500) {
-            var zoom=zoomContainer();
+            
             var ex = parseFloat(e.offsetX === undefined ? e.originalEvent.layerX : e.offsetX);
             var ey = parseFloat(e.offsetY === undefined ? e.originalEvent.layerY : e.offsetY);
+            
+
+            var zoom=zoomContainer();
             var w=parseFloat($('#floor-container').width());
             var h=parseFloat($('#floor-container .draggable-container').height());
             var point={
                 x:(ex/zoom)/w,
                 y:(ey/zoom)/h
             }
+
             
             var img='<img src="assets/img/dot.png" class="polygon-dot"/>';
             
@@ -439,7 +488,21 @@ var floorDraw=function(data) {
             
             polygonPoints.push(point);
             point.dot.attr('title',polygonPoints.length);
-            point.dot.click(createPolygonFromPoints);
+  
+            
+            if (polygonPoints.length>2) {
+                var l=polygonPoints.length-1;
+                var last2first = zoom*Math.sqrt( Math.pow(polygonPoints[0].x*w - polygonPoints[l].x*w,2) + Math.pow(polygonPoints[0].y*h - polygonPoints[l].y*h,2) );
+         
+                if (last2first<dotW) createPolygonFromPoints();
+            }
+            
+            if (polygonPoints.length>1) {
+                var l=polygonPoints.length-1;
+                p=drawPolygon([polygonPoints[l],polygonPoints[l-1]],'line-'+l);                
+            }
+            
+            
             drawPolygonPoints();
         }
     
@@ -480,7 +543,11 @@ var floorDrawElements=function(data) {
             
             switch (data[i].type) {
                 case 'polygon': {
-                    drawPolygon(data[i].points,data[i].id,data[i].name);
+                    var p=null;
+                    if (typeof(data[i].lx)!='undefined') {
+                        p={x:data[i].lx,y:data[i].ly};
+                    }
+                    drawPolygon(data[i].points,data[i].id,data[i].name,null,p);
                     break;
                 }
                 default: {
@@ -656,12 +723,12 @@ $(function(){
             if (polygonMode) {
                 polygonMode=false;
                 $(icon_selector).removeClass('active');
-                $('#floor-container .draggable-container .element').show();
+                $('#floor-container .floor-polygon-dashboard').hide();
                 removePolygonPoints();
             } else {
                 polygonMode=true;
                 $(icon_selector).addClass('active');
-                $('#floor-container .draggable-container .element').hide();
+                $('#floor-container .floor-polygon-dashboard').show();
             }
         });
         
@@ -680,9 +747,13 @@ $(function(){
             if (editmode) {
                 $('.breadcrumb .edit-mode-only').show();
                 $('#floor-container .draggable-container .device-container').draggable('enable');
+                $('#floor-container .draggable-container .polygon div').draggable('enable');
+                
             } else {
                 $('.breadcrumb .edit-mode-only').hide();
                 $('#floor-container .draggable-container .device-container').draggable('disable');
+                $('#floor-container .draggable-container .polygon div').draggable('disable');
+                            
             }
         });      
         
