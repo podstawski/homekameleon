@@ -299,7 +299,6 @@ var Model = function(opt,logger) {
             for (var k in d) {
                 data[idx][k]=d[k];
             }
-            if (cb) cb(idx);
 
             lastSet=Date.now();
             if (cb) cb(d);

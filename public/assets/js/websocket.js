@@ -24,6 +24,12 @@ websocket.on('logout',function() {
     $('#username').text('nobody');
     $('._after-login').removeClass('_after-login').addClass('after-login');
     $('body').removeClass('sidebar-nav').addClass('sidebar-off-canvas');
+    
+    $('.sidebar .sidebar-header div strong').text('');
+    $('.sidebar .sidebar-header div small').text('');
+    $('.sidebar .sidebar-header img.img-avatar').removeAttr('src');
+    $('.sidebar #left-sidebar').html('');
+    
     loadPage('main.html');
 });
 
@@ -43,7 +49,6 @@ websocket.on('projects',function(data){
         }
     }
     
-    
     $('.sidebar .sidebar-header div strong').text(data.name);
     $('.sidebar .sidebar-header div small').text(data.description);
     $('.sidebar a.a-avatar').attr('href','project.html,'+data.id);
@@ -51,8 +56,6 @@ websocket.on('projects',function(data){
     if (typeof(data.img)!='undefined' && data.img.length>0) {
         $('#img_img,.sidebar .sidebar-header .img-avatar').attr('src',data.img);
     }
-    
-
     
     var hash=window.location.hash;
     
