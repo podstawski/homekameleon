@@ -147,7 +147,7 @@ var moveElements = function() {
         switch (elements[i].type) {
             case 'polygon': {
                 elements[i].element.remove();
-                drawPolygon(elements[i].points,elements[i].id,elements[i].name,elements[i]);
+                drawPolygon(elements[i].points,elements[i].id,elements[i].data,elements[i]);
                 break;
             }
             default: {
@@ -200,8 +200,11 @@ var calculateWH = function () {
     moveElements();
 }
 
-var drawPolygon = function(points,id,name,element,labelpoint) {
-    
+var drawPolygon = function(points,id,data,element,labelpoint) {
+    var name;
+    if (data!=null) name=data.name||'';
+    else name='';
+  
     if (labelpoint==null && element!=null && typeof(element.lx)!='undefined') {
         labelpoint={x:element.lx,y:element.ly};
     }
@@ -251,8 +254,10 @@ var drawPolygon = function(points,id,name,element,labelpoint) {
     poli.width(maxx-minx);
     poli.height(maxy-miny);
 
+    
     if (id==null) id=0;
-    if (name==null) name='';
+    
+
     
     poli.attr('id',id);
     poli.attr('title',name);
@@ -265,7 +270,8 @@ var drawPolygon = function(points,id,name,element,labelpoint) {
             element:poli,
             points: points,
             id:id,
-            name:name
+            name:name,
+            data:data
         };
         elements.push(element);
     } else {
@@ -291,7 +297,7 @@ var drawPolygon = function(points,id,name,element,labelpoint) {
         
         uploadImage=null;
         
-        $.smekta_file('views/smekta/floor-polygon.html',element,'#edit-element .modal-body',function(){
+        $.smekta_file('views/smekta/floor-polygon.html',element.data,'#edit-element .modal-body',function(){
             $('#edit-element .modal-body .translate').translate();
         });
         
@@ -310,9 +316,7 @@ var drawPolygon = function(points,id,name,element,labelpoint) {
     });
     
     if (!editmode) label.draggable('disable');
-    
-    
-    
+ 
     return poli;
 }
 
@@ -526,12 +530,7 @@ var floorDrawElements=function(data) {
         for(var j=0; j<elements.length; j++) {
             if (data[i].id == elements[j].id) {
                 elements[j].toBeDeleted=false;
-                if (data[i].type=='polygon') {
-                    for( var k in data[i]) elements[j][k]=data[i][k];
-                } else {
-                    for( var k in data[i]) elements[j].data[k]=data[i][k];
-                }
-                
+                for( var k in data[i]) elements[j].data[k]=data[i][k]; 
                 matchFound=true;
                 break;
             }
@@ -547,7 +546,7 @@ var floorDrawElements=function(data) {
                     if (typeof(data[i].lx)!='undefined') {
                         p={x:data[i].lx,y:data[i].ly};
                     }
-                    drawPolygon(data[i].points,data[i].id,data[i].name,null,p);
+                    drawPolygon(data[i].points,data[i].id,data[i],null,p);
                     break;
                 }
                 default: {
