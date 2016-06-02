@@ -114,7 +114,7 @@ var addControl = function (obj,data) {
 
 	
 	if (obj==null) {
-        obj=$('<div class="drg"><span class="name"></span></div>');
+        obj=$('<div class="drg"></div>');
 		for(var k in data) {
 			obj.attr(k,data[k]);
 		}
@@ -187,9 +187,7 @@ var controlsStyle=function() {
 
 	$('#edit-device .device-controls-container div[type]').each( function(){
 		var addr=$(this).attr('addr');
-		if (addr!==undefined && addr.length>0) {
-            $(this).find('span.name').html(addr);
-        }
+
 		var style=$(this).attr('sstyle');
 		var state=$(this).attr('state');
 		var simage=$(this).attr('simage');
@@ -218,7 +216,6 @@ var controlsStyle=function() {
 			
 			
 			$(this).find('.slider').remove();
-			$(this).find('span.name').remove();
 			
 			var img='';
 			if (simage!==undefined && simage.length>0) {
@@ -235,7 +232,10 @@ var controlsStyle=function() {
 		}
 		
 		
-		
+		if (type=='txt') {
+			$(this).find('.outertxt').remove();
+			$(this).append('<div class="outertxt"><div class="innertxt">'+$(this).attr('state')+'</div></div>');
+		}
 
 		
 	});

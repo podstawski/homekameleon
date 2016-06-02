@@ -691,7 +691,7 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
 
     if (typeof(session[hash].username)!='undefined' && session[hash].username!=null) {
         loggedIn=true;
-        socket.emit('login',{username:session[hash].username});
+        socket.emit('login',{username:session[hash].username, admin:session[hash].admin});
         wallProjects();
         if (typeof(session[hash].project)!='undefined') {
             database.projects.get(session[hash].project,function(p){

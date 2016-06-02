@@ -14,6 +14,7 @@ websocket.on('cookie',function(cn,cv) {
 
 websocket.on('login',function(data) {
     $('#username').text(data.username);
+    currentuser=data;
     $('.after-login').removeClass('after-login').addClass('_after-login');
     $('body').addClass('sidebar-nav').removeClass('sidebar-off-canvas');
 

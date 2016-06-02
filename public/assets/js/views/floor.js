@@ -299,6 +299,7 @@ var drawPolygon = function(points,id,data,element,labelpoint) {
         
         uploadImage=null;
         
+        element.data.admin=currentuser.admin;
         $.smekta_file('views/smekta/floor-polygon.html',element.data,'#edit-element .modal-body',function(){
             $('#edit-element .modal-body .translate').translate();
         });
@@ -377,6 +378,7 @@ var drawDeviceElement = function(data,element) {
             
             calculateLabelForSmekta(data,data.type);
             
+            data.admin=currentuser.admin;
             $.smekta_file('views/smekta/floor-device.html',data,'#edit-element .modal-body',function(){
                 $('#edit-element .modal-body .translate').translate();
             });
@@ -404,6 +406,7 @@ var drawDeviceElement = function(data,element) {
                 }
             }
             
+            cdata.admin=currentuser.admin;
             $.smekta_file('views/smekta/floor-control.html',cdata,'#edit-element .modal-body',function(){
                 $('#edit-element .modal-body .translate').translate();
             });

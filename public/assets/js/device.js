@@ -87,6 +87,11 @@ var Device = function(device, zoomfun, emiterfun) {
                     control.append(slider);
                 }
                 
+                if (device.controls[i].type=='txt') {
+                    var txt='<div class="txt">'+device.controls[i].state+'</div>';
+                    control.append(txt);
+                }
+                
                 
                 for(var k in device.controls[i]) {
                     control.attr(k,device.controls[i][k]);
@@ -168,6 +173,8 @@ var Device = function(device, zoomfun, emiterfun) {
             _dom.find('.controls-container').each(function(){
                 $(this).height($(this).width()/parseFloat($(this).attr('wh')));
             });
+            
+
         }
         
         
@@ -181,6 +188,13 @@ var Device = function(device, zoomfun, emiterfun) {
         _default.devicesHeight=controls.height();
         
         _default.fontSize=parseInt(label.css('font-size'));
+        
+        setTimeout(function(){
+            _dom.find('.controls-container .txt').each(function(){
+                $(this).css('font-size',$(this).parent().height()+'px');
+            });
+        },500);
+        
     };
     
     var setStateElement = function(element,state) {

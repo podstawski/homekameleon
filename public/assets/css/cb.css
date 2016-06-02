@@ -295,9 +295,17 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     border-color: red;
 }
 
-#edit-device .drg .name {
-    margin-top: 30%;
-    display: block;
+#edit-device .drg .outertxt {
+    width:100%;
+    height: 100%;
+    display: table;
+}
+
+#edit-device .drg .innertxt {
+    text-align: center;
+    font-size: 100%;
+    display: table-cell;
+    vertical-align: middle;
 }
 
  
@@ -476,6 +484,16 @@ aside .device-container {
 
 .control-edit .btn-danger {
     display: none;
+}
+
+
+.device-container .controls-container .txt {
+    text-align: center;
+    font-size: 10px;
+    width:100%;
+    display: block;
+    padding: 0;
+    color: #fff;
 }
 
 
