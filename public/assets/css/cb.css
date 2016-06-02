@@ -108,12 +108,15 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     position: absolute;
     color: yellow;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 60%;
     top: 40%;
     left: 20%;
     z-index: 50;
 }
 
+.editmode .draggable-container .polygon div {
+    cursor: move;
+}
 
 
 #floor-container .draggable-container .polygon svg polygon {
@@ -421,11 +424,19 @@ aside .device-element {
 .device-container {
     position: relative;
     width: 100%;
-    cursor: move;
     border: 0.5px solid black;
     border-radius: 1px;
     background-color: rgba(255,0,0,0.6);
 }
+
+aside .device-container {
+    cursor: move;
+}
+
+.editmode .device-container {
+    cursor: move;
+}
+
 
 #floor-container .draggable-container .device-container {
     width: 35px;
@@ -550,11 +561,11 @@ aside .device-element {
     position: relative;
 }
 
-.device-container .controls-container .mouseclick {
+.previewmode .device-container .controls-container .mouseclick {
     cursor: crosshair;
 }
 
-.device-container .controls-container .mousemove {
+.previewmode .device-container .controls-container .mousemove {
     cursor: e-resize;
 }
 

@@ -18,6 +18,8 @@ var editmode=false;
 var deviceRatio=5;
 var minDeviceRatio=3;
 var maxDeviceRatio=10;
+var busRequested=false;
+var ctrlOn=false;
 
 var lastFloorDebugTxt='';
 
@@ -205,14 +207,15 @@ var drawPolygon = function(points,id,data,element,labelpoint) {
     if (data!=null) name=data.name||'';
     else name='';
   
-    if (labelpoint==null && element!=null && typeof(element.lx)!='undefined') {
-        labelpoint={x:element.lx,y:element.ly};
+    if (labelpoint==null && element!=null && typeof(element.data.lx)!='undefined') {
+        labelpoint={x:element.data.lx,y:element.data.ly};
     }
     var labelstyle='';
     if (labelpoint!=null) {
         var lp=calculatePoint(labelpoint);
         labelstyle='style="left: '+lp.x+'px; top: '+lp.y+'px;"';
     }
+    
     
     
     var points2=[],p='';
@@ -257,8 +260,7 @@ var drawPolygon = function(points,id,data,element,labelpoint) {
     
     if (id==null) id=0;
     
-
-    
+ 
     poli.attr('id',id);
     poli.attr('title',name);
     
@@ -332,14 +334,16 @@ var drawDeviceElement = function(data,element) {
         
         var device=new Device(data, zoomContainer, devicesStateEmiter);
         device.parent($('#floor-container .draggable-container'));
-        element={device: device, type: 'device', data: data, id: data.id};
+        element={device: device, type: 'device', data: data, id: data.id,ready4click:true};
         elements.push(element);
 
     } else {
         var device=element.device;
     }
     
-    var ratio=0.1*deviceRatio*$('#floor-container').width()/originalSvgWidth;
+    var z=data.z||1;
+    data.z=z;
+    var ratio=0.1*z*deviceRatio*$('#floor-container').width()/originalSvgWidth;
     
     device.draw({
         start: function() {
@@ -347,7 +351,7 @@ var drawDeviceElement = function(data,element) {
         },
         stop: function(e,ui) {
 
-            $(this).css('cursor','move').parent().css('cursor','move');
+            $(this).css('cursor','move').parent().css('cursor','default');
             
             var d={id:data.id};
             var p=$(this).position();
@@ -408,7 +412,33 @@ var drawDeviceElement = function(data,element) {
     
     element.element = device.dom();
     device.dom().addClass('element');
-    if (!editmode) device.dom().draggable('disable');
+
+    var zoomDevice=function(zoom) {
+        if (!editmode || !ctrlOn) return;
+        var z=data.z;
+        z*=zoom;
+        var d={id: data.id, z: z};
+        data.z=z;
+        device.dom().height(device.dom().height()*z/data.z);
+        device.dom().width(device.dom().width()*z/data.z);
+        websocket.emit('db-save','floor',d);
+    }
+    
+    if (element.ready4click) {
+        element.ready4click=false;
+        device.dom().click(function(e) {
+            zoomDevice(1.1);
+        }).contextmenu(function(e){
+            zoomDevice(1/1.1);
+            e.preventDefault();
+        });
+        
+    }
+
+    
+    if (!editmode) {
+        device.dom().draggable('disable');
+    }
     
     var point=calculatePoint(data.point);
     
@@ -585,7 +615,10 @@ var floorDrawElements=function(data) {
     
     moveElements();
     
-    websocket.emit('bus');
+    if (!busRequested) {
+        websocket.emit('bus');
+        busRequested=true;
+    }
     
 }
 
@@ -707,7 +740,7 @@ $(function(){
     $('.breadcrumb .btn-floor').not('.edit-mode-only').fadeIn(200);
    
     
-
+    busRequested=false;
     
 
     
@@ -740,6 +773,7 @@ $(function(){
         
         $(document).on('click','.breadcrumb .edit-mode-toggle',function(){
             $(this).toggleClass('active');
+            $('#floor-container').toggleClass('previewmode').toggleClass('editmode');
             $(this).children().toggleClass('active');
             editmode=$(this).hasClass('active');
             
@@ -776,8 +810,14 @@ $(function(){
             
         });
 
+        $(document).keyup(function(e){
+            
+            if (e.which==17) ctrlOn=false; 
+        });
         
         $(document).keydown(function(e){
+            
+            if (e.which==17) ctrlOn=true;
             
             if (lastDraggedElement && e.which>=37 && e.which<=40) {
                 event.preventDefault();
