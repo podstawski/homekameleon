@@ -18,10 +18,16 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
         if (len==null) len=4;
         var base=new Buffer(''+Math.random());
         
-        var hash=base.toString('base64');
+        var hash=base.toString('base64').replace('=','');
         var ret=hash.substr(-1*len).toUpperCase();
         return ret;
     };
+    
+    var rid=function(len) {
+        if (len==null) len=8;
+        var ret=hashPass(''+Date.now()).substr(0,len);
+        return ret;
+    }
  
     var fileUploadData = function(data) {
 
@@ -318,19 +324,19 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
                         needsave=true;
                     }
                     
-                    if (typeof(rec.haddr)!='undefined' && rec.haddr!='') { 
+                    if (typeof(rec.haddr)!='undefined' && rec.haddr!='' && rec.haddr!=null) { 
                         if (typeof(rec.controls[i].haddr)=='undefined' || rec.controls[i].haddr=='') {
                             var haddr=rec.haddr+'-';
                             
                             switch (rec.controls[i].type) {
                                 case 'slider':
-                                    haddr+='SL';
+                                    haddr+='sl';
                                     break;
                                 case 'txt':
-                                    haddr+='TX';
+                                    haddr+='tx';
                                     break;
                                 default:
-                                    haddr+='BTN';
+                                    haddr+='btn';
                                     break;
                             }
                             haddr+='.'+rec.controls[i].addr;
@@ -356,8 +362,10 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
             
             if (typeof(ini.uuid)!='undefined') {
                 database.projects.get(d[idxName],function(rec) {
-                    if ( typeof(rec.uuid)=='undefined' || rec.uuid=='') {
+                    
+                    if ( typeof(rec.uuid)=='undefined' || rec.uuid=='' || rec.uuid==null) {
                         rec.uuid=uuid(ini.uuid.length);
+                        session[hash].uuid=rec.uuid;
                         database.projects.set(rec,cb);
                     }
                 });
@@ -367,9 +375,44 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
             
         },
         
-        structure: function(d,idxName,cb) {
-            wallStructure(session[hash].project,true);
-            if (typeof(cb)=='function') cb(d);
+        structure: function(rec,idxName,cb) {
+            var finish=function(rec,cb) {
+                wallStructure(session[hash].project,true);
+                if (typeof(cb)=='function') cb(rec);
+            };
+            
+            var assignhaddr=function(rec,cb) {
+                rec.haddr='cb.'+session[hash].uuid+'-inv.'+rid()+'-lev.'+rec.seqno;
+                database.structure.set(rec,cb);
+            };
+            
+            if (typeof(rec.seqno)=='undefined' || rec.seqno=='' || rec.seqno==null) {
+                
+                var cond=[{project: session[hash].project}];
+                
+                database.structure.max('seqno',cond,function(m){
+                    if (m==null) m=0;
+                    rec.seqno=parseInt(m)+1;
+                    
+                    assignhaddr(rec,function(rec){
+                        finish(rec,cb);
+                    });
+                    
+                });
+                
+                
+                
+            } else if (typeof(rec.haddr)=='undefined' || rec.haddr=='' || rec.haddr==null) {
+                
+                assignhaddr(rec,function(rec){
+                    finish(rec,cb);
+                });
+                    
+            } else {
+                finish(rec,cb);                   
+            }
+            
+
         },
         
         devices: function(d,idxName,cb) {
@@ -381,37 +424,58 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
         },
         
         floor: function(d,idxName,cb) {
+
+            var finish=function(rec,cb) {
+                if (typeof(rec.floor)!='undefined') wallFloor(rec.floor);
+                if (typeof(cb)=='function') cb(rec);
+                
+            };
+            
+            var assignhaddr = function(rec,cb) {
+                if (typeof(session[hash].uuid)!='undefined') {
+                    if (rec.type=='polygon') {
+                        rec.haddr=session[hash].floor_haddr+'-room.'+rec.seqno;
+                    } else {
+                        rec.haddr='cb.'+session[hash].uuid+'-inv.'+rid()+'-cmb.'+rec.seqno;
+                    }
+                }
+                
+                
+                database.floor.set(rec,function(rec) {
+                    controlsFillAddr('floor',rec,function(rec){
+                        cb(rec);   
+                    });
+ 
+                });
+            };
+            
             controlsFillAddr('floor',d,function(rec){
                 
-                if (typeof(rec.seqno)=='undefined' || rec.seqno=='') {
+                if (typeof(rec.seqno)=='undefined' || rec.seqno=='' || rec.seqno==null) {
                     
                     var cond=[{project: session[hash].project}];
                     if (rec.type=='polygon') cond[0].type='polygon';
                     
                     database.floor.max('seqno',cond,function(m){
+                        if (m==null) m=0;
                         rec.seqno=parseInt(m)+1;
-                        if (typeof(session[hash].uuid)!='undefined') {
-                            if (rec.type=='polygon') {
-                                rec.haddr=session[hash].uuid+'-CB-AWI-ROOM.'+rec.seqno;
-                            } else {
-                                rec.haddr=session[hash].uuid+'-CB-AWI-CMB.'+rec.seqno;
-                            }
-                        }
-                        database.floor.set(rec,function(rec) {
-                            controlsFillAddr('floor',rec,function(rec){
-                                if (typeof(rec.floor)!='undefined') wallFloor(rec.floor);
-                                if (typeof(cb)=='function') cb(rec);   
-                            });
- 
+                        
+                        assignhaddr(rec,function(rec){
+                            finish(rec,cb);
                         });
                         
                     });
                     
                     
                     
+                } else if (typeof(rec.haddr)=='undefined' || rec.haddr=='' || rec.haddr==null) {
+                    
+                    assignhaddr(rec,function(rec){
+                        finish(rec,cb);
+                    });
+                        
                 } else {
-                    if (typeof(rec.floor)!='undefined') wallFloor(rec.floor);
-                    if (typeof(cb)=='function') cb(rec);                    
+                    finish(rec,cb);                   
                 }
                 
             });
@@ -617,8 +681,9 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
                     }
                     wallStructure(idx);
                 }
-                if (db=='structure') {
+                if (db=='structure' && idx!=null) {
                     session[hash].floor=idx;
+                    session[hash].floor_haddr=ret.haddr;
                 }
         
             }
