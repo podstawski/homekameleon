@@ -316,7 +316,7 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
 
             var needsave=false;
 
-            if (typeof(rec.controls)=='object') {
+            if (typeof(rec.controls)=='object' && rec.controls!=null) {
                 
                 for(var i=0;i<rec.controls.length;i++) {
                     if (typeof(rec.controls[i].addr)=='undefined' || rec.controls[i].addr=='') {
