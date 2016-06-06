@@ -325,6 +325,8 @@ var startDraggingLabels = function() {
 
 $(function(){
 	
+	document.title = $.translate('Devices');
+	
 	/*
 	 *DataTable init
 	 */

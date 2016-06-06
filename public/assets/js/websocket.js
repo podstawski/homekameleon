@@ -63,6 +63,7 @@ websocket.on('projects',function(data){
     if (hash.indexOf('project.html')>0) {
         $('.page-title').text(data.name);
         $('.page-desc').text(data.description);
+        document.title = data.name;
         
         setBreadcrumbs([{name: data.name, href:'project.html,'+data.id}]);
 

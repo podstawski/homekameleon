@@ -99,6 +99,8 @@ var listenForUsers=function(get) {
 
 $(function(){
 	
+	document.title = $.translate('Users');
+	
 	/*
 	 *DataTable init
 	 */

@@ -2,6 +2,7 @@ var thisproject;
 
 $(function() {
 
+    document.title = $.translate('Project');
     var data={};
     
     $('#img-input').on('change',function(){
