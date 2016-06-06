@@ -108,7 +108,7 @@ var initApp = function() {
         });
                   
         console.log('Hello new client',hash); 
-        var adm=admin(socket,session,hash,database,'./public',ini);
+        var adm=admin(socket,session,hash,database,'./public',ini,console);
         server.run(socket);
         
         

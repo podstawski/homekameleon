@@ -25,7 +25,9 @@ var lastFloorDebugTxt='';
 
 var floorDebug=function(txt) {
     if (lastFloorDebugTxt!=txt) {
-        $('#floor-container .draggable-container .floor-debug-container .floor-debug-contents').append('<p>'+txt+'</p>');
+        var dst=$('#floor-container .draggable-container .floor-debug-container .floor-debug-contents');
+        dst.append('<p>'+txt+'</p>');
+        dst.scrollTop(dst[0].scrollHeight)
     }
     lastFloorDebugTxt=txt;
 }
@@ -43,6 +45,10 @@ var zoomContainer = function(z,set) {
     
     var sel='#floor-container .draggable-container';
     var current=$(sel).css('zoom');
+    var w=$(sel).width(),h=$(sel).height(),x=parseFloat($(sel).css('left')),y=parseFloat($(sel).css('top'));
+    if (isNaN(x)) x=0;
+    if (isNaN(y)) y=0;
+    
 
     if (current===undefined) {
         current=$(sel).css('-moz-transform');
@@ -66,6 +72,8 @@ var zoomContainer = function(z,set) {
         $(sel).css('-moz-transform','scale('+current+')');
         $(sel).css('zoom',current);
         
+        $(sel).css('left',(x+(1-z)*w/2)+'px');
+        $(sel).css('top',(y+(1-z)*y/2)+'px');    
     }    
     
     return current;    
@@ -182,21 +190,24 @@ var drawPolygonPoints = function() {
 
 }
 
+var debugContainer = function() {
+    floorDebug('F/C:'+$('#floor-container').width()+'/'+$('#floor-container .draggable-container').width()+', z:'+Math.round(10*zoomContainer())/10);
+}
 
 var calculateWH = function () {
     
     var top=270;
     
-    top=-300;
+    //top=-300;
     
     var height=parseInt($(window).height())-top;
     if (height<200) height=200;
     
-    //$('#floor-container').height(height);
+    $('#floor-container').height(height);
+    //$('img.svg').width($('#floor-container .draggable-container').width());
     $('img.svg').width($('#floor-container').width());
     
-    floorDebug('SVG width: '+$('#floor-container').width()+', container: '+$('#floor-container .draggable-container').width());
-    
+    debugContainer();
     
     drawPolygonPoints();
     moveElements();
@@ -425,6 +436,7 @@ var drawDeviceElement = function(data,element) {
         device.dom().height(device.dom().height()*z/data.z);
         device.dom().width(device.dom().width()*z/data.z);
         websocket.emit('db-save','floor',d);
+        floorDebug(data.haddr+' z: '+Math.round(z*10)/10);
     }
     
     if (element.ready4click) {
@@ -550,13 +562,16 @@ var floorDraw=function(data) {
 
 
 var floorDrawElements=function(data) {
-        
-    if (data.length==0) return;
-    if (data[0].floor!=thisfloor) return;
+    
+    
+    if (data.length>0 && data[0].floor!=thisfloor) return;
     
     for(var i=0;i<elements.length;i++) {
         elements[i].toBeDeleted=true;
     }
+    
+    var newlements=0;
+    var deletedelements=elements.length;
     
     for(var i=0;i<data.length;i++) {
         var matchFound=false;
@@ -565,13 +580,14 @@ var floorDrawElements=function(data) {
                 elements[j].toBeDeleted=false;
                 for( var k in data[i]) elements[j].data[k]=data[i][k]; 
                 matchFound=true;
+                deletedelements--;
                 break;
             }
         }
    
         if (!matchFound) {
             if (typeof(data[i].name)=='undefined') data[i].name='';
-        
+            newlements++;
             
             switch (data[i].type) {
                 case 'polygon': {
@@ -605,8 +621,8 @@ var floorDrawElements=function(data) {
         
     }
 
-    
-    
+    floorDebug('Elements: '+data.length+' (new:'+newlements+'), removed: '+deletedelements);
+    debugContainer();
     for(var i=0;i<elements.length;i++) {
         
         if (typeof(elements[i].toBeDeleted)!='undefined' && elements[i].toBeDeleted) {
@@ -617,6 +633,11 @@ var floorDrawElements=function(data) {
     }    
     
     moveElements();
+    
+    /*
+     *Ask bus about states of all elements
+     *Only first load
+     */
     
     if (!busRequested) {
         websocket.emit('bus');
@@ -670,17 +691,19 @@ var drawAsideDevices = function() {
                     ui.offset.left<ctn.offset().left+ctn.width()
                     ){
                         var zoom=zoomContainer();
-                        var w=parseFloat($('#floor-container').width());
-                        var h=parseFloat($('#floor-container .draggable-container').height());
+                        var w=parseFloat($('#floor-container .draggable-container .svg').width());
+                        var h=parseFloat($('#floor-container .draggable-container .svg').height());
                         
                         ctn=$('#floor-container .draggable-container');
                         
                         var data=device.attr();
                         
                         data.point={
-                            x:((ui.offset.left - ctn.offset().left)/zoom)/w,
-                            y:((ui.offset.top - ctn.offset().top)/zoom)/h
+                            x:((ui.offset.left/zoom - ctn.offset().left))/w,
+                            y:((ui.offset.top/zoom - ctn.offset().top))/h
                         }
+                        
+                        floorDebug('Drop: '+Math.round(ui.offset.left - ctn.offset().left)+' x '+Math.round(ui.offset.top - ctn.offset().top));
                         
 
                         data.floor=thisfloor;
@@ -815,12 +838,18 @@ $(function(){
 
         $(document).keyup(function(e){
             
-            if (e.which==17) ctrlOn=false; 
+            if (e.which==17) {
+                floorDebug('Ctrl-UP, editmode: '+editmode);
+                ctrlOn=false;
+            }
         });
         
         $(document).keydown(function(e){
             
-            if (e.which==17) ctrlOn=true;
+            if (e.which==17) {
+                floorDebug('Ctrl-DOWN, editmode: '+editmode);
+                ctrlOn=true;
+            }
             
             if (lastDraggedElement && e.which>=37 && e.which<=40) {
                 event.preventDefault();

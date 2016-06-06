@@ -153,7 +153,7 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
 #floor-container .draggable-container .floor-debug-container .floor-debug-contents {
     height: 100%;
     overflow: auto;
-    font-size: 10px;
+    font-size: 8px;
     font-family: Courier;
 }
 

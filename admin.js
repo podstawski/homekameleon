@@ -5,7 +5,7 @@ var crypto = require('crypto');
 var images='images';
 
 
-var Admin = function(socket,session,hash,database,public_path,ini) {
+var Admin = function(socket,session,hash,database,public_path,ini,logger) {
     var loggedIn=false;
 
     var hashPass=function(txt) {
@@ -498,7 +498,8 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
     socket.on('login',function (data) {
         loggedIn=false;
         var err_txt1='Login error',err_txt2="Username or password doesn't match",err_txt3='Account blocked';
-        
+      
+        logger.log('Login request: '+data.username);
       
         if (data.username.length>0 && data.password.length>0) {
             database.users.get(data.username,function(u){
@@ -632,8 +633,12 @@ var Admin = function(socket,session,hash,database,public_path,ini) {
             return;
         }
         
+        
         database[db].get(idx,function(rec){
+            if (rec==null) return;
+            
             database[db].remove(idx,function(){
+
                 if (db=='projects') wallProjects(true);
                 if (db=='structure') wallStructure(session[hash].project);
                 if (db=='devices') wallDevices();    
