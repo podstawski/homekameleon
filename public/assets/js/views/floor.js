@@ -357,14 +357,24 @@ var drawDeviceElement = function(data,element) {
     data.z=z;
     var ratio=0.1*z*deviceRatio*$('#floor-container').width()/originalSvgWidth;
     
+    var last_e,lastpos;
     device.draw({
-        start: function() {
-            $(this).css('cursor','none').parent().css('cursor','none');  
+        start: function(e,ui) {
+            last_e=e;
+            lastpos=ui.position;
+        },
+        drag: function(e,ui) {
+            var z=zoomContainer();
+            if (z==1) return;
+            
+            ui.position.left=lastpos.left + (e.pageX-last_e.pageX)/z;
+            ui.position.top=lastpos.top + (e.pageY-last_e.pageY)/z;
+
+            
+            last_e=e;
+            lastpos=ui.position;
         },
         stop: function(e,ui) {
-
-            $(this).css('cursor','move').parent().css('cursor','default');
-            
             var d={id:data.id};
             var p=$(this).position();
             
@@ -372,6 +382,7 @@ var drawDeviceElement = function(data,element) {
             p.y=p.top;
             d.point=calculatePoint(p);
             d.room=roomOfDevice($(this));
+            
             
             websocket.emit('db-save','floor',d);
             lastDraggedElement={id: data.id,element: $(this)};
