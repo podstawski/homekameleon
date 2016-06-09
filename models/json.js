@@ -158,6 +158,58 @@ var Model = function(opt,logger) {
     }
     
     
+    var data_set = function(d,idx,cb) {
+    
+        if (typeof(idx)=='function') {
+            cb=idx;
+            idx=createIndex(d);
+        }
+        
+        if (idx==null) {
+            idx=createIndex(d);
+        }
+        
+        if (typeof(data[idx])=='undefined') {
+            return data_add(d,cb);
+        }
+        var anythingChanged=false;
+
+        for (var k in d) {
+            if (typeof(data[idx][k])=='undefined' || data[idx][k]!=d[k]) {
+                data[idx][k]=d[k];
+                anythingChanged=true;
+            }
+            
+        }
+        
+        if (anythingChanged) {
+            data[idx]._updated=Date.now();
+            lastSet=Date.now();
+        }
+        
+        if (cb) cb(data[idx]);
+        else return data[idx];
+    };
+    
+    var data_add = function(d,cb) {
+        idx=createIndex(d);
+ 
+        if (idx=='_' && index.length==1) {
+            d[index[0]]=max_element(index[0])+1;
+            idx=createIndex(d);
+        }
+       
+        if (idx.length==0 ) return;
+        data[idx]={_updated:Date.now(),_created:Date.now()};
+
+        for (var k in d) {
+            data[idx][k]=d[k];
+        }
+
+        lastSet=Date.now();
+        if (cb) cb(d);
+        else return d;
+    }
     
     
     return {
@@ -236,37 +288,7 @@ var Model = function(opt,logger) {
         },
         
         set: function(d,idx,cb) {
-    
-            if (typeof(idx)=='function') {
-                cb=idx;
-                idx=createIndex(d);
-            }
-            
-            if (idx==null) {
-                idx=createIndex(d);
-            }
-            
-            if (typeof(data[idx])=='undefined') {
-                logger.log("Index "+idx+" could not be found",'error');
-                return;
-            }
-            var anythingChanged=false;
-
-            for (var k in d) {
-                if (typeof(data[idx][k])=='undefined' || data[idx][k]!=d[k]) {
-                    data[idx][k]=d[k];
-                    anythingChanged=true;
-                }
-                
-            }
-            
-            if (anythingChanged) {
-                data[idx]._updated=Date.now();
-                lastSet=Date.now();
-            }
-            
-            if (cb) cb(data[idx]);
-            else return data[idx];
+            return data_set(d,idx,cb);    
         },
         
         count: function(where,cb) {
@@ -286,23 +308,8 @@ var Model = function(opt,logger) {
         },
         
         add: function(d,cb) {
-            idx=createIndex(d);
-     
-            if (idx=='_' && index.length==1) {
-                d[index[0]]=max_element(index[0])+1;
-                idx=createIndex(d);
-            }
-           
-            if (idx.length==0 ) return;
-            data[idx]={_updated:Date.now(),_created:Date.now()};
-   
-            for (var k in d) {
-                data[idx][k]=d[k];
-            }
-
-            lastSet=Date.now();
-            if (cb) cb(d);
-            else return d;
+            
+            return data_add(d,cb);
             
         },
         

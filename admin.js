@@ -588,16 +588,17 @@ var Admin = function(socket,session,hash,database,public_path,ini,logger) {
                 return;
             }
             
+          
             var fun;
-            if (parseInt(d[idxName])==0) {
+            if (d[idxName]==0 || d[idxName]=='0') {
                 delete(d[idxName]);
-                fun=database[db].add;
+                fun='add';
             } else {
-                fun=database[db].set;
+                fun='set';
             }
 
             
-            fun(d,function(d){
+            database[db][fun](d,function(d){
                 
                 
                 if (img_blob!=null) {
@@ -646,6 +647,8 @@ var Admin = function(socket,session,hash,database,public_path,ini,logger) {
                 if (db=='users') database.users.getAll(function(all){
                     socket.emit('users-all',all);
                 });
+                if (db=='inputs') socket.emit('inputs',rec);
+            
             });
         });
         

@@ -18,7 +18,15 @@ var inputsColumns=[
 	},
     { title: $.translate("Device"), data: "device" },
 	{ title: $.translate("Address"), data: "address" },
-    { title: $.translate("Type") , data: "type"},
+    {
+		title: $.translate("Type") ,
+		data: "type",
+		sortable: false,
+		render: function ( data, type, full, meta ) {
+			var ch=data==1?'checked':'';
+			return '<label class="switch switch-icon switch-pill switch-secondary-outline"><input type="checkbox" class="switch-input" '+ch+'><span class="switch-label" data-on="" data-off=""></span><span class="switch-handle"></span></label>';
+		}
+	},
     {
 		title: $.translate("Active"),
 		data: "active",
@@ -75,7 +83,7 @@ var inputsTableDraw = function(data) {
 		
 		inputsData[data[i].DT_RowId] = data[i];
 		
-		data[i].id='input,'+data[i].device+','+data[i].address;
+		data[i].id='inputs,'+data[i].device+','+data[i].address;
 	}
 	
 	inputsDataArray=data;
@@ -89,7 +97,15 @@ var inputsTableDraw = function(data) {
 
 var drawScriptSelects = function(selection) {
 	
-	$(selection+' select.scripts').each(function(){
+	var obj;
+	if (typeof(selection)=='object') {
+		obj=selection.find('select.scripts');
+	} else if (typeof(selection)=='string') {
+        obj=$(selection+' select.scripts');
+    }
+
+	
+	obj.each(function(){
 		
 		var id=$(this).attr('rel');
 		var select=$(this);
@@ -102,8 +118,17 @@ var drawScriptSelects = function(selection) {
 }
 
 var drawIOSelects = function(selection) {
-	
-	$(selection+' select.inputoroutput').each(function(){
+
+	var obj;
+	if (typeof(selection)=='object') {
+		obj=selection.find('select.inputoroutput');
+	} else if (typeof(selection)=='string') {
+        obj=$(selection+' select.inputoroutput');
+    }
+
+
+
+	obj.each(function(){
 		
 		var id=$(this).attr('rel');
 		var select=$(this);
@@ -118,6 +143,45 @@ var drawIOSelects = function(selection) {
 			select.select2();
 		});
 	});
+}
+
+var drawConditions = function (selection) {
+	
+	var obj;
+
+	if (typeof(selection)=='object') {
+		obj=selection.find('condition');
+	} else if (typeof(selection)=='string') {
+        obj=$(selection+' condition');
+    }	
+	
+	
+	obj.each(function(){
+		
+		var cond=$(this).text().split(',');
+		if (cond.length==1) cond=['state','=',''];
+		
+		var html='<select class="cond_what" name="cond_what">';
+		html+='<option value="state" '+(cond[0]=='state'?'selected':'')+'>state</option>';
+		html+='<option value="logicalstate" '+(cond[0]=='logicalstate'?'selected':'')+'>Lstate</option>';
+		html+='</select>';
+		html+='<select class="cond_eq" name="cond_eq">';
+		html+='<option value="=" '+(cond[1]=='='?'selected':'')+'>=</option>';
+		html+='</select>';
+		html+='<input type="text" size="1" value="'+cond[2]+'" class="cond_value" name="cond_value"/>';
+		$(this).html(html);
+	});
+}
+
+var loadInputs = function() {
+	/*
+	 *request to get all inputs
+	 */
+	websocket.emit('db-get','inputs');
+	websocket.once('inputs-all', function(data) {
+		inputsTableDraw(data.data);
+	});
+
 }
 
 
@@ -137,14 +201,8 @@ $(function(){
 	 *set breadcrumbs path
 	 */
 	setBreadcrumbs([{name: $.translate('Inputs'), href:'inputs.html'}]);
-		
-	/*
-	 *request to get all inputs
-	 */
-	websocket.emit('db-get','inputs');
-	websocket.once('inputs-all', function(data) {
-		inputsTableDraw(data.data);
-	});
+
+	loadInputs();		
 	
 	websocket.emit('db-get','outputs');
 	websocket.once('outputs-all', function(data) {
@@ -195,7 +253,7 @@ $(function(){
 			
 			var id=$(this).parent().parent().attr('id');
 			$('#edit-input').attr('rel',id);
-			$('#edit-input .modal-header h4').text(inputsData[id].name);
+			$('#edit-input .modal-header h4 input').val(inputsData[id].name);
 			
 			websocket.emit('db-get','actions',id);
 			websocket.once('actions',function(actions) {
@@ -213,12 +271,10 @@ $(function(){
 					$('#edit-input .modal-body .translate').translate();
 					
 					$('#edit-input .modal-body li').not('.add').append('<a class="x">×</a>');
-					$('#edit-input .modal-body li a.x').click( function(){
-						$(this).parent().remove();
-					});
-					drawScriptSelects('#edit-input .modal-body .container-fluid');
-					drawIOSelects('#edit-input .modal-body .container-fluid');
-					
+
+					drawScriptSelects('#edit-input .modal-body .container-fluid .item');
+					drawIOSelects('#edit-input .modal-body .container-fluid .item');
+					drawConditions('#edit-input .modal-body .container-fluid .item');
 				});
 
 				
@@ -232,11 +288,53 @@ $(function(){
 			
 			$('#edit-input .modal-body .new-row').clone().appendTo('#edit-input .modal-body .container-fluid').show();
 			
-			drawScriptSelects('#edit-input .modal-body .container-fluid .new-row');
-			drawIOSelects('#edit-input .modal-body .container-fluid .new-row');
+			drawScriptSelects('#edit-input .modal-body .container-fluid .new-row .item');
+			drawIOSelects('#edit-input .modal-body .container-fluid .new-row .item');
+			drawConditions('#edit-input .modal-body .container-fluid .new-row .item');
 			
 			$('#edit-input .modal-body .container-fluid .new-row').removeClass('new-row');
 		});
+		
+		$(document).on('click','#edit-input .modal-body .plus-last',function(e){
+			var newobj=$(this).parent().find('.new-item').last().clone();
+			
+			$(this).parent().find('.add').before(newobj);
+			
+			newobj.show().removeClass('new-item').addClass('item');
+			
+			drawScriptSelects(newobj);
+			drawIOSelects(newobj);
+			drawConditions(newobj);
+
+		});
+		
+		
+		$(document).on('click','#edit-input .modal-body li a.x', function(){
+				$(this).parent().remove();
+		});
+		
+		
+		$(document).on('click','.inputtable .switch-success input', function() {
+			var id=$(this).parent().parent().parent().attr('id').split(',');
+			var data={
+				device: id[0],
+				address: id[1],
+				active: $(this).prop('checked') 
+			};
+			websocket.emit('db-save','inputs',data,'address');
+		});
+		
+		$(document).on('click','.inputtable .switch-pill input', function() {
+			var id=$(this).parent().parent().parent().attr('id').split(',');
+			var data={
+				device: id[0],
+				address: id[1],
+				type: $(this).prop('checked')?1:0 
+			};
+			websocket.emit('db-save','inputs',data,'address');
+		});
+		
+		
 		
 		$.inputsInitiated=true;
     }
@@ -246,6 +344,7 @@ $(function(){
 	 */
 	$('#confirm-delete .btn-danger').click(function(e){
 		$('#confirm-delete').modal('hide');
+		console.log('Remove',$('#confirm-delete').attr('rel'));
 		websocket.emit('db-remove','inputs',$('#confirm-delete').attr('rel'));
 	});
 
@@ -254,50 +353,66 @@ $(function(){
 	 */
 	$('#edit-input .btn-info').click(function(e){
 		$('#edit-input').modal('hide');
-		var data={id:$('#edit-input').attr('rel')};
+		var id=$('#edit-input').attr('rel').split(',');
+		var data={
+			device: id[0],
+			address: id[1]
+		}
 		
-		$('#edit-input input,#edit-input select').each(function(){
-			data[$(this).attr('name')]=$(this).val();
+		data.name=$('#edit-input input[name="name"]').val();
+		websocket.emit('db-save','inputs',data,'address');
+		
+		data={
+			device: id[0],
+			address: id[1]
+		};
+		
+		var actions=[];
+		$('#edit-input form .row').not('.new-row').each(function(){
+			var a={};
+			a.active=$(this).find('.switch-success input').prop('checked');
+			
+			a.conditions=[];
+			$(this).find('.conditions li.item').each(function(){
+				var cond={};
+
+				var id=$(this).find('select.inputoroutput').val().split(',');
+				cond.db=id[0];
+				cond.device=id[1];
+				cond.address=id[2];
+				cond.condition=[
+					$(this).find('.cond_what').val(),
+					$(this).find('.cond_eq').val(),
+					$(this).find('.cond_value').val()
+				];
+				
+				a.conditions.push(cond);
+			});
+			
+			a.scripts=[];
+			
+			$(this).find('.scripts li.item').each(function(){
+				var s={
+					script: $(this).find('select.scripts').val()
+				};
+				var delay=parseInt($(this).find('input.delay').val());
+				if (!isNaN(delay) && delay>0) s.delay=delay;
+				
+				if (s.script.length>0) a.scripts.push(s);
+			});
+			
+
+			if (a.scripts.length>0) actions.push(a);
+			
 		});
 		
-		var controls=[];
 		
-		$('#edit-input .input-controls-container div').each( function(){
-			if ($(this).attr('type')===undefined) return;
-			
-			$(this).resizable('destroy');
-			var control={};
+		
+		data.actions=actions;
 
-			for (var i=0;i<this.attributes.length; i++) {
-				var attr=this.attributes[i].nodeName;
-				var val=this.attributes[i].nodeValue;
-				if (attr=='style') continue;
-				if (attr=='class') continue;
-				control[attr]=val;
-			}
-			
-			var position=$(this).position();
-			control.x=position.left/$(this).parent().width();
-			control.y=position.top/$(this).parent().height();
-			control.w=($(this).width()+2)/$(this).parent().width();
-			control.h=($(this).height()+2)/$(this).parent().height();
-			
-					
-			controls.push(control);
-		});
-
-		data.controls=controls;
-
-		/*
-		 *count inputs and outputs
-		 */
-		data.inputs=$('#edit-input .input-controls-container div[type="input"]').length;
-		data.outputs=$('#edit-input .input-controls-container div[type="output"]').length;
-	
-		/*
-		 *send save request
-		 */
-		websocket.emit('db-save','inputs',data);
+		console.log(data);		
+		websocket.emit('db-save','actions',data,'address');
+		
 	});
 
 	/*
@@ -319,19 +434,6 @@ $(function(){
 	});
 	
 	
-	/*
-	 *edit control save button
-	 */
-	$('#edit-control .modal-footer .btn-info').click(function (){
-		$('#edit-control').modal('hide');
-		$('#edit-control input').each(function (){
-		
-			if ($(this).attr('name')!==undefined) {
-                callingControl.attr($(this).attr('name'),$(this).val());
-            }
-		});
-		controlsStyle();
-	});
 
 
 });

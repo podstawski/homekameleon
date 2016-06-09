@@ -135,3 +135,9 @@ websocket.on('bus',function(haddr,state) {
     }
 });
 
+
+websocket.on('inputs',function(data){
+    if (typeof(loadInputs)=='function') {
+        loadInputs(data); 
+    }    
+});

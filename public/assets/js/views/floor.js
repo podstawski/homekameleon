@@ -26,8 +26,11 @@ var lastFloorDebugTxt='';
 var floorDebug=function(txt) {
     if (lastFloorDebugTxt!=txt) {
         var dst=$('#floor-container .draggable-container .floor-debug-container .floor-debug-contents');
-        dst.append('<p>'+txt+'</p>');
-        dst.scrollTop(dst[0].scrollHeight)
+        if (dst.length==1) {
+            dst.append('<p>'+txt+'</p>');
+            dst.scrollTop(dst[0].scrollHeight);
+        }
+
     }
     lastFloorDebugTxt=txt;
 }

@@ -9,34 +9,47 @@
             </label>
         </div>
         
-        <div class="col-md-5">
+        <div class="conditions col-md-5">
             <ul>
             [loop:conditions]
-                <li>
-                    <select class="inputoroutput" rel="[db],[device],[address]"></select>
+                <li class="item">
+                    <select class="inputoroutput" name="io" rel="[db],[device],[address]"></select>
                     <condition>[condition]</condition>
                 </li>
             [endloop:conditions]
-                <li class="add"><i class="icon-plus"></i></li>
+                <li class="new-item">
+                    <select class="inputoroutput" rel="inputs,[device],[address]"></select>
+                    <condition></condition>
+                </li>
+                <li class="add plus-last"><i class="icon-plus"></i></li>
             </ul>
         </div>
         
-        <div class="col-md-5">
+        <div class="scripts col-md-5">
             <ul>
             [loop:scripts]
-                <li>
+                <li class="item">
                     <select rel="[script]" class="scripts">
                         
                     </select>
-                    <input type="text" size="2" [if:delay]value="[delay]"[endif:delay] class="translate" placeholder="delay"/>
+                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="delay"/>
                 </li>
             [endloop:scripts]
-                <li class="add"><i class="icon-plus"></i></li>
+
+                <li class="new-item">
+                    <select rel="" class="scripts">
+                        
+                    </select>
+                    <input type="text" class="translate delay" placeholder="delay"/>
+                </li>
+                
+                <li class="add plus-last"><i class="icon-plus"></i></li>
             </ul>
         </div>
     </div>
     
 [endloop:actions]
+
 </div>
 
 <div class="add plus-action"><i class="icon-plus"></i></div>
@@ -51,25 +64,32 @@
         </label>
     </div>
     
-    <div class="col-md-5">
+    <div class="conditions col-md-5">
         <ul>
-            <li>
+            <li class="item">
                 <select class="inputoroutput" rel="input,[id]"></select>
                 <condition></condition>
             </li>
-            <li class="add"><i class="icon-plus"></i></li>
+            <li class="new-item">
+                <select class="inputoroutput" rel="input,[id]"></select>
+                <condition></condition>
+            </li>
+            <li class="add plus-last"><i class="icon-plus"></i></li>
         </ul>
     </div>
     
-    <div class="col-md-5">
+    <div class="scripts col-md-5">
         <ul>
-
-            <li>
+            <li class="item">
                 <select class="scripts"></select>
-                <input type="text" size="2" class="translate" placeholder="delay"/>
+                <input type="text" class="delay translate" placeholder="delay"/>
+            </li>
+            <li class="new-item">
+                <select class="scripts"></select>
+                <input type="text" class="delay translate" placeholder="delay"/>
             </li>
 
-            <li class="add"><i class="icon-plus"></i></li>
+            <li class="add plus-last"><i class="icon-plus"></i></li>
         </ul>
     </div>
 </div>

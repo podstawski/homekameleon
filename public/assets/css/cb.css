@@ -212,6 +212,14 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
         width: 78%;
         margin: 5px auto;
     }
+    
+    #edit-input {
+        top: 5px;
+    }
+    #edit-input .modal-dialog {
+        width: 88%;
+        margin: 5px auto;
+    }
 }
 
 
@@ -391,7 +399,8 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
     background-color: transparent;
     border: 0;
     padding: 0;
-    outline: none; 
+    outline: none;
+    width:40%;
 }
 
 #edit-control .modal-header {
@@ -516,6 +525,14 @@ aside .device-container {
     background-color: #ffff00;
 }
 
+#edit-input .modal-header input {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
 
 #edit-input .modal-body {
     padding-top: 0;
@@ -543,15 +560,42 @@ aside .device-container {
 
 #edit-input .modal-body .row ul li .x {
     content: "×";
-    position: absolute;
     cursor: pointer;
-    right: 2px;
-    top: 0;
-
+    width: 1%;
+    display: inline-block;
+    float: right;
+    padding: 0 4px 10px 0;
 }
 
 #edit-input .modal-body .row ul li .select2-container {
-    width: 100%;
+    width: 70%;
+}
+#edit-input .modal-body .row ul li condition {
+    display: inline-block;
+    width:28%;
+}
+
+#edit-input .modal-body .row ul .new-item {
+    display: none;
+}
+
+#edit-input .modal-body .row ul li .delay {
+    border: solid 1px #e0e0e0;
+    width:28%;
+    height: 32px;
+}
+
+#edit-input .modal-body .row ul li .cond_what {
+    width: 60%;
+    height: 32px;
+}
+#edit-input .modal-body .row ul li .cond_eq {
+    width: 15%;
+    height: 32px;
+}
+#edit-input .modal-body .row ul li .cond_value {
+    width: 20%;
+    height: 31px;
 }
 
 
