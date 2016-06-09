@@ -1,4 +1,5 @@
 {
+    "uuid": "PROM",
     "devices": [
         {
             "id": "HQP",
@@ -133,6 +134,11 @@
             "model": "../../admin/models/json",
             "file":"actions.json",
             "index": ["device","address"]
+        },
+        "users": {
+            "model": "../../admin/models/json",
+            "file":"users.json",
+            "index": ["username"]
         }
         
     }

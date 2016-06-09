@@ -48,7 +48,7 @@ process.on('SIGHUP',function () {
                 delete(devices[id]);
             }
             logger.log('Initializing '+structureData.devices[i].name,'init');
-            devices[id] = new Device(id,structureData.devices[i].protocol,structureData.devices[i].language,structureData.devices[i].com,logger);
+            devices[id] = new Device(id,structureData.devices[i].protocol,structureData.devices[i].language,structureData.devices[i].com,data,logger);
             
             devices[id].on('data',function(id,type,data) {
                 logic.action(id,type,data);

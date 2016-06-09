@@ -4,7 +4,7 @@ var fs = require('fs');
 var root=__dirname+'/../../web';
 
 
-var Web = function(com,logger,callback) {
+var Web = function(com,ini,logger,callback) {
     
     com.on('initstate',function(opt,db) {
         var outputs=db.outputs.getAll().data;

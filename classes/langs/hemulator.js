@@ -11,7 +11,7 @@ var pos_crc=6;
 
 var hcrc = require('../common/hcrc');
 
-module.exports = function(com,logger,callback) {
+module.exports = function(com,ini,logger,callback) {
     var counter=0;
     var sendQueue=[];
     var sendSemaphore=false;

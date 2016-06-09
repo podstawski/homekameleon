@@ -4,14 +4,14 @@ var admin = require('../../admin/admin.js');
 
 var root_path=__dirname+'/../../admin/public';
 
-var Web = function(com,logger,callback) {
+var Web = function(com,ini,logger,callback) {
     var database;
     
     com.staticContent(root_path);
     
     com.on('initstate',function(opt,db) {
         database=db;
-        admin(opt.socket,opt.session,opt.hash,database,root_path); 
+        admin(opt.socket,opt.session,opt.hash,database,root_path,ini,logger); 
     });
     
     com.on('notify',function(sockets,type,data) {        

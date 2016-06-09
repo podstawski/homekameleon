@@ -2,15 +2,15 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 
-var Device = function(id,protocol,language,options,logger) {
+var Device = function(id,protocol,language,options,ini,logger) {
     var self=this;
     
     var Protocol = require(__dirname+'/../protocols/'+protocol);
     var Translator = require(__dirname+'/../langs/'+language);
     
-    
+
     var com=new Protocol(options,logger);
-    var trans=new Translator(com,logger,function(type,data) {
+    var trans=new Translator(com,ini,logger,function(type,data) {
         
         self.emit('data',id,type,data);
     });
