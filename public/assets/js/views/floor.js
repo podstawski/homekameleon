@@ -44,7 +44,7 @@ var modalCleanup = function() {
 };
 
 
-var zoomContainer = function(z,set) {
+var zoomContainer = function(z,set,e) {
     
     var sel='#floor-container .draggable-container';
     var current=$(sel).css('zoom');
@@ -75,8 +75,12 @@ var zoomContainer = function(z,set) {
         $(sel).css('-moz-transform','scale('+current+')');
         $(sel).css('zoom',current);
         
-        $(sel).css('left',(x+(1-z)*w/2)+'px');
-        $(sel).css('top',(y+(1-z)*y/2)+'px');    
+        var ox=e.pageX-$('#floor-container').offset().left;
+        var oy=e.screenY-$('#floor-container').offset().top;
+        
+        //console.log(ox.left,e);
+        $(sel).css('left',(x+(1-z)*ox/z)+'px');
+        $(sel).css('top',(y+(1-z)*oy/z)+'px');    
     }    
     
     return current;    
@@ -130,23 +134,26 @@ var roomOfDevice = function(obj) {
 }
 
 
-var calculatePoint = function(p) {
+var calculatePoint = function(p,dbg) {
     var zoom=zoomContainer();
     var w=parseFloat($('#floor-container .draggable-container').width());
     var h=parseFloat($('#floor-container .draggable-container').height());
     
+    
+    
     if (p.x > 1) {
         var point={
-            x: (p.x)/(w*zoom),
+            x: (p.x)/(w), //*zoom
             y: (p.y)/h
         };
     } else {
         var point={
-            x: p.x*w*zoom,
+            x: p.x*w, //*zoom
             y: p.y*h
         };
     }
     
+    if (dbg) floorDebug(p.x+','+p.y+' &raquo; '+point.x+','+point.y+' ('+w+','+h+')');
     //console.log(p.x,p.y,'->',point.x,point.y,'w:'+w,'h:'+h,zoom);
     
     return point;
@@ -209,6 +216,7 @@ var calculateWH = function () {
     $('#floor-container').height(height);
     //$('img.svg').width($('#floor-container .draggable-container').width());
     $('img.svg').width($('#floor-container').width());
+    $('#floor-container .draggable-container').width($('#floor-container').width());
     
     debugContainer();
     
@@ -383,7 +391,7 @@ var drawDeviceElement = function(data,element) {
             
             p.x=p.left;
             p.y=p.top;
-            d.point=calculatePoint(p);
+            d.point=calculatePoint(p,true);
             d.room=roomOfDevice($(this));
             
             
@@ -907,12 +915,12 @@ $(function(){
      */
     $('#floor-container .draggable-container').bind('mousewheel', function(e){
         
-        if(e.originalEvent.wheelDelta /120 > 0) zoomContainer(1.1);
-        else zoomContainer(0.9);
+        if(e.originalEvent.wheelDelta /120 > 0) zoomContainer(1.1,null,e);
+        else zoomContainer(0.9,null,e);
         
     }).bind('DOMMouseScroll',function(e) {
-        if (e.detail<0) zoomContainer(1.1);
-        if (e.detail>0) zoomContainer(0.9);
+        if (e.detail<0) zoomContainer(1.1,null,e);
+        if (e.detail>0) zoomContainer(0.9,null,e);
         
     });   
     
