@@ -76,11 +76,10 @@ var zoomContainer = function(z,set,e) {
         $(sel).css('zoom',current);
         
         var ox=e.pageX-$('#floor-container').offset().left;
-        var oy=e.screenY-$('#floor-container').offset().top;
-        
-        //console.log(ox.left,e);
-        $(sel).css('left',(x+(1-z)*ox/z)+'px');
-        $(sel).css('top',(y+(1-z)*oy/z)+'px');    
+        var oy=e.pageY-$('#floor-container').offset().top;
+
+        $(sel).css('left',(x+(1-z)*ox/current)+'px');
+        $(sel).css('top',(y+(1-z)*oy/current)+'px');    
     }    
     
     return current;    
@@ -340,9 +339,39 @@ var drawPolygon = function(points,id,data,element,labelpoint) {
         }    
     });
     
+    zoomDraggableFix(label);
+    
     if (!editmode) label.draggable('disable');
  
     return poli;
+}
+
+var zoomDraggableFix = function(obj) {
+
+
+    obj.on('dragstart',function(e,ui) {
+        var zdf={ex: e.pageX, ey: e.pageY, lf: ui.position.left, tp: ui.position.top};
+        obj.attr('zdf',JSON.stringify(zdf));
+
+    });
+    
+    obj.on('drag', function(e,ui) {
+        var z=zoomContainer();
+        if (z!=1) {
+            var zdf=JSON.parse(obj.attr('zdf'));
+        
+            ui.position.left=zdf.lf + (e.pageX-zdf.ex)/z;
+            ui.position.top=zdf.tp + (e.pageY-zdf.ey)/z;
+
+        }
+        
+        zdf={ex: e.pageX, ey: e.pageY, lf: ui.position.left, tp: ui.position.top};
+        obj.attr('zdf',JSON.stringify(zdf));
+    });
+    
+    obj.on('dragstop', function() {
+        obj.removeAttr('zdf');
+    });
 }
 
 
@@ -368,23 +397,7 @@ var drawDeviceElement = function(data,element) {
     data.z=z;
     var ratio=0.1*z*deviceRatio*$('#floor-container').width()/originalSvgWidth;
     
-    var last_e,lastpos;
     device.draw({
-        start: function(e,ui) {
-            last_e=e;
-            lastpos=ui.position;
-        },
-        drag: function(e,ui) {
-            var z=zoomContainer();
-            if (z==1) return;
-            
-            ui.position.left=lastpos.left + (e.pageX-last_e.pageX)/z;
-            ui.position.top=lastpos.top + (e.pageY-last_e.pageY)/z;
-
-            
-            last_e=e;
-            lastpos=ui.position;
-        },
         stop: function(e,ui) {
             var d={id:data.id};
             var p=$(this).position();
@@ -448,6 +461,7 @@ var drawDeviceElement = function(data,element) {
     
     element.element = device.dom();
     device.dom().addClass('element');
+    zoomDraggableFix(device.dom());
 
     var zoomDevice=function(zoom) {
         if (!editmode || !ctrlOn) return;
@@ -905,7 +919,11 @@ $(function(){
         }
     });
     
+    zoomDraggableFix($('#floor-container .draggable-container'));
+    
     $('#floor-container .draggable-container .floor-debug-container').draggable();
+    zoomDraggableFix($('#floor-container .draggable-container .floor-debug-container'));
+    
     $('#floor-container .draggable-container .floor-debug-container a').click(function(){
         $(this).parent().remove();
     });
