@@ -1,9 +1,11 @@
+
+
 <div class="container-fluid">
 [loop:actions]
     <div class="row">
         <div class="col-md-2">
             <label class="switch switch-default switch-success">
-                <input type="checkbox" class="switch-input" name="active" value="1" [if:active]checked[endif:active]/>
+                <input type="checkbox" class="switch-input" value="1" [if:active]checked[endif:active]/>
                 <span class="switch-label"></span>
                 <span class="switch-handle"></span>
             </label>
@@ -13,12 +15,12 @@
             <ul>
             [loop:conditions]
                 <li class="item">
-                    <select class="inputoroutput" name="io" rel="[db],[device],[address]"></select>
+                    <select class="inputoroutput" rel="[haddr]"></select>
                     <condition>[condition]</condition>
                 </li>
             [endloop:conditions]
                 <li class="new-item">
-                    <select class="inputoroutput" rel="inputs,[device],[address]"></select>
+                    <select class="inputoroutput" rel="[haddr]"></select>
                     <condition></condition>
                 </li>
                 <li class="add plus-last"><i class="icon-plus"></i></li>
@@ -58,7 +60,7 @@
 <div class="row new-row" style="display: none">
     <div class="col-md-2">
         <label class="switch switch-default switch-success">
-            <input type="checkbox" class="switch-input" name="active" value="1" checked/>
+            <input type="checkbox" class="switch-input" value="1" checked/>
             <span class="switch-label"></span>
             <span class="switch-handle"></span>
         </label>
@@ -67,11 +69,11 @@
     <div class="conditions col-md-5">
         <ul>
             <li class="item">
-                <select class="inputoroutput" rel="input,[id]"></select>
+                <select class="inputoroutput" rel="[haddr]"></select>
                 <condition></condition>
             </li>
             <li class="new-item">
-                <select class="inputoroutput" rel="input,[id]"></select>
+                <select class="inputoroutput" rel="[haddr]"></select>
                 <condition></condition>
             </li>
             <li class="add plus-last"><i class="icon-plus"></i></li>

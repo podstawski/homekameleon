@@ -7,7 +7,7 @@
 /*
  * columns definitions for DataTable
  */
-var inputsColumns=[
+var iosColumns=[
 	{
 		title: $.translate("Name"),
 		data: "name",
@@ -16,17 +16,9 @@ var inputsColumns=[
 			return '<input type="text" value="'+data+'"/>'
 		}
 	},
-    { title: $.translate("Device"), data: "device" },
-	{ title: $.translate("Address"), data: "address" },
-    {
-		title: $.translate("Type") ,
-		data: "type",
-		sortable: false,
-		render: function ( data, type, full, meta ) {
-			var ch=data==1?'checked':'';
-			return '<label class="switch switch-icon switch-pill switch-secondary-outline"><input type="checkbox" class="switch-input" '+ch+'><span class="switch-label" data-on="" data-off=""></span><span class="switch-handle"></span></label>';
-		}
-	},
+	{ title: $.translate("Address"), data: "haddr" },
+	{ title: $.translate("Type"), data: "type" },
+    
     {
 		title: $.translate("Active"),
 		data: "active",
@@ -45,14 +37,13 @@ var inputsColumns=[
 	}
 ];
 
-var inputsData={};
-var outputsData={};
+var iosData={};
+
 var scriptsData={};
 
-var inputsDataArray=[];
-var outputsDataArray=[];
+var iosDataArray=[];
 var scriptsDataArray=[];
-var inputsoutputsDataArray=[];
+var iosoutputsDataArray=[];
 
 /*
  *callingControl
@@ -61,32 +52,32 @@ var inputsoutputsDataArray=[];
 var callingControl=null;
 
 /*
- * function: inputsTableDraw
+ * function: iosTableDraw
  * called from websocket on data ready
  */
-var inputsTableDraw = function(data) {
+var iosTableDraw = function(data) {
 
-	inputsData={};
+	iosData={};
 
 	var datatable = $('.inputtable').dataTable().api();
 
 	for (var i=0; i<data.length;i++) {
-		data[i].DT_RowId=data[i].device+','+data[i].address;
+		data[i].DT_RowId=data[i].haddr;
 	
-		for (var j=0; j<inputsColumns.length; j++) {
-			if (inputsColumns[j].data==null) continue;
+		for (var j=0; j<iosColumns.length; j++) {
+			if (iosColumns[j].data==null) continue;
 			
-			if (typeof(data[i][inputsColumns[j].data])=='undefined') {
-                data[i][inputsColumns[j].data]='';
+			if (typeof(data[i][iosColumns[j].data])=='undefined') {
+                data[i][iosColumns[j].data]='';
             }
 		}
 		
-		inputsData[data[i].DT_RowId] = data[i];
+		iosData[data[i].DT_RowId] = data[i];
 		
-		data[i].id='inputs,'+data[i].device+','+data[i].address;
+		data[i].id=data[i].haddr;
 	}
 	
-	inputsDataArray=data;
+	iosDataArray=data;
 	
 	
 	datatable.clear();
@@ -135,12 +126,10 @@ var drawIOSelects = function(selection) {
 
 
 		$.smekta_file('views/smekta/inputoutput-select.html',{
-			inputs:inputsDataArray,
-			outputs:outputsDataArray
-			},this,function(){
-			
-			select.val(id);
-			select.select2();
+			ios:iosDataArray,
+			},this,function() {
+				select.val(id);
+				select.select2();
 		});
 	});
 }
@@ -159,27 +148,27 @@ var drawConditions = function (selection) {
 	obj.each(function(){
 		
 		var cond=$(this).text().split(',');
-		if (cond.length==1) cond=['state','=',''];
+		if (cond.length==1) cond=['value','=',''];
 		
-		var html='<select class="cond_what" name="cond_what">';
-		html+='<option value="state" '+(cond[0]=='state'?'selected':'')+'>state</option>';
-		html+='<option value="logicalstate" '+(cond[0]=='logicalstate'?'selected':'')+'>Lstate</option>';
+		var html='<select class="cond_what">';
+		html+='<option value="value" '+(cond[0]=='value'?'selected':'')+'>value</option>';
+		html+='<option value="haddr" '+(cond[0]=='haddr'?'selected':'')+'>address</option>';
 		html+='</select>';
-		html+='<select class="cond_eq" name="cond_eq">';
+		html+='<select class="cond_eq">';
 		html+='<option value="=" '+(cond[1]=='='?'selected':'')+'>=</option>';
 		html+='</select>';
-		html+='<input type="text" size="1" value="'+cond[2]+'" class="cond_value" name="cond_value"/>';
+		html+='<input type="text" size="1" value="'+cond[2]+'" class="cond_value" />';
 		$(this).html(html);
 	});
 }
 
 var loadInputs = function() {
 	/*
-	 *request to get all inputs
+	 *request to get all ios
 	 */
-	websocket.emit('db-get','inputs');
-	websocket.once('inputs-all', function(data) {
-		inputsTableDraw(data.data);
+	websocket.emit('db-get','ios');
+	websocket.once('ios-all', function(data) {
+		iosTableDraw(data.data);
 	});
 
 }
@@ -194,29 +183,16 @@ $(function(){
 		language: {
 			url: "assets/js/datatables/"+$.translateLang()+".json"
 		},
-		columns: inputsColumns
+		columns: iosColumns
 	});
 
 	/*
 	 *set breadcrumbs path
 	 */
-	setBreadcrumbs([{name: $.translate('Inputs'), href:'inputs.html'}]);
+	setBreadcrumbs([{name: $.translate('Inputs & outputs'), href:'inputs.html'}]);
 
 	loadInputs();		
 	
-	websocket.emit('db-get','outputs');
-	websocket.once('outputs-all', function(data) {
-		
-		
-		for (var i=0; i<data.data.length; i++) {
-			var idx=data.data[i].device+','+data.data[i].address;
-			
-			outputsData[idx]=data.data[i];
-			data.data[i].id='outputs,'+idx;
-		}
-		
-		outputsDataArray=data.data;
-	});
 
 	websocket.emit('db-get','scripts');
 	websocket.once('scripts-all', function(data) {
@@ -231,7 +207,7 @@ $(function(){
 	});
 	
 	
-	if (typeof($.inputsInitiated)=='undefined') { //prevent multi event
+	if (typeof($.iosInitiated)=='undefined') { //prevent multi event
 	
 		/*
 		 *when delete button clicked in table list
@@ -240,7 +216,7 @@ $(function(){
 		$(document).on('click','.inputtable td a.btn-danger',function(e){
 			var id=$(this).parent().parent().attr('id');
 			$('#confirm-delete').attr('rel',id);
-			$('#confirm-delete .modal-header h4').text(inputsData[id].name);
+			$('#confirm-delete .modal-header h4').text(iosData[id].name);
 		});
 		
 		/*
@@ -253,7 +229,7 @@ $(function(){
 			
 			var id=$(this).parent().parent().attr('id');
 			$('#edit-input').attr('rel',id);
-			$('#edit-input .modal-header h4 input').val(inputsData[id].name);
+			$('#edit-input .modal-header h4 input').val(iosData[id].name);
 			
 			websocket.emit('db-get','actions',id);
 			websocket.once('actions',function(actions) {
@@ -321,22 +297,13 @@ $(function(){
 				address: id[1],
 				active: $(this).prop('checked') 
 			};
-			websocket.emit('db-save','inputs',data,'address');
+			websocket.emit('db-save','ios',data,'haddr');
 		});
 		
-		$(document).on('click','.inputtable .switch-pill input', function() {
-			var id=$(this).parent().parent().parent().attr('id').split(',');
-			var data={
-				device: id[0],
-				address: id[1],
-				type: $(this).prop('checked')?1:0 
-			};
-			websocket.emit('db-save','inputs',data,'address');
-		});
+	
 		
 		
-		
-		$.inputsInitiated=true;
+		$.iosInitiated=true;
     }
 	
 	/*
@@ -345,7 +312,7 @@ $(function(){
 	$('#confirm-delete .btn-danger').click(function(e){
 		$('#confirm-delete').modal('hide');
 		console.log('Remove',$('#confirm-delete').attr('rel'));
-		websocket.emit('db-remove','inputs',$('#confirm-delete').attr('rel'));
+		websocket.emit('db-remove','ios',$('#confirm-delete').attr('rel'));
 	});
 
 	/*
@@ -353,19 +320,15 @@ $(function(){
 	 */
 	$('#edit-input .btn-info').click(function(e){
 		$('#edit-input').modal('hide');
-		var id=$('#edit-input').attr('rel').split(',');
-		var data={
-			device: id[0],
-			address: id[1]
-		}
+		var id=$('#edit-input').attr('rel');
+		var data={'haddr':id};
 		
 		data.name=$('#edit-input input[name="name"]').val();
-		websocket.emit('db-save','inputs',data,'address');
 		
-		data={
-			device: id[0],
-			address: id[1]
-		};
+		console.log(data);
+		//websocket.emit('db-save','ios',data,'haddr');
+		
+		var data={'haddr':id};
 		
 		var actions=[];
 		$('#edit-input form .row').not('.new-row').each(function(){
@@ -411,7 +374,7 @@ $(function(){
 		data.actions=actions;
 
 		console.log(data);		
-		websocket.emit('db-save','actions',data,'address');
+		//websocket.emit('db-save','actions',data,'haddr');
 		
 	});
 

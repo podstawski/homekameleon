@@ -647,7 +647,7 @@ var Admin = function(socket,session,hash,database,public_path,ini,logger) {
                 if (db=='users') database.users.getAll(function(all){
                     socket.emit('users-all',all);
                 });
-                if (db=='inputs') socket.emit('inputs',rec);
+                if (db=='ios') socket.emit('ios',rec);
             
             });
         });
