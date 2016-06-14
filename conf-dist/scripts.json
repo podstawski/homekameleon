@@ -1,1 +1,2963 @@
-[{"id":"A-290","name":"Piwnica kot\u0142ownia \u015bwiat\u0142o ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.7","command":"turnon","delay":0}]},{"id":"A-291","name":"Piwnica kot\u0142ownia \u015bwiat\u0142o OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.7","command":"turnoff","delay":"1"}]},{"id":"A-307","name":"\u015awiat\u0142o pi\u0119tro korytarz antresola ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.4","command":"turnon","delay":0},{"device":"HQP","address":"0L.4","command":"turnoff","delay":7200}]},{"id":"A-308","name":"\u015awiat\u0142o pi\u0119tro korytarz antresola OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.4","command":"turnoff","delay":0}]},{"id":"A-313","name":"\u015awiat\u0142o pi\u0119tro Sebol prawy ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.6","command":"turnon","delay":0},{"device":"HQP","address":"0L.6","command":"turnoff","delay":3600}]},{"id":"A-314","name":"\u015awiat\u0142o pi\u0119tro Sebol prawy OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.6","command":"turnoff","delay":0}]},{"id":"A-315","name":"\u015awiat\u0142o pi\u0119tro kwadrat lewy ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.5","command":"turnon","delay":0},{"device":"HQP","address":"0L.5","command":"turnoff","delay":3600}]},{"id":"A-316","name":"\u015awiat\u0142o pi\u0119tro kwadrat lewy OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.5","command":"turnoff","delay":0}]},{"id":"A-317","name":"\u015awiat\u0142o pi\u0119tro d\u0142ugi prawy ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.8","command":"turnon","delay":0},{"device":"HQP","address":"0L.8","command":"turnoff","delay":7200}]},{"id":"A-318","name":"\u015awiat\u0142o pi\u0119tro d\u0142ugi prawy OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.8","command":"turnoff","delay":0}]},{"id":"A-329","name":"\u015awiat\u0142o schody piwnica OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.2","command":"turnoff","delay":0}]},{"id":"A-330","name":"\u015awiat\u0142o schody piwnica ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.2","command":"turnon","delay":0},{"device":"HQP","address":"0G.2","command":"turnoff","delay":60}]},{"id":"A-333","name":"\u015awiat\u0142o kuchnia OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.4","command":"turnoff","delay":0}]},{"id":"A-334","name":"\u015awiat\u0142o kuchnia ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.4","command":"turnon","delay":0},{"device":"HQP","address":"0G.4","command":"turnoff","delay":7200}]},{"id":"A-335","name":"\u015awiat\u0142o \u0142azienka g\u00f3rna OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.9","command":"turnoff","delay":0}]},{"id":"A-336","name":"\u015awiat\u0142o \u0142azienka g\u00f3rna ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.9","command":"turnon","delay":0},{"device":"HQP","address":"0I.9","command":"turnoff","delay":5400}]},{"id":"A-339","name":"\u015awiat\u0142o pi\u0119tro korytarz od tarasu OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.3","command":"turnoff","delay":0}]},{"id":"A-340","name":"\u015awiat\u0142o pi\u0119tro korytarz od tarasu ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.3","command":"turnon","delay":0},{"device":"HQP","address":"0L.3","command":"turnoff","delay":1800}]},{"id":"A-349","name":"Roleta schody piwnica, prawa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"05","command":"up","delay":0},{"device":"HQP","address":"05","command":"stop-u","delay":41}]},{"id":"A-351","name":"Roleta schody piwnica, prawa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"05","command":"down","delay":0},{"device":"HQP","address":"05","command":"stop-d","delay":41}]},{"id":"A-353","name":"Roleta schody piwnica, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"05","command":"stop-d","delay":0}]},{"id":"A-354","name":"Roleta schody piwnica, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"05","command":"stop-u","delay":0}]},{"id":"A-355","name":"Roleta schody piwnica, lewa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"06","command":"up","delay":0},{"device":"HQP","address":"06","command":"stop-u","delay":41}]},{"id":"A-357","name":"Roleta schody piwnica, lewa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"06","command":"down","delay":0},{"device":"HQP","address":"06","command":"stop-d","delay":41}]},{"id":"A-359","name":"Roleta schody piwnica, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"06","command":"stop-d","delay":0}]},{"id":"A-360","name":"Roleta schody piwnica, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"06","command":"stop-u","delay":0}]},{"id":"A-367","name":"Roleta sypialnia, lewa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0A","command":"up","delay":0},{"device":"HQP","address":"0A","command":"stop-u","delay":50}]},{"id":"A-369","name":"Roleta sypialnia, lewa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0A","command":"down","delay":0},{"device":"HQP","address":"0A","command":"stop-d","delay":50}]},{"id":"A-371","name":"Roleta sypialnia, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0A","command":"stop-d","delay":0}]},{"id":"A-372","name":"Roleta sypialnia, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0A","command":"stop-u","delay":0}]},{"id":"A-373","name":"\u015awiat\u0142o sauna OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.9","command":"turnoff","delay":0}]},{"id":"A-374","name":"\u015awiat\u0142o sauna ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.9","command":"turnon","delay":0},{"device":"HQP","address":"0K.9","command":"turnoff","delay":3600}]},{"id":"A-375","name":"\u015awiat\u0142o ping-pong + szafa OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.8","command":"turnoff","delay":0}]},{"id":"A-376","name":"\u015awiat\u0142o ping-pong + szafa ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.8","command":"turnon","delay":0},{"device":"HQP","address":"0K.8","command":"turnoff","delay":4600}]},{"id":"A-377","name":"\u015awiatlo ping-pong lewe OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.6","command":"turnoff","delay":0}]},{"id":"A-378","name":"\u015awiatlo ping-pong lewe ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.6","command":"turnon","delay":0},{"device":"HQP","address":"0K.6","command":"turnoff","delay":5400}]},{"id":"A-388","name":"\u015awiat\u0142o \u0142azienka OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.1","command":"turnoff","delay":0}]},{"id":"A-389","name":"\u015awiat\u0142o \u0142azienka ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.1","command":"turnon","delay":0},{"device":"HQP","address":"0G.1","command":"turnoff","delay":5400}]},{"id":"A-390","name":"\u015awiat\u0142o salon okno OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.6","command":"turnoff","delay":0}]},{"id":"A-391","name":"\u015awiat\u0142o salon okno ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.6","command":"turnon","delay":0},{"device":"HQP","address":"0G.6","command":"turnoff","delay":1800}]},{"id":"A-396","name":"\u015awiat\u0142o dzidzia OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.0","command":"turnoff","delay":0}]},{"id":"A-397","name":"\u015awiat\u0142o dzidzia ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.0","command":"turnon","delay":0},{"device":"HQP","address":"0G.0","command":"turnoff","delay":10800}]},{"id":"A-402","name":"\u015awiat\u0142o pracownia OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.7","command":"turnoff","delay":0}]},{"id":"A-403","name":"\u015awiat\u0142o pracownia ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.7","command":"turnon","delay":0},{"device":"HQP","address":"0G.7","command":"turnoff","delay":3600}]},{"id":"A-404","name":"Roleta kuchnia UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0E","command":"up","delay":0},{"device":"HQP","address":"0E","command":"stop-u","delay":85}]},{"id":"A-406","name":"Roleta kuchnia DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0E","command":"down","delay":0},{"device":"HQP","address":"0E","command":"stop-d","delay":85}]},{"id":"A-408","name":"Roleta kuchnia STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0E","command":"stop-d","delay":0}]},{"id":"A-409","name":"Roleta kuchnia STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0E","command":"stop-u","delay":0}]},{"id":"A-410","name":"Roleta korytarz UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0F","command":"up","delay":0},{"device":"HQP","address":"0F","command":"stop-u","delay":75}]},{"id":"A-412","name":"Roleta korytarz DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0F","command":"down","delay":0},{"device":"HQP","address":"0F","command":"stop-d","delay":75}]},{"id":"A-414","name":"Roleta korytarz STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0F","command":"stop-d","delay":0}]},{"id":"A-415","name":"Roleta korytarz STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0F","command":"stop-u","delay":0}]},{"id":"A-434","name":"\u015awiat\u0142o salon od korytarza OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.1","command":"turnoff","delay":0}]},{"id":"A-435","name":"\u015awiat\u0142o salon od korytarza ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.1","command":"turnon","delay":0},{"device":"HQP","address":"0J.1","command":"turnoff","delay":7200}]},{"id":"A-438","name":"Schody - lampki OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.0","command":"turnoff","delay":0}]},{"id":"A-439","name":"Schody - lampki ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.0","command":"turnon","delay":0},{"device":"HQP","address":"0L.0","command":"turnoff","delay":"60"}]},{"id":"A-447","name":"\u015awiat\u0142o schody pi\u0119tro OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.2","command":"turnoff","delay":0}]},{"id":"A-448","name":"\u015awiat\u0142o schody pi\u0119tro ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.2","command":"turnon","delay":0},{"device":"HQP","address":"0J.2","command":"turnoff","delay":"45"}]},{"id":"A-470","name":"Roleta pi\u0119tro \u0142azienka UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0N","command":"up","delay":0},{"device":"HQP","address":"0N","command":"stop-u","delay":55}]},{"id":"A-472","name":"Roleta pi\u0119tro \u0142azienka DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0N","command":"down","delay":0},{"device":"HQP","address":"0N","command":"stop-d","delay":55}]},{"id":"A-474","name":"Roleta pi\u0119tro \u0142azienka STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0N","command":"stop-d","delay":0}]},{"id":"A-475","name":"Roleta pi\u0119tro \u0142azienka STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0N","command":"stop-u","delay":0}]},{"id":"A-476","name":"Roleta schody pi\u0119tro, lewa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"07","command":"up","delay":0},{"device":"HQP","address":"07","command":"stop-u","delay":41}]},{"id":"A-478","name":"Roleta schody pi\u0119tro, lewa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"07","command":"down","delay":0},{"device":"HQP","address":"07","command":"stop-d","delay":41}]},{"id":"A-480","name":"Roleta schody pi\u0119tro, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"07","command":"stop-d","delay":0}]},{"id":"A-481","name":"Roleta schody pi\u0119tro, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"07","command":"stop-u","delay":0}]},{"id":"A-482","name":"Roleta schody pi\u0119tro, prawa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"08","command":"up","delay":0},{"device":"HQP","address":"08","command":"stop-u","delay":41}]},{"id":"A-484","name":"Roleta schody pi\u0119tro, prawa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"08","command":"down","delay":0},{"device":"HQP","address":"08","command":"stop-d","delay":41}]},{"id":"A-486","name":"Roleta schody pi\u0119tro, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"08","command":"stop-d","delay":0}]},{"id":"A-487","name":"Roleta schody pi\u0119tro, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"08","command":"stop-u","delay":0}]},{"id":"A-490","name":"\u015awiat\u0142o garderoba pi\u0119tro OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.9","command":"turnoff","delay":"2"}]},{"id":"A-491","name":"\u015awiat\u0142o garderoba pi\u0119tro ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.9","command":"turnon","delay":0}]},{"id":"A-492","name":"\u015awiat\u0142o pi\u0119tro sebol lewe OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.1","command":"turnoff","delay":0}]},{"id":"A-493","name":"\u015awiat\u0142o pi\u0119tro sebol lewe ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.1","command":"turnon","delay":0},{"device":"HQP","address":"0L.1","command":"turnoff","delay":7200}]},{"id":"A-494","name":"\u015awiat\u0142o parter korytarz OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.3","command":"turnoff","delay":0}]},{"id":"A-495","name":"\u015awiat\u0142o parter korytarz ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.3","command":"turnon","delay":0},{"device":"HQP","address":"0J.3","command":"turnoff","delay":900}]},{"id":"A-498","name":"Roleta salon, prawa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"02","command":"up","delay":0},{"device":"HQP","address":"02","command":"stop-u","delay":75}]},{"id":"A-500","name":"Roleta salon, prawa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"02","command":"down","delay":0},{"device":"HQP","address":"02","command":"stop-d","delay":75}]},{"id":"A-502","name":"Roleta salon, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"02","command":"stop-d","delay":0}]},{"id":"A-503","name":"Roleta salon, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"02","command":"stop-u","delay":0}]},{"id":"A-504","name":"Roleta salon, lewa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"09","command":"up","delay":0},{"device":"HQP","address":"09","command":"stop-u","delay":90}]},{"id":"A-506","name":"Roleta salon, lewa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"09","command":"down","delay":0},{"device":"HQP","address":"09","command":"stop-d","delay":90}]},{"id":"A-508","name":"Roleta salon, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"09","command":"stop-d","delay":0}]},{"id":"A-509","name":"Roleta salon, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"09","command":"stop-u","delay":0}]},{"id":"A-510","name":"Roleta sypialnia, prawa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"01","command":"up","delay":0},{"device":"HQP","address":"01","command":"stop-u","delay":60}]},{"id":"A-512","name":"Roleta sypialnia, prawa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"01","command":"down","delay":0},{"device":"HQP","address":"01","command":"stop-d","delay":60}]},{"id":"A-514","name":"Roleta sypialnia, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"01","command":"stop-d","delay":0}]},{"id":"A-515","name":"Roleta sypialnia, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"01","command":"stop-u","delay":0}]},{"id":"A-516","name":"Roleta pracownia, taras UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0B","command":"up","delay":0},{"device":"HQP","address":"0B","command":"stop-u","delay":75}]},{"id":"A-518","name":"Roleta pracownia, taras DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0B","command":"down","delay":0},{"device":"HQP","address":"0B","command":"stop-d","delay":75}]},{"id":"A-520","name":"Roleta pracownia, taras STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0B","command":"stop-d","delay":0}]},{"id":"A-521","name":"Roleta pracownia, taras STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0B","command":"stop-u","delay":0}]},{"id":"A-522","name":"Roleta pracownia, prawa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"03","command":"up","delay":0},{"device":"HQP","address":"03","command":"stop-u","delay":31}]},{"id":"A-524","name":"Roleta pracownia, prawa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"03","command":"down","delay":0},{"device":"HQP","address":"03","command":"stop-d","delay":31}]},{"id":"A-526","name":"Roleta pracownia, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"03","command":"stop-d","delay":0}]},{"id":"A-527","name":"Roleta pracownia, prawa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"03","command":"stop-u","delay":0}]},{"id":"A-528","name":"Roleta pracownia, lewa UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"04","command":"up","delay":0},{"device":"HQP","address":"04","command":"stop-u","delay":35}]},{"id":"A-530","name":"Roleta pracownia, lewa DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"04","command":"down","delay":0},{"device":"HQP","address":"04","command":"stop-d","delay":35}]},{"id":"A-532","name":"Roleta pracownia, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"04","command":"stop-d","delay":0}]},{"id":"A-533","name":"Roleta pracownia, lewa STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"04","command":"stop-u","delay":0}]},{"id":"A-534","name":"Roleta dzidzia UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0D","command":"up","delay":0},{"device":"HQP","address":"0D","command":"stop-u","delay":55}]},{"id":"A-536","name":"Roleta dzidzia DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0D","command":"down","delay":0},{"device":"HQP","address":"0D","command":"stop-d","delay":55}]},{"id":"A-538","name":"Roleta dzidzia STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0D","command":"stop-d","delay":0}]},{"id":"A-539","name":"Roleta dzidzia STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0D","command":"stop-u","delay":0}]},{"id":"A-540","name":"\u015awiat\u0142o parter dzidzia garderoba OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.4","command":"turnoff","delay":0}]},{"id":"A-541","name":"\u015awiat\u0142o parter dzidzia garderoba ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.4","command":"turnon","delay":0}]},{"id":"A-542","name":"\u015awiat\u0142o spi\u017carnia OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.0","command":"turnoff","delay":0}]},{"id":"A-543","name":"\u015awiat\u0142o spi\u017carnia ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.0","command":"turnon","delay":0},{"device":"HQP","address":"0J.0","command":"turnoff","delay":"300"}]},{"id":"A-544","name":"Roleta parter \u0142azienka UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0C","command":"up","delay":0},{"device":"HQP","address":"0C","command":"stop-u","delay":55}]},{"id":"A-546","name":"Roleta parter \u0142azienka DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0C","command":"down","delay":0},{"device":"HQP","address":"0C","command":"stop-d","delay":55}]},{"id":"A-548","name":"Roleta parter \u0142azienka STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0C","command":"stop-d","delay":0}]},{"id":"A-549","name":"Roleta parter \u0142azienka STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0C","command":"stop-u","delay":0}]},{"id":"A-550","name":"Pi\u0119tro \u0142azienka kinkiet OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.8","command":"turnoff","delay":0}]},{"id":"A-551","name":"Pi\u0119tro \u0142azienka kinkiet ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.8","command":"turnon","delay":0},{"device":"HQP","address":"0I.8","command":"turnoff","delay":600}]},{"id":"A-579","name":"\u015awiat\u0142o wiatro\u0142ap OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.8","command":"turnoff","delay":0}]},{"id":"A-580","name":"\u015awiat\u0142o wiatro\u0142ap ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.8","command":"turnon","delay":0},{"device":"HQP","address":"0G.8","command":"turnoff","delay":120}]},{"id":"A-582","name":"Wej\u015bcie do domu","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0H.0","command":"","delay":0}]},{"id":"A-583","name":"Wyj\u015bcie z domu","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0H.0","command":"","delay":0}]},{"id":"A-584","name":"\u015awiat\u0142o parter \u0142azienka kinkiet OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.5","command":"turnoff","delay":0}]},{"id":"A-585","name":"\u015awiat\u0142o parter \u0142azienka kinkiet ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.5","command":"turnon","delay":0},{"device":"HQP","address":"0J.5","command":"turnoff","delay":900}]},{"id":"A-587","name":"\u015awiat\u0142o sypialnia OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.3","command":"turnoff","delay":0}]},{"id":"A-588","name":"\u015awiat\u0142o sypialnia ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.3","command":"turnon","delay":0},{"device":"HQP","address":"0G.3","command":"turnoff","delay":1800}]},{"id":"A-591","name":"Wiatro\u0142ap czujka OFF po czasie","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0G.8","command":"turnoff","delay":120},{"device":"HQP","address":"0L.3","command":"turnoff","delay":"120"}]},{"id":"A-594","name":"Parter salon nad sto\u0142em OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.7","command":"turnoff","delay":0}]},{"id":"A-595","name":"Parter salon nad sto\u0142em ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.7","command":"turnon","delay":0},{"device":"HQP","address":"0J.7","command":"turnoff","delay":25000}]},{"id":"A-597","name":"Lampki \u015bcienne taras OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.7","command":"turnoff","delay":0}]},{"id":"A-598","name":"Lampki \u015bcienne taras ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0L.7","command":"turnon","delay":0}]},{"id":"A-599","name":"Wiatro\u0142ap dolny czeka na kolejne klikni\u0119cie","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0H.0","command":"X","delay":0},{"device":"HQP","address":"0H.0","command":"turnoff","delay":"60"}]},{"id":"A-605","name":"\u015awiat\u0142o pi\u0119tro pok\u00f3j kwadrat prawe OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.7","command":"turnoff","delay":0}]},{"id":"A-606","name":"\u015awiat\u0142o pi\u0119tro pok\u00f3j kwadrat prawe ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.7","command":"turnon","delay":0},{"device":"HQP","address":"0I.7","command":"turnoff","delay":7200}]},{"id":"A-610","name":"Roleta pi\u0119tro taras UP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0M","command":"up","delay":0},{"device":"HQP","address":"0M","command":"stop-u","delay":75}]},{"id":"A-612","name":"Roleta pi\u0119tro taras DOWN","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0M","command":"down","delay":0},{"device":"HQP","address":"0M","command":"stop-d","delay":75}]},{"id":"A-614","name":"Roleta pi\u0119tro taras STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0M","command":"stop-d","delay":0}]},{"id":"A-615","name":"Roleta pi\u0119tro taras STOP","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0M","command":"stop-u","delay":0}]},{"id":"A-616","name":"Lampki pod\u0142ogowe taras OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.6","command":"turnoff","delay":0}]},{"id":"A-617","name":"Lampki pod\u0142ogowe taras ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.6","command":"turnon","delay":0}]},{"id":"A-620","name":"\u015awiat\u0142o pi\u0119tro gabinet prawe OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.5","command":"turnoff","delay":0}]},{"id":"A-621","name":"\u015awiat\u0142o pi\u0119tro gabinet prawe ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0I.5","command":"turnon","delay":0},{"device":"HQP","address":"0I.5","command":"turnoff","delay":"3600"}]},{"id":"A-623","name":"Koniec podlewania - koniec wody w studni","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.0","command":"turnoff","delay":0}]},{"id":"A-624","name":"Koniec wody w studni to historia","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.0","command":"turnon","delay":"3600"}]},{"id":"A-625","name":"Taras - \u015bciana salonowa OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.8","command":"turnoff","delay":0}]},{"id":"A-626","name":"Taras - \u015bciana salonowa ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.8","command":"turnon","delay":0}]},{"id":"A-627","name":"Taras - \u015bciana boczna OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.9","command":"turnoff","delay":0}]},{"id":"A-628","name":"Taras - \u015bciana boczna ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0J.9","command":"turnon","delay":0}]},{"id":"A-630","name":"Cyrkulacja ON","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.2","command":"turnon","delay":0}]},{"id":"A-631","name":"Cyrkulacja OFF","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0K.2","command":"turnoff","delay":300},{"device":"HQP","address":"0H.1","command":"turnoff","delay":120},{"device":"HQP","address":"0H.2","command":"turnoff","delay":180}]},{"id":"A-635","name":"Piec osi\u0105gn\u0105\u0142 temperatur\u0119","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0P.9","command":"turnon","delay":0}]},{"id":"A-602","name":"Wiatro\u0142ap dolny wentylacja","conditions":[],"active":true,"actions":[{"device":"HQP","address":"0H.0","command":"turnoff","delay":0}]}]
+[
+    {
+        "id": "290",
+        "name": "Piwnica kot\u0142ownia \u015bwiat\u0142o ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.7",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0K.7",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "291",
+        "name": "Piwnica kot\u0142ownia \u015bwiat\u0142o OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.7",
+                "delay": "1"
+            }
+        ]
+    },
+    {
+        "id": "307",
+        "name": "\u015awiat\u0142o pi\u0119tro korytarz antresola ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.4",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.4",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0L.4",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.4",
+                "delay": 7200
+            }
+        ]
+    },
+    {
+        "id": "308",
+        "name": "\u015awiat\u0142o pi\u0119tro korytarz antresola OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.4",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.4",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "313",
+        "name": "\u015awiat\u0142o pi\u0119tro Sebol prawy ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.6",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.6",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0L.6",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.6",
+                "delay": 3600
+            }
+        ]
+    },
+    {
+        "id": "314",
+        "name": "\u015awiat\u0142o pi\u0119tro Sebol prawy OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.6",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.6",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "315",
+        "name": "\u015awiat\u0142o pi\u0119tro kwadrat lewy ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.5",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.5",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0L.5",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.5",
+                "delay": 3600
+            }
+        ]
+    },
+    {
+        "id": "316",
+        "name": "\u015awiat\u0142o pi\u0119tro kwadrat lewy OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.5",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.5",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "317",
+        "name": "\u015awiat\u0142o pi\u0119tro d\u0142ugi prawy ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.8",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.8",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0L.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.8",
+                "delay": 7200
+            }
+        ]
+    },
+    {
+        "id": "318",
+        "name": "\u015awiat\u0142o pi\u0119tro d\u0142ugi prawy OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.8",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "329",
+        "name": "\u015awiat\u0142o schody piwnica OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.2",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.2",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "330",
+        "name": "\u015awiat\u0142o schody piwnica ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.2",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.2",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.2",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.2",
+                "delay": 60
+            }
+        ]
+    },
+    {
+        "id": "333",
+        "name": "\u015awiat\u0142o kuchnia OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.4",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.4",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "334",
+        "name": "\u015awiat\u0142o kuchnia ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.4",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.4",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.4",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.4",
+                "delay": 7200
+            }
+        ]
+    },
+    {
+        "id": "335",
+        "name": "\u015awiat\u0142o \u0142azienka g\u00f3rna OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.9",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.9",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "336",
+        "name": "\u015awiat\u0142o \u0142azienka g\u00f3rna ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.9",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0I.9",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0I.9",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.9",
+                "delay": 5400
+            }
+        ]
+    },
+    {
+        "id": "339",
+        "name": "\u015awiat\u0142o pi\u0119tro korytarz od tarasu OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.3",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.3",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "340",
+        "name": "\u015awiat\u0142o pi\u0119tro korytarz od tarasu ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.3",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.3",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0L.3",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.3",
+                "delay": 1800
+            }
+        ]
+    },
+    {
+        "id": "349",
+        "name": "Roleta schody piwnica, prawa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "05",
+                "value": "up",
+                "haddr": "PROM,HQP,r,05",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "05",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,05",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "351",
+        "name": "Roleta schody piwnica, prawa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "05",
+                "value": "down",
+                "haddr": "PROM,HQP,r,05",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "05",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,05",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "353",
+        "name": "Roleta schody piwnica, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "05",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,05",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "354",
+        "name": "Roleta schody piwnica, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "05",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,05",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "355",
+        "name": "Roleta schody piwnica, lewa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "06",
+                "value": "up",
+                "haddr": "PROM,HQP,r,06",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "06",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,06",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "357",
+        "name": "Roleta schody piwnica, lewa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "06",
+                "value": "down",
+                "haddr": "PROM,HQP,r,06",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "06",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,06",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "359",
+        "name": "Roleta schody piwnica, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "06",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,06",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "360",
+        "name": "Roleta schody piwnica, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "06",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,06",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "367",
+        "name": "Roleta sypialnia, lewa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0A",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0A",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0A",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0A",
+                "delay": 50
+            }
+        ]
+    },
+    {
+        "id": "369",
+        "name": "Roleta sypialnia, lewa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0A",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0A",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0A",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0A",
+                "delay": 50
+            }
+        ]
+    },
+    {
+        "id": "371",
+        "name": "Roleta sypialnia, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0A",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0A",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "372",
+        "name": "Roleta sypialnia, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0A",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0A",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "373",
+        "name": "\u015awiat\u0142o sauna OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.9",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.9",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "374",
+        "name": "\u015awiat\u0142o sauna ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.9",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0K.9",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0K.9",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.9",
+                "delay": 3600
+            }
+        ]
+    },
+    {
+        "id": "375",
+        "name": "\u015awiat\u0142o ping-pong + szafa OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.8",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "376",
+        "name": "\u015awiat\u0142o ping-pong + szafa ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.8",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0K.8",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0K.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.8",
+                "delay": 4600
+            }
+        ]
+    },
+    {
+        "id": "377",
+        "name": "\u015awiatlo ping-pong lewe OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.6",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.6",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "378",
+        "name": "\u015awiatlo ping-pong lewe ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.6",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0K.6",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0K.6",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.6",
+                "delay": 5400
+            }
+        ]
+    },
+    {
+        "id": "388",
+        "name": "\u015awiat\u0142o \u0142azienka OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.1",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.1",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "389",
+        "name": "\u015awiat\u0142o \u0142azienka ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.1",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.1",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.1",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.1",
+                "delay": 5400
+            }
+        ]
+    },
+    {
+        "id": "390",
+        "name": "\u015awiat\u0142o salon okno OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.6",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.6",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "391",
+        "name": "\u015awiat\u0142o salon okno ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.6",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.6",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.6",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.6",
+                "delay": 1800
+            }
+        ]
+    },
+    {
+        "id": "396",
+        "name": "\u015awiat\u0142o dzidzia OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.0",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "397",
+        "name": "\u015awiat\u0142o dzidzia ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.0",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.0",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.0",
+                "delay": 10800
+            }
+        ]
+    },
+    {
+        "id": "402",
+        "name": "\u015awiat\u0142o pracownia OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.7",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "403",
+        "name": "\u015awiat\u0142o pracownia ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.7",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.7",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.7",
+                "delay": 3600
+            }
+        ]
+    },
+    {
+        "id": "404",
+        "name": "Roleta kuchnia UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0E",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0E",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0E",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0E",
+                "delay": 85
+            }
+        ]
+    },
+    {
+        "id": "406",
+        "name": "Roleta kuchnia DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0E",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0E",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0E",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0E",
+                "delay": 85
+            }
+        ]
+    },
+    {
+        "id": "408",
+        "name": "Roleta kuchnia STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0E",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0E",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "409",
+        "name": "Roleta kuchnia STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0E",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0E",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "410",
+        "name": "Roleta korytarz UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0F",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0F",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0F",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0F",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "412",
+        "name": "Roleta korytarz DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0F",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0F",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0F",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0F",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "414",
+        "name": "Roleta korytarz STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0F",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0F",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "415",
+        "name": "Roleta korytarz STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0F",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0F",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "434",
+        "name": "\u015awiat\u0142o salon od korytarza OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.1",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.1",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "435",
+        "name": "\u015awiat\u0142o salon od korytarza ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.1",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.1",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0J.1",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.1",
+                "delay": 7200
+            }
+        ]
+    },
+    {
+        "id": "438",
+        "name": "Schody - lampki OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.0",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "439",
+        "name": "Schody - lampki ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.0",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.0",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0L.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.0",
+                "delay": "60"
+            }
+        ]
+    },
+    {
+        "id": "447",
+        "name": "\u015awiat\u0142o schody pi\u0119tro OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.2",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.2",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "448",
+        "name": "\u015awiat\u0142o schody pi\u0119tro ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.2",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.2",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0J.2",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.2",
+                "delay": "45"
+            }
+        ]
+    },
+    {
+        "id": "470",
+        "name": "Roleta pi\u0119tro \u0142azienka UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0N",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0N",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0N",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0N",
+                "delay": 55
+            }
+        ]
+    },
+    {
+        "id": "472",
+        "name": "Roleta pi\u0119tro \u0142azienka DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0N",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0N",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0N",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0N",
+                "delay": 55
+            }
+        ]
+    },
+    {
+        "id": "474",
+        "name": "Roleta pi\u0119tro \u0142azienka STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0N",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0N",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "475",
+        "name": "Roleta pi\u0119tro \u0142azienka STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0N",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0N",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "476",
+        "name": "Roleta schody pi\u0119tro, lewa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "07",
+                "value": "up",
+                "haddr": "PROM,HQP,r,07",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "07",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,07",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "478",
+        "name": "Roleta schody pi\u0119tro, lewa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "07",
+                "value": "down",
+                "haddr": "PROM,HQP,r,07",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "07",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,07",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "480",
+        "name": "Roleta schody pi\u0119tro, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "07",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,07",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "481",
+        "name": "Roleta schody pi\u0119tro, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "07",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,07",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "482",
+        "name": "Roleta schody pi\u0119tro, prawa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "08",
+                "value": "up",
+                "haddr": "PROM,HQP,r,08",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "08",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,08",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "484",
+        "name": "Roleta schody pi\u0119tro, prawa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "08",
+                "value": "down",
+                "haddr": "PROM,HQP,r,08",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "08",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,08",
+                "delay": 41
+            }
+        ]
+    },
+    {
+        "id": "486",
+        "name": "Roleta schody pi\u0119tro, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "08",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,08",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "487",
+        "name": "Roleta schody pi\u0119tro, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "08",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,08",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "490",
+        "name": "\u015awiat\u0142o garderoba pi\u0119tro OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.9",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.9",
+                "delay": "2"
+            }
+        ]
+    },
+    {
+        "id": "491",
+        "name": "\u015awiat\u0142o garderoba pi\u0119tro ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.9",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.9",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "492",
+        "name": "\u015awiat\u0142o pi\u0119tro sebol lewe OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.1",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.1",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "493",
+        "name": "\u015awiat\u0142o pi\u0119tro sebol lewe ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.1",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.1",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0L.1",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.1",
+                "delay": 7200
+            }
+        ]
+    },
+    {
+        "id": "494",
+        "name": "\u015awiat\u0142o parter korytarz OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.3",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.3",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "495",
+        "name": "\u015awiat\u0142o parter korytarz ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.3",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.3",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0J.3",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.3",
+                "delay": 900
+            }
+        ]
+    },
+    {
+        "id": "498",
+        "name": "Roleta salon, prawa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "02",
+                "value": "up",
+                "haddr": "PROM,HQP,r,02",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "02",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,02",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "500",
+        "name": "Roleta salon, prawa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "02",
+                "value": "down",
+                "haddr": "PROM,HQP,r,02",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "02",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,02",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "502",
+        "name": "Roleta salon, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "02",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,02",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "503",
+        "name": "Roleta salon, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "02",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,02",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "504",
+        "name": "Roleta salon, lewa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "09",
+                "value": "up",
+                "haddr": "PROM,HQP,r,09",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "09",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,09",
+                "delay": 90
+            }
+        ]
+    },
+    {
+        "id": "506",
+        "name": "Roleta salon, lewa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "09",
+                "value": "down",
+                "haddr": "PROM,HQP,r,09",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "09",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,09",
+                "delay": 90
+            }
+        ]
+    },
+    {
+        "id": "508",
+        "name": "Roleta salon, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "09",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,09",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "509",
+        "name": "Roleta salon, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "09",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,09",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "510",
+        "name": "Roleta sypialnia, prawa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "01",
+                "value": "up",
+                "haddr": "PROM,HQP,r,01",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "01",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,01",
+                "delay": 60
+            }
+        ]
+    },
+    {
+        "id": "512",
+        "name": "Roleta sypialnia, prawa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "01",
+                "value": "down",
+                "haddr": "PROM,HQP,r,01",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "01",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,01",
+                "delay": 60
+            }
+        ]
+    },
+    {
+        "id": "514",
+        "name": "Roleta sypialnia, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "01",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,01",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "515",
+        "name": "Roleta sypialnia, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "01",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,01",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "516",
+        "name": "Roleta pracownia, taras UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0B",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0B",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0B",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0B",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "518",
+        "name": "Roleta pracownia, taras DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0B",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0B",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0B",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0B",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "520",
+        "name": "Roleta pracownia, taras STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0B",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0B",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "521",
+        "name": "Roleta pracownia, taras STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0B",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0B",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "522",
+        "name": "Roleta pracownia, prawa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "03",
+                "value": "up",
+                "haddr": "PROM,HQP,r,03",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "03",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,03",
+                "delay": 31
+            }
+        ]
+    },
+    {
+        "id": "524",
+        "name": "Roleta pracownia, prawa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "03",
+                "value": "down",
+                "haddr": "PROM,HQP,r,03",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "03",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,03",
+                "delay": 31
+            }
+        ]
+    },
+    {
+        "id": "526",
+        "name": "Roleta pracownia, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "03",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,03",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "527",
+        "name": "Roleta pracownia, prawa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "03",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,03",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "528",
+        "name": "Roleta pracownia, lewa UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "04",
+                "value": "up",
+                "haddr": "PROM,HQP,r,04",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "04",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,04",
+                "delay": 35
+            }
+        ]
+    },
+    {
+        "id": "530",
+        "name": "Roleta pracownia, lewa DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "04",
+                "value": "down",
+                "haddr": "PROM,HQP,r,04",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "04",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,04",
+                "delay": 35
+            }
+        ]
+    },
+    {
+        "id": "532",
+        "name": "Roleta pracownia, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "04",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,04",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "533",
+        "name": "Roleta pracownia, lewa STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "04",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,04",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "534",
+        "name": "Roleta dzidzia UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0D",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0D",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0D",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0D",
+                "delay": 55
+            }
+        ]
+    },
+    {
+        "id": "536",
+        "name": "Roleta dzidzia DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0D",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0D",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0D",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0D",
+                "delay": 55
+            }
+        ]
+    },
+    {
+        "id": "538",
+        "name": "Roleta dzidzia STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0D",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0D",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "539",
+        "name": "Roleta dzidzia STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0D",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0D",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "540",
+        "name": "\u015awiat\u0142o parter dzidzia garderoba OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.4",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.4",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "541",
+        "name": "\u015awiat\u0142o parter dzidzia garderoba ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.4",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.4",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "542",
+        "name": "\u015awiat\u0142o spi\u017carnia OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.0",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "543",
+        "name": "\u015awiat\u0142o spi\u017carnia ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.0",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.0",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0J.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.0",
+                "delay": "300"
+            }
+        ]
+    },
+    {
+        "id": "544",
+        "name": "Roleta parter \u0142azienka UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0C",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0C",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0C",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0C",
+                "delay": 55
+            }
+        ]
+    },
+    {
+        "id": "546",
+        "name": "Roleta parter \u0142azienka DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0C",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0C",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0C",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0C",
+                "delay": 55
+            }
+        ]
+    },
+    {
+        "id": "548",
+        "name": "Roleta parter \u0142azienka STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0C",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0C",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "549",
+        "name": "Roleta parter \u0142azienka STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0C",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0C",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "550",
+        "name": "Pi\u0119tro \u0142azienka kinkiet OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.8",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "551",
+        "name": "Pi\u0119tro \u0142azienka kinkiet ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.8",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0I.8",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0I.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.8",
+                "delay": 600
+            }
+        ]
+    },
+    {
+        "id": "579",
+        "name": "\u015awiat\u0142o wiatro\u0142ap OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.8",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "580",
+        "name": "\u015awiat\u0142o wiatro\u0142ap ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.8",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.8",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.8",
+                "delay": 120
+            }
+        ]
+    },
+    {
+        "id": "582",
+        "name": "Wej\u015bcie do domu",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0H.0",
+                "value": "",
+                "haddr": "PROM,HQP,o,0H.0",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "583",
+        "name": "Wyj\u015bcie z domu",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0H.0",
+                "value": "",
+                "haddr": "PROM,HQP,o,0H.0",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "584",
+        "name": "\u015awiat\u0142o parter \u0142azienka kinkiet OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.5",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.5",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "585",
+        "name": "\u015awiat\u0142o parter \u0142azienka kinkiet ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.5",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.5",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0J.5",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.5",
+                "delay": 900
+            }
+        ]
+    },
+    {
+        "id": "587",
+        "name": "\u015awiat\u0142o sypialnia OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.3",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.3",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "588",
+        "name": "\u015awiat\u0142o sypialnia ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.3",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0G.3",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0G.3",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.3",
+                "delay": 1800
+            }
+        ]
+    },
+    {
+        "id": "591",
+        "name": "Wiatro\u0142ap czujka OFF po czasie",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0G.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0G.8",
+                "delay": 120
+            },
+            {
+                "device": "HQP",
+                "address": "0L.3",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.3",
+                "delay": "120"
+            }
+        ]
+    },
+    {
+        "id": "594",
+        "name": "Parter salon nad sto\u0142em OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.7",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "595",
+        "name": "Parter salon nad sto\u0142em ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.7",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.7",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0J.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.7",
+                "delay": 25000
+            }
+        ]
+    },
+    {
+        "id": "597",
+        "name": "Lampki \u015bcienne taras OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0L.7",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "598",
+        "name": "Lampki \u015bcienne taras ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0L.7",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0L.7",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "599",
+        "name": "Wiatro\u0142ap dolny czeka na kolejne klikni\u0119cie",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0H.0",
+                "value": "X",
+                "haddr": "PROM,HQP,o,0H.0",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0H.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0H.0",
+                "delay": "60"
+            }
+        ]
+    },
+    {
+        "id": "605",
+        "name": "\u015awiat\u0142o pi\u0119tro pok\u00f3j kwadrat prawe OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.7",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "606",
+        "name": "\u015awiat\u0142o pi\u0119tro pok\u00f3j kwadrat prawe ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.7",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0I.7",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0I.7",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.7",
+                "delay": 7200
+            }
+        ]
+    },
+    {
+        "id": "610",
+        "name": "Roleta pi\u0119tro taras UP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0M",
+                "value": "up",
+                "haddr": "PROM,HQP,r,0M",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0M",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0M",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "612",
+        "name": "Roleta pi\u0119tro taras DOWN",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0M",
+                "value": "down",
+                "haddr": "PROM,HQP,r,0M",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0M",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0M",
+                "delay": 75
+            }
+        ]
+    },
+    {
+        "id": "614",
+        "name": "Roleta pi\u0119tro taras STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0M",
+                "value": "stop-d",
+                "haddr": "PROM,HQP,r,0M",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "615",
+        "name": "Roleta pi\u0119tro taras STOP",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0M",
+                "value": "stop-u",
+                "haddr": "PROM,HQP,r,0M",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "616",
+        "name": "Lampki pod\u0142ogowe taras OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.6",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.6",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "617",
+        "name": "Lampki pod\u0142ogowe taras ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.6",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0I.6",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "620",
+        "name": "\u015awiat\u0142o pi\u0119tro gabinet prawe OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.5",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.5",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "621",
+        "name": "\u015awiat\u0142o pi\u0119tro gabinet prawe ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0I.5",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0I.5",
+                "delay": 0
+            },
+            {
+                "device": "HQP",
+                "address": "0I.5",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0I.5",
+                "delay": "3600"
+            }
+        ]
+    },
+    {
+        "id": "623",
+        "name": "Koniec podlewania - koniec wody w studni",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.0",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.0",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "624",
+        "name": "Koniec wody w studni to historia",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.0",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0K.0",
+                "delay": "3600"
+            }
+        ]
+    },
+    {
+        "id": "625",
+        "name": "Taras - \u015bciana salonowa OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.8",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.8",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "626",
+        "name": "Taras - \u015bciana salonowa ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.8",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.8",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "627",
+        "name": "Taras - \u015bciana boczna OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.9",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0J.9",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "628",
+        "name": "Taras - \u015bciana boczna ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0J.9",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0J.9",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "630",
+        "name": "Cyrkulacja ON",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.2",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0K.2",
+                "delay": 0
+            }
+        ]
+    },
+    {
+        "id": "631",
+        "name": "Cyrkulacja OFF",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0K.2",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0K.2",
+                "delay": 300
+            },
+            {
+                "device": "HQP",
+                "address": "0H.1",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0H.1",
+                "delay": 120
+            },
+            {
+                "device": "HQP",
+                "address": "0H.2",
+                "value": 0,
+                "haddr": "PROM,HQP,o,0H.2",
+                "delay": 180
+            }
+        ]
+    },
+    {
+        "id": "635",
+        "name": "Piec osi\u0105gn\u0105\u0142 temperatur\u0119",
+        "conditions": [
+
+        ],
+        "active": true,
+        "actions": [
+            {
+                "device": "HQP",
+                "address": "0P.9",
+                "value": 1,
+                "haddr": "PROM,HQP,o,0P.9",
+                "delay": 0
+            }
+        ]
+    }
+]

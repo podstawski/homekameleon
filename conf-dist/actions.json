@@ -1,1 +1,4042 @@
-[{"device":"HQP","address":"0K.2","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.7","condition":["logicalstate","=","off"]},{"db":"inputs","device":"HQP","address":"0K.2","condition":["state","=","0"]}],"scripts":[{"script":"A-290"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.7","condition":["logicalstate","=","on"]},{"db":"inputs","device":"HQP","address":"0K.2","condition":["state","=","1"]}],"scripts":[{"script":"A-291"}]}]},{"device":"HQP","address":"0L.12","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.4","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-307"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.4","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-308"}]}]},{"device":"HQP","address":"0L.2","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.6","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-313"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.6","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-314"}]}]},{"device":"HQP","address":"0L.5","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.5","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-315"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.5","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-316"}]}]},{"device":"HQP","address":"0L.9","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.8","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-317"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.8","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-318"}]}]},{"device":"HQP","address":"0G.7","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.2","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-329"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.2","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-330"}]}]},{"device":"HQP","address":"0J.4","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.4","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-333"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.4","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-334"}]}]},{"device":"HQP","address":"0L.10","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.9","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-335"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.9","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-336"}]}]},{"device":"HQP","address":"0L.4","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.3","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-339"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-340"}]}]},{"device":"HQP","address":"0L.3","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.4","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-341"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.4","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-342"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.4","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-574"}]}]},{"device":"HQP","address":"0H.1","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"05","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-349"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"05","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-351"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"05","condition":["state","=","down"]}],"scripts":[{"script":"A-353"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"05","condition":["state","=","up"]}],"scripts":[{"script":"A-354"}]}]},{"device":"HQP","address":"0H.2","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"06","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-355"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"06","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-357"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"06","condition":["state","=","down"]}],"scripts":[{"script":"A-359"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"06","condition":["state","=","up"]}],"scripts":[{"script":"A-360"}]}]},{"device":"HQP","address":"0H.5","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0A","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-367"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0A","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-369"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0A","condition":["state","=","down"]}],"scripts":[{"script":"A-371"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0A","condition":["state","=","up"]}],"scripts":[{"script":"A-372"}]}]},{"device":"HQP","address":"0K.0","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.9","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-373"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.9","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-374"}]}]},{"device":"HQP","address":"0K.1","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.8","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-375"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.8","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-376"}]}]},{"device":"HQP","address":"0K.3","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.6","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-377"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.6","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-378"}]}]},{"device":"HQP","address":"0G.12","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.2","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-380"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.2","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-381"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.2","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-382"}]}]},{"device":"HQP","address":"0G.3","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.1","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-388"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.1","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-389"}]}]},{"device":"HQP","address":"0G.14","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.6","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-390"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.6","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-391"}]}]},{"device":"HQP","address":"0G.4","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.0","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-396"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.0","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-397"}]}]},{"device":"HQP","address":"0J.3","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.7","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-402"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.7","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-403"}]}]},{"device":"HQP","address":"0H.6","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0E","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-404"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0E","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-406"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0E","condition":["state","=","down"]}],"scripts":[{"script":"A-408"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0E","condition":["state","=","up"]}],"scripts":[{"script":"A-409"}]}]},{"device":"HQP","address":"0H.15","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0F","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-410"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0F","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-412"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0F","condition":["state","=","down"]}],"scripts":[{"script":"A-414"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0F","condition":["state","=","up"]}],"scripts":[{"script":"A-415"}]}]},{"device":"HQP","address":"0G.15","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.1","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-434"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.1","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-435"}]}]},{"device":"HQP","address":"0G.10","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.0","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-438"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.0","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-439"}]}]},{"device":"HQP","address":"0G.11","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.2","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-447"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.2","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-448"}]}]},{"device":"HQP","address":"0G.8","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.2","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-450"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.2","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-451"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.2","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-452"}]}]},{"device":"HQP","address":"0G.9","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.0","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-453"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.0","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-454"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.0","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-455"}]}]},{"device":"HQP","address":"0I.0","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.3","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-468"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-469"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-572"}]}]},{"device":"HQP","address":"0L.7","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0N","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-470"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0N","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-472"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0N","condition":["state","=","down"]}],"scripts":[{"script":"A-474"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0N","condition":["state","=","up"]}],"scripts":[{"script":"A-475"}]}]},{"device":"HQP","address":"0H.7","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"07","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-476"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"07","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-478"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"07","condition":["state","=","down"]}],"scripts":[{"script":"A-480"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"07","condition":["state","=","up"]}],"scripts":[{"script":"A-481"}]}]},{"device":"HQP","address":"0H.8","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"08","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-482"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"08","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-484"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"08","condition":["state","=","down"]}],"scripts":[{"script":"A-486"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"08","condition":["state","=","up"]}],"scripts":[{"script":"A-487"}]}]},{"device":"HQP","address":"0L.15","actions":[{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0L.15","condition":["state","=","1"]}],"scripts":[{"script":"A-490"}]},{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0L.15","condition":["state","=","0"]}],"scripts":[{"script":"A-491"}]}]},{"device":"HQP","address":"0L.8","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.1","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-492"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.1","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-493"}]}]},{"device":"HQP","address":"0G.1","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.3","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-494"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-495"}]}]},{"device":"HQP","address":"0J.7","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.3","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-496"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-497"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-570"}]}]},{"device":"HQP","address":"0H.13","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"02","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-498"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"02","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-500"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"02","condition":["state","=","down"]}],"scripts":[{"script":"A-502"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"02","condition":["state","=","up"]}],"scripts":[{"script":"A-503"}]}]},{"device":"HQP","address":"0H.9","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"09","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-504"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"09","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-506"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"09","condition":["state","=","down"]}],"scripts":[{"script":"A-508"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"09","condition":["state","=","up"]}],"scripts":[{"script":"A-509"}]}]},{"device":"HQP","address":"0G.0","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"01","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-510"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"01","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-512"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"01","condition":["state","=","down"]}],"scripts":[{"script":"A-514"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"01","condition":["state","=","up"]}],"scripts":[{"script":"A-515"}]}]},{"device":"HQP","address":"0H.11","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0B","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-516"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0B","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-518"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0B","condition":["state","=","down"]}],"scripts":[{"script":"A-520"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0B","condition":["state","=","up"]}],"scripts":[{"script":"A-521"}]}]},{"device":"HQP","address":"0H.10","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"03","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-522"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"03","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-524"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"03","condition":["state","=","down"]}],"scripts":[{"script":"A-526"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"03","condition":["state","=","up"]}],"scripts":[{"script":"A-527"}]}]},{"device":"HQP","address":"0H.12","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"04","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-528"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"04","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-530"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"04","condition":["state","=","down"]}],"scripts":[{"script":"A-532"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"04","condition":["state","=","up"]}],"scripts":[{"script":"A-533"}]}]},{"device":"HQP","address":"0H.0","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0D","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-534"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0D","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-536"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0D","condition":["state","=","down"]}],"scripts":[{"script":"A-538"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0D","condition":["state","=","up"]}],"scripts":[{"script":"A-539"}]}]},{"device":"HQP","address":"0J.0","actions":[{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0J.0","condition":["state","=","1"]}],"scripts":[{"script":"A-540"}]},{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0J.0","condition":["state","=","0"]}],"scripts":[{"script":"A-541"}]}]},{"device":"HQP","address":"0J.2","actions":[{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0J.2","condition":["state","=","1"]}],"scripts":[{"script":"A-542"}]},{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0J.2","condition":["state","=","0"]}],"scripts":[{"script":"A-543"}]}]},{"device":"HQP","address":"0H.3","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0C","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-544"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0C","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-546"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0C","condition":["state","=","down"]}],"scripts":[{"script":"A-548"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0C","condition":["state","=","up"]}],"scripts":[{"script":"A-549"}]}]},{"device":"HQP","address":"0L.0","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.8","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-550"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.8","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-551"}]}]},{"device":"HQP","address":"0G.5","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.8","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-579"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.8","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-580"}]}]},{"device":"HQP","address":"0K.15","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0H.0","condition":["logicalstate","=","off"]},{"db":"inputs","device":"HQP","address":"0K.15","condition":["state","=","0"]}],"scripts":[{"script":"A-582"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0H.0","condition":["logicalstate","=","off"]},{"db":"inputs","device":"HQP","address":"0K.15","condition":["state","=","1"]}],"scripts":[{"script":"A-583"}]}]},{"device":"HQP","address":"0H.4","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.5","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-584"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.5","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-585"}]}]},{"device":"HQP","address":"0O.0","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.3","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-587"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-588"}]}]},{"device":"HQP","address":"0K.13","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0G.8","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-590"}]},{"active":"1","conditions":[],"scripts":[{"script":"A-591"}]}]},{"device":"HQP","address":"0K.12","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.3","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-592"}]},{"active":"1","conditions":[],"scripts":[{"script":"A-591"}]}]},{"device":"HQP","address":"0H.14","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.7","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-594"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.7","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-595"}]}]},{"device":"HQP","address":"0L.11","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.7","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-597"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0L.7","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-598"}]}]},{"device":"HQP","address":"0J.6","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0H.0","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-599"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0H.0","condition":["state","=","X"]}],"scripts":[{"script":"A-602"}]}]},{"device":"HQP","address":"0L.6","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.7","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-605"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.7","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-606"}]}]},{"device":"HQP","address":"0L.13","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0M","condition":["state","=","stop-d"]}],"scripts":[{"script":"A-610"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0M","condition":["state","=","stop-u"]}],"scripts":[{"script":"A-612"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0M","condition":["state","=","down"]}],"scripts":[{"script":"A-614"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0M","condition":["state","=","up"]}],"scripts":[{"script":"A-615"}]}]},{"device":"HQP","address":"0L.14","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.6","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-616"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.6","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-617"}]}]},{"device":"HQP","address":"0L.1","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.5","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-620"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0I.5","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-621"}]}]},{"device":"HQP","address":"0K.10","actions":[{"active":"0","conditions":[{"db":"outputs","device":"HQP","address":"0K.0","condition":["logicalstate","=","on"]},{"db":"inputs","device":"HQP","address":"0K.10","condition":["state","=","1"]}],"scripts":[{"script":"A-623"}]},{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0K.10","condition":["state","=","0"]}],"scripts":[{"script":"A-624"}]}]},{"device":"HQP","address":"0J.5","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.8","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-625"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.8","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-626"}]}]},{"device":"HQP","address":"0J.8","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.9","condition":["logicalstate","=","on"]}],"scripts":[{"script":"A-627"}]},{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0J.9","condition":["logicalstate","=","off"]}],"scripts":[{"script":"A-628"}]}]},{"device":"HQP","address":"0K.14","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0K.2","condition":["logicalstate","=","off"]},{"db":"inputs","device":"HQP","address":"0K.14","condition":["state","=","1"]}],"scripts":[{"script":"A-630"}]},{"active":"1","conditions":[{"db":"inputs","device":"HQP","address":"0K.14","condition":["state","=","1"]}],"scripts":[{"script":"A-631"}]}]},{"device":"HQP","address":"0K.7","actions":[{"active":"1","conditions":[{"db":"outputs","device":"HQP","address":"0P.9","condition":["logicalstate","=","off"]},{"db":"inputs","device":"HQP","address":"0K.7","condition":["state","=","1"]}],"scripts":[{"script":"A-635"}]}]},{"_updated":1465496319627,"_created":1465496299522,"device":"HQP","address":"0K.6","actions":[]}]
+[
+    {
+        "haddr": "PROM,HQP,i,0K.2",
+        "device": "HQP",
+        "address": "0K.2",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.7",
+                        "address": "0K.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    },
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.2",
+                        "address": "0K.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            "0"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "290"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.7",
+                        "address": "0K.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    },
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.2",
+                        "address": "0K.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "291"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.12",
+        "device": "HQP",
+        "address": "0L.12",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.4",
+                        "address": "0L.4",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "307"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.4",
+                        "address": "0L.4",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "308"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.2",
+        "device": "HQP",
+        "address": "0L.2",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.6",
+                        "address": "0L.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "313"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.6",
+                        "address": "0L.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "314"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.5",
+        "device": "HQP",
+        "address": "0L.5",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.5",
+                        "address": "0L.5",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "315"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.5",
+                        "address": "0L.5",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "316"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.9",
+        "device": "HQP",
+        "address": "0L.9",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.8",
+                        "address": "0L.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "317"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.8",
+                        "address": "0L.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "318"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.7",
+        "device": "HQP",
+        "address": "0G.7",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.2",
+                        "address": "0G.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "329"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.2",
+                        "address": "0G.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "330"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.4",
+        "device": "HQP",
+        "address": "0J.4",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.4",
+                        "address": "0G.4",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "333"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.4",
+                        "address": "0G.4",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "334"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.10",
+        "device": "HQP",
+        "address": "0L.10",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.9",
+                        "address": "0I.9",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "335"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.9",
+                        "address": "0I.9",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "336"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.4",
+        "device": "HQP",
+        "address": "0L.4",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.3",
+                        "address": "0L.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "339"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.3",
+                        "address": "0L.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "340"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.3",
+        "device": "HQP",
+        "address": "0L.3",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.4",
+                        "address": "0L.4",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "341"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.4",
+                        "address": "0L.4",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "342"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.4",
+                        "address": "0L.4",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "574"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.1",
+        "device": "HQP",
+        "address": "0H.1",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,05",
+                        "address": "05",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "349"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,05",
+                        "address": "05",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "351"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,05",
+                        "address": "05",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "353"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,05",
+                        "address": "05",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "354"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.2",
+        "device": "HQP",
+        "address": "0H.2",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,06",
+                        "address": "06",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "355"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,06",
+                        "address": "06",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "357"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,06",
+                        "address": "06",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "359"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,06",
+                        "address": "06",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "360"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.5",
+        "device": "HQP",
+        "address": "0H.5",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0A",
+                        "address": "0A",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "367"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0A",
+                        "address": "0A",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "369"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0A",
+                        "address": "0A",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "371"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0A",
+                        "address": "0A",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "372"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.0",
+        "device": "HQP",
+        "address": "0K.0",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.9",
+                        "address": "0K.9",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "373"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.9",
+                        "address": "0K.9",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "374"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.1",
+        "device": "HQP",
+        "address": "0K.1",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.8",
+                        "address": "0K.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "375"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.8",
+                        "address": "0K.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "376"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.3",
+        "device": "HQP",
+        "address": "0K.3",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.6",
+                        "address": "0K.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "377"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.6",
+                        "address": "0K.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "378"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.12",
+        "device": "HQP",
+        "address": "0G.12",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.2",
+                        "address": "0G.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "380"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.2",
+                        "address": "0G.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "381"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.2",
+                        "address": "0G.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "382"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.3",
+        "device": "HQP",
+        "address": "0G.3",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.1",
+                        "address": "0G.1",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "388"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.1",
+                        "address": "0G.1",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "389"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.14",
+        "device": "HQP",
+        "address": "0G.14",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.6",
+                        "address": "0G.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "390"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.6",
+                        "address": "0G.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "391"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.4",
+        "device": "HQP",
+        "address": "0G.4",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.0",
+                        "address": "0G.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "396"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.0",
+                        "address": "0G.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "397"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.3",
+        "device": "HQP",
+        "address": "0J.3",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.7",
+                        "address": "0G.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "402"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.7",
+                        "address": "0G.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "403"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.6",
+        "device": "HQP",
+        "address": "0H.6",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0E",
+                        "address": "0E",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "404"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0E",
+                        "address": "0E",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "406"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0E",
+                        "address": "0E",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "408"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0E",
+                        "address": "0E",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "409"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.15",
+        "device": "HQP",
+        "address": "0H.15",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0F",
+                        "address": "0F",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "410"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0F",
+                        "address": "0F",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "412"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0F",
+                        "address": "0F",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "414"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0F",
+                        "address": "0F",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "415"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.15",
+        "device": "HQP",
+        "address": "0G.15",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.1",
+                        "address": "0J.1",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "434"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.1",
+                        "address": "0J.1",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "435"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.10",
+        "device": "HQP",
+        "address": "0G.10",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.0",
+                        "address": "0L.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "438"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.0",
+                        "address": "0L.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "439"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.11",
+        "device": "HQP",
+        "address": "0G.11",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.2",
+                        "address": "0J.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "447"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.2",
+                        "address": "0J.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "448"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.8",
+        "device": "HQP",
+        "address": "0G.8",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.2",
+                        "address": "0J.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "450"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.2",
+                        "address": "0J.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "451"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.2",
+                        "address": "0J.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "452"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.9",
+        "device": "HQP",
+        "address": "0G.9",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.0",
+                        "address": "0L.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "453"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.0",
+                        "address": "0L.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "454"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.0",
+                        "address": "0L.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "455"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0I.0",
+        "device": "HQP",
+        "address": "0I.0",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.3",
+                        "address": "0L.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "468"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.3",
+                        "address": "0L.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "469"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.3",
+                        "address": "0L.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "572"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.7",
+        "device": "HQP",
+        "address": "0L.7",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0N",
+                        "address": "0N",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "470"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0N",
+                        "address": "0N",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "472"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0N",
+                        "address": "0N",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "474"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0N",
+                        "address": "0N",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "475"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.7",
+        "device": "HQP",
+        "address": "0H.7",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,07",
+                        "address": "07",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "476"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,07",
+                        "address": "07",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "478"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,07",
+                        "address": "07",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "480"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,07",
+                        "address": "07",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "481"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.8",
+        "device": "HQP",
+        "address": "0H.8",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,08",
+                        "address": "08",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "482"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,08",
+                        "address": "08",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "484"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,08",
+                        "address": "08",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "486"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,08",
+                        "address": "08",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "487"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.15",
+        "device": "HQP",
+        "address": "0L.15",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0L.15",
+                        "address": "0L.15",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "490"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0L.15",
+                        "address": "0L.15",
+                        "condition": [
+                            "value",
+                            "=",
+                            "0"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "491"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.8",
+        "device": "HQP",
+        "address": "0L.8",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.1",
+                        "address": "0L.1",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "492"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.1",
+                        "address": "0L.1",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "493"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.1",
+        "device": "HQP",
+        "address": "0G.1",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.3",
+                        "address": "0J.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "494"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.3",
+                        "address": "0J.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "495"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.7",
+        "device": "HQP",
+        "address": "0J.7",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.3",
+                        "address": "0J.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "496"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.3",
+                        "address": "0J.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "497"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.3",
+                        "address": "0J.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "570"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.13",
+        "device": "HQP",
+        "address": "0H.13",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,02",
+                        "address": "02",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "498"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,02",
+                        "address": "02",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "500"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,02",
+                        "address": "02",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "502"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,02",
+                        "address": "02",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "503"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.9",
+        "device": "HQP",
+        "address": "0H.9",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,09",
+                        "address": "09",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "504"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,09",
+                        "address": "09",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "506"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,09",
+                        "address": "09",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "508"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,09",
+                        "address": "09",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "509"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.0",
+        "device": "HQP",
+        "address": "0G.0",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,01",
+                        "address": "01",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "510"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,01",
+                        "address": "01",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "512"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,01",
+                        "address": "01",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "514"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,01",
+                        "address": "01",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "515"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.11",
+        "device": "HQP",
+        "address": "0H.11",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0B",
+                        "address": "0B",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "516"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0B",
+                        "address": "0B",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "518"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0B",
+                        "address": "0B",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "520"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0B",
+                        "address": "0B",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "521"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.10",
+        "device": "HQP",
+        "address": "0H.10",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,03",
+                        "address": "03",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "522"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,03",
+                        "address": "03",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "524"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,03",
+                        "address": "03",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "526"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,03",
+                        "address": "03",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "527"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.12",
+        "device": "HQP",
+        "address": "0H.12",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,04",
+                        "address": "04",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "528"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,04",
+                        "address": "04",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "530"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,04",
+                        "address": "04",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "532"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,04",
+                        "address": "04",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "533"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.0",
+        "device": "HQP",
+        "address": "0H.0",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0D",
+                        "address": "0D",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "534"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0D",
+                        "address": "0D",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "536"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0D",
+                        "address": "0D",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "538"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0D",
+                        "address": "0D",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "539"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.0",
+        "device": "HQP",
+        "address": "0J.0",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0J.0",
+                        "address": "0J.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "540"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0J.0",
+                        "address": "0J.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            "0"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "541"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.2",
+        "device": "HQP",
+        "address": "0J.2",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0J.2",
+                        "address": "0J.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "542"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0J.2",
+                        "address": "0J.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            "0"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "543"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.3",
+        "device": "HQP",
+        "address": "0H.3",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0C",
+                        "address": "0C",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "544"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0C",
+                        "address": "0C",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "546"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0C",
+                        "address": "0C",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "548"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0C",
+                        "address": "0C",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "549"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.0",
+        "device": "HQP",
+        "address": "0L.0",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.8",
+                        "address": "0I.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "550"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.8",
+                        "address": "0I.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "551"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0G.5",
+        "device": "HQP",
+        "address": "0G.5",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.8",
+                        "address": "0G.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "579"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.8",
+                        "address": "0G.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "580"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.15",
+        "device": "HQP",
+        "address": "0K.15",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0H.0",
+                        "address": "0H.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    },
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.15",
+                        "address": "0K.15",
+                        "condition": [
+                            "value",
+                            "=",
+                            "0"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "582"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0H.0",
+                        "address": "0H.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    },
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.15",
+                        "address": "0K.15",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "583"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.4",
+        "device": "HQP",
+        "address": "0H.4",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.5",
+                        "address": "0J.5",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "584"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.5",
+                        "address": "0J.5",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "585"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0O.0",
+        "device": "HQP",
+        "address": "0O.0",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.3",
+                        "address": "0G.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "587"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.3",
+                        "address": "0G.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "588"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.13",
+        "device": "HQP",
+        "address": "0K.13",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0G.8",
+                        "address": "0G.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "590"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+
+                ],
+                "scripts": [
+                    {
+                        "script": "591"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.12",
+        "device": "HQP",
+        "address": "0K.12",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.3",
+                        "address": "0L.3",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "592"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+
+                ],
+                "scripts": [
+                    {
+                        "script": "591"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0H.14",
+        "device": "HQP",
+        "address": "0H.14",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.7",
+                        "address": "0J.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "594"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.7",
+                        "address": "0J.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "595"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.11",
+        "device": "HQP",
+        "address": "0L.11",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.7",
+                        "address": "0L.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "597"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0L.7",
+                        "address": "0L.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "598"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.6",
+        "device": "HQP",
+        "address": "0J.6",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0H.0",
+                        "address": "0H.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "599"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.6",
+        "device": "HQP",
+        "address": "0L.6",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.7",
+                        "address": "0I.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "605"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.7",
+                        "address": "0I.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "606"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.13",
+        "device": "HQP",
+        "address": "0L.13",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0M",
+                        "address": "0M",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-d"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "610"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0M",
+                        "address": "0M",
+                        "condition": [
+                            "value",
+                            "=",
+                            "stop-u"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "612"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0M",
+                        "address": "0M",
+                        "condition": [
+                            "value",
+                            "=",
+                            "down"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "614"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,r,0M",
+                        "address": "0M",
+                        "condition": [
+                            "value",
+                            "=",
+                            "up"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "615"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.14",
+        "device": "HQP",
+        "address": "0L.14",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.6",
+                        "address": "0I.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "616"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.6",
+                        "address": "0I.6",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "617"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0L.1",
+        "device": "HQP",
+        "address": "0L.1",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.5",
+                        "address": "0I.5",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "620"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0I.5",
+                        "address": "0I.5",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "621"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.10",
+        "device": "HQP",
+        "address": "0K.10",
+        "actions": [
+            {
+                "active": "0",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.0",
+                        "address": "0K.0",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    },
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.10",
+                        "address": "0K.10",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "623"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.10",
+                        "address": "0K.10",
+                        "condition": [
+                            "value",
+                            "=",
+                            "0"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "624"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.5",
+        "device": "HQP",
+        "address": "0J.5",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.8",
+                        "address": "0J.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "625"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.8",
+                        "address": "0J.8",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "626"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0J.8",
+        "device": "HQP",
+        "address": "0J.8",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.9",
+                        "address": "0J.9",
+                        "condition": [
+                            "value",
+                            "=",
+                            1
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "627"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0J.9",
+                        "address": "0J.9",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "628"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.14",
+        "device": "HQP",
+        "address": "0K.14",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0K.2",
+                        "address": "0K.2",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    },
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.14",
+                        "address": "0K.14",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "630"
+                    }
+                ]
+            },
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.14",
+                        "address": "0K.14",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "631"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "haddr": "PROM,HQP,i,0K.7",
+        "device": "HQP",
+        "address": "0K.7",
+        "actions": [
+            {
+                "active": "1",
+                "conditions": [
+                    {
+                        "db": "outputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,o,0P.9",
+                        "address": "0P.9",
+                        "condition": [
+                            "value",
+                            "=",
+                            0
+                        ]
+                    },
+                    {
+                        "db": "inputs",
+                        "device": "HQP",
+                        "haddr": "PROM,HQP,i,0K.7",
+                        "address": "0K.7",
+                        "condition": [
+                            "value",
+                            "=",
+                            "1"
+                        ]
+                    }
+                ],
+                "scripts": [
+                    {
+                        "script": "635"
+                    }
+                ]
+            }
+        ]
+    }
+]

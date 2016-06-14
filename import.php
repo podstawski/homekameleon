@@ -11,6 +11,7 @@
     $ios=[];
 	$actions=[];
 	$scripts=[];
+	$modules=[];
 	
 	$outps=[];
     
@@ -23,7 +24,7 @@
         parse_str($adodb->ado_ExplodeName($res,$i));
         
         if ($m_type=='O') {
-            $ios[]=[
+            $modules[]=[
                 'id'=>$m_symbol,
                 'device'=>'HQP',
                 'address'=>$m_adr,
@@ -36,9 +37,10 @@
                 'id'=>$m_symbol,
                 'device'=>'HQP',
                 'address'=>$m_adr,
+				'haddr'=>'PROM,HQP,r,'.$m_adr,
                 'serial'=>$m_serial,
                 'name'=>$m_name,
-                'state'=>'stop-u',
+                'value'=>'stop-u',
                 'timeout'=>$m_sleep,
                 'active'=>1
             ];
@@ -48,8 +50,10 @@
                 'device'=>'HQP',
                 'address'=>$m_adr,
                 'serial'=>$m_serial,
-                'name'=>$m_name,
-                'state'=>'',
+                'haddr'=>'PROM,HQP,t,'.$m_adr,
+				'name'=>$m_name,
+                'value'=>'',
+				'type'=>'t',
                 'active'=>1
             ];
         }
@@ -68,10 +72,10 @@
             'id'=>$o_symbol,
             'device'=>'HQP',
             'address'=>$o_module.'.'.$o_adr,
+			'haddr'=>'PROM,HQP,o,'.$o_module.'.'.$o_adr,
             'parent'=>$o_module,
             'name'=>$o_name,
-            'state'=>0,
-			'logicalstate'=>'off',
+            'value'=>0,
             'timeout'=>$o_sleep,
             'type'=>$o_type,
             'active'=>$o_active
@@ -92,7 +96,19 @@
             'address'=>$i_module.'.'.$i_adr,
             'parent'=>$i_module,
             'name'=>$i_name,
-            'state'=>$i_state,
+            'value'=>$i_state,
+            'type'=>$i_type,
+            'active'=>$i_active
+        ];
+		
+		$outputs[]=[
+            'id'=>$i_symbol,
+            'device'=>'HQP',
+            'address'=>$i_module.'.'.$i_adr,
+			'haddr'=>'PROM,HQP,i,'.$i_module.'.'.$i_adr,
+            'parent'=>$i_module,
+            'name'=>$i_name,
+            'value'=>$i_state,
             'type'=>$i_type,
             'active'=>$i_active
         ];
@@ -115,40 +131,48 @@
 				$idx=$a_input_module.'.'.$p;
 				
 				$output_addr=$a_output_module;
-				if (strlen($a_output_adr)) $output_addr.='.'.$a_output_adr;
+				$haddr='PROM,HQP,r,'.$a_output_module;
+				if (strlen($a_output_adr)) {
+					$output_addr.='.'.$a_output_adr;
+					$haddr='PROM,HQP,o,'.$a_output_module.'.'.$a_output_adr;
+				}
 				
 				
 				$cond=[];
-				$s=strlen($output_addr)?'A-'.$a_id:'';
+				$s=strlen($output_addr)?$a_id:'';
 				
 				if (strlen($a_input_module_state)) {
 					if ($a_input_module_state=='0' || $a_input_module_state=='1') {
-						$c=['logicalstate','=',$a_input_module_state?'on':'off'];
+						$c=['value','=',$a_input_module_state+0];
 					} elseif ($a_input_module_state=='U') {
-						$c=['state','=','stop-u'];
+						$c=['value','=','stop-u'];
 					} elseif ($a_input_module_state=='D') {
-						$c=['state','=','stop-d'];
+						$c=['value','=','stop-d'];
 					} elseif ($a_input_module_state=='u') {
-						$c=['state','=','up'];
+						$c=['value','=','up'];
 					} elseif ($a_input_module_state=='d') {
-						$c=['state','=','down'];
+						$c=['value','=','down'];
 					} else {
-						$c=['state','=',$a_input_module_state];
+						$c=['value','=',$a_input_module_state];
 					}
 					$cond[]=[
 						'db'=>'outputs',
 						'device'=>'HQP',
+						'haddr'=>$haddr,
 						'address'=>$output_addr,
 						'condition'=> $c
 					];
 				}
+				
+				
 				if (strlen($a_input_state)) {
 					$cond[]=[
 						'db'=>'inputs',
 						'device'=>'HQP',
+						'haddr'=>'PROM,HQP,i,'.$a_input_module.'.'.$p,
 						'address'=>$a_input_module.'.'.$p,
 						'condition'=> [
-							'state','=',$a_input_state
+							'value','=',$a_input_state
 						]
 					];
 				}
@@ -161,7 +185,8 @@
 				
 				$cmd=$a_output_state;
 				if ($a_output_state=='1' || $a_output_state=='0') {
-					$cmd=$a_output_state?'turnon':'turnoff';
+					//$cmd=$a_output_state?'turnon':'turnoff';
+					$cmd=$a_output_state+0;
 				}
 				if ($a_output_state=='u') $cmd='up';
 				if ($a_output_state=='d') $cmd='down';
@@ -171,7 +196,8 @@
 				$sact=[
 							'device'=>'HQP',
 							'address'=>$output_addr,
-							'command'=>$cmd,
+							'value'=>$cmd,
+							'haddr'=>$haddr,
 							'delay'=>$delay
 				];
 				
@@ -213,8 +239,9 @@
 						
 						//if (strlen($a_macro)) $a['scripts'][]=['script'=>$a_macro];
 						
-						if (!isset($act[$idx])) $act[$idx]=['device'=>'HQP','address'=>$idx,'actions'=>[]];
-						
+						if (!isset($act[$idx])) {
+							$act[$idx]=['haddr'=>'PROM,HQP,i,'.$idx,'device'=>'HQP','address'=>$idx,'actions'=>[]];
+						}
 						$act[$idx]['actions'][]=$a;						
 					
 					}
@@ -234,15 +261,20 @@
 
 	foreach ($act AS $a) $actions[]=$a;
 
-	print_r(['a'=>$actions,'s'=>$scripts]);
+	//print_r(['a'=>$actions,'s'=>$scripts]);
 
     
-    
+    /*
 	file_put_contents(__DIR__.'/conf/inputs.json', json_encode($inputs));
 	file_put_contents(__DIR__.'/conf/outputs.json', json_encode($outputs));
 	file_put_contents(__DIR__.'/conf/ios.json', json_encode($ios));
-	file_put_contents(__DIR__.'/conf/actions.json', json_encode($actions));
-	file_put_contents(__DIR__.'/conf/scripts.json', json_encode($scripts));
+	*/
+	
+	file_put_contents(__DIR__.'/conf/ios.json', json_encode($outputs,JSON_PRETTY_PRINT));
+	file_put_contents(__DIR__.'/conf/modules.json', json_encode($modules,JSON_PRETTY_PRINT));
+	
+	file_put_contents(__DIR__.'/conf/actions.json', json_encode($actions,JSON_PRETTY_PRINT));
+	file_put_contents(__DIR__.'/conf/scripts.json', json_encode($scripts,JSON_PRETTY_PRINT));
 	
     
     //print_r([$ios,$outputs,$inputs]);

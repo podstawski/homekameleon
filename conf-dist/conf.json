@@ -1,5 +1,5 @@
 {
-    "uuid": "PROM",
+    "uuid": "PR",
     "devices": [
         {
             "id": "HQP",
@@ -33,7 +33,8 @@
                 "port": "8002",
                 "tunnel_port": "8001",
                 "tunnel_host": "homiq@homiq.webkameleon.com"
-            }
+            },
+            "active": false
         },
         {
             "id": "ADM",
@@ -98,7 +99,12 @@
         "ios": {
             "model": "../../admin/models/json",
             "file":"ios.json",
-            "index": ["device","address"]
+            "index": ["haddr"]
+        },
+        "modules": {
+            "model": "../../admin/models/json",
+            "file":"modules.json",
+            "index": ["serial"]
         },
         "scripts": {
             "model": "../../admin/models/json",
@@ -133,7 +139,7 @@
         "actions": {
             "model": "../../admin/models/json",
             "file":"actions.json",
-            "index": ["device","address"]
+            "index": ["haddr"]
         },
         "users": {
             "model": "../../admin/models/json",
