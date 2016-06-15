@@ -11,7 +11,7 @@
                 "device": "HQP",
                 "address": "0K.7",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0K.7",
+                "haddr": "PROM-HQP-O-0K.7",
                 "delay": 0
             }
         ]
@@ -28,7 +28,7 @@
                 "device": "HQP",
                 "address": "0K.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.7",
+                "haddr": "PROM-HQP-O-0K.7",
                 "delay": "1"
             }
         ]
@@ -45,14 +45,14 @@
                 "device": "HQP",
                 "address": "0L.4",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.4",
+                "haddr": "PROM-HQP-O-0L.4",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0L.4",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.4",
+                "haddr": "PROM-HQP-O-0L.4",
                 "delay": 7200
             }
         ]
@@ -69,7 +69,7 @@
                 "device": "HQP",
                 "address": "0L.4",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.4",
+                "haddr": "PROM-HQP-O-0L.4",
                 "delay": 0
             }
         ]
@@ -86,14 +86,14 @@
                 "device": "HQP",
                 "address": "0L.6",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.6",
+                "haddr": "PROM-HQP-O-0L.6",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0L.6",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.6",
+                "haddr": "PROM-HQP-O-0L.6",
                 "delay": 3600
             }
         ]
@@ -110,7 +110,7 @@
                 "device": "HQP",
                 "address": "0L.6",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.6",
+                "haddr": "PROM-HQP-O-0L.6",
                 "delay": 0
             }
         ]
@@ -127,14 +127,14 @@
                 "device": "HQP",
                 "address": "0L.5",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.5",
+                "haddr": "PROM-HQP-O-0L.5",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0L.5",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.5",
+                "haddr": "PROM-HQP-O-0L.5",
                 "delay": 3600
             }
         ]
@@ -151,7 +151,7 @@
                 "device": "HQP",
                 "address": "0L.5",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.5",
+                "haddr": "PROM-HQP-O-0L.5",
                 "delay": 0
             }
         ]
@@ -168,14 +168,14 @@
                 "device": "HQP",
                 "address": "0L.8",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.8",
+                "haddr": "PROM-HQP-O-0L.8",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0L.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.8",
+                "haddr": "PROM-HQP-O-0L.8",
                 "delay": 7200
             }
         ]
@@ -192,7 +192,7 @@
                 "device": "HQP",
                 "address": "0L.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.8",
+                "haddr": "PROM-HQP-O-0L.8",
                 "delay": 0
             }
         ]
@@ -209,7 +209,7 @@
                 "device": "HQP",
                 "address": "0G.2",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.2",
+                "haddr": "PROM-HQP-O-0G.2",
                 "delay": 0
             }
         ]
@@ -226,14 +226,14 @@
                 "device": "HQP",
                 "address": "0G.2",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.2",
+                "haddr": "PROM-HQP-O-0G.2",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.2",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.2",
+                "haddr": "PROM-HQP-O-0G.2",
                 "delay": 60
             }
         ]
@@ -250,7 +250,7 @@
                 "device": "HQP",
                 "address": "0G.4",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.4",
+                "haddr": "PROM-HQP-O-0G.4",
                 "delay": 0
             }
         ]
@@ -267,14 +267,14 @@
                 "device": "HQP",
                 "address": "0G.4",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.4",
+                "haddr": "PROM-HQP-O-0G.4",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.4",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.4",
+                "haddr": "PROM-HQP-O-0G.4",
                 "delay": 7200
             }
         ]
@@ -291,7 +291,7 @@
                 "device": "HQP",
                 "address": "0I.9",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.9",
+                "haddr": "PROM-HQP-O-0I.9",
                 "delay": 0
             }
         ]
@@ -308,14 +308,14 @@
                 "device": "HQP",
                 "address": "0I.9",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0I.9",
+                "haddr": "PROM-HQP-O-0I.9",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0I.9",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.9",
+                "haddr": "PROM-HQP-O-0I.9",
                 "delay": 5400
             }
         ]
@@ -332,7 +332,7 @@
                 "device": "HQP",
                 "address": "0L.3",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.3",
+                "haddr": "PROM-HQP-O-0L.3",
                 "delay": 0
             }
         ]
@@ -349,14 +349,14 @@
                 "device": "HQP",
                 "address": "0L.3",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.3",
+                "haddr": "PROM-HQP-O-0L.3",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0L.3",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.3",
+                "haddr": "PROM-HQP-O-0L.3",
                 "delay": 1800
             }
         ]
@@ -373,14 +373,14 @@
                 "device": "HQP",
                 "address": "05",
                 "value": "up",
-                "haddr": "PROM,HQP,r,05",
+                "haddr": "PROM-HQP-R-05",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "05",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,05",
+                "haddr": "PROM-HQP-R-05",
                 "delay": 41
             }
         ]
@@ -397,14 +397,14 @@
                 "device": "HQP",
                 "address": "05",
                 "value": "down",
-                "haddr": "PROM,HQP,r,05",
+                "haddr": "PROM-HQP-R-05",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "05",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,05",
+                "haddr": "PROM-HQP-R-05",
                 "delay": 41
             }
         ]
@@ -421,7 +421,7 @@
                 "device": "HQP",
                 "address": "05",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,05",
+                "haddr": "PROM-HQP-R-05",
                 "delay": 0
             }
         ]
@@ -438,7 +438,7 @@
                 "device": "HQP",
                 "address": "05",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,05",
+                "haddr": "PROM-HQP-R-05",
                 "delay": 0
             }
         ]
@@ -455,14 +455,14 @@
                 "device": "HQP",
                 "address": "06",
                 "value": "up",
-                "haddr": "PROM,HQP,r,06",
+                "haddr": "PROM-HQP-R-06",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "06",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,06",
+                "haddr": "PROM-HQP-R-06",
                 "delay": 41
             }
         ]
@@ -479,14 +479,14 @@
                 "device": "HQP",
                 "address": "06",
                 "value": "down",
-                "haddr": "PROM,HQP,r,06",
+                "haddr": "PROM-HQP-R-06",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "06",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,06",
+                "haddr": "PROM-HQP-R-06",
                 "delay": 41
             }
         ]
@@ -503,7 +503,7 @@
                 "device": "HQP",
                 "address": "06",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,06",
+                "haddr": "PROM-HQP-R-06",
                 "delay": 0
             }
         ]
@@ -520,7 +520,7 @@
                 "device": "HQP",
                 "address": "06",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,06",
+                "haddr": "PROM-HQP-R-06",
                 "delay": 0
             }
         ]
@@ -537,14 +537,14 @@
                 "device": "HQP",
                 "address": "0A",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0A",
+                "haddr": "PROM-HQP-R-0A",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0A",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0A",
+                "haddr": "PROM-HQP-R-0A",
                 "delay": 50
             }
         ]
@@ -561,14 +561,14 @@
                 "device": "HQP",
                 "address": "0A",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0A",
+                "haddr": "PROM-HQP-R-0A",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0A",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0A",
+                "haddr": "PROM-HQP-R-0A",
                 "delay": 50
             }
         ]
@@ -585,7 +585,7 @@
                 "device": "HQP",
                 "address": "0A",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0A",
+                "haddr": "PROM-HQP-R-0A",
                 "delay": 0
             }
         ]
@@ -602,7 +602,7 @@
                 "device": "HQP",
                 "address": "0A",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0A",
+                "haddr": "PROM-HQP-R-0A",
                 "delay": 0
             }
         ]
@@ -619,7 +619,7 @@
                 "device": "HQP",
                 "address": "0K.9",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.9",
+                "haddr": "PROM-HQP-O-0K.9",
                 "delay": 0
             }
         ]
@@ -636,14 +636,14 @@
                 "device": "HQP",
                 "address": "0K.9",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0K.9",
+                "haddr": "PROM-HQP-O-0K.9",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0K.9",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.9",
+                "haddr": "PROM-HQP-O-0K.9",
                 "delay": 3600
             }
         ]
@@ -660,7 +660,7 @@
                 "device": "HQP",
                 "address": "0K.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.8",
+                "haddr": "PROM-HQP-O-0K.8",
                 "delay": 0
             }
         ]
@@ -677,14 +677,14 @@
                 "device": "HQP",
                 "address": "0K.8",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0K.8",
+                "haddr": "PROM-HQP-O-0K.8",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0K.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.8",
+                "haddr": "PROM-HQP-O-0K.8",
                 "delay": 4600
             }
         ]
@@ -701,7 +701,7 @@
                 "device": "HQP",
                 "address": "0K.6",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.6",
+                "haddr": "PROM-HQP-O-0K.6",
                 "delay": 0
             }
         ]
@@ -718,14 +718,14 @@
                 "device": "HQP",
                 "address": "0K.6",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0K.6",
+                "haddr": "PROM-HQP-O-0K.6",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0K.6",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.6",
+                "haddr": "PROM-HQP-O-0K.6",
                 "delay": 5400
             }
         ]
@@ -742,7 +742,7 @@
                 "device": "HQP",
                 "address": "0G.1",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.1",
+                "haddr": "PROM-HQP-O-0G.1",
                 "delay": 0
             }
         ]
@@ -759,14 +759,14 @@
                 "device": "HQP",
                 "address": "0G.1",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.1",
+                "haddr": "PROM-HQP-O-0G.1",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.1",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.1",
+                "haddr": "PROM-HQP-O-0G.1",
                 "delay": 5400
             }
         ]
@@ -783,7 +783,7 @@
                 "device": "HQP",
                 "address": "0G.6",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.6",
+                "haddr": "PROM-HQP-O-0G.6",
                 "delay": 0
             }
         ]
@@ -800,14 +800,14 @@
                 "device": "HQP",
                 "address": "0G.6",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.6",
+                "haddr": "PROM-HQP-O-0G.6",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.6",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.6",
+                "haddr": "PROM-HQP-O-0G.6",
                 "delay": 1800
             }
         ]
@@ -824,7 +824,7 @@
                 "device": "HQP",
                 "address": "0G.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.0",
+                "haddr": "PROM-HQP-O-0G.0",
                 "delay": 0
             }
         ]
@@ -841,14 +841,14 @@
                 "device": "HQP",
                 "address": "0G.0",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.0",
+                "haddr": "PROM-HQP-O-0G.0",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.0",
+                "haddr": "PROM-HQP-O-0G.0",
                 "delay": 10800
             }
         ]
@@ -865,7 +865,7 @@
                 "device": "HQP",
                 "address": "0G.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.7",
+                "haddr": "PROM-HQP-O-0G.7",
                 "delay": 0
             }
         ]
@@ -882,14 +882,14 @@
                 "device": "HQP",
                 "address": "0G.7",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.7",
+                "haddr": "PROM-HQP-O-0G.7",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.7",
+                "haddr": "PROM-HQP-O-0G.7",
                 "delay": 3600
             }
         ]
@@ -906,14 +906,14 @@
                 "device": "HQP",
                 "address": "0E",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0E",
+                "haddr": "PROM-HQP-R-0E",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0E",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0E",
+                "haddr": "PROM-HQP-R-0E",
                 "delay": 85
             }
         ]
@@ -930,14 +930,14 @@
                 "device": "HQP",
                 "address": "0E",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0E",
+                "haddr": "PROM-HQP-R-0E",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0E",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0E",
+                "haddr": "PROM-HQP-R-0E",
                 "delay": 85
             }
         ]
@@ -954,7 +954,7 @@
                 "device": "HQP",
                 "address": "0E",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0E",
+                "haddr": "PROM-HQP-R-0E",
                 "delay": 0
             }
         ]
@@ -971,7 +971,7 @@
                 "device": "HQP",
                 "address": "0E",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0E",
+                "haddr": "PROM-HQP-R-0E",
                 "delay": 0
             }
         ]
@@ -988,14 +988,14 @@
                 "device": "HQP",
                 "address": "0F",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0F",
+                "haddr": "PROM-HQP-R-0F",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0F",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0F",
+                "haddr": "PROM-HQP-R-0F",
                 "delay": 75
             }
         ]
@@ -1012,14 +1012,14 @@
                 "device": "HQP",
                 "address": "0F",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0F",
+                "haddr": "PROM-HQP-R-0F",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0F",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0F",
+                "haddr": "PROM-HQP-R-0F",
                 "delay": 75
             }
         ]
@@ -1036,7 +1036,7 @@
                 "device": "HQP",
                 "address": "0F",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0F",
+                "haddr": "PROM-HQP-R-0F",
                 "delay": 0
             }
         ]
@@ -1053,7 +1053,7 @@
                 "device": "HQP",
                 "address": "0F",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0F",
+                "haddr": "PROM-HQP-R-0F",
                 "delay": 0
             }
         ]
@@ -1070,7 +1070,7 @@
                 "device": "HQP",
                 "address": "0J.1",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.1",
+                "haddr": "PROM-HQP-O-0J.1",
                 "delay": 0
             }
         ]
@@ -1087,14 +1087,14 @@
                 "device": "HQP",
                 "address": "0J.1",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.1",
+                "haddr": "PROM-HQP-O-0J.1",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0J.1",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.1",
+                "haddr": "PROM-HQP-O-0J.1",
                 "delay": 7200
             }
         ]
@@ -1111,7 +1111,7 @@
                 "device": "HQP",
                 "address": "0L.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.0",
+                "haddr": "PROM-HQP-O-0L.0",
                 "delay": 0
             }
         ]
@@ -1128,14 +1128,14 @@
                 "device": "HQP",
                 "address": "0L.0",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.0",
+                "haddr": "PROM-HQP-O-0L.0",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0L.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.0",
+                "haddr": "PROM-HQP-O-0L.0",
                 "delay": "60"
             }
         ]
@@ -1152,7 +1152,7 @@
                 "device": "HQP",
                 "address": "0J.2",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.2",
+                "haddr": "PROM-HQP-O-0J.2",
                 "delay": 0
             }
         ]
@@ -1169,14 +1169,14 @@
                 "device": "HQP",
                 "address": "0J.2",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.2",
+                "haddr": "PROM-HQP-O-0J.2",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0J.2",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.2",
+                "haddr": "PROM-HQP-O-0J.2",
                 "delay": "45"
             }
         ]
@@ -1193,14 +1193,14 @@
                 "device": "HQP",
                 "address": "0N",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0N",
+                "haddr": "PROM-HQP-R-0N",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0N",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0N",
+                "haddr": "PROM-HQP-R-0N",
                 "delay": 55
             }
         ]
@@ -1217,14 +1217,14 @@
                 "device": "HQP",
                 "address": "0N",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0N",
+                "haddr": "PROM-HQP-R-0N",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0N",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0N",
+                "haddr": "PROM-HQP-R-0N",
                 "delay": 55
             }
         ]
@@ -1241,7 +1241,7 @@
                 "device": "HQP",
                 "address": "0N",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0N",
+                "haddr": "PROM-HQP-R-0N",
                 "delay": 0
             }
         ]
@@ -1258,7 +1258,7 @@
                 "device": "HQP",
                 "address": "0N",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0N",
+                "haddr": "PROM-HQP-R-0N",
                 "delay": 0
             }
         ]
@@ -1275,14 +1275,14 @@
                 "device": "HQP",
                 "address": "07",
                 "value": "up",
-                "haddr": "PROM,HQP,r,07",
+                "haddr": "PROM-HQP-R-07",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "07",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,07",
+                "haddr": "PROM-HQP-R-07",
                 "delay": 41
             }
         ]
@@ -1299,14 +1299,14 @@
                 "device": "HQP",
                 "address": "07",
                 "value": "down",
-                "haddr": "PROM,HQP,r,07",
+                "haddr": "PROM-HQP-R-07",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "07",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,07",
+                "haddr": "PROM-HQP-R-07",
                 "delay": 41
             }
         ]
@@ -1323,7 +1323,7 @@
                 "device": "HQP",
                 "address": "07",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,07",
+                "haddr": "PROM-HQP-R-07",
                 "delay": 0
             }
         ]
@@ -1340,7 +1340,7 @@
                 "device": "HQP",
                 "address": "07",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,07",
+                "haddr": "PROM-HQP-R-07",
                 "delay": 0
             }
         ]
@@ -1357,14 +1357,14 @@
                 "device": "HQP",
                 "address": "08",
                 "value": "up",
-                "haddr": "PROM,HQP,r,08",
+                "haddr": "PROM-HQP-R-08",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "08",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,08",
+                "haddr": "PROM-HQP-R-08",
                 "delay": 41
             }
         ]
@@ -1381,14 +1381,14 @@
                 "device": "HQP",
                 "address": "08",
                 "value": "down",
-                "haddr": "PROM,HQP,r,08",
+                "haddr": "PROM-HQP-R-08",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "08",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,08",
+                "haddr": "PROM-HQP-R-08",
                 "delay": 41
             }
         ]
@@ -1405,7 +1405,7 @@
                 "device": "HQP",
                 "address": "08",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,08",
+                "haddr": "PROM-HQP-R-08",
                 "delay": 0
             }
         ]
@@ -1422,7 +1422,7 @@
                 "device": "HQP",
                 "address": "08",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,08",
+                "haddr": "PROM-HQP-R-08",
                 "delay": 0
             }
         ]
@@ -1439,7 +1439,7 @@
                 "device": "HQP",
                 "address": "0L.9",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.9",
+                "haddr": "PROM-HQP-O-0L.9",
                 "delay": "2"
             }
         ]
@@ -1456,7 +1456,7 @@
                 "device": "HQP",
                 "address": "0L.9",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.9",
+                "haddr": "PROM-HQP-O-0L.9",
                 "delay": 0
             }
         ]
@@ -1473,7 +1473,7 @@
                 "device": "HQP",
                 "address": "0L.1",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.1",
+                "haddr": "PROM-HQP-O-0L.1",
                 "delay": 0
             }
         ]
@@ -1490,14 +1490,14 @@
                 "device": "HQP",
                 "address": "0L.1",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.1",
+                "haddr": "PROM-HQP-O-0L.1",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0L.1",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.1",
+                "haddr": "PROM-HQP-O-0L.1",
                 "delay": 7200
             }
         ]
@@ -1514,7 +1514,7 @@
                 "device": "HQP",
                 "address": "0J.3",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.3",
+                "haddr": "PROM-HQP-O-0J.3",
                 "delay": 0
             }
         ]
@@ -1531,14 +1531,14 @@
                 "device": "HQP",
                 "address": "0J.3",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.3",
+                "haddr": "PROM-HQP-O-0J.3",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0J.3",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.3",
+                "haddr": "PROM-HQP-O-0J.3",
                 "delay": 900
             }
         ]
@@ -1555,14 +1555,14 @@
                 "device": "HQP",
                 "address": "02",
                 "value": "up",
-                "haddr": "PROM,HQP,r,02",
+                "haddr": "PROM-HQP-R-02",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "02",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,02",
+                "haddr": "PROM-HQP-R-02",
                 "delay": 75
             }
         ]
@@ -1579,14 +1579,14 @@
                 "device": "HQP",
                 "address": "02",
                 "value": "down",
-                "haddr": "PROM,HQP,r,02",
+                "haddr": "PROM-HQP-R-02",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "02",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,02",
+                "haddr": "PROM-HQP-R-02",
                 "delay": 75
             }
         ]
@@ -1603,7 +1603,7 @@
                 "device": "HQP",
                 "address": "02",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,02",
+                "haddr": "PROM-HQP-R-02",
                 "delay": 0
             }
         ]
@@ -1620,7 +1620,7 @@
                 "device": "HQP",
                 "address": "02",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,02",
+                "haddr": "PROM-HQP-R-02",
                 "delay": 0
             }
         ]
@@ -1637,14 +1637,14 @@
                 "device": "HQP",
                 "address": "09",
                 "value": "up",
-                "haddr": "PROM,HQP,r,09",
+                "haddr": "PROM-HQP-R-09",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "09",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,09",
+                "haddr": "PROM-HQP-R-09",
                 "delay": 90
             }
         ]
@@ -1661,14 +1661,14 @@
                 "device": "HQP",
                 "address": "09",
                 "value": "down",
-                "haddr": "PROM,HQP,r,09",
+                "haddr": "PROM-HQP-R-09",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "09",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,09",
+                "haddr": "PROM-HQP-R-09",
                 "delay": 90
             }
         ]
@@ -1685,7 +1685,7 @@
                 "device": "HQP",
                 "address": "09",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,09",
+                "haddr": "PROM-HQP-R-09",
                 "delay": 0
             }
         ]
@@ -1702,7 +1702,7 @@
                 "device": "HQP",
                 "address": "09",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,09",
+                "haddr": "PROM-HQP-R-09",
                 "delay": 0
             }
         ]
@@ -1719,14 +1719,14 @@
                 "device": "HQP",
                 "address": "01",
                 "value": "up",
-                "haddr": "PROM,HQP,r,01",
+                "haddr": "PROM-HQP-R-01",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "01",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,01",
+                "haddr": "PROM-HQP-R-01",
                 "delay": 60
             }
         ]
@@ -1743,14 +1743,14 @@
                 "device": "HQP",
                 "address": "01",
                 "value": "down",
-                "haddr": "PROM,HQP,r,01",
+                "haddr": "PROM-HQP-R-01",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "01",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,01",
+                "haddr": "PROM-HQP-R-01",
                 "delay": 60
             }
         ]
@@ -1767,7 +1767,7 @@
                 "device": "HQP",
                 "address": "01",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,01",
+                "haddr": "PROM-HQP-R-01",
                 "delay": 0
             }
         ]
@@ -1784,7 +1784,7 @@
                 "device": "HQP",
                 "address": "01",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,01",
+                "haddr": "PROM-HQP-R-01",
                 "delay": 0
             }
         ]
@@ -1801,14 +1801,14 @@
                 "device": "HQP",
                 "address": "0B",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0B",
+                "haddr": "PROM-HQP-R-0B",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0B",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0B",
+                "haddr": "PROM-HQP-R-0B",
                 "delay": 75
             }
         ]
@@ -1825,14 +1825,14 @@
                 "device": "HQP",
                 "address": "0B",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0B",
+                "haddr": "PROM-HQP-R-0B",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0B",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0B",
+                "haddr": "PROM-HQP-R-0B",
                 "delay": 75
             }
         ]
@@ -1849,7 +1849,7 @@
                 "device": "HQP",
                 "address": "0B",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0B",
+                "haddr": "PROM-HQP-R-0B",
                 "delay": 0
             }
         ]
@@ -1866,7 +1866,7 @@
                 "device": "HQP",
                 "address": "0B",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0B",
+                "haddr": "PROM-HQP-R-0B",
                 "delay": 0
             }
         ]
@@ -1883,14 +1883,14 @@
                 "device": "HQP",
                 "address": "03",
                 "value": "up",
-                "haddr": "PROM,HQP,r,03",
+                "haddr": "PROM-HQP-R-03",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "03",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,03",
+                "haddr": "PROM-HQP-R-03",
                 "delay": 31
             }
         ]
@@ -1907,14 +1907,14 @@
                 "device": "HQP",
                 "address": "03",
                 "value": "down",
-                "haddr": "PROM,HQP,r,03",
+                "haddr": "PROM-HQP-R-03",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "03",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,03",
+                "haddr": "PROM-HQP-R-03",
                 "delay": 31
             }
         ]
@@ -1931,7 +1931,7 @@
                 "device": "HQP",
                 "address": "03",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,03",
+                "haddr": "PROM-HQP-R-03",
                 "delay": 0
             }
         ]
@@ -1948,7 +1948,7 @@
                 "device": "HQP",
                 "address": "03",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,03",
+                "haddr": "PROM-HQP-R-03",
                 "delay": 0
             }
         ]
@@ -1965,14 +1965,14 @@
                 "device": "HQP",
                 "address": "04",
                 "value": "up",
-                "haddr": "PROM,HQP,r,04",
+                "haddr": "PROM-HQP-R-04",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "04",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,04",
+                "haddr": "PROM-HQP-R-04",
                 "delay": 35
             }
         ]
@@ -1989,14 +1989,14 @@
                 "device": "HQP",
                 "address": "04",
                 "value": "down",
-                "haddr": "PROM,HQP,r,04",
+                "haddr": "PROM-HQP-R-04",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "04",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,04",
+                "haddr": "PROM-HQP-R-04",
                 "delay": 35
             }
         ]
@@ -2013,7 +2013,7 @@
                 "device": "HQP",
                 "address": "04",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,04",
+                "haddr": "PROM-HQP-R-04",
                 "delay": 0
             }
         ]
@@ -2030,7 +2030,7 @@
                 "device": "HQP",
                 "address": "04",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,04",
+                "haddr": "PROM-HQP-R-04",
                 "delay": 0
             }
         ]
@@ -2047,14 +2047,14 @@
                 "device": "HQP",
                 "address": "0D",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0D",
+                "haddr": "PROM-HQP-R-0D",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0D",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0D",
+                "haddr": "PROM-HQP-R-0D",
                 "delay": 55
             }
         ]
@@ -2071,14 +2071,14 @@
                 "device": "HQP",
                 "address": "0D",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0D",
+                "haddr": "PROM-HQP-R-0D",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0D",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0D",
+                "haddr": "PROM-HQP-R-0D",
                 "delay": 55
             }
         ]
@@ -2095,7 +2095,7 @@
                 "device": "HQP",
                 "address": "0D",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0D",
+                "haddr": "PROM-HQP-R-0D",
                 "delay": 0
             }
         ]
@@ -2112,7 +2112,7 @@
                 "device": "HQP",
                 "address": "0D",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0D",
+                "haddr": "PROM-HQP-R-0D",
                 "delay": 0
             }
         ]
@@ -2129,7 +2129,7 @@
                 "device": "HQP",
                 "address": "0J.4",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.4",
+                "haddr": "PROM-HQP-O-0J.4",
                 "delay": 0
             }
         ]
@@ -2146,7 +2146,7 @@
                 "device": "HQP",
                 "address": "0J.4",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.4",
+                "haddr": "PROM-HQP-O-0J.4",
                 "delay": 0
             }
         ]
@@ -2163,7 +2163,7 @@
                 "device": "HQP",
                 "address": "0J.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.0",
+                "haddr": "PROM-HQP-O-0J.0",
                 "delay": 0
             }
         ]
@@ -2180,14 +2180,14 @@
                 "device": "HQP",
                 "address": "0J.0",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.0",
+                "haddr": "PROM-HQP-O-0J.0",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0J.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.0",
+                "haddr": "PROM-HQP-O-0J.0",
                 "delay": "300"
             }
         ]
@@ -2204,14 +2204,14 @@
                 "device": "HQP",
                 "address": "0C",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0C",
+                "haddr": "PROM-HQP-R-0C",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0C",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0C",
+                "haddr": "PROM-HQP-R-0C",
                 "delay": 55
             }
         ]
@@ -2228,14 +2228,14 @@
                 "device": "HQP",
                 "address": "0C",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0C",
+                "haddr": "PROM-HQP-R-0C",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0C",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0C",
+                "haddr": "PROM-HQP-R-0C",
                 "delay": 55
             }
         ]
@@ -2252,7 +2252,7 @@
                 "device": "HQP",
                 "address": "0C",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0C",
+                "haddr": "PROM-HQP-R-0C",
                 "delay": 0
             }
         ]
@@ -2269,7 +2269,7 @@
                 "device": "HQP",
                 "address": "0C",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0C",
+                "haddr": "PROM-HQP-R-0C",
                 "delay": 0
             }
         ]
@@ -2286,7 +2286,7 @@
                 "device": "HQP",
                 "address": "0I.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.8",
+                "haddr": "PROM-HQP-O-0I.8",
                 "delay": 0
             }
         ]
@@ -2303,14 +2303,14 @@
                 "device": "HQP",
                 "address": "0I.8",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0I.8",
+                "haddr": "PROM-HQP-O-0I.8",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0I.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.8",
+                "haddr": "PROM-HQP-O-0I.8",
                 "delay": 600
             }
         ]
@@ -2327,7 +2327,7 @@
                 "device": "HQP",
                 "address": "0G.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.8",
+                "haddr": "PROM-HQP-O-0G.8",
                 "delay": 0
             }
         ]
@@ -2344,14 +2344,14 @@
                 "device": "HQP",
                 "address": "0G.8",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.8",
+                "haddr": "PROM-HQP-O-0G.8",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.8",
+                "haddr": "PROM-HQP-O-0G.8",
                 "delay": 120
             }
         ]
@@ -2368,7 +2368,7 @@
                 "device": "HQP",
                 "address": "0H.0",
                 "value": "",
-                "haddr": "PROM,HQP,o,0H.0",
+                "haddr": "PROM-HQP-O-0H.0",
                 "delay": 0
             }
         ]
@@ -2385,7 +2385,7 @@
                 "device": "HQP",
                 "address": "0H.0",
                 "value": "",
-                "haddr": "PROM,HQP,o,0H.0",
+                "haddr": "PROM-HQP-O-0H.0",
                 "delay": 0
             }
         ]
@@ -2402,7 +2402,7 @@
                 "device": "HQP",
                 "address": "0J.5",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.5",
+                "haddr": "PROM-HQP-O-0J.5",
                 "delay": 0
             }
         ]
@@ -2419,14 +2419,14 @@
                 "device": "HQP",
                 "address": "0J.5",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.5",
+                "haddr": "PROM-HQP-O-0J.5",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0J.5",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.5",
+                "haddr": "PROM-HQP-O-0J.5",
                 "delay": 900
             }
         ]
@@ -2443,7 +2443,7 @@
                 "device": "HQP",
                 "address": "0G.3",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.3",
+                "haddr": "PROM-HQP-O-0G.3",
                 "delay": 0
             }
         ]
@@ -2460,14 +2460,14 @@
                 "device": "HQP",
                 "address": "0G.3",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0G.3",
+                "haddr": "PROM-HQP-O-0G.3",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0G.3",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.3",
+                "haddr": "PROM-HQP-O-0G.3",
                 "delay": 1800
             }
         ]
@@ -2484,14 +2484,14 @@
                 "device": "HQP",
                 "address": "0G.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0G.8",
+                "haddr": "PROM-HQP-O-0G.8",
                 "delay": 120
             },
             {
                 "device": "HQP",
                 "address": "0L.3",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.3",
+                "haddr": "PROM-HQP-O-0L.3",
                 "delay": "120"
             }
         ]
@@ -2508,7 +2508,7 @@
                 "device": "HQP",
                 "address": "0J.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.7",
+                "haddr": "PROM-HQP-O-0J.7",
                 "delay": 0
             }
         ]
@@ -2525,14 +2525,14 @@
                 "device": "HQP",
                 "address": "0J.7",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.7",
+                "haddr": "PROM-HQP-O-0J.7",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0J.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.7",
+                "haddr": "PROM-HQP-O-0J.7",
                 "delay": 25000
             }
         ]
@@ -2549,7 +2549,7 @@
                 "device": "HQP",
                 "address": "0L.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0L.7",
+                "haddr": "PROM-HQP-O-0L.7",
                 "delay": 0
             }
         ]
@@ -2566,7 +2566,7 @@
                 "device": "HQP",
                 "address": "0L.7",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0L.7",
+                "haddr": "PROM-HQP-O-0L.7",
                 "delay": 0
             }
         ]
@@ -2583,14 +2583,14 @@
                 "device": "HQP",
                 "address": "0H.0",
                 "value": "X",
-                "haddr": "PROM,HQP,o,0H.0",
+                "haddr": "PROM-HQP-O-0H.0",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0H.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0H.0",
+                "haddr": "PROM-HQP-O-0H.0",
                 "delay": "60"
             }
         ]
@@ -2607,7 +2607,7 @@
                 "device": "HQP",
                 "address": "0I.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.7",
+                "haddr": "PROM-HQP-O-0I.7",
                 "delay": 0
             }
         ]
@@ -2624,14 +2624,14 @@
                 "device": "HQP",
                 "address": "0I.7",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0I.7",
+                "haddr": "PROM-HQP-O-0I.7",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0I.7",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.7",
+                "haddr": "PROM-HQP-O-0I.7",
                 "delay": 7200
             }
         ]
@@ -2648,14 +2648,14 @@
                 "device": "HQP",
                 "address": "0M",
                 "value": "up",
-                "haddr": "PROM,HQP,r,0M",
+                "haddr": "PROM-HQP-R-0M",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0M",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0M",
+                "haddr": "PROM-HQP-R-0M",
                 "delay": 75
             }
         ]
@@ -2672,14 +2672,14 @@
                 "device": "HQP",
                 "address": "0M",
                 "value": "down",
-                "haddr": "PROM,HQP,r,0M",
+                "haddr": "PROM-HQP-R-0M",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0M",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0M",
+                "haddr": "PROM-HQP-R-0M",
                 "delay": 75
             }
         ]
@@ -2696,7 +2696,7 @@
                 "device": "HQP",
                 "address": "0M",
                 "value": "stop-d",
-                "haddr": "PROM,HQP,r,0M",
+                "haddr": "PROM-HQP-R-0M",
                 "delay": 0
             }
         ]
@@ -2713,7 +2713,7 @@
                 "device": "HQP",
                 "address": "0M",
                 "value": "stop-u",
-                "haddr": "PROM,HQP,r,0M",
+                "haddr": "PROM-HQP-R-0M",
                 "delay": 0
             }
         ]
@@ -2730,7 +2730,7 @@
                 "device": "HQP",
                 "address": "0I.6",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.6",
+                "haddr": "PROM-HQP-O-0I.6",
                 "delay": 0
             }
         ]
@@ -2747,7 +2747,7 @@
                 "device": "HQP",
                 "address": "0I.6",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0I.6",
+                "haddr": "PROM-HQP-O-0I.6",
                 "delay": 0
             }
         ]
@@ -2764,7 +2764,7 @@
                 "device": "HQP",
                 "address": "0I.5",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.5",
+                "haddr": "PROM-HQP-O-0I.5",
                 "delay": 0
             }
         ]
@@ -2781,14 +2781,14 @@
                 "device": "HQP",
                 "address": "0I.5",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0I.5",
+                "haddr": "PROM-HQP-O-0I.5",
                 "delay": 0
             },
             {
                 "device": "HQP",
                 "address": "0I.5",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0I.5",
+                "haddr": "PROM-HQP-O-0I.5",
                 "delay": "3600"
             }
         ]
@@ -2805,7 +2805,7 @@
                 "device": "HQP",
                 "address": "0K.0",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.0",
+                "haddr": "PROM-HQP-O-0K.0",
                 "delay": 0
             }
         ]
@@ -2822,7 +2822,7 @@
                 "device": "HQP",
                 "address": "0K.0",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0K.0",
+                "haddr": "PROM-HQP-O-0K.0",
                 "delay": "3600"
             }
         ]
@@ -2839,7 +2839,7 @@
                 "device": "HQP",
                 "address": "0J.8",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.8",
+                "haddr": "PROM-HQP-O-0J.8",
                 "delay": 0
             }
         ]
@@ -2856,7 +2856,7 @@
                 "device": "HQP",
                 "address": "0J.8",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.8",
+                "haddr": "PROM-HQP-O-0J.8",
                 "delay": 0
             }
         ]
@@ -2873,7 +2873,7 @@
                 "device": "HQP",
                 "address": "0J.9",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0J.9",
+                "haddr": "PROM-HQP-O-0J.9",
                 "delay": 0
             }
         ]
@@ -2890,7 +2890,7 @@
                 "device": "HQP",
                 "address": "0J.9",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0J.9",
+                "haddr": "PROM-HQP-O-0J.9",
                 "delay": 0
             }
         ]
@@ -2907,7 +2907,7 @@
                 "device": "HQP",
                 "address": "0K.2",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0K.2",
+                "haddr": "PROM-HQP-O-0K.2",
                 "delay": 0
             }
         ]
@@ -2924,21 +2924,21 @@
                 "device": "HQP",
                 "address": "0K.2",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0K.2",
+                "haddr": "PROM-HQP-O-0K.2",
                 "delay": 300
             },
             {
                 "device": "HQP",
                 "address": "0H.1",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0H.1",
+                "haddr": "PROM-HQP-O-0H.1",
                 "delay": 120
             },
             {
                 "device": "HQP",
                 "address": "0H.2",
                 "value": 0,
-                "haddr": "PROM,HQP,o,0H.2",
+                "haddr": "PROM-HQP-O-0H.2",
                 "delay": 180
             }
         ]
@@ -2955,7 +2955,7 @@
                 "device": "HQP",
                 "address": "0P.9",
                 "value": 1,
-                "haddr": "PROM,HQP,o,0P.9",
+                "haddr": "PROM-HQP-O-0P.9",
                 "delay": 0
             }
         ]

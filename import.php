@@ -37,7 +37,7 @@
                 'id'=>$m_symbol,
                 'device'=>'HQP',
                 'address'=>$m_adr,
-				'haddr'=>'PROM,HQP,r,'.$m_adr,
+				'haddr'=>'PROM-HQP-R-'.$m_adr,
                 'serial'=>$m_serial,
                 'name'=>$m_name,
                 'value'=>'stop-u',
@@ -50,7 +50,7 @@
                 'device'=>'HQP',
                 'address'=>$m_adr,
                 'serial'=>$m_serial,
-                'haddr'=>'PROM,HQP,t,'.$m_adr,
+                'haddr'=>'PROM-HQP-T-'.$m_adr,
 				'name'=>$m_name,
                 'value'=>'',
 				'type'=>'t',
@@ -72,7 +72,7 @@
             'id'=>$o_symbol,
             'device'=>'HQP',
             'address'=>$o_module.'.'.$o_adr,
-			'haddr'=>'PROM,HQP,o,'.$o_module.'.'.$o_adr,
+			'haddr'=>'PROM-HQP-O-'.$o_module.'.'.$o_adr,
             'parent'=>$o_module,
             'name'=>$o_name,
             'value'=>0,
@@ -105,7 +105,7 @@
             'id'=>$i_symbol,
             'device'=>'HQP',
             'address'=>$i_module.'.'.$i_adr,
-			'haddr'=>'PROM,HQP,i,'.$i_module.'.'.$i_adr,
+			'haddr'=>'PROM-HQP-I-'.$i_module.'.'.$i_adr,
             'parent'=>$i_module,
             'name'=>$i_name,
             'value'=>$i_state,
@@ -131,10 +131,10 @@
 				$idx=$a_input_module.'.'.$p;
 				
 				$output_addr=$a_output_module;
-				$haddr='PROM,HQP,r,'.$a_output_module;
+				$haddr='PROM-HQP-R-'.$a_output_module;
 				if (strlen($a_output_adr)) {
 					$output_addr.='.'.$a_output_adr;
-					$haddr='PROM,HQP,o,'.$a_output_module.'.'.$a_output_adr;
+					$haddr='PROM-HQP-O-'.$a_output_module.'.'.$a_output_adr;
 				}
 				
 				
@@ -169,7 +169,7 @@
 					$cond[]=[
 						'db'=>'inputs',
 						'device'=>'HQP',
-						'haddr'=>'PROM,HQP,i,'.$a_input_module.'.'.$p,
+						'haddr'=>'PROM-HQP-I-'.$a_input_module.'.'.$p,
 						'address'=>$a_input_module.'.'.$p,
 						'condition'=> [
 							'value','=',$a_input_state
@@ -240,7 +240,7 @@
 						//if (strlen($a_macro)) $a['scripts'][]=['script'=>$a_macro];
 						
 						if (!isset($act[$idx])) {
-							$act[$idx]=['haddr'=>'PROM,HQP,i,'.$idx,'device'=>'HQP','address'=>$idx,'actions'=>[]];
+							$act[$idx]=['haddr'=>'PROM-HQP-I-'.$idx,'device'=>'HQP','address'=>$idx,'actions'=>[]];
 						}
 						$act[$idx]['actions'][]=$a;						
 					
