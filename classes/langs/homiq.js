@@ -19,6 +19,8 @@ module.exports = function(com,ini,logger,callback) {
     var buf='';
     var self=this;
     var sendTimers=[];
+    var database;
+    var deviceId;
 
     
     var crc = function (cmd) {
@@ -130,8 +132,6 @@ module.exports = function(com,ini,logger,callback) {
              
         }
         
-        
-        
         sendSemaphore=false;
         if (sendQueue.length>0) sendTimers.push(setTimeout(send,nextHop));
         
@@ -165,91 +165,84 @@ module.exports = function(com,ini,logger,callback) {
     
     self.cmd_I = function (line) {
         var cmd=line[pos_cmd].split('.');
-        if (cmd.length==2) callback('input',{address: line[pos_src]+'.'+cmd[1], state: line[pos_val]});
+        if (cmd.length==2) callback('input',{haddr: address2haddr(line[pos_src]+'.'+cmd[1],'i'), value: line[pos_val]});
     }
     
+    var address2haddrCache={};
+    
+    var address2haddr = function(adr,ioo) {
+        var cond={device: deviceId, address: adr};
+        if (ioo!=null) cond.io=ioo;
+    
+        var token=JSON.stringify(cond);
+        if (typeof(address2haddrCache[token])!='undefined') {
+            return address2haddrCache[token];
+        }
+        var rec=database.ios.select([cond]);
+        if (rec!=null && rec.recordsTotal==1) {
+            
+            address2haddrCache[token]=rec.data[0].haddr;
+            return address2haddrCache[token];
+        }
+        return null;
+        
+    }
+    
+    var haddr2address = function(haddr) {
+        var obj=database.ios.get(haddr);
+        if (obj!=null) return obj.address;
+    
+        return null;
+    }
     
     return {
-        'turnon': function(options) {
-            var adr=options['address'].split('.');
-            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
-            deletefuture({
-                cmd: 'O.'+adr[1],
-                dst: adr[0],
-            });
-            send({
-                cmd: 'O.'+adr[1],
-                dst: adr[0],
-                val: 1
-            },delay);
+        
+        'set': function(data) {
+            var address=haddr2address(data.haddr);
+            if (address==null) return;
+            var value=data.value;
+            var delay = typeof(data.delay)=='undefined' ? 0 : data.delay;
+            
+            switch (value) {
+                case 'stop-d':
+                case 'stop-u':
+                case 'down':
+                case 'up':
+                    deletefuture({cmd: 'UD',dst: address});
+                    val='s';
+                    if (value=='up') val='u';
+                    if (value=='down') val='d';
+                    send({
+                        cmd: 'UD',
+                        dst: address,
+                        val: val,
+                        setval: value
+                    },delay);
+                    break;
+                
+                default:
+                    var adr=address.split('.');
+                    
+                    if (!isNaN(parseFloat(value)) && adr.length==2) {
+                        
+                        deletefuture({
+                            cmd: 'O.'+adr[1],
+                            dst: adr[0],
+                        });
+                        send({
+                            cmd: 'O.'+adr[1],
+                            dst: adr[0],
+                            val: value
+                        },delay); 
+                    }
+                    
+                    break;
+                    
+            }
             
             
         },
-        'turnoff': function(options) {
-            var adr=options['address'].split('.');
-            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
-            deletefuture({
-                cmd: 'O.'+adr[1],
-                dst: adr[0],
-            });
-            send({
-                cmd: 'O.'+adr[1],
-                dst: adr[0],
-                val: 0
-            },delay);
-        },
-        'up': function(options) {
-            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
-            deletefuture({
-                cmd: 'UD',
-                dst: options['address'],
-            });
-            send({
-                cmd: 'UD',
-                dst: options['address'],
-                val: 'u',
-                setval: 'up'
-            },delay);
-        },
-        'down': function(options) {
-            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
-            deletefuture({
-                cmd: 'UD',
-                dst: options['address'],
-            });
-            send({
-                cmd: 'UD',
-                dst: options['address'],
-                val: 'd',
-                setval: 'down'
-            },delay);
-        },
-        'stop-u': function(options) {
-            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
-            deletefuture({
-                cmd: 'UD',
-                dst: options['address'],
-            });
-            send({
-                cmd: 'UD',
-                dst: options['address'],
-                val: 's',
-                setval: 'stop-u'
-            },delay);
-        },
-        'stop-d': function(options) {
-            var delay = typeof(options['delay'])=='undefined'?0:options['delay'];
-            deletefuture({
-                cmd: 'UD',
-                dst: options['address'],
-            });
-            send({
-                cmd: 'UD',
-                dst: options['address'],
-                val: 's',
-                setval: 'stop-d'
-            },delay);
-        },
+        
         'data': function(data) {
             buf+=data.trim();
             
@@ -258,6 +251,7 @@ module.exports = function(com,ini,logger,callback) {
                 var end=buf.indexOf(';>');
                 
                 logger.log('Received: '+buf.substr(begin,end-begin+2),'frame');
+                
                 var line=buf.substr(begin+2,end-begin-2).split(';');
                 buf=buf.substr(end+2);
                 if (line[pos_top]=='s') {
@@ -284,22 +278,19 @@ module.exports = function(com,ini,logger,callback) {
                             break;
                         }
                     }
-                    var logicalstate='';
-                    var state=line[pos_val];
-                    if (state=='1') logicalstate='on';
-                    if (state=='0') logicalstate='off';
-                    if (state=='u') logicalstate='up';
-                    if (state=='d') logicalstate='down';
                     
+                    var state=line[pos_val];
+             
                     var cmd=line[pos_cmd].split('.');
                     var adr=line[pos_src];
                     if (cmd.length==2) adr+='.'+cmd[1];
                     
                     if (typeof(origin.setval)!='undefined') {
-                        state=logicalstate=origin.setval;
+                        state=origin.setval;
                     }
                     
-                    var opt={address:adr,state:state,logicalstate:logicalstate};
+                    var io=(cmd.length==2)?'o':null;
+                    var opt={haddr:address2haddr(adr,io),value:state};
                     callback('output',opt);
                 }
                 
@@ -309,6 +300,11 @@ module.exports = function(com,ini,logger,callback) {
         },
         'initstate': function (db) {
             setTimeout(hb,1000);
+            database=db;
+        },
+        
+        'setId': function (id) {
+            deviceId = id;
         }
     }
     

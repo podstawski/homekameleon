@@ -42,7 +42,7 @@ var Web = function(com,ini,logger,callback) {
         
         'data': function(data) {
             logger.log('Click '+data,'web');
-            callback('input',{address: data});
+            callback('input',{haddr: data});
         },
         
 

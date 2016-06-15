@@ -15,11 +15,12 @@ var Logic = function(script,logger)
             
             switch (type) {
                 case 'output':        
-                    db.outputs.set(data);
+                    db.ios.set(data);
                     break;
                 
                 case 'input': {
-                    var inp=db.inputs.get(data);
+                    
+                    var inp=db.ios.get(data);
                     if (inp==null) break;
                     if (!checkactive(inp)) break; 
                     
@@ -33,7 +34,7 @@ var Logic = function(script,logger)
                     data.last=inp.last
                     data.time=now-data.last;
                     data.last=now;
-                    db.inputs.set(data);
+                    db.ios.set(data);
                 
                     
                     if (actions!=null) {
@@ -57,7 +58,7 @@ var Logic = function(script,logger)
                                 
                             }
                             if (!anypass) {
-                                logger.log('No satisfying condition for input '+db.actions.index(data),'logic');
+                                logger.log('No satisfying condition for io '+db.actions.index(data),'logic');
                             }
                         }
                     } else {
@@ -66,7 +67,7 @@ var Logic = function(script,logger)
                         if (inp!=null) {
                             name=' ('+inp.name+')';
                         }
-                        logger.log('No action for input '+db.actions.index(data)+name,'logic');
+                        logger.log('No action for io '+db.actions.index(data)+name,'logic');
                     }
                     
                     

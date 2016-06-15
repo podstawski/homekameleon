@@ -56,7 +56,8 @@
         }
         ,
         "frame": {
-            "console": false
+            "console": false,
+            "file": "frame.txt"
         },
         "init": {
             "console": true,
@@ -86,16 +87,7 @@
         
     ],
     "db": {
-        "inputs": {
-            "model": "../../admin/models/json",
-            "file":"inputs.json",
-            "index": ["device","address"]
-        },        
-        "outputs": {
-            "model": "../../admin/models/json",
-            "file":"outputs.json",
-            "index": ["device","address"]
-        },        
+      
         "ios": {
             "model": "../../admin/models/json",
             "file":"ios.json",

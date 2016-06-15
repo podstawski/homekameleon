@@ -1,9 +1,11 @@
 
 module.exports = function (db,condition) {
-    var table=condition.db;
+    var table=condition.db||'ios';
     
     if (typeof(db[table])=='undefined') return false;
+    
     var data=db[table].get(condition);
+    
     var field=condition.condition[0];
     if (typeof(data[field])=='undefined') data[field]='';
     

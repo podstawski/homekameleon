@@ -42,6 +42,7 @@
                 'name'=>$m_name,
                 'value'=>'stop-u',
                 'timeout'=>$m_sleep,
+				'io'=>'r',
                 'active'=>1
             ];
         } elseif ($m_type=='I') {
@@ -54,6 +55,7 @@
 				'name'=>$m_name,
                 'value'=>'',
 				'type'=>'t',
+				'io'=>'t',
                 'active'=>1
             ];
         }
@@ -78,6 +80,7 @@
             'value'=>0,
             'timeout'=>$o_sleep,
             'type'=>$o_type,
+			'io'=>'o',
             'active'=>$o_active
         ];
         //echo $adodb->ado_ExplodeName($res,$i);break;
@@ -110,6 +113,7 @@
             'name'=>$i_name,
             'value'=>$i_state,
             'type'=>$i_type,
+			'io'=>'i',
             'active'=>$i_active
         ];
 		
@@ -156,7 +160,6 @@
 						$c=['value','=',$a_input_module_state];
 					}
 					$cond[]=[
-						'db'=>'outputs',
 						'device'=>'HQP',
 						'haddr'=>$haddr,
 						'address'=>$output_addr,
@@ -167,7 +170,6 @@
 				
 				if (strlen($a_input_state)) {
 					$cond[]=[
-						'db'=>'inputs',
 						'device'=>'HQP',
 						'haddr'=>'PROM-HQP-I-'.$a_input_module.'.'.$p,
 						'address'=>$a_input_module.'.'.$p,

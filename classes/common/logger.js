@@ -25,6 +25,7 @@ module.exports = function(logdir) {
         
     }
     
+    
     var log=function(contents,type) {
         if (channels==null || channels==undefined || typeof(channels[type])=='undefined' || typeof(channels[type]['console'])=='undefined' || channels[type]['console']) {
             console.log('['+type+']'+spaces(10-type.length),contents);
@@ -52,6 +53,7 @@ module.exports = function(logdir) {
         
         loadChannels: function(ch) {
             channels=ch;
+            save();
         },
         
         save: function() {

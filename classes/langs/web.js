@@ -7,9 +7,9 @@ var root=__dirname+'/../../web';
 var Web = function(com,ini,logger,callback) {
     
     com.on('initstate',function(opt,db) {
-        var outputs=db.outputs.getAll().data;
-        for (var o in outputs) {
-            opt.socket.emit('output', outputs[o]);
+        var ios=db.ios.getAll().data;
+        for (var io in ios) {
+            opt.socket.emit('io', ios[io]);
         }
     });
     
@@ -60,7 +60,7 @@ var Web = function(com,ini,logger,callback) {
         
         'data': function(data) {
             logger.log('Click '+data,'web');
-            callback('input',{address: data});
+            callback('input',{haddr: data});
         },
         
 
