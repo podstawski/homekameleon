@@ -484,6 +484,20 @@ var Admin = function(socket,session,hash,database,public_path,ini,logger) {
         users: function(d,idxName,cb) {
             updateUserSessionData(d);
             if (typeof(cb)=='function') cb(d);
+        },
+        
+        ios: function(d,idxName,cb) {
+      
+            if (d[idxName]=='_new') {
+                database.ios.remove('_new',function(){
+                    
+                    if (session[hash].uuid!==undefined) {
+                        d[idxName]=session[hash].uuid+'-ADD-'+rid();
+                        database.ios.add(d,cb);
+                    }
+                
+                });
+            } else cb(d);
         }
     }
     
@@ -551,6 +565,8 @@ var Admin = function(socket,session,hash,database,public_path,ini,logger) {
         if (typeof(database[db])=='undefined') return;
         if (typeof(idxName)=='undefined') idxName='id';
         if (typeof(d[idxName])=='undefined') d[idxName]=0;
+        
+        
         
         var dependencies=0;
         

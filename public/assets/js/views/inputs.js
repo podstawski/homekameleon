@@ -303,7 +303,6 @@ $(function(){
 			websocket.emit('db-save','ios',data,'haddr');
 		});
 		
-	
 		
 		
 		$.iosInitiated=true;
@@ -400,7 +399,12 @@ $(function(){
 	
 	});
 	
-	
+	/*
+	 *plus icon click - fire: add empty record
+	 */
+	$('.inputs .add-item').click(function(e) {
+		websocket.emit('db-save','ios',{'haddr':'_new','io':'o'},'haddr');
+	});	
 
 
 });
