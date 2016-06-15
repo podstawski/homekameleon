@@ -162,7 +162,7 @@ var drawConditions = function (selection) {
 	});
 }
 
-var loadInputs = function() {
+var loadIOs = function() {
 	/*
 	 *request to get all ios
 	 */
@@ -191,7 +191,7 @@ $(function(){
 	 */
 	setBreadcrumbs([{name: $.translate('Inputs & outputs'), href:'inputs.html'}]);
 
-	loadInputs();		
+	loadIOs();		
 	
 
 	websocket.emit('db-get','scripts');
@@ -240,9 +240,13 @@ $(function(){
 				if (actions.actions===undefined) {
                     actions.actions=[];
                 }
-				actions.id=id;
-				console.log(actions);
-				$.smekta_file('views/smekta/input-actions.html',actions,'#edit-input .modal-body',function(){
+				
+				var data=iosData[id];
+				data.id=id;
+				data.actions=actions.actions;
+				
+				console.log(data);
+				$.smekta_file('views/smekta/input-actions.html',data,'#edit-input .modal-body',function(){
 					
 					$('#edit-input .modal-body .translate').translate();
 					
@@ -291,10 +295,9 @@ $(function(){
 		
 		
 		$(document).on('click','.inputtable .switch-success input', function() {
-			var id=$(this).parent().parent().parent().attr('id').split(',');
+
 			var data={
-				device: id[0],
-				address: id[1],
+				haddr: $(this).parent().parent().parent().attr('id'),
 				active: $(this).prop('checked') 
 			};
 			websocket.emit('db-save','ios',data,'haddr');
@@ -325,8 +328,12 @@ $(function(){
 		
 		data.name=$('#edit-input input[name="name"]').val();
 		
-		console.log(data);
-		//websocket.emit('db-save','ios',data,'haddr');
+		var sa=$('#edit-input form').serializeArray();
+		for(var i=0;i <sa.length; i++) {
+			data[sa[i].name] = sa[i].value;
+		}
+
+		websocket.emit('db-save','ios',data,'haddr');
 		
 		var data={'haddr':id};
 		
@@ -339,10 +346,8 @@ $(function(){
 			$(this).find('.conditions li.item').each(function(){
 				var cond={};
 
-				var id=$(this).find('select.inputoroutput').val().split(',');
-				cond.db=id[0];
-				cond.device=id[1];
-				cond.address=id[2];
+				cond.haddr=$(this).find('select.inputoroutput').val();
+
 				cond.condition=[
 					$(this).find('.cond_what').val(),
 					$(this).find('.cond_eq').val(),
@@ -372,9 +377,8 @@ $(function(){
 		
 		
 		data.actions=actions;
-
-		console.log(data);		
-		//websocket.emit('db-save','actions',data,'haddr');
+		
+		websocket.emit('db-save','actions',data,'haddr');
 		
 	});
 

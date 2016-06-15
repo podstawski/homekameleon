@@ -1,9 +1,41 @@
+<div class="row">
 
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Type</span>
+                <input type="text" id="type" value="[type]" name="type"
+                       class="form-control translate" placeholder="Type">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Device</span>
+                <input device="text" id="device" value="[device]" name="device"
+                       class="form-control translate" placeholder="Device">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Address</span>
+                <input address="text" id="address" value="[address]" name="address"
+                       class="form-control translate" placeholder="Address">
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <div class="container-fluid">
 [loop:actions]
     <div class="row">
-        <div class="col-md-2">
+        <div class="activity col-md-1">
             <label class="switch switch-default switch-success">
                 <input type="checkbox" class="switch-input" value="1" [if:active]checked[endif:active]/>
                 <span class="switch-label"></span>
@@ -11,7 +43,7 @@
             </label>
         </div>
         
-        <div class="conditions col-md-5">
+        <div class="conditions col-md-7">
             <ul>
             [loop:conditions]
                 <li class="item">
@@ -27,7 +59,7 @@
             </ul>
         </div>
         
-        <div class="scripts col-md-5">
+        <div class="scripts col-md-4">
             <ul>
             [loop:scripts]
                 <li class="item">
@@ -58,7 +90,7 @@
 
 
 <div class="row new-row" style="display: none">
-    <div class="col-md-2">
+    <div class="activity col-md-1">
         <label class="switch switch-default switch-success">
             <input type="checkbox" class="switch-input" value="1" checked/>
             <span class="switch-label"></span>
@@ -66,7 +98,7 @@
         </label>
     </div>
     
-    <div class="conditions col-md-5">
+    <div class="conditions col-md-7">
         <ul>
             <li class="item">
                 <select class="inputoroutput" rel="[haddr]"></select>
@@ -80,7 +112,7 @@
         </ul>
     </div>
     
-    <div class="scripts col-md-5">
+    <div class="scripts col-md-4">
         <ul>
             <li class="item">
                 <select class="scripts"></select>

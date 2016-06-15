@@ -112,13 +112,6 @@ websocket.on('devices-all', function(data) {
     buildAsideMenu(data.data);
 });
 
-/*
-websocket.on('inputs-all', function(data) {
-    if (typeof(inputsTableDraw)=='function' && $('.inputtable').length>0) {
-        inputsTableDraw(data.data); 
-    }
-});
-*/
 
 websocket.on('files', function(dir,data) {
     if (typeof(displayFileList)=='function' ) {
@@ -136,8 +129,8 @@ websocket.on('bus',function(haddr,state) {
 });
 
 
-websocket.on('inputs',function(data){
-    if (typeof(loadInputs)=='function') {
-        loadInputs(data); 
+websocket.on('ios',function(data){
+    if (typeof(loadIOs)=='function') {
+        loadIOs(data); 
     }    
 });
