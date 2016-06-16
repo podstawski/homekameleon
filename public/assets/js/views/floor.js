@@ -216,7 +216,7 @@ var calculateWH = function () {
     //$('img.svg').width($('#floor-container .draggable-container').width());
     $('img.svg').width($('#floor-container').width());
     $('#floor-container .draggable-container').width($('#floor-container').width());
-    
+
     debugContainer();
     
     drawPolygonPoints();
@@ -916,6 +916,7 @@ $(function(){
     $('#floor-container .draggable-container').draggable({
         stop: function() {
             lastDragEvent=Date.now();
+            $(this).css('height','auto');
         }
     });
     
