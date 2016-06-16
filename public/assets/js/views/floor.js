@@ -599,6 +599,7 @@ var floorDraw=function(data) {
 
 var floorDrawElements=function(data) {
     
+    var haddrs=[];
     
     if (data.length>0 && data[0].floor!=thisfloor) return;
     
@@ -611,6 +612,14 @@ var floorDrawElements=function(data) {
     
     for(var i=0;i<data.length;i++) {
         var matchFound=false;
+        
+        if (data[i].controls!==undefined) {
+            for (var j=0; j<data[i].controls.length; j++) {
+                if (data[i].controls[j].haddr !== undefined) {
+                    haddrs.push(data[i].controls[j].haddr);
+                }
+            }
+        }
         for(var j=0; j<elements.length; j++) {
             if (data[i].id == elements[j].id) {
                 elements[j].toBeDeleted=false;
@@ -676,7 +685,7 @@ var floorDrawElements=function(data) {
      */
     
     if (!busRequested) {
-        websocket.emit('bus');
+        busSend(haddrs);
         busRequested=true;
     }
     

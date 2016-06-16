@@ -106,11 +106,21 @@ var Device = function(device, zoomfun, emiterfun) {
                         if (!emiterfun()) return;
                         var lastIdx=$(this).attr('_counter');
                         if (lastIdx===undefined) lastIdx=0;
-                        var mdown=$(this).attr('mdown').split(',');
-                        var size=mdown.length;
-                        var state=mdown[lastIdx%size];
-                        lastIdx++;
-                        $(this).attr('_counter',lastIdx);
+                        
+                        var mdown=$(this).attr('mdown');
+                        var state;
+                        if (mdown.indexOf('__STATE__')>=0) {
+                            mdown=mdown.replace(/__STATE__/g,$(this).attr('state'));
+                            state=eval(mdown);
+                        } else {
+                            mdown=mdown.split(',');
+                            var size=mdown.length;
+                            state=mdown[lastIdx%size];
+                            lastIdx++;
+                            $(this).attr('_counter',lastIdx);                            
+                        }
+                        
+
                         emiterfun($(this).attr('haddr'),state);
                     });
                 }
@@ -238,6 +248,7 @@ var Device = function(device, zoomfun, emiterfun) {
             if (dst!=element) style='';
             style+=sstyle.replace(/__STATE__/g,state).replace(/__PRC__/g,prc).replace(/__RPRC__/g,rprc);
             dst.attr('style',style);
+            dst.attr('state',state);
         }
         
     };
