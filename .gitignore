@@ -1,5 +1,5 @@
 node_modules/
-conf/
+conf
 logs/
 app.pid
 npm-debug.log
