@@ -14,7 +14,7 @@
             }
         },
         {
-            "id": "VAL",
+            "id": "VAR",
             "name": "Local Values",
             "language": "echo",
             "protocol": "echo"
