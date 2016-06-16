@@ -7,10 +7,10 @@ STOP=75
  
 start() {        
 	cd /root/promienko
-	node app.js >>/root/promienko.log &
+	node app >>/sd/promienko.log &
 }                 
  
 stop() {          
-	killall -TERM node
+	kill -TERM `cat /sd/promienko/app.pid` node
 	killall -TERM ssh
 }
