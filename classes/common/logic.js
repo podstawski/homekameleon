@@ -14,6 +14,12 @@ var Logic = function(script,logger)
             data.device=device;
             
             switch (type) {
+                
+                case 'set':
+                    var io=db.ios.get(data);
+                    script.set(io,data.value);
+                    break;
+                
                 case 'output':        
                     db.ios.set(data);
                     break;

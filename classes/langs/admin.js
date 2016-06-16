@@ -15,7 +15,11 @@ var Web = function(com,ini,logger,callback) {
     });
     
     com.on('notify',function(sockets,type,data) {        
-
+        
+        for (var i=0; i<sockets.length; i++) {
+            sockets[i].socket.emit('bus',data.haddr,data.value);
+        }
+        
     });
     
     return {
@@ -41,8 +45,35 @@ var Web = function(com,ini,logger,callback) {
         },
         
         'data': function(data) {
-            logger.log('Click '+data,'web');
-            callback('input',{haddr: data});
+            
+
+    
+            if (data===undefined) {
+                //code
+            } else if (typeof(data)=='object') {
+
+                if (typeof(data.haddr)=='string') {
+                    logger.log('Click '+data.haddr+': '+data.value,'web');
+                    
+                    database.ios.get(data.haddr,function(io){
+                        if (io.io=='i') callback('input',{haddr: data.haddr, value: data.value});
+                        if (io.io=='o') callback('set',{haddr: data.haddr, value: data.value});
+                    });           
+
+                }
+                
+                if (typeof(data.haddr)=='object') {
+                    for (var i=0;i <data.haddr.length; i++) {
+                        database.ios.get(data.haddr[i],function(io){
+                            data.socket.emit('bus',io.haddr,io.value);
+                        });
+                    }
+                }
+
+            }
+
+                        
+            
         },
         
 

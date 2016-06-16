@@ -159,7 +159,8 @@ var Httpd = function(options,logger) {
                     }
                 });
                 
-                httpSocket.on('input', function(data){
+                httpSocket.on('bus', function(data){
+                    data.socket=httpSocket;
                     self.emit('data',data);
                 });
             });
