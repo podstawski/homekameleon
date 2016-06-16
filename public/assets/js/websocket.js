@@ -134,3 +134,9 @@ websocket.on('ios',function(data){
         loadIOs(data); 
     }    
 });
+
+websocket.on('scripts',function(data){
+    if (typeof(loadScripts)=='function') {
+        loadScripts(data); 
+    }    
+});

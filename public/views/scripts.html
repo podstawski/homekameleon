@@ -5,18 +5,18 @@ var requireJS = [
     "assets/js/libs/select2.min.js",
     'assets/js/promienko.js'
 ];
-loadJS(requireJS, "assets/js/views/inputs.js");
+loadJS(requireJS, "assets/js/views/scripts.js");
 
 </script>
 
 
-<div id="current-title" class="translate" hidden>Inputs</div>
-<div id="current-desc" class="translate" hidden>Global list of inputs</div>
+<div id="current-title" class="translate" hidden>Scripts</div>
+<div id="current-desc" class="translate" hidden>Global list of scripts</div>
 
-<div class="animated fadeIn inputs">
+<div class="animated fadeIn scripts">
     <div class="card">
         <div class="card-header">
-            <i class="fa fa-edit"></i> <span class="translate">Inputs</span>
+            <i class="fa fa-edit"></i> <span class="translate">Scripts</span>
             <div class="card-actions">
                 <a href="#">
                     <small class="text-muted">docs</small>
@@ -24,7 +24,7 @@ loadJS(requireJS, "assets/js/views/inputs.js");
             </div>
         </div>
         <div class="card-block">
-            <table class="table table-striped table-bordered inputtable">
+            <table class="table table-striped table-bordered scripttable">
 
             </table>
         </div>
@@ -40,7 +40,7 @@ loadJS(requireJS, "assets/js/views/inputs.js");
 </div>
 
 <!-- Modal -->
-<div id="edit-input" class="modal fade" role="dialog" data-backdrop="static" >
+<div id="edit-script" class="modal fade" role="dialog" data-backdrop="static" >
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -78,28 +78,3 @@ loadJS(requireJS, "assets/js/views/inputs.js");
     </div>
 </div>
 
-
-<input type="file" id="img-input" accept="image/*" style="display: none" />
-
-<!-- Modal -->
-<div id="edit-control" class="modal fade" role="dialog" data-backdrop="static">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">
-            <input type="text" name="addr" placeholder="Control address" class="addr translate" value=""/>
-        </h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default translate" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-info translate">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>

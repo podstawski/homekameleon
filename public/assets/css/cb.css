@@ -220,6 +220,14 @@ body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
         width: 88%;
         margin: 5px auto;
     }
+
+    #edit-script {
+        top: 5px;
+    }
+    #edit-script .modal-dialog {
+        width: 88%;
+        margin: 5px auto;
+    }
 }
 
 
@@ -611,6 +619,120 @@ aside .device-container {
     float: right;
     margin: 5px 0 3px 0;
 }
+
+
+#edit-script .modal-header input {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+
+#edit-script .modal-body {
+    padding-top: 0;
+}
+#edit-script .modal-body .row {
+    border-bottom: solid 1px #d0d0d0;
+    padding-top: 10px;
+}
+
+
+
+#edit-script .modal-body .row ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#edit-script .modal-body .row ul li {
+    border: dotted 1px #d0d0d0;
+}
+
+#edit-script .modal-body .row ul li.add {
+    border: 0;
+}
+
+#edit-script .modal-body .row ul li .x {
+    content: "×";
+    cursor: pointer;
+    width: 1%;
+    display: inline-block;
+    float: right;
+    padding: 0 4px 10px 0;
+}
+
+
+#edit-script .modal-body .row .conditions ul li .select2-container {
+    width: 60%;
+}
+
+#edit-script .modal-body .row .actions ul li .select2-container {
+    width: 76%;
+}
+
+#edit-script .modal-body .row .scripts ul li .select2-container {
+    width: 80%;
+}
+
+#edit-script .modal-body .row ul li condition {
+    display: inline-block;
+    width:38%;
+}
+
+#edit-script .modal-body .row ul .new-item {
+    display: none;
+}
+
+#edit-script .modal-body .row .scripts ul li .delay {
+    border: solid 1px #e0e0e0;
+    width:17%;
+    height: 32px;
+}
+
+#edit-script .modal-body .row .actions ul li .value {
+    border: solid 1px #e0e0e0;
+    width:10%;
+    height: 32px;
+    font-size: 80%;
+}
+
+#edit-script .modal-body .row .actions ul li .delay {
+    border: solid 1px #e0e0e0;
+    width:10%;
+    height: 32px;
+    font-size: 80%;
+}
+
+
+#edit-script .modal-body .row ul li .cond_what {
+    width: 30%;
+    height: 32px;
+}
+#edit-script .modal-body .row ul li .cond_eq {
+    width: 15%;
+    height: 32px;
+}
+#edit-script .modal-body .row ul li .cond_value {
+    width: 50%;
+    height: 31px;
+    font-size: 70%;
+}
+
+
+#edit-script .modal-body .add {
+    cursor: pointer;
+    float: right;
+    margin: 5px 0 3px 0;
+}
+
+
+
+
+
+
+
 
 .device-container .controls-container .control-slider {
     position: relative;
