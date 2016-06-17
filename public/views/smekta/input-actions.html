@@ -4,7 +4,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon translate">Type</span>
-                <input type="text" id="type" value="[type]" name="type"
+                <input type="text" id="type" [if:type]value="[type]"[endif:type] name="type"
                        class="form-control translate" placeholder="Type">
             </div>
         </div>
@@ -14,7 +14,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon translate">Device</span>
-                <input device="text" id="device" value="[device]" name="device"
+                <input device="text" id="device" [if:device]value="[device]"[endif:device] name="device"
                        class="form-control translate" placeholder="Device">
             </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon translate">Address</span>
-                <input address="text" id="address" value="[address]" name="address"
+                <input address="text" id="address" [if:address]value="[address]"[endif:address] name="address"
                        class="form-control translate" placeholder="Address">
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon translate">GPF</span>
-                <input io="text" id="gpf" value="[gpf]" name="gpf"
+                <input io="text" id="gpf" [if:gpf]value="[gpf]"[endif:gpf] name="gpf"
                        class="form-control translate" placeholder="General Purpose Field">
             </div>
         </div>
