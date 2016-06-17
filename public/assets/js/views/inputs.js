@@ -16,7 +16,8 @@ var iosColumns=[
 			return '<input type="text" value="'+data+'"/>'
 		}
 	},
-	{ title: $.translate("Address"), data: "haddr" },
+	{ title: $.translate("H-address"), data: "haddr" },
+	{ title: $.translate("Address"), data: "address" },
 	{ title: $.translate("Type"), data: "type" },
     
     {
