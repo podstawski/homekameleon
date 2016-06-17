@@ -31,17 +31,19 @@ module.exports = function(session) {
     
             socket.on('bus',function(addr,state) {
                 
-                if (addr==null) {
-                    allStates(socket);
+            
+                if (typeof(addr.haddr)=='object') {
+                    allStates(socket,addr.haddr);
                     return;
                 }
                 
                 
-                var a=addr.replace('I','O');
+                var a=addr.haddr;
                 
                 var s=states.get(a);
+                
                 if (s==null) {
-                    s={addr: a, state: (a==addr)?parseInt(state):0};
+                    s={addr: a, state: parseInt(addr.state)};
                     states.add(s);
                 }
                 
@@ -53,9 +55,6 @@ module.exports = function(session) {
                     state2=parseInt(state);
                 }
                 
-                if (addr.indexOf('IM')>=0) {
-                    state2=parseInt(state);
-                }
                 
                 states.set({state:state2},a,function(){
                     for (var h in session) {    
