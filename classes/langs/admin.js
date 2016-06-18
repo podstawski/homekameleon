@@ -55,7 +55,9 @@ var Web = function(com,ini,logger,callback) {
                 if (typeof(data.haddr)=='string') {
                     logger.log('Click '+data.haddr+': '+data.value,'web');
                     
-                    database.ios.get(data.haddr,function(io){
+                    if (data.haddr=='script') {
+                        callback('script',{script:data.value});
+                    } else database.ios.get(data.haddr,function(io){
                         if (io.io=='i') callback('input',{haddr: data.haddr, value: data.value});
                         if (io.io=='o') callback('set',{haddr: data.haddr, value: data.value});
                     });           

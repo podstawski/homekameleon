@@ -40,6 +40,16 @@ var Script=function(logger) {
                                   scriptsQueue[i].script.actions[j].device,
                                   scriptsQueue[i].script.actions[j]);
                     }
+                } else if (typeof(scriptsQueue[i].script.nactions)=='object' && scriptsQueue[i].script.nactions.length) {
+                    logger.log('!'+scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
+                
+                
+                    for(var j=0;j<scriptsQueue[i].script.nactions.length;j++) {
+                        
+                        self.emit(scriptsQueue[i].script.nactions[j].device,
+                                  scriptsQueue[i].script.nactions[j].device,
+                                  scriptsQueue[i].script.nactions[j]);
+                    }
                 }
                 
                 scriptsQueue.splice(i,1);
@@ -114,6 +124,7 @@ var Script=function(logger) {
         
         var result={};
         for (var id in all) {
+            if ( all[id].name==null) continue;
             var lev=levenshtein(str,all[id].name.toLowerCase());
             if (lev==0) return id;
             if (lev>5) continue;
