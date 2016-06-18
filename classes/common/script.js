@@ -24,11 +24,16 @@ var Script=function(logger) {
                 var pass=true;
                 
                 if (typeof(scriptsQueue[i].script.conditions)=='object') {
-                    for (var j=0; j<scriptsQueue[i].script.conditions.length; j++) {
-                        pass*=condition(db,scriptsQueue[i].script.conditions[j]);
-                        if (!pass) break;
-                    }                    
+                    if (scriptsQueue[i].script.conditions.length>0) {
+                        scriptsQueue[i].conditions = scriptsQueue[i].conditions.concat(scriptsQueue[i].script.conditions);
+                    }
                 }
+
+                for (var j=0; j<scriptsQueue[i].conditions.length; j++) {
+                    pass*=condition(db,scriptsQueue[i].conditions[j]);
+                    if (!pass) break;
+                }                    
+
                 
                 if (pass) {
                     logger.log(scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
@@ -63,7 +68,7 @@ var Script=function(logger) {
         setTimeout(runscripts,1000);
     }
     
-    var run = function(script,delay) {
+    var run = function(script,delay,condition) {
         if (delay==null) delay=0;
         
         /*
@@ -79,7 +84,9 @@ var Script=function(logger) {
         /*
          *get database for specified script id
          */
+        
         script=db.scripts.get(script);
+        
         if (script==null) return;
         if (!checkactive(script)) return;
     
@@ -88,9 +95,39 @@ var Script=function(logger) {
          */
         var when=Date.now()+1000*delay;
         
+        var conditions=[];
+    
+        if (condition!=null && condition.length>0) {
+            var ca=condition.split('\n');
+            for (var i=0; i<ca.length; i++) {
+                var c=ca[i].match(/(.+)(=|>|<\!=)(.+)/);
+                if (c==null) continue;
+                var ioidx=c[1];
+                
+                var io=db.ios.get(ioidx);
+                if (io==null) {
+                    ioidx=ioidx.split('.');
+                    if (ioidx.length==2) {
+                        ios=db.ios.select([{device: ioidx[0], address: ioidx[1]}]);
+                        if (ios.data.length==1) io=ios.data[0];
+                    }
+                    
+                }
+                if (io==null) continue;
+            
+                conditions.push({
+                    haddr: io.haddr,
+                    device: io.device,
+                    condition: ['value',c[2],c[3]]
+                });
+            }
+            
+        }
+        
         scriptsQueue.push({
             when: when,
-            script: script
+            script: script,
+            conditions: conditions
         });
         
         /*
@@ -126,11 +163,13 @@ var Script=function(logger) {
         for (var id in all) {
             if ( all[id].name==null) continue;
             var lev=levenshtein(str,all[id].name.toLowerCase());
-            if (lev==0) return id;
+            if (lev==0) return all[id].id;
+
             if (lev>5) continue;
             if (typeof(result[lev])=='undefined') result[lev]=[];
             result[lev].push(all[id]);
         }
+        
         
         if (typeof(result[1])!='undefined') {
             cache[str]=result[1][0].id;
@@ -194,8 +233,8 @@ var Script=function(logger) {
             self.on(event,fun);
         },
         
-        run: function(script,delay) {
-            run(script,delay);
+        run: function(script,delay,condition) {
+            run(script,delay,condition);
         },
         
         find: function(str) {

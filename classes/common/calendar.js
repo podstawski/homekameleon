@@ -107,12 +107,14 @@ module.exports = function(logger,script) {
                                 if (id==null) {
                                     logger.log('Script "'+ev.summary+'" unrecognizable','calendar');
                                 } else {
+                        
                                     if (typeof(id)=='object') {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:id[0]});
-                                        if (ev.end.getTime()>now) events.push({when:ev.end,script:id[1]});
+                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id[0]),condition:ev.description||null});
+                                        if (ev.end.getTime()>now) events.push({when:ev.end,script:parseInt(id[1]),condition:ev.description||null});
                                         
                                     } else {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:id});
+                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id),condition:ev.description||null});
+                        
                                     }
                                 
                                 }
@@ -129,13 +131,14 @@ module.exports = function(logger,script) {
         },
         
         run: function() {
-            
+                        
             var now=Date.now();
             for (var i=0;i<events.length;i++) {
                 var when=events[i].when.getTime();
                 
+                
                 if (Math.abs(now-when)<10000) {
-                    script.run(events[i].script,0);
+                    script.run(events[i].script,0,events[i].condition);
                     
                 }
                 if (when<now) {
