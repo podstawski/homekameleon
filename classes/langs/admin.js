@@ -64,9 +64,11 @@ var Web = function(com,ini,logger,callback) {
                 
                 if (typeof(data.haddr)=='object') {
                     for (var i=0;i <data.haddr.length; i++) {
-                        database.ios.get(data.haddr[i],function(io){
-                            data.socket.emit('bus',io.haddr,io.value);
-                        });
+                        
+                        var io=database.ios.get(data.haddr[i]);
+                        if (io==null) logger.log('IO not found: '+data.haddr[i],'error')
+                        else data.socket.emit('bus',io.haddr,io.value);
+                    
                     }
                 }
 
