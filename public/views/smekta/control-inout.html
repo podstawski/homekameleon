@@ -1,0 +1,61 @@
+
+<div class="card inout">
+    <div class="card-header">
+        <strong class="translate">Input/output attributes</strong> 
+    </div>
+    <div class="card-block">
+
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Default state</span>
+                <input type="text" id="state" [if:state]value="[state]"[endif:state] name="state"
+                       class="form-control translate" placeholder="State of output if no command was emited">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">States emited</span>
+                <input type="text" id="estate" [if:estate]value="[estate]"[endif:estate] name="estate"
+                       class="form-control translate" placeholder="Input states emited after mouse operations, e.g. 0,1">
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Acceptable range</span>
+                <input type="text" id="min" [if:min]value="[min]"[endif:min] name="min"
+                       class="form-control translate" style="width:50%"
+                       placeholder="Min value">
+                <input type="text" id="max" [if:max]value="[max]"[endif:max] name="max"
+                       class="form-control translate" style="width:50%"
+                       placeholder="Max value">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Style line</span>
+                <input type="text" id="sstyle" [if:sstyle]value="[sstyle]"[endif:sstyle] name="sstyle"
+                       class="form-control translate" placeholder="CSS style depanding of state - use __STATE__ for evaluation">
+            </div>
+        </div>
+        
+
+
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="img-input">
+                <i class="fa fa-plus"></i>
+                <i class="fa fa-image"></i>
+            </label>
+            <div class="col-md-9">
+                <ul class="images">
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>

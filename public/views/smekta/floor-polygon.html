@@ -1,0 +1,40 @@
+
+
+<div class="card">
+    <div class="card-header">
+        <strong>Room attributes</strong> 
+    </div>
+    <div class="card-block">
+        
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="haddr">Address</label>
+            <div class="col-md-9">
+                
+                <input type="text" id="haddr" value="[if:haddr][haddr][endif:haddr]" name="haddr"
+                       class="form-control" [if:!admin]disabled[endif:!admin]>
+                <span class="help-block translate"></span>
+            </div>
+            
+        </div>
+          
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label translate" for="image">Image</label>
+            <div class="col-md-9">
+                <label for="img-input" class="img-input">
+                    [if:img]
+                    <img src="[img]"/>
+                    [endif:img]
+                    [if:!img]
+                    <img src="assets/img/noimg.png"/>
+                    [endif:!img]    
+                </label> 
+            </div>
+        </div>            
+            
+            
+
+    </div>
+
+</div>
+
+            

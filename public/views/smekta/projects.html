@@ -1,0 +1,13 @@
+<div class="dropdown-header"><span class="translate">Projects</span> <a href="project.html,0" class="btn pull-right"><i class="icon-plus"></i></a></div>
+                                
+[loop:data]		
+<a class="dropdown-item nav-link p-l-0" href="project.html,[id]">
+    <div class="avatar avatar-sm">
+        [if:img]
+        <img src="[img]" class="img-avatar" alt="[description]">
+        [endif:img]
+        <span class="avatar-status label-success"></span>
+    </div>
+    [name]
+</a>
+[endloop:data]

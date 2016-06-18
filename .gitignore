@@ -1,5 +1,13 @@
 node_modules/
+<<<<<<< HEAD
 conf
 logs/
 app.pid
 npm-debug.log
+=======
+images/
+data/
+start
+ini.js
+app.pid
+>>>>>>> eeddad8f6dd3f5cbff7b77cea10e573a1b8e515c

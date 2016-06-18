@@ -1,0 +1,83 @@
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="conditions col-md-4">
+            <div class="card-header">
+                <strong class="translate">Script conditions</strong> 
+            </div>
+            <ul>
+            [if:conditions]
+            [loop:conditions]
+                <li class="item">
+                    <select class="inputoroutput" rel="[haddr]"></select>
+                    <condition>[condition]</condition>
+                </li>
+            [endloop:conditions]
+            [endif:conditions]
+                <li class="new-item">
+                    <select class="inputoroutput" rel=""></select>
+                    <condition></condition>
+                </li>
+                <li class="add plus-last"><i class="icon-plus translate" title="Add condition"></i></li>
+            </ul>
+        </div>
+
+        <div class="actions col-md-4">
+            
+            <div class="card-header">
+                <strong class="translate">Actions</strong> 
+            </div>
+            <ul>
+            [if:actions]
+            [loop:actions]
+                <li class="item">
+                    <select rel="[haddr]" class="inputoroutput"></select>
+                    <input type="text" value="[value]" class="translate value" placeholder="value"/>
+                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="delay"/>
+                </li>
+            [endloop:actions]
+            [endif:actions]
+                <li class="new-item">
+                    <select rel="" class="inputoroutput"></select>
+                    <input type="text" class="translate value" placeholder="value"/>
+                    <input type="text" class="translate delay" placeholder="delay"/>
+                </li>
+                
+                <li class="add plus-last"><i class="icon-plus translate" title="Add action"></i></li>
+            </ul>
+        </div>
+
+
+        
+        <div class="scripts col-md-4">
+            <div class="card-header">
+                <strong class="translate">Subscripts</strong> 
+            </div>
+            <ul>
+            [if:scripts]    
+            [loop:scripts]
+                <li class="item">
+                    <select rel="[script]" class="scripts"></select>
+                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="delay"/>
+                </li>
+            [endloop:scripts]
+            [endif:scripts]
+                <li class="new-item">
+                    <select rel="" class="scripts"></select>
+                    <input type="text" class="translate delay" placeholder="delay"/>
+                </li>
+                
+                <li class="add plus-last"><i class="icon-plus translate" title="Add subscript"></i></li>
+            </ul>
+        </div>
+    
+    
+    
+    </div>
+    
+
+
+</div>

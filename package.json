@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "MyPromienkoHome",
+=======
+  "name": "ControlByConsole",
+>>>>>>> eeddad8f6dd3f5cbff7b77cea10e573a1b8e515c
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
@@ -8,16 +12,29 @@
   },
   "repository": {
     "type": "git",
+<<<<<<< HEAD
     "url": "https://github.com/podstawski/promienko"
+=======
+    "url": "https://github.com/podstawski/cb"
+>>>>>>> eeddad8f6dd3f5cbff7b77cea10e573a1b8e515c
   },
   "author": "Piotr Podstawski",
   "license": "ISC",
   "bugs": {
+<<<<<<< HEAD
     "url": "https://github.com/podstawski/promienko/issues"
   },
   "dependencies": {
     "express": "",
     "socket.io": "",
     "ical": ""
+=======
+    "url": "https://github.com/podstawski/cb/issues"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "mysql": "^2.10.2",
+    "socket.io": "^1.4.5"
+>>>>>>> eeddad8f6dd3f5cbff7b77cea10e573a1b8e515c
   }
 }

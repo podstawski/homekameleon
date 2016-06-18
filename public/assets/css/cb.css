@@ -1,0 +1,828 @@
+.after-login {
+    display: none !important;
+}
+
+.project-avatar,
+body:not(.top-nav) .sidebar .sidebar-header .img-avatar{
+    width: 120px;
+    margin: 20px auto 10px;
+    border-radius: 50%;
+}
+
+.project-avatar {
+    cursor: pointer;
+}
+
+.add-item {
+    text-align: right;
+}
+
+.add-item a {
+    background-color: #20a8d8;
+    border-radius: 50%;
+    padding: 1.5em;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.add-item a:hover {
+    text-decoration: none;
+    opacity: 0.5;
+}
+.add-item a:active,.add-item a:focus {
+    text-decoration: none;
+}
+
+.add-item a:hover i {
+    color: #000;
+}
+
+.add-item a i {
+    color: white;
+    font-size: 3em;
+}
+
+#project-structure {
+    margin-top: 20px;
+}
+
+#project-structure input {
+    width: 80%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none;
+}
+#project-structure input:focus {
+    outline: none;
+}
+
+.project .form-actions {
+    margin-left: 3px;
+}
+
+#left-sidebar .nav-dropdown-items li {
+    margin-left: 10px;
+}
+
+#floor-container {
+    overflow: hidden;
+    position: relative;
+    width:100%;
+    padding: 0;
+}
+
+#floor-container .draggable-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 0;
+}
+
+
+#floor-container .draggable-container:active {
+    cursor: move;
+}
+
+#floor-container .draggable-container img.svg {
+    z-index: 10;
+}
+
+#floor-container .draggable-container .polygon-dot {
+    position: absolute;
+}
+
+
+#floor-container .draggable-container .polygon {
+    position: absolute;
+    z-index: 100;
+}
+
+#floor-container .draggable-container .polygon svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#floor-container .draggable-container .polygon div {
+    position: absolute;
+    color: yellow;
+    font-weight: bold;
+    font-size: 60%;
+    top: 40%;
+    left: 20%;
+    z-index: 50;
+}
+
+.editmode .draggable-container .polygon div {
+    cursor: move;
+}
+
+
+#floor-container .draggable-container .polygon svg polygon {
+    fill:rgba(1, 1, 1, 0.1);
+    stroke:yellow;
+    stroke-width:2;
+    width: 100%;
+    height: 100%;    
+}
+
+#floor-container .draggable-container .floor-debug-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: 150px;
+    border: 1px red solid;
+    background-color: rgba(255,0,0,0.1);
+    z-index: 30;
+    padding: 2px;
+}
+
+#floor-container .draggable-container .floor-debug-container a {
+    right: 2px;
+    position: absolute;
+    top: -5px;
+    color: red;
+}
+
+#floor-container .draggable-container .floor-debug-container a:hover {
+    text-decoration: none;
+}
+
+#floor-container .draggable-container .floor-debug-container .floor-debug-contents {
+    height: 100%;
+    overflow: auto;
+    font-size: 8px;
+    font-family: Courier;
+}
+
+#floor-container .draggable-container .floor-debug-container .floor-debug-contents p {
+    margin: 0;
+}
+
+#floor-container .floor-polygon-dashboard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    cursor: crosshair;
+    display: none;
+}
+
+#floor-container .draggable-container .line {
+    position: absolute;
+    z-index: 120;
+}
+
+#floor-container .draggable-container .line svg line {
+    stroke:red;
+    stroke-width:1;
+    width: 100%;
+    height: 100%;    
+}
+
+.breadcrumb .breadcrumb-menu .active {
+    color: #20a8d8
+}
+
+#edit-element .modal-header input {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-element .img-input img {
+    max-width: 200px;
+}
+
+#edit-element .btn-danger {
+    float: left;
+}
+
+@media screen and (min-width: 768px) {
+    #edit-device {
+        top: 5px;
+    }
+    #edit-device .modal-dialog {
+        width: 78%;
+        margin: 5px auto;
+    }
+    
+    #edit-input {
+        top: 5px;
+    }
+    #edit-input .modal-dialog {
+        width: 88%;
+        margin: 5px auto;
+    }
+
+    #edit-script {
+        top: 5px;
+    }
+    #edit-script .modal-dialog {
+        width: 88%;
+        margin: 5px auto;
+    }
+}
+
+
+
+#edit-device .modal-header {
+    background-color: yellow;
+    border-radius: 3px 3px 0 0;
+}
+
+#edit-device .modal-footer {
+    background-color: yellow;
+    border-radius: 0 0 3px 3px;
+}
+
+#edit-device .modal-header input.name {
+    width: 69%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-device .modal-header input.symbol {
+    width: 20%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-device .img-input {
+    cursor: pointer;
+    padding: 3px;
+    border: solid 1px #808080;
+}
+
+#edit-device .img-input img {
+    max-width: 80px;
+}
+
+#edit-device .device-controls-top-container {
+    position: relative;
+}
+
+#edit-device .device-controls-parent-container {
+    padding: 0;
+}
+
+#edit-device .device-controls-container {
+    width: 100%;
+    height: 364px;
+    border: solid 1px black;
+    padding: 0;
+}
+
+#edit-device .device-controls-container div {
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#edit-device .device-controls-label-container {
+    padding: 10px;
+    background-color: rgba(0,0,0,0.15);
+    border: #909090 solid;
+    border-width: 1px;
+    position: absolute;
+    bottom: 0;
+}
+ 
+ 
+#edit-device .drg {
+    width: 50px;
+    height: 50px;
+    border: dashed 1px green;
+    text-align: center;
+    color: #909090;
+    display: inline-block;
+}
+
+#edit-device .drg-active {
+    border-color: red;
+}
+
+#edit-device .drg .outertxt {
+    width:100%;
+    height: 100%;
+    display: table;
+}
+
+#edit-device .drg .innertxt {
+    text-align: center;
+    font-size: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+ 
+#edit-device .device-controls-label-container div {
+    margin-bottom: 10px;
+
+}
+
+#edit-device .device-controls-container .drg {
+    margin: 0;
+    position: absolute;    
+}
+
+#edit-device .device-controls-top-container .device-attrinutes-container {
+    height: 100%;
+}
+
+#edit-device .device-controls-top-container .dim {
+    border: dashed 1px red;
+    padding: 4px;
+    text-align: right;
+    display: none;
+}
+#edit-device .device-controls-top-container .dim input{
+    width: 40px;
+    display: inline-block;
+}
+
+
+#edit-device .drg:hover {
+    cursor: move;
+}
+
+#edit-device .select2-container {
+    width: 100%;
+}
+
+#edit-device .disable-toggle {
+    position: absolute;
+    width: 98%;
+    text-align: center;
+    background-color: rgba(0,0,0,0.3);
+    height: 199px;
+    z-index: 20;
+    cursor: wait;
+    font-size: 36px;
+    padding-top: 80px;
+    color: #ffff00;
+}
+
+#edit-control .modal-header input.addr {
+    width: 90%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+#edit-control .modal-body i {
+    font-size: 36px;
+    cursor: pointer;
+}
+
+#edit-control .modal-body ul.images {
+    list-style-type: none;
+}
+#edit-control .modal-body ul.images li {
+    border-bottom: 1px solid #909090;
+    padding: 3px;
+}
+
+#edit-control .modal-body ul.images li img {
+    max-width: 36px;
+}
+
+#edit-control .modal-body ul.images li i {
+    font-size: 12px;
+    float: right;
+    margin-top: 10px;
+}
+
+#edit-control .modal-body ul.images li input {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none;
+    width:40%;
+}
+
+#edit-control .modal-header {
+    background-color: green;
+    border-radius: 3px 3px 0 0;
+    color: white;
+}
+
+#edit-control .modal-footer {
+    background-color: green;
+    border-radius: 0 0 3px 3px;
+}
+
+
+aside .nav-tabs .nav-item + .nav-item {
+    margin: 0;
+}
+
+aside .avatar {
+    width: 35px;
+}
+
+aside .pull-left {
+    height: 70px;
+}
+
+aside hr {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+aside .device-element {
+    width: 35px;
+    height: 70px;
+}
+
+
+
+.device-container {
+    position: relative;
+    width: 100%;
+    border: 0.5px solid black;
+    border-radius: 1px;
+    background-color: rgba(255,0,0,0.6);
+}
+
+aside .device-container {
+    cursor: move;
+}
+
+.editmode .device-container {
+    cursor: move;
+}
+
+
+#floor-container .draggable-container .device-container {
+    width: 35px;
+    height: 70px;
+    position: absolute;
+    z-index: 200;
+}
+
+
+.device-container .controls-container {
+    width: 100%;
+    position: relative;
+}
+
+.device-container .controls-container div {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.device-container .device-label {
+    font-size: 10px;
+    text-align: center;
+    height: 32px;
+    color: #fff;
+    
+}
+
+.device-container.ui-draggable-dragging {
+    z-index: 3000;
+    width: 35px;
+}
+
+.aside-edit .btn-danger {
+    display: none;
+}
+
+.control-edit .btn-danger {
+    display: none;
+}
+
+
+.device-container .controls-container .txt {
+    text-align: center;
+    font-size: 10px;
+    width:100%;
+    display: block;
+    padding: 0;
+    color: #fff;
+}
+
+
+#edit-device .modal-body .device-controls-container .slider {
+    position: relative;
+    margin: 8% 4% 0 4%;
+    height: 60%;
+    border: 1px #909090 solid;
+    border-radius: 1%;
+}
+
+#edit-device .modal-body .device-controls-container .slider img {
+    position: absolute;
+    top: -20%;
+    height: 140%
+}
+
+#edit-device .modal-body .device-controls-container .slider .progressbar {
+    height: 100%;
+    background-color: #ffff00;
+}
+
+#edit-input .modal-header input {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+
+#edit-input .modal-body {
+    padding-top: 0;
+}
+#edit-input .modal-body .row {
+    border-bottom: solid 1px #d0d0d0;
+    padding-top: 10px;
+}
+
+
+
+#edit-input .modal-body .row ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#edit-input .modal-body .row ul li {
+    border: dotted 1px #d0d0d0;
+}
+
+#edit-input .modal-body .row ul li.add {
+    border: 0;
+}
+
+#edit-input .modal-body .row ul li .x {
+    content: "×";
+    cursor: pointer;
+    width: 1%;
+    display: inline-block;
+    float: right;
+    padding: 0 4px 10px 0;
+}
+
+
+#edit-input .modal-body .row .conditions ul li .select2-container {
+    width: 60%;
+}
+
+#edit-input .modal-body .row .scripts ul li .select2-container {
+    width: 80%;
+}
+
+#edit-input .modal-body .row ul li condition {
+    display: inline-block;
+    width:38%;
+}
+
+#edit-input .modal-body .row ul .new-item {
+    display: none;
+}
+
+#edit-input .modal-body .row ul li .delay {
+    border: solid 1px #e0e0e0;
+    width:17%;
+    height: 32px;
+}
+
+#edit-input .modal-body .row ul li .cond_what {
+    width: 30%;
+    height: 32px;
+}
+#edit-input .modal-body .row ul li .cond_eq {
+    width: 15%;
+    height: 32px;
+}
+#edit-input .modal-body .row ul li .cond_value {
+    width: 50%;
+    height: 31px;
+    font-size: 70%;
+}
+
+
+#edit-input .modal-body .add {
+    cursor: pointer;
+    float: right;
+    margin: 5px 0 3px 0;
+}
+
+
+#edit-script .modal-header input {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
+}
+
+
+#edit-script .modal-body {
+    padding-top: 0;
+}
+#edit-script .modal-body .row {
+    border-bottom: solid 1px #d0d0d0;
+    padding-top: 10px;
+}
+
+
+
+#edit-script .modal-body .row ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#edit-script .modal-body .row ul li {
+    border: dotted 1px #d0d0d0;
+}
+
+#edit-script .modal-body .row ul li.add {
+    border: 0;
+}
+
+#edit-script .modal-body .row ul li .x {
+    content: "×";
+    cursor: pointer;
+    width: 1%;
+    display: inline-block;
+    float: right;
+    padding: 0 4px 10px 0;
+}
+
+
+#edit-script .modal-body .row .conditions ul li .select2-container {
+    width: 60%;
+}
+
+#edit-script .modal-body .row .actions ul li .select2-container {
+    width: 76%;
+}
+
+#edit-script .modal-body .row .scripts ul li .select2-container {
+    width: 80%;
+}
+
+#edit-script .modal-body .row ul li condition {
+    display: inline-block;
+    width:38%;
+}
+
+#edit-script .modal-body .row ul .new-item {
+    display: none;
+}
+
+#edit-script .modal-body .row .scripts ul li .delay {
+    border: solid 1px #e0e0e0;
+    width:17%;
+    height: 32px;
+}
+
+#edit-script .modal-body .row .actions ul li .value {
+    border: solid 1px #e0e0e0;
+    width:10%;
+    height: 32px;
+    font-size: 80%;
+}
+
+#edit-script .modal-body .row .actions ul li .delay {
+    border: solid 1px #e0e0e0;
+    width:10%;
+    height: 32px;
+    font-size: 80%;
+}
+
+
+#edit-script .modal-body .row ul li .cond_what {
+    width: 30%;
+    height: 32px;
+}
+#edit-script .modal-body .row ul li .cond_eq {
+    width: 15%;
+    height: 32px;
+}
+#edit-script .modal-body .row ul li .cond_value {
+    width: 50%;
+    height: 31px;
+    font-size: 70%;
+}
+
+
+#edit-script .modal-body .add {
+    cursor: pointer;
+    float: right;
+    margin: 5px 0 3px 0;
+}
+
+
+
+
+
+
+
+
+.device-container .controls-container .control-slider {
+    position: relative;
+}
+
+.device-container .controls-container .control-slider .slider {
+    width: 90%;
+    margin: 4% 4% 0 4%;
+    height: 70%;
+    border: #909090 solid;
+    border-width: 0.1px;
+}
+
+.device-container .controls-container .control-slider .progressbar {
+    background-color: yellow;
+    height: 100%;
+    position: relative;
+}
+
+.previewmode .device-container .controls-container .mouseclick {
+    cursor: crosshair;
+}
+
+.previewmode .device-container .controls-container .mousemove {
+    cursor: e-resize;
+}
+
+.device-container .controls-container .control-slider .img-container {
+    position: relative;
+    width: 80%;
+    height: 100%;
+}
+
+
+.device-container .controls-container .control-slider img {
+    position: absolute;
+    height: 100%;
+    left: 40%;
+}
+
+
+.breadcrumb .edit-mode-hidden {
+    display: none;
+}
+
+
+#confirm-delete {
+    top: 20%
+}
+
+#confirm-delete .modal-header {
+    background-color: #f53b3b;
+    color: #fff;
+    border-radius: 3px 3px 0 0;
+}
+#confirm-delete .modal-header h4 {
+    margin: 0;
+}
+
+
+.picker-dialog {
+    z-index: 1500 !important;
+}
+
+
+
+
+@media print {
+    body {
+        background-color: #fff;
+    }
+    body.navbar-fixed .main {
+        padding: 0 !important;
+    }
+    
+    .container-fluid {
+        padding: 0;
+    }
+    
+    .footer {
+        display: none;
+    }
+
+    .page-header {
+        display: none;
+    }
+    
+    #floor-container .draggable-container .floor-debug-container {
+        display: none;
+    }
+}
+
+
