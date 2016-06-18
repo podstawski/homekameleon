@@ -255,7 +255,10 @@ module.exports = function(com,ini,logger,callback) {
                 var line=buf.substr(begin+2,end-begin-2).split(';');
                 buf=buf.substr(end+2);
                 
-                console.log('TODOCMP',line,crc(line));
+                if (line[pos_cmd]!='PG' && parseInt(line[pos_crc])!=crc(line)) {
+                    logger.log('CRC error','error');
+                    continue;
+                }
                 
                 if (line[pos_top]=='s') {
                     var ack=line.slice(0);
