@@ -290,6 +290,7 @@ var Admin = function(socket,session,hash,database,public_path,ini,logger) {
             
                  for (var h in session) {    
                      if (typeof(session[h].socket)!='undefined' && session[h].socket!=null && typeof(session[h].floor)!='undefined' && session[h].floor==floor) {
+                       console.log('Floor is going',data.data.length);
                        session[h].socket.emit('floor-select',data);
                      }
                  }
