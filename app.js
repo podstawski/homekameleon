@@ -63,8 +63,8 @@ process.on('SIGHUP',function () {
                 devices[id].initstate(data,structure.db);
             });
             
-            script.on(id,function(id,data) {
-                devices[id].command(data);
+            script.on(id,function(id,data,delay) {
+                devices[id].command(data,delay);
             });
             
             devices[id].connect();
@@ -88,6 +88,11 @@ var cleanEnd=function() {
 process.on('SIGTERM',cleanEnd);
 process.on('SIGINT',cleanEnd);
 
+process.on('SIGTSTP',function(){
+    for (id in devices) {
+        devices[id].ctrlz();
+    }
+});
 
 
 process.kill(process.pid, 'SIGHUP');

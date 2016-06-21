@@ -70,6 +70,7 @@ var Logic = function(script,logger)
                     break;
                 
                 case 'input': {
+                    if (data.device!==undefined) delete(data.device);
                     var inp=db.ios.get(data);
                     if (inp==null) break;
                     if (!checkactive(inp)) break; 
