@@ -59,7 +59,7 @@ var Web = function(com,ini,logger,callback) {
                         callback('script',{script:data.value});
                     } else database.ios.get(data.haddr,function(io){
                         if (io.io=='i') callback('input',{haddr: data.haddr, value: data.value});
-                        if (io.io=='o') callback('set',{haddr: data.haddr, value: data.value});
+                        if (io.io=='o' || io.io=='r') callback('set',{haddr: data.haddr, value: data.value});
                     });           
 
                 }
