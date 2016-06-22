@@ -93,7 +93,7 @@ module.exports = function(logger,script) {
                                             var id=script.find(a[j].substr(0,colon));
                     
                                             if (id!=null) {
-                                                events.push({when:d,script:id});
+                                                events.push({when:d,script:id,c_name:ev.summary});
                                             } else {
                                                 logger.log('Script "'+a[j].substr(0,colon)+'" unrecognizable','calendar');
                                             }
@@ -109,11 +109,11 @@ module.exports = function(logger,script) {
                                 } else {
                         
                                     if (typeof(id)=='object') {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id[0]),condition:ev.description||null});
-                                        if (ev.end.getTime()>now) events.push({when:ev.end,script:parseInt(id[1]),condition:ev.description||null});
+                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id[0]),condition:ev.description||null,c_name:ev.summary});
+                                        if (ev.end.getTime()>now) events.push({when:ev.end,script:parseInt(id[1]),condition:ev.description||null,c_name:ev.summary});
                                         
                                     } else {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id),condition:ev.description||null});
+                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id),condition:ev.description||null,c_name:ev.summary});
                         
                                     }
                                 
@@ -147,6 +147,15 @@ module.exports = function(logger,script) {
                 }
             }
             
+        },
+        
+        ctrlz: function() {
+            for (var i in events) {
+                
+                var s=script.get(events[i].script);
+                events[i].s_name = s.name;
+            }
+            console.log('Calendars:',events);
         }
     }
 }

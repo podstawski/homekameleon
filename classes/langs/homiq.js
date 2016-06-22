@@ -320,7 +320,7 @@ module.exports = function(com,ini,logger,callback) {
             for (var i in sendQueue) {
                 sendQueue[i].seconds2go = Math.round((sendQueue[i].when - Date.now())/1000);
             }
-            console.log(sendQueue);
+            console.log('Homiq:',sendQueue);
         }
     }
     

@@ -253,6 +253,10 @@ var Script=function(logger) {
         set: function(io,value) {
             var set={haddr:io.haddr, value:value};
             self.emit(io.device,io.device,set);
+        },
+        
+        get: function(s) {
+            return db.scripts.get(s);
         }
     }
     

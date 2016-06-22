@@ -100,6 +100,7 @@ process.on('SIGTSTP',function(){
     for (id in devices) {
         devices[id].ctrlz();
     }
+    calendar.ctrlz();
 });
 
 
