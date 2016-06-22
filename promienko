@@ -7,7 +7,7 @@ STOP=75
  
 start() {        
 	cd /root/promienko
-	node app >>/sd/promienko.log &
+	node app >>/sd/promienko.log 2>>&1 &
 }                 
  
 stop() {          
