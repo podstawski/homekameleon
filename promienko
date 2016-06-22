@@ -11,6 +11,6 @@ start() {
 }                 
  
 stop() {          
-	kill -TERM `cat /sd/promienko/app.pid` node
-	killall -TERM ssh
+	kill -TERM `cat /sd/promienko/app.pid` 
+	#killall -TERM ssh
 }
