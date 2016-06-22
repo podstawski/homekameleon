@@ -2,7 +2,7 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var http = require('http');
 var os = require('os');
-var exec = require('child_process').exec;
+var exec = require('child_process').execFile;
 var express = require('express');
 var crypto = require('crypto');
 
