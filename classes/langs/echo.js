@@ -5,8 +5,9 @@ module.exports = function(com,ini,logger,callback) {
         
     return {
         
-        'set': function(data) {
-            com.send(data);            
+        'set': function(data,delay) {
+            if (delay==null) delay=0;
+            setTimeout(com.send,1000*delay,data);
         },
         
         'data': function(data) {

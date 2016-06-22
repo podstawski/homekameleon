@@ -202,6 +202,7 @@ module.exports = function(com,ini,logger,callback) {
             if (address==null) return;
             var value=data.value;
             var delay = typeof(data.delay)=='undefined' ? 0 : data.delay;
+            
             delay+=delay2||0;
             
             switch (value) {

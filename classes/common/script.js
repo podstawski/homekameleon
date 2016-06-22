@@ -82,13 +82,14 @@ var Script=function(logger) {
                 delay+=parseFloat(script.delay);
             }
             script=script.script;
-        }
+        } 
         
         /*
          *get database for specified script id
          */
         
         script=db.scripts.get(script);
+        
         
         if (script==null) return;
         if (!checkactive(script)) return;
@@ -131,6 +132,7 @@ var Script=function(logger) {
             script: script,
             conditions: conditions
         });
+        
         
         /*
          *run queue
