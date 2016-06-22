@@ -1,5 +1,5 @@
-var attempts=5;
-var attempt_delay=1000;
+var attempts=8;
+var attempt_delay=500;
 
 var pos_cmd=0;
 var pos_val=1;
@@ -31,6 +31,7 @@ module.exports = function(com,ini,logger,callback) {
     var deletefuture = function (params) {
         for (var i=0; i<sendQueue.length; i++) {
             if (sendQueue[i].str.length>0) continue;
+            if (sendQueue[i].when - Date.now() < 500) continue;
             
             var pass=true;
             for (var k in params) {

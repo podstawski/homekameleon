@@ -7,8 +7,7 @@
             "protocol": "tcp",
             "language": "homiq",
             "com":{
-                "host": "10.10.20.201",
-                "host2": "127.0.0.1",
+                "host": "homiqmaster",
                 "port": "4001",
                 "latency": 20
             }
