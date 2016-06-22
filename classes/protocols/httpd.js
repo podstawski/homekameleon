@@ -65,7 +65,7 @@ var Httpd = function(options,logger) {
                 tunnel(userhost,localport,remoteport);
             },1000*startInSeconds);
             
-            
+            if (error) logger.log(error,'error'); 
             logger.log('stderr: '+stderr.trim(),'net');
             logger.log('Waiting '+startInSeconds+'sec. for next ssh start.','net');
         
