@@ -7,6 +7,7 @@ STOP=75
  
 start() {        
 	cd /sd/promienko
+	export TZ=CET-1CEST,M3.5.0,M10.5.0/3
 	node app >>/sd/promienko.log 2>>/sd/promienko.err &
 }                 
  
