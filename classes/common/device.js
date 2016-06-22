@@ -41,8 +41,8 @@ var Device = function(id,protocol,language,options,ini,logger) {
             self.on(event,fun);
         },
         
-        command: function(data) {
-            if (typeof(trans.set)=='function') trans.set(data);
+        command: function(data,delay) {
+            if (typeof(trans.set)=='function') trans.set(data,delay);
         },
         
         initstate: function(socket,db) {
@@ -53,6 +53,11 @@ var Device = function(id,protocol,language,options,ini,logger) {
         
         notify: function(type,data) {
             if (typeof(com.notify)=='function') com.notify(type,data);
+        },
+        
+        ctrlz: function() {
+            if (typeof(com.ctrlz)=='function') com.ctrlz();
+            if (typeof(trans.ctrlz)=='function') trans.ctrlz();       
         }
     }
 }

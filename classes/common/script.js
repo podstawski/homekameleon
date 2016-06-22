@@ -19,49 +19,52 @@ var Script=function(logger) {
         scriptsSemaphore=true;
         
         for (var i=0;i<scriptsQueue.length;i++) {
-            if (scriptsQueue[i].when<=Date.now()) {
                 
-                var pass=true;
-                
-                if (typeof(scriptsQueue[i].script.conditions)=='object') {
-                    if (scriptsQueue[i].script.conditions.length>0) {
-                        scriptsQueue[i].conditions = scriptsQueue[i].conditions.concat(scriptsQueue[i].script.conditions);
-                    }
+            var pass=true;
+            
+            if (typeof(scriptsQueue[i].script.conditions)=='object') {
+                if (scriptsQueue[i].script.conditions.length>0) {
+                    scriptsQueue[i].conditions = scriptsQueue[i].conditions.concat(scriptsQueue[i].script.conditions);
                 }
-
-                for (var j=0; j<scriptsQueue[i].conditions.length; j++) {
-                    pass*=condition(db,scriptsQueue[i].conditions[j]);
-                    if (!pass) break;
-                }                    
-
-                
-                if (pass) {
-                    logger.log(scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
-                    
-
-                    for(var j=0;j<scriptsQueue[i].script.actions.length;j++) {
-                        
-                        self.emit(scriptsQueue[i].script.actions[j].device,
-                                  scriptsQueue[i].script.actions[j].device,
-                                  scriptsQueue[i].script.actions[j]);
-                    }
-                } else if (typeof(scriptsQueue[i].script.nactions)=='object' && scriptsQueue[i].script.nactions.length) {
-                    logger.log('!'+scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
-                
-                
-                    for(var j=0;j<scriptsQueue[i].script.nactions.length;j++) {
-                        
-                        self.emit(scriptsQueue[i].script.nactions[j].device,
-                                  scriptsQueue[i].script.nactions[j].device,
-                                  scriptsQueue[i].script.nactions[j]);
-                    }
-                }
-                
-                scriptsQueue.splice(i,1);
-                scriptsSemaphore=false;
-                setTimeout(runscripts,1);
-                return;
             }
+
+            for (var j=0; j<scriptsQueue[i].conditions.length; j++) {
+                pass*=condition(db,scriptsQueue[i].conditions[j]);
+                if (!pass) break;
+            }                    
+
+            
+            if (pass) {
+                logger.log(scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
+                
+
+                for(var j=0;j<scriptsQueue[i].script.actions.length;j++) {
+                    
+                    
+                    self.emit(scriptsQueue[i].script.actions[j].device,
+                              scriptsQueue[i].script.actions[j].device,
+                              scriptsQueue[i].script.actions[j],
+                              scriptsQueue[i].delay);
+                }
+            } else if (typeof(scriptsQueue[i].script.nactions)=='object' && scriptsQueue[i].script.nactions.length) {
+                logger.log('!'+scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
+            
+            
+                for(var j=0;j<scriptsQueue[i].script.nactions.length;j++) {
+
+
+                    self.emit(scriptsQueue[i].script.nactions[j].device,
+                              scriptsQueue[i].script.nactions[j].device,
+                              scriptsQueue[i].script.nactions[j],
+                              scriptsQueue[i].delay);
+                }
+            }
+            
+            scriptsQueue.splice(i,1);
+            scriptsSemaphore=false;
+            setTimeout(runscripts,1);
+            return;
+        
         }
         
         scriptsSemaphore=false;
@@ -93,7 +96,6 @@ var Script=function(logger) {
         /*
          *queue script
          */
-        var when=Date.now()+1000*delay;
         
         var conditions=[];
     
@@ -125,7 +127,7 @@ var Script=function(logger) {
         }
         
         scriptsQueue.push({
-            when: when,
+            delay: delay,
             script: script,
             conditions: conditions
         });
