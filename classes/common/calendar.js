@@ -154,6 +154,7 @@ module.exports = function(logger,script) {
                 
                 var s=script.get(events[i].script);
                 events[i].s_name = s.name;
+		events[i].seconds2go = Math.round((events[i].when.getTime()-Date.now())/1000);
             }
             console.log('Calendars:',events);
         }
