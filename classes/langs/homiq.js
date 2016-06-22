@@ -198,6 +198,7 @@ module.exports = function(com,ini,logger,callback) {
     return {
         
         'set': function(data,delay2) {
+ 
             var address=haddr2address(data.haddr);
             if (address==null) return;
             var value=data.value;
