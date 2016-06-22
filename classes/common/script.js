@@ -34,20 +34,25 @@ var Script=function(logger) {
             }                    
 
             
+            var delay_suffix='';
+            if (scriptsQueue[i].delay>0) {
+                delay_suffix=' (in '+scriptsQueue[i].delay+' s.)';
+            }
             if (pass) {
-                logger.log(scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
+                
+                logger.log(scriptsQueue[i].script.name+delay_suffix,scriptsQueue[i].script.log||'script');
                 
 
                 for(var j=0;j<scriptsQueue[i].script.actions.length;j++) {
                     
-                    
+                
                     self.emit(scriptsQueue[i].script.actions[j].device,
                               scriptsQueue[i].script.actions[j].device,
                               scriptsQueue[i].script.actions[j],
                               scriptsQueue[i].delay);
                 }
             } else if (typeof(scriptsQueue[i].script.nactions)=='object' && scriptsQueue[i].script.nactions.length) {
-                logger.log('!'+scriptsQueue[i].script.name,scriptsQueue[i].script.log||'script');
+                logger.log('!'+scriptsQueue[i].script.name+delay_suffix,scriptsQueue[i].script.log||'script');
             
             
                 for(var j=0;j<scriptsQueue[i].script.nactions.length;j++) {
