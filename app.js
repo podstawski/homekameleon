@@ -81,7 +81,14 @@ var cleanEnd=function() {
         structure.db[k].ultimateSave();
         break;
     }
+    
+    
+    for (id in devices) {
+        devices[id].disconnect();
+    }
+    
     logger.save();
+
     process.exit(0);
 }
 
@@ -89,6 +96,7 @@ process.on('SIGTERM',cleanEnd);
 process.on('SIGINT',cleanEnd);
 
 process.on('SIGTSTP',function(){
+    console.log('');
     for (id in devices) {
         devices[id].ctrlz();
     }

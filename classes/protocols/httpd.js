@@ -170,6 +170,7 @@ var Httpd = function(options,logger) {
         disconnect: function() {
             connected=false;
             io.close();
+            if (tunnel_pid>0) process.kill(tunnel_pid, 'SIGTERM');
         },
         on: function(event,fun) {
             self.on(event,fun);
