@@ -52,10 +52,11 @@ var Httpd = function(options,logger) {
         
         var milliseconds = (new Date).getTime();
         
-        var cmd='ssh -nNT -o TCPKeepAlive=yes -o ServerAliveInterval=60 -R '+remoteport+':localhost:'+localport+' '+userhost;
-        logger.log('Trying to establish ssh tunnel: '+cmd,'net');
+        var cmd='ssh';
+        var cmd_args=['-nNT', '-o TCPKeepAlive=yes','-o ServerAliveInterval=60', '-R '+remoteport+':localhost:'+localport,userhost];
+        logger.log('Trying to establish ssh tunnel: '+cmd+' '+cmd_args.join(' '),'net');
         
-        var e=exec(cmd,function (error, stdout, stderr) {
+        var e=exec(cmd,cmd_args,function (error, stdout, stderr) {
             
             var delay=(new Date).getTime() - milliseconds;
             var startInSeconds=delay<10000?300:1;
@@ -69,7 +70,7 @@ var Httpd = function(options,logger) {
             logger.log('Waiting '+startInSeconds+'sec. for next ssh start.','net');
         
         });
-        tunnel_pid=e.pid;
+        if (e.pid!=null) tunnel_pid=e.pid;
     }
     
     var hb=function() {
