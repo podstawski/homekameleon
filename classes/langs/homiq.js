@@ -212,7 +212,7 @@ module.exports = function(com,ini,logger,callback) {
                 case 'stop-u':
                 case 'down':
                 case 'up':
-                    deletefuture({cmd: 'UD',dst: address});
+                    if (delay==0) deletefuture({cmd: 'UD',dst: address});
                     val='s';
                     if (value=='up') val='u';
                     if (value=='down') val='d';
@@ -229,10 +229,12 @@ module.exports = function(com,ini,logger,callback) {
                     
                     if (!isNaN(parseFloat(value)) && adr.length==2) {
                         
-                        deletefuture({
-                            cmd: 'O.'+adr[1],
-                            dst: adr[0],
-                        });
+                        if (delay==0) {
+                            deletefuture({
+                                cmd: 'O.'+adr[1],
+                                dst: adr[0],
+                            });
+                        }
                         send({
                             cmd: 'O.'+adr[1],
                             dst: adr[0],
