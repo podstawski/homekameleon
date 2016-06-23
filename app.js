@@ -97,10 +97,10 @@ process.on('SIGINT',cleanEnd);
 
 process.on('SIGTSTP',function(){
     console.log('');
+    calendar.ctrlz();
     for (id in devices) {
         devices[id].ctrlz();
     }
-    calendar.ctrlz();
 });
 
 
