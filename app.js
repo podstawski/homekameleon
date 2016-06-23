@@ -25,7 +25,13 @@ var devices=[];
  */
 
 process.on('SIGHUP',function () {
-    var data=structure.get();
+    var data=structure.get(function () {
+        for(var i=0; i<structureData.devices.length; i++) {
+            var id=structureData.devices[i].id;
+        
+            if (devices[id]!=null) devices[id].dbready(structure.db);
+        }
+    });
     if (typeof(data)=='object') {
         structureData=data;
         

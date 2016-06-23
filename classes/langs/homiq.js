@@ -54,7 +54,7 @@ module.exports = function(com,ini,logger,callback) {
     }
     
     var send = function(cmd,delay) {
-        
+
         for (var i=0; i<sendTimers.length; i++) {
             clearTimeout(sendTimers[i]);
         }
@@ -196,57 +196,62 @@ module.exports = function(com,ini,logger,callback) {
         return null;
     }
     
+    var hset = function(data,delay2) {
+        var address=haddr2address(data.haddr);
+        if (address==null) return;
+        var value=data.value;
+        var delay = typeof(data.delay)=='undefined' ? 0 : data.delay;
+        
+        delay+=delay2||0;
+    
+        
+        switch (value) {
+            case 'stop-d':
+            case 'stop-u':
+            case 'down':
+            case 'up':
+                if (delay==0) deletefuture({cmd: 'UD',dst: address});
+                val='s';
+                if (value=='up') val='u';
+                if (value=='down') val='d';
+                send({
+                    cmd: 'UD',
+                    dst: address,
+                    val: val,
+                    setval: value
+                },delay);
+                break;
+            
+            default:
+                var adr=address.split('.');
+                
+                if (!isNaN(parseFloat(value)) && adr.length==2) {
+                    
+                    if (delay==0) {
+                        deletefuture({
+                            cmd: 'O.'+adr[1],
+                            dst: adr[0],
+                        });
+                    }
+                    
+                    send({
+                        cmd: 'O.'+adr[1],
+                        dst: adr[0],
+                        val: value
+                    },delay); 
+                }
+                
+                break;
+                
+        }
+        
+        
+    };
+    
     return {
         
         'set': function(data,delay2) {
- 
-            var address=haddr2address(data.haddr);
-            if (address==null) return;
-            var value=data.value;
-            var delay = typeof(data.delay)=='undefined' ? 0 : data.delay;
-            
-            delay+=delay2||0;
-            
-            switch (value) {
-                case 'stop-d':
-                case 'stop-u':
-                case 'down':
-                case 'up':
-                    if (delay==0) deletefuture({cmd: 'UD',dst: address});
-                    val='s';
-                    if (value=='up') val='u';
-                    if (value=='down') val='d';
-                    send({
-                        cmd: 'UD',
-                        dst: address,
-                        val: val,
-                        setval: value
-                    },delay);
-                    break;
-                
-                default:
-                    var adr=address.split('.');
-                    
-                    if (!isNaN(parseFloat(value)) && adr.length==2) {
-                        
-                        if (delay==0) {
-                            deletefuture({
-                                cmd: 'O.'+adr[1],
-                                dst: adr[0],
-                            });
-                        }
-                        send({
-                            cmd: 'O.'+adr[1],
-                            dst: adr[0],
-                            val: value
-                        },delay); 
-                    }
-                    
-                    break;
-                    
-            }
-            
-            
+            return hset(data,delay2);
         },
         
         'data': function(data) {
@@ -313,6 +318,13 @@ module.exports = function(com,ini,logger,callback) {
         'initstate': function (db) {
             setTimeout(hb,1000);
             database=db;
+        },
+        
+        'dbready': function(db) {
+            outputs=db.ios.select([{device: deviceId, io: 'o', value: 1}]);
+            for (var i in outputs.data) {
+                hset(outputs.data[i]);
+            }
         },
         
         'setId': function (id) {

@@ -46,9 +46,10 @@ var Device = function(id,protocol,language,options,ini,logger) {
         },
         
         initstate: function(socket,db) {
+            if (typeof(trans.setId)=='function') trans.setId(id);
             if (typeof(com.initstate)=='function') com.initstate(socket,db);
             if (typeof(trans.initstate)=='function') trans.initstate(db);
-            if (typeof(trans.setId)=='function') trans.setId(id);
+            
         },
         
         notify: function(type,data) {
@@ -58,6 +59,10 @@ var Device = function(id,protocol,language,options,ini,logger) {
         ctrlz: function() {
             if (typeof(com.ctrlz)=='function') com.ctrlz();
             if (typeof(trans.ctrlz)=='function') trans.ctrlz();       
+        },
+        
+        dbready: function(db) {
+            if (typeof(trans.dbready)=='function') trans.dbready(db);
         }
     }
 }

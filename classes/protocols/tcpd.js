@@ -30,11 +30,11 @@ var Tcpd = function(options,logger) {
                 lastSocket=null;
             });
             socket.on('data',function(data){
-                var now=Date.now();
-                if (now-lastData<options.latency) {
-                    logger.log('Data comes too fast','error');
+                //console.log('Received',Date.now(),Date.now()-lastData,data.toString('ascii').trim());
+                if (Date.now()-lastData<options.latency) {
+                    logger.log('Data comes too fast: '+(Date.now()-lastData),'error');
                 }
-                lastData=now;
+                lastData=Date.now();
                 var line=data.toString('ascii');
                 self.emit('data',line.trim()); 
             });

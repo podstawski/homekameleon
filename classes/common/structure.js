@@ -9,7 +9,7 @@ module.exports = function (conf,logger) {
     var db={};
     
     return {
-        get: function() {
+        get: function(cb) {
             try {
                 
                 data=fs.readFileSync(config_file);
@@ -27,8 +27,9 @@ module.exports = function (conf,logger) {
             }            
             
             if (typeof(json.db)!='undefined') {
-                   
+                var jsons=0;
                 for (var key in json.db) {    
+                    jsons++;
                     try {
                         var model=json.db[key].model || './model';
              
@@ -40,7 +41,10 @@ module.exports = function (conf,logger) {
                         }
                   
                         db[key] = new models[model](json.db[key],logger);
-                        db[key].init();
+                        db[key].init(function() {
+                            jsons--;
+                            if (jsons==0 && typeof(cb)=='function') cb();
+                        });
                     } catch (e) {
                         logger.log('Error reading file '+json.db[key].file+' '+e,'error');
                         return null;

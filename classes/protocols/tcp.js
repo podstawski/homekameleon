@@ -8,9 +8,11 @@ var Tcp = function(options,logger) {
     var self=this;
     var sendQueue=[];
     var sendSemaphore=false;
+    var sendLast=0;
+    var sendTimers=[];
     
     if (typeof(options.latency)=='undefined') {
-        options.latency=1;
+        options.latency=0;
     }
     
     var connect=function () {
@@ -28,17 +30,36 @@ var Tcp = function(options,logger) {
     
     var send = function() {
         if (sendQueue.length==0) return;
-        if (!connected) return;
         
-        if (sendSemaphore) {
-            //setTimeout(send,options.latency);
+        
+        for (var i=0; i<sendTimers.length; i++) {
+            clearTimeout(sendTimers[i]);
+        }
+        sendTimers=[];
+        
+        if (!connected) {
+            sendTimers.push(setTimeout(send,100));
             return;
         }
+        
+        if (sendSemaphore) {
+            sendTimers.push(setTimeout(send,options.latency));
+            return;
+        }
+        
+        if (sendLast>0 && Date.now()-sendLast<=options.latency && options.latency>0) {
+            sendTimers.push(setTimeout(send,options.latency-Date.now()+sendLast+1));
+            return;
+        }
+        
         sendSemaphore=true;
+        //console.log('Sendingg',Date.now(),Date.now()-sendLast,sendQueue[0].trim());
+        sendLast=Date.now();
         client.write(sendQueue[0],'utf-8',function() {
             sendQueue.shift();
             sendSemaphore=false;
-            setTimeout(send,options.latency);
+            sendLast=Date.now();
+            sendTimers.push(setTimeout(send,options.latency));
         });
        
     }
