@@ -82,6 +82,10 @@
             "console": true,
             "file": "cal.txt"
         },
+        "script": {
+            "console": true,
+            "file": "homiq.txt"
+	},
         "error": {
             "console": true,
             "file": "error.txt"
