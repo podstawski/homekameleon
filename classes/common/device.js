@@ -11,9 +11,12 @@ var Device = function(id,protocol,language,options,ini,logger) {
 
     var com=new Protocol(options,logger);
     var trans=new Translator(com,ini,logger,function(type,data) {
-        
         self.emit('data',id,type,data);
     });
+    
+    if (typeof(com.setLanguage)=='function') {
+        com.setLanguage(trans);
+    }
     
     com.on('data',function(data) {
         trans.data(data);

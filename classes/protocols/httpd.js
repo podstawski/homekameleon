@@ -32,6 +32,7 @@ var Httpd = function(options,logger) {
     var tunnel_pid=0;
     var session={};
     var connected=false;
+    var language;
     
     var app = express();
     var ifaces = os.networkInterfaces();
@@ -99,10 +100,14 @@ var Httpd = function(options,logger) {
             app.use(express.static(pub));  
         },
         
+        setLanguage: function(lang) {
+            language=lang;
+        },
+        
         connect: function() {
 
-            app.get('/', function (request, response) {
-                self.emit('request',request,response); 
+            app.get('/*', function (request, response) {
+                language.request(request, response);
             });
             
             

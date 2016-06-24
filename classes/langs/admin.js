@@ -27,15 +27,16 @@ var Web = function(com,ini,logger,callback) {
         'request': function(request,response) {
 
             var path = url.parse(request.url).pathname;
-                
+            
             switch(path){
                 case '/check-web':
-                    response.writeHead(200, {"Content-Type": "text/html","Access-Control-Allow-Origin": "*"});
+                    response.setHeader('Access-Control-Allow-Origin', '*');
+                    //response.writeHead(200, {"Content-Type": "text/html","Access-Control-Allow-Origin": "*"});
                     response.write('OK', "utf8");
                     response.end();            
                 
                 default:
-                    response.writeHead(404);
+                    //response.writeHead(404);
                     response.write("opps this doesn't exist - 404");
                     response.end();
                     break;
