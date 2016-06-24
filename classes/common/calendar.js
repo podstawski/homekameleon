@@ -27,6 +27,7 @@ module.exports = function(logger,script) {
             var now=Date.now();
             var backup=events.slice(0,events.length);
             events=[];
+            var cals=calendars.length;
             for (var i=0;i<calendars.length;i++) {
                 ical.fromURL(calendars[i], {}, function(err, data) {
 
@@ -123,11 +124,26 @@ module.exports = function(logger,script) {
                             
                           
                         }
-                    }                
+                    }
+                    
+                    cals--;
                 
                 });
             }
             
+            var waiter=function() {
+                if (cals>0) {
+                    setTimeout(waiter,100);
+                    return;
+                }
+                for (var i in events) {
+                     var s=script.get(events[i].script);
+                     events[i].s_name = s.name;
+                     events[i].seconds2go = Math.round((events[i].when.getTime()-Date.now())/1000);
+                }    
+                logger.log(events,'calendar');
+            }
+            waiter();
         },
         
         run: function() {
@@ -137,7 +153,8 @@ module.exports = function(logger,script) {
                 var when=events[i].when.getTime();
                 
                 
-                if (Math.abs(now-when)<10000) {
+                if (Math.abs(now-when)<10000 || when<now) {
+                    logger.log('Calling '+events[i].s_name,'calendar');
                     script.run(events[i].script,0,events[i].condition);
                     
                 }
@@ -150,12 +167,6 @@ module.exports = function(logger,script) {
         },
         
         ctrlz: function() {
-            for (var i in events) {
-                
-                var s=script.get(events[i].script);
-                events[i].s_name = s.name;
-		events[i].seconds2go = Math.round((events[i].when.getTime()-Date.now())/1000);
-            }
             console.log('Calendars:',events);
         }
     }
