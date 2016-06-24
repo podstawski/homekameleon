@@ -116,8 +116,12 @@ fs.writeFile(__dirname+'/app.pid',process.pid);
 var cron = function() {
     var now=Math.round(Date.now()/1000);
     var min=(now/60)%60;
-    if (min==0) calendar.update(); 
     calendar.run();
+    
+    if (min==0) setTimeout (function(){
+        calendar.update();
+    },10000); 
+    
     setTimeout(cron,60000);    
 }
 
