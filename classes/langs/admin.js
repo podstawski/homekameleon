@@ -28,11 +28,11 @@ var Web = function(com,ini,logger,callback) {
 
             var path = url.parse(request.url).pathname;
             
+            
             switch(path){
                 case '/check-web':
                     response.setHeader('Access-Control-Allow-Origin', '*');
-                    //response.writeHead(200, {"Content-Type": "text/html","Access-Control-Allow-Origin": "*"});
-                    response.write('OK', "utf8");
+                    response.write('OK,'+request.headers.host, "utf8");
                     response.end();            
                 
                 default:
