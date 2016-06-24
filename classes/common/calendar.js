@@ -137,11 +137,13 @@ module.exports = function(logger,script) {
                     return;
                 }
                 for (var i in events) {
-                     var s=script.get(events[i].script);
-                     events[i].s_name = s.name;
-                     events[i].seconds2go = Math.round((events[i].when.getTime()-Date.now())/1000);
+                    var s=script.get(events[i].script);
+                    events[i].s_name = s.name;
+                    events[i].seconds2go = Math.round((events[i].when.getTime()-Date.now())/1000);
+               
+                    logger.log(events[i],'calendar');
                 }    
-                logger.log(events,'calendar');
+                
             }
             waiter();
         },
