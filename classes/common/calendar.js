@@ -141,7 +141,7 @@ module.exports = function(logger,script) {
                     events[i].s_name = s.name;
                     events[i].seconds2go = Math.round((events[i].when.getTime()-Date.now())/1000);
                
-                    logger.log(events[i],'calendar');
+                    logger.log(events[i].when+' '+s_name+', in '+events[i].seconds2go,'calendar');
                 }    
                 
             }
