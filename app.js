@@ -118,7 +118,9 @@ var cron = function() {
     var min=(now/60)%60;
     calendar.run();
     
+    logger.log('Minutes: '+min,'calendar');
     if (min==0) setTimeout (function(){
+        logger.log('Update calendar','calendar');
         calendar.update();
     },10000); 
     
