@@ -86,7 +86,7 @@ module.exports = function(logger,script) {
                                     if (id!=null) {
                                         events.push({when:d,script:id,c_name:ev.summary});
                                     } else {
-                                        logger.log('Script "'+a[j].substr(0,colon)+'" unrecognizable','calendar');
+                                        logger.log('Script "'+a[j].substr(0,colon)+'" unrecognizable, '+duration,'calendar');
                                     }
                                     
                                 }
@@ -96,7 +96,7 @@ module.exports = function(logger,script) {
                     } else {
                         var id=script.find(ev.summary);
                         if (id==null) {
-                            logger.log('Script "'+ev.summary+'" unrecognizable','calendar');
+                            logger.log('Script "'+ev.summary+'" unrecognizable, '+duration,'calendar');
                         } else {
                 
                             if (typeof(id)=='object') {

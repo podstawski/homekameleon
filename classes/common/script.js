@@ -173,7 +173,7 @@ var Script=function(logger) {
             if ( all[id].name==null) continue;
             var lev=levenshtein(str,all[id].name.toLowerCase());
             if (lev==0) return all[id].id;
-
+            
             if (lev>5) continue;
             if (typeof(result[lev])=='undefined') result[lev]=[];
             result[lev].push(all[id]);
@@ -214,6 +214,9 @@ var Script=function(logger) {
             
             }
         }
+        
+
+        
         var res=['',''];
         
         for (var i=0; i<2; i++) {
@@ -225,7 +228,8 @@ var Script=function(logger) {
             }
         }
         
-        if (res[0].length>0 && res[1].length) {
+        
+        if (parseInt(res[0])>0 && parseInt(res[1])>0 && !isNaN(parseInt(res[0])) && !isNaN(parseInt(res[1]))) {
             cache[str]=res;
             return res;
         }
