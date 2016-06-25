@@ -29,7 +29,6 @@ module.exports = function(logger,script) {
             }
             
             
-            
             for (var k in data){
                 if (data.hasOwnProperty(k)) {
                     var ev = data[k];
