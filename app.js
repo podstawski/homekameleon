@@ -119,7 +119,7 @@ var cron = function() {
     calendar.run();
     
     logger.log('Minutes: '+min,'calendar');
-    if (min==0) setTimeout (function(){
+    if (min==4) setTimeout (function(){
         logger.log('Update calendar','calendar');
         calendar.update();
     },10000); 

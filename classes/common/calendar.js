@@ -17,6 +17,112 @@ module.exports = function(logger,script) {
         return time.replace(/(am|pm)/, '');
     }
     
+    var update_cal = function(calendar,cb) {
+        var now=Date.now();
+        
+        ical.fromURL(calendar, {}, function(err, data) {
+
+            if (typeof(err)!='undefined') {
+                logger.log('Problem with calendar '+calendar,'calendar');
+                cb(err);
+                return;
+            }
+            
+            
+            
+            for (var k in data){
+                if (data.hasOwnProperty(k)) {
+                    var ev = data[k];
+                    if (typeof(ev.start)=='undefined') continue;
+                    
+                    var start=ev.start.getTime();
+                    var end=ev.end.getTime();
+                    var duration_ms=end-start;
+                    var duration=duration_ms/3600000;
+                    
+                    if (typeof(ev.rrule)!='undefined' && end<now) {
+                        var starts=ev.rrule.between(new Date(new Date().getTime()-3600*1000),new Date(new Date().getTime()+24*3600*1000));
+                        
+                        if (starts.length>0) {
+                            var nStart=starts[0];
+                            
+                            nStart.setHours(ev.start.getHours());
+                            nStart.setMinutes(ev.start.getMinutes());
+                            nStart.setSeconds(ev.start.getSeconds());
+                        
+                            start=nStart.getTime();
+                            end=start+duration_ms;
+                            ev.start=new Date(start);
+                            ev.end=new Date(end);
+                            
+                        }
+                        
+                    };
+                    
+                    
+                    if (end < now) continue;
+                    if (start > now+24*3600*1000) continue;
+                    
+                    
+
+                    if (duration>=23 && duration<=25) {
+                    
+                        
+                        if (ev.summary.indexOf('unrise')>=0 && ev.summary.indexOf('unset')>=0) {
+                           
+                            var a=ev.summary.split(',');
+                            for (var j=0;j<a.length; j++) {
+                                a[j]=a[j].trim();
+                                var colon=a[j].indexOf(':');
+                                if (colon>0) {
+                                    
+                                    var today = new Date(start+(end-start)/2).toString();
+                                    var colon2=today.indexOf(':');
+                                    today=today.substr(0,colon2-2).trim();
+                                    var str=today+' '+convertTo24Hour(a[j].substr(colon+1)).trim()+' GMT';
+                                    var d=new Date(Date.parse(str));
+                                    if (d.getTime()<now) continue;
+                                    var id=script.find(a[j].substr(0,colon));
+            
+                                    if (id!=null) {
+                                        events.push({when:d,script:id,c_name:ev.summary});
+                                    } else {
+                                        logger.log('Script "'+a[j].substr(0,colon)+'" unrecognizable','calendar');
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                    } else {
+                        var id=script.find(ev.summary);
+                        if (id==null) {
+                            logger.log('Script "'+ev.summary+'" unrecognizable','calendar');
+                        } else {
+                
+                            if (typeof(id)=='object') {
+                                if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id[0]),condition:ev.description||null,c_name:ev.summary});
+                                if (ev.end.getTime()>now) events.push({when:ev.end,script:parseInt(id[1]),condition:ev.description||null,c_name:ev.summary});
+                                
+                            } else {
+                                if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id),condition:ev.description||null,c_name:ev.summary});
+                
+                            }
+                        
+                        }
+                    }
+                    
+                    
+                  
+                }
+            }
+            
+            cb();
+        
+        });
+        
+    }
+    
 
     return {
         reggister: function(cals) {
@@ -24,117 +130,22 @@ module.exports = function(logger,script) {
         },
         
         update: function() {
-            var now=Date.now();
+            
             var backup=events.slice(0,events.length);
             events=[];
             var cals=calendars.length;
             for (var i=0;i<calendars.length;i++) {
-                ical.fromURL(calendars[i], {}, function(err, data) {
-
-                    if (typeof(err)!='undefined') {
-                        events=backup.slice(0,backup.length);
-                        logger.log('Problem with calendar '+calendars[i],'calendar');
-                        return;
+                update_cal(calendars[i],function(err){
+                    if (err==null) {
+                        cals--;
                     }
-                    
-                    
-                    
-                    for (var k in data){
-                        if (data.hasOwnProperty(k)) {
-                            var ev = data[k];
-                            if (typeof(ev.start)=='undefined') continue;
-                            
-                            var start=ev.start.getTime();
-                            var end=ev.end.getTime();
-                            var duration_ms=end-start;
-                            var duration=duration_ms/3600000;
-                            
-                            if (typeof(ev.rrule)!='undefined' && end<now) {
-                                var starts=ev.rrule.between(new Date(new Date().getTime()-3600*1000),new Date(new Date().getTime()+24*3600*1000));
-                                
-                                if (starts.length>0) {
-                                    var nStart=starts[0];
-                                    
-                                    nStart.setHours(ev.start.getHours());
-                                    nStart.setMinutes(ev.start.getMinutes());
-                                    nStart.setSeconds(ev.start.getSeconds());
-                                
-                                    start=nStart.getTime();
-                                    end=start+duration_ms;
-                                    ev.start=new Date(start);
-                                    ev.end=new Date(end);
-                                    
-                                }
-                                
-                            };
-                            
-                            
-                            if (end < now) continue;
-                            if (start > now+24*3600*1000) continue;
-                            
-                            
-
-                            if (duration>=23 && duration<=25) {
-                            
-                                
-                                if (ev.summary.indexOf('unrise')>=0 && ev.summary.indexOf('unset')>=0) {
-                                   
-                                    var a=ev.summary.split(',');
-                                    for (var j=0;j<a.length; j++) {
-                                        a[j]=a[j].trim();
-                                        var colon=a[j].indexOf(':');
-                                        if (colon>0) {
-                                            
-                                            var today = new Date(start+(end-start)/2).toString();
-                                            var colon2=today.indexOf(':');
-                                            today=today.substr(0,colon2-2).trim();
-                                            var str=today+' '+convertTo24Hour(a[j].substr(colon+1)).trim()+' GMT';
-                                            var d=new Date(Date.parse(str));
-                                            if (d.getTime()<now) continue;
-                                            var id=script.find(a[j].substr(0,colon));
-                    
-                                            if (id!=null) {
-                                                events.push({when:d,script:id,c_name:ev.summary});
-                                            } else {
-                                                logger.log('Script "'+a[j].substr(0,colon)+'" unrecognizable','calendar');
-                                            }
-                                            
-                                        }
-                                        
-                                    }
-                                }
-                            } else {
-                                var id=script.find(ev.summary);
-                                if (id==null) {
-                                    logger.log('Script "'+ev.summary+'" unrecognizable','calendar');
-                                } else {
-                        
-                                    if (typeof(id)=='object') {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id[0]),condition:ev.description||null,c_name:ev.summary});
-                                        if (ev.end.getTime()>now) events.push({when:ev.end,script:parseInt(id[1]),condition:ev.description||null,c_name:ev.summary});
-                                        
-                                    } else {
-                                        if (ev.start.getTime()>now) events.push({when:ev.start,script:parseInt(id),condition:ev.description||null,c_name:ev.summary});
-                        
-                                    }
-                                
-                                }
-                            }
-                            
-                            
-                          
-                        }
-                    }
-                    
-                    cals--;
-                
                 });
             }
             
             var waiter=function() {
                 if (cals>0) {
-                    setTimeout(waiter,100);
-                    return;
+                    console.log('Restoring calendar from backup','calendar');
+                    events=backup.slice(0,backup.length);
                 }
                 for (var i in events) {
                     var s=script.get(events[i].script);
@@ -145,7 +156,7 @@ module.exports = function(logger,script) {
                 }    
                 
             }
-            waiter();
+            setTimeout(waiter,15000);
         },
         
         run: function() {
