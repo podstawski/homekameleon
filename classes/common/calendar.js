@@ -133,16 +133,24 @@ module.exports = function(logger,script) {
             var backup=events.slice(0,events.length);
             events=[];
             var cals=calendars.length;
+            var failed_cals=cals;
+            logger.log('Update calendars '+cals,'calendar');
             for (var i=0;i<calendars.length;i++) {
                 update_cal(calendars[i],function(err){
+                    cals--;
                     if (err==null) {
-                        cals--;
+                        failed_cals--;
                     }
                 });
             }
             
             var waiter=function() {
                 if (cals>0) {
+                    setTimeout(waiter,200);
+                    return;
+                }
+                
+                if (failed_cals>0) {
                     console.log('Restoring calendar from backup','calendar');
                     events=backup.slice(0,backup.length);
                 }
@@ -155,7 +163,7 @@ module.exports = function(logger,script) {
                 }    
                 
             }
-            setTimeout(waiter,15000);
+            setTimeout(waiter,500);
         },
         
         run: function() {

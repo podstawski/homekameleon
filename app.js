@@ -41,7 +41,10 @@ process.on('SIGHUP',function () {
         
         if (typeof(structureData.calendars)!='undefined') {
             calendar.reggister(structureData.calendars);
-            calendar.update();
+            setTimeout(function() {
+                calendar.update();
+            },1000);
+            
         }
         
         for(var i=0; i<structureData.devices.length; i++) {
@@ -120,7 +123,6 @@ var cron = function() {
     
     logger.log('Minutes: '+min,'calendar');
     if (Math.round(min)==0) setTimeout (function(){
-        logger.log('Update calendar','calendar');
         calendar.update();
     },10000); 
     
