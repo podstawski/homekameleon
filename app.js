@@ -117,16 +117,17 @@ process.kill(process.pid, 'SIGHUP');
 fs.writeFile(__dirname+'/app.pid',process.pid);
 
 var cron = function() {
+    setTimeout(cron,60000);    
+
     var now=Math.round(Date.now()/1000);
     var min=(now/60)%60;
     calendar.run();
     
-    logger.log('Minutes: '+min,'calendar');
-    if (Math.round(min)==0) setTimeout (function(){
+    logger.log('Minutes: '+Math.floor(min),'calendar');
+    if (Math.floor(min)==0) setTimeout (function(){
         calendar.update();
     },10000); 
     
-    setTimeout(cron,60000);    
 }
 
 var now=Math.round(Date.now()/1000);
