@@ -40,7 +40,7 @@ module.exports = function(logger,script) {
                     var duration=duration_ms/3600000;
                     
                     if (typeof(ev.rrule)!='undefined' && end<now) {
-                        var starts=ev.rrule.between(new Date(new Date().getTime()-3600*1000),new Date(new Date().getTime()+24*3600*1000));
+                        var starts=ev.rrule.between(new Date(new Date().getTime()-12*3600*1000),new Date(new Date().getTime()+12*3600*1000));
                         
                         if (starts.length>0) {
                             var nStart=starts[0];
