@@ -19,6 +19,12 @@
             "protocol": "echo"
         },
         {
+            "id": "GRP",
+            "name": "Grouping IOS",
+            "language": "groups",
+            "protocol": "echo"
+        },
+        {
             "id": "EMU",
             "name": "Homiq emulator",
             "protocol": "tcpd",

@@ -9,14 +9,21 @@ var Echo = function(options,logger) {
             logger.log('Echo server initialized','init');
             self.emit('connection');
         },
+        
         disconnect: function() {
         },
+        
         on: function(event,fun) {
             self.on(event,fun);
         },
         
         send: function(str) {
             self.emit('data',str);
+        },
+        
+        notify: function(type,data) {
+            self.emit('notify',type,data);
+    
         }
     }
 }

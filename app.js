@@ -123,7 +123,7 @@ var cron = function() {
     var min=(now/60)%60;
     calendar.run();
     
-    logger.log('Minutes: '+Math.floor(min),'calendar');
+    //logger.log('Minutes: '+Math.floor(min),'calendar');
     if (Math.floor(min)==0) setTimeout (function(){
         calendar.update();
     },10000); 
