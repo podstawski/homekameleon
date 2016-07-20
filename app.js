@@ -60,7 +60,9 @@ process.on('SIGHUP',function () {
             devices[id] = new Device(id,structureData.devices[i].protocol,structureData.devices[i].language,structureData.devices[i].com,data,logger);
             
             devices[id].on('data',function(id,type,data) {
-                logic.action(id,type,data);
+                var changed=logic.action(id,type,data);
+                if (type=='set' || !changed) return; // don't notify
+                
                 for (var id2 in devices) {
                     if (id!=id2) {
                         devices[id2].notify(type,data);
