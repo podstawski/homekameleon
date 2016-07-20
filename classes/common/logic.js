@@ -52,12 +52,12 @@ var Logic = function(script,logger)
         
         action: function(device,type,data) {
             data.device=device;
+            var io=db.ios.get(data);
+            var io_cp=JSON.parse(JSON.stringify(io));
             
             switch (type) {
-                
                 case 'set':
-                    var io=db.ios.get(data);
-                    script.set(io,data.value);
+                    if (io_cp.value!=data.value) script.set(io,data.value);
                     break;
                 
                 case 'script':
@@ -93,6 +93,8 @@ var Logic = function(script,logger)
                     
                 }
             }
+            
+            return typeof(data.value)!='undefined' && io_cp.value!=data.value;
         }
     }
     
