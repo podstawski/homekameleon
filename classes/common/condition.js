@@ -17,6 +17,12 @@ module.exports = function (db,condition) {
         case '!=':
             return data[field]!=condition.condition[2];
     
+        case '>':
+            return data[field]>condition.condition[2];
+
+        case '<':
+            return data[field]<condition.condition[2];
+        
         default:
             return false;
     }
