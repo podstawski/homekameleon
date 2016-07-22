@@ -49,12 +49,17 @@ var Httpd = function(options,logger) {
       });
     });
     
-    var tunnel = function (userhost,localport,remoteport) {
+    var tunnel = function (userhost,localport,remoteport,script) {
         
         var milliseconds = (new Date).getTime();
         
         var cmd='ssh';
         var cmd_args=['-nNT', '-o TCPKeepAlive=yes','-o ServerAliveInterval=60', '-R '+remoteport+':localhost:'+localport,userhost];
+        
+        if (script!=null) {
+            cmd_args[0]='-nT';
+            cmd_args.push (script);
+        }
         logger.log('Trying to establish ssh tunnel: '+cmd+' '+cmd_args.join(' '),'net');
         
         var e=exec(cmd,cmd_args,function (error, stdout, stderr) {
@@ -63,7 +68,7 @@ var Httpd = function(options,logger) {
             var startInSeconds=delay<10000?300:1;
             
             setTimeout(function(){
-                tunnel(userhost,localport,remoteport);
+                tunnel(userhost,localport,remoteport,script);
             },1000*startInSeconds);
             
             if (error) logger.log(error,'error'); 
@@ -126,7 +131,7 @@ var Httpd = function(options,logger) {
             
             
             if (typeof(options.tunnel_port)!='undefined' && typeof(options.tunnel_host)!='undefined') {
-                tunnel(options.tunnel_host,options.port,options.tunnel_port);
+                tunnel(options.tunnel_host,options.port,options.tunnel_port,options.tunnel_script||null);
             }
             
             
