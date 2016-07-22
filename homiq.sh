@@ -16,7 +16,7 @@ f=/tmp/homiq-$1
 while [ "1" = "1" ]
 do
         sleep 60
-        wget -q -O f http://localhost:$1/check-web
+        wget -q -O $f http://localhost:$1/check-web
         ok=`cat $f | grep OK`
         if [ ! "$ok" ]
         then
