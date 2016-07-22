@@ -55,7 +55,8 @@
             "com":{
                 "port": "3000",
                 "tunnel_port": "3023",
-                "tunnel_host": "homiq@homiq.webkameleon.com"
+                "tunnel_host": "homiq@homiq.webkameleon.com",
+		"tunnel_script": "/home/homiq/homiq.sh 3023"
             },
             "active": true
         }
