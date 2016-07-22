@@ -6,7 +6,7 @@ module.exports = function(com,ini,logger,callback) {
     var arrayMath = new ArrayMath();
     
     var calculateRelated = function(data,arrayOfCalled) {
-        if (data!=null && typeof(data.related)=='object') {
+        if (data!=null && typeof(data.related)=='object' && data.related!=null) {
             if (arrayOfCalled.indexOf(data.haddr)>=0) return;
             arrayOfCalled.push(data.haddr);
             
