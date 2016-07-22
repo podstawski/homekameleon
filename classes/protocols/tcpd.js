@@ -18,10 +18,11 @@ var Tcpd = function(options,logger) {
     var connect=function () {
         var daemon = net.createServer(function(socket) {
             if (lastSocket!=null) {
-                socket.write("Only one client permited, sorry\r\n");
+                socket.write("Only one client permitted, sorry\r\n");
                 socket.end();
                 return;
             }
+            self.emit('connection',socket);
             lastSocket=socket;
             self.emit('request',socket);
             connected=true;

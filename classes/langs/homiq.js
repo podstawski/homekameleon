@@ -324,6 +324,7 @@ module.exports = function(com,ini,logger,callback) {
             outputs=db.ios.select([{device: deviceId, io: 'o', value: 1}]);
             for (var i in outputs.data) {
                 hset(outputs.data[i]);
+                logger.log(outputs.data[i].name+' ON','init');
             }
         },
         

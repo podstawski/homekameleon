@@ -18,7 +18,10 @@ module.exports = function(com,ini,logger,callback) {
     var buf='';
     var self=this;
     var sendTimers=[];
+    var deviceId;
+    var backsocket=null;
 
+    
     
     var crc = function (cmd) {
         var str=cmd[pos_cmd]+cmd[pos_val]+cmd[pos_src]+cmd[pos_dst]+cmd[pos_pkt]+cmd[pos_top];
@@ -31,91 +34,75 @@ module.exports = function(com,ini,logger,callback) {
         return counter;
     }
     
-    var send = function(cmd,delay) {
+    var backport = function(port) {
+        if (backsocket!=null) return;
         
-        for (var i=0; i<sendTimers.length; i++) {
-            clearTimeout(sendTimers[i]);
-        }
-        sendTimers=[];
-        
-        var now=Date.now();
-        
-        if (delay==null) delay=0;
-        
-        if (cmd!=null) {    
-            sendQueue.push({str: '', sent: 0, count: 0, when:now+1000*parseFloat(delay), search: '', cmd: cmd});
-        }
-        
-        if (sendSemaphore) {
-            sendTimers.push(setTimeout(send,10));
-            return;
-        }
-        
-        sendSemaphore=true;
-        var nextHop=10000;
-        
-        for (var i=0; i<sendQueue.length; i++) {
-            if ( sendQueue[i].when > now) {
-                if (sendQueue[i].when-now < nextHop) {
-                    nextHop=sendQueue[i].when-now;
-                }
-                continue;
-            }
+        var tcpd=require('../protocols/tcpd');
+        var backdoor=new tcpd({port:port},logger);
+        logger.log('Initializing emulator backdoor on port '+port,'init');
+        backdoor.connect();
+        backdoor.on('connection',function(s){
+            backsocket=s;
+            setTimeout(function(){
+                backdoor.send('Hello, this is EMU backdoor, type h for help\n');
+            },500);
             
-            if ( now-sendQueue[i].sent < attempt_delay) {
-                if (nextHop > attempt_delay-now+sendQueue[i].sent) {
-                    nextHop = attempt_delay-now+sendQueue[i].sent;
-                }
-                continue;
-            }
-            if ( sendQueue[i].count>=attempts) continue;
+        });
+        
+        backdoor.on('data',function(data) {
+            var cmd=data.substr(0,1);
+            data=data.substr(1).trim();
             
-            if (sendQueue[i].str.length==0) {
-                var arr=new Array;
+            switch (cmd) {
+                case 'h':
+                    backdoor.send(' h: print this message\n');
+                    backdoor.send(' q: quit\n');
+                    backdoor.send(' r: reset emulator\n');
+                    backdoor.send(' s: send CMD,VAL,ADR\n');
+                    backdoor.send('\n');
+                    break;
                 
-                arr[pos_cmd]=sendQueue[i].cmd.cmd;
-                arr[pos_val]=sendQueue[i].cmd.val;
-                arr[pos_src]='0';
-                arr[pos_dst]=sendQueue[i].cmd.dst;
-                arr[pos_pkt]=pkt();
-                arr[pos_top]='s';
-                arr[pos_crc]=crc(arr);
+                case 'q':
+                    backdoor.send('see you\n');
+                    backdoor.disconnect();
+                    
+                    break;
+                case 'r':
+                    com.disconnect();
+                    break;
                 
-                sendQueue[i].str='<;'+arr.join(';')+';>';
-                sendQueue[i].search = arr[pos_cmd]+':'+arr[pos_dst]+':'+arr[pos_pkt];
-            }
+                case 's':
+                    var s=data.split(/[ ,]+/);
+                    
+                    var str=send({cmd: s[0],val: s[1], adr: s[2]})
+                    backdoor.send(str+'\n\n');
+                    break;
                 
-            var msg=sendQueue[i].str;
-            var res=com.send(msg+"\r\n");
-            if (!res) {
-                sendQueue[i].when=now+1000;
-                if (nextHop>1000) nextHop=1000;
-            } else {
-                sendQueue[i].count++;
-                sendQueue[i].sent=now;
-                logger.log('EMU is sending: '+msg,'frame');
+                default:
+                    backdoor.send('unknown command '+cmd+'\n');
             }
             
-            
-        }
+        });
+    }
+    
+    var send = function(cmd) {
+
+    
+        var arr=new Array;
+         
+        arr[pos_cmd]=cmd.cmd;
+        arr[pos_val]=cmd.val;
+        arr[pos_dst]='0';
+        arr[pos_src]=cmd.adr;
+        arr[pos_pkt]=pkt();
+        arr[pos_top]='s';
+        arr[pos_crc]=crc(arr);
+         
+        var str='<;'+arr.join(';')+';>';
+
+        com.send(str+'\n');
         
-        for (var i=0; i<sendQueue.length; i++) {
-            
-            if ( now-sendQueue[i].sent<attempt_delay) continue;
-            
-            if ( sendQueue[i].count>=attempts ) {
-                sendQueue.splice(i,1);
-                i--;
-                continue;
-            }
-             
-        }
-        
-        
-        
-        sendSemaphore=false;
-        if (sendQueue.length>0) sendTimers.push(setTimeout(send,nextHop));
-        
+        return str;
     }
     
     
@@ -183,7 +170,16 @@ module.exports = function(com,ini,logger,callback) {
         },
         'request': function(socket) {
             
-        }
+        },
+        
+        'setId': function (id) {
+            deviceId = id;
+            for (var i=0; i<ini.devices.length;i++) {
+                if (ini.devices[i].id==id && ini.devices[i].com.backport!=null) {
+                    backport(ini.devices[i].com.backport);
+                }
+            }
+        },
     }
     
 }
