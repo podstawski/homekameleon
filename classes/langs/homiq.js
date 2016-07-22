@@ -322,6 +322,7 @@ module.exports = function(com,ini,logger,callback) {
         
         'dbready': function(db) {
             outputs=db.ios.select([{device: deviceId, io: 'o', value: 1}]);
+            logger.log('Initializing outputs: '+outputs.recordsTotal,'init');
             for (var i in outputs.data) {
                 hset(outputs.data[i]);
                 logger.log(outputs.data[i].name+' ON','init');
