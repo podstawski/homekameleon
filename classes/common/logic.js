@@ -4,6 +4,7 @@ var checkactive=require('./checkactive');
 var Logic = function(script,logger)
 {
     var db;
+    var collection;
     
     var run_actions = function(data,dbg_output) {
         var actions=db.actions.get(data);
@@ -60,8 +61,9 @@ var Logic = function(script,logger)
     }
     
     return {
-        setdb: function (setdb) {
-            db=setdb;        
+        setdb: function (setdb,c) {
+            db=setdb;
+            collection=c;
         },
         
         action: function(device,type,data) {
@@ -103,12 +105,24 @@ var Logic = function(script,logger)
                     io.value=data.value;
                     var evaluated=evaluate(io);
                     db.ios.set(io);
-                
+                    
                     run_actions(data,!evaluated);
                     
                     break;
                     
                     
+                }
+            }
+            
+            if (io!=null && io.store!=null) {
+                var store=io.store.split('/');
+            
+                if (!collection.inited(store[0])) {
+                    collection.init(store[0],10,store[1]||60,function(){
+                        collection.add(store[0],io.value);
+                    });
+                } else {
+                    collection.add(store[0],io.value);
                 }
             }
             

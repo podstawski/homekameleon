@@ -40,7 +40,7 @@ process.on('SIGHUP',function () {
         
         logger.loadChannels(structureData['logger']);
         script.setdb(structure.db);
-        logic.setdb(structure.db);
+        logic.setdb(structure.db,collection);
         
         if (typeof(structureData.calendars)!='undefined') {
             calendar.reggister(structureData.calendars);

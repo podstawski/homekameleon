@@ -2,7 +2,7 @@ var dblite = require('dblite').withSQLite('3.8.6');
 var fs = require('fs');
 
 module.exports = function(path) {
-    var avgs={},saves={},lastsaves={},values={},records={};
+    var avgs={},saves={},lastsaves={},values={};
     
     fs.stat(path,function(err,stat) {
         if (err!=null) {
@@ -20,10 +20,18 @@ module.exports = function(path) {
         return txt.replace(/[,.-]+/g,'_');
     };
     
-    var init = function (table,avg,save,record,cb) {
+    /*
+     * table:   name of table
+     * avg:     how many results keep for average calc
+     * save:    save every ... seconds even if data comes faster
+     *
+     * cb:      callback
+     */
+    
+    var init = function (table,avg,save,cb) {
         avgs[table]=avg;
         saves[table]=save;
-        records[table]=record;
+
         lastsaves[table]=0;
         values[table]=[];
         var sql="CREATE TABLE IF NOT EXISTS "+name(table)+" (date INTEGER PRIMARY KEY NOT NULL,value REAL NOT NULL)";
@@ -35,11 +43,11 @@ module.exports = function(path) {
                     var sql="SELECT value FROM "+name(table)+" WHERE date="+lastsaves[table];
                     db.query(sql,function(data) {
                         if (data[0]!=null && data[0][0]!=null && data[0][0].length>0) {
-                            record['current']=round(parseFloat(data[0][0])*(record.multiplier||1));
-                        }
+                            if (typeof(cb)=='function') cb(round(parseFloat(data[0][0])));
+                        } else if (typeof(cb)=='function') cb(null);
                     });
                 }
-                if (typeof(cb)=='function') cb();
+                else if (typeof(cb)=='function') cb(null);
             });
         });
     };
@@ -62,7 +70,7 @@ module.exports = function(path) {
         }
         var sql="INSERT INTO "+name(table)+" VALUES (?,?)";
         var val=[now,avg(values[table])];
-        if (now-lastsaves[table] >= saves[table]) {
+        if (now-lastsaves[table] >= saves[table]*1000) {
             db.query(sql,val,cb);
             lastsaves[table]=now;
         }
@@ -95,6 +103,9 @@ module.exports = function(path) {
         },
         init: function (table,avg,save,record,cb) {
             init(table,avg,save,record,cb);
+        },
+        inited: function (table) {
+            return typeof(values[table])!='undefined';
         },
         round: function(number) {
             return round(number);
