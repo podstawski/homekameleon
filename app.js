@@ -7,6 +7,7 @@ var Device = require('./classes/common/device');
 var Logic = require('./classes/common/logic');
 var Script = require('./classes/common/script');
 var Calendar = require('./classes/common/calendar');
+var Collection = require('./classes/common/collection');
 
 var logger = new Logger('./logs');
 var structure = new Structure(__dirname + '/conf/conf.json',logger);
@@ -34,6 +35,8 @@ process.on('SIGHUP',function () {
     });
     if (typeof(data)=='object') {
         structureData=data;
+        
+        var collection=new Collection(__dirname + '/conf/'+(data.collection||'collection.db'));
         
         logger.loadChannels(structureData['logger']);
         script.setdb(structure.db);
