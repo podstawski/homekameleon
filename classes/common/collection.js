@@ -133,15 +133,20 @@ module.exports = function(path) {
         }
         var now=Date.now();
         values[table].push(value);
-        while (values[table].length>avgs[table]) {
-            values[table].splice(0,1);
-        }
-        var sql="INSERT INTO "+name(table)+" VALUES (?,?)";
-        var val=[now,avg(values[table])];
+
         if (now-lastsaves[table] >= saves[table]*1000) {
+            
+            var sql="INSERT INTO "+name(table)+" VALUES (?,?)";
+            var val=[now,avg(values[table])];
+            
             try {
                 db.query(sql,val,cb);
                 lastsaves[table]=now;
+                
+                while (values[table].length>avgs[table]) {
+                    values[table].splice(0,1);
+                }
+                
             } catch(e) {
                 console.log('ERROR:',e,sql,val,values[table]);
             }
