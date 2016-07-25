@@ -49,9 +49,7 @@ var Logic = function(script,logger)
     var evaluate = function (io) {
         var now=Date.now();
         
-        if (io.last==null) io.last=0;
-        io.time=now-io.last;
-
+        io.time=now-(io.last||0);
 
         if (io['eval'] == null || io['eval'].length==0){
             io.last=now; 
@@ -65,6 +63,7 @@ var Logic = function(script,logger)
         }
         var e='value='+io['eval']+';';
         eval(e);
+        //console.log(e,value,io);
         io.value=value;
         io.last=now; 
         return true;
@@ -91,6 +90,7 @@ var Logic = function(script,logger)
                     break;
                 
                 case 'output':
+                    data.last=io.last||0;
                     data.eval=io.eval||null;
                     evaluate(data);
                     db.ios.set(data);
@@ -102,6 +102,7 @@ var Logic = function(script,logger)
                     if (io==null) break;
                     if (!checkactive(io)) break; 
                     
+                    data.last=io.last||0;
                     data.eval=io.eval||null;
                     var evaluated=evaluate(data);
                     db.ios.set(data);
