@@ -47,7 +47,16 @@ var Logic = function(script,logger)
     }
     
     var evaluate = function (io) {
-        if (io['eval'] == null || io['eval'].length==0) return false;
+        var now=Date.now();
+        
+        if (io.last==null) io.last=0;
+        io.time=now-io.last;
+
+
+        if (io['eval'] == null || io['eval'].length==0){
+            io.last=now; 
+            return false;
+        }
         
         for (var k in io) {
             if (k=='eval' || k=='io' || k=='e') continue;
@@ -57,6 +66,7 @@ var Logic = function(script,logger)
         var e='value='+io['eval']+';';
         eval(e);
         io.value=value;
+        io.last=now; 
         return true;
     }
     
@@ -81,37 +91,20 @@ var Logic = function(script,logger)
                     break;
                 
                 case 'output':
-                    io.value=data.value;
-                    evaluate(io);
-                    data.value=io.value;
+                    data.eval=io.eval||null;
+                    evaluate(data);
                     db.ios.set(data);
                     run_actions(data,false);
                     break;
                 
                 case 'input': {
                     if (data.device!==undefined) delete(data.device);
-                  
                     if (io==null) break;
                     if (!checkactive(io)) break; 
                     
-                    
-                    var now=Date.now();
-                    
-                    if (typeof(io.last)=='undefined') {
-                        io.last=0;
-                    }
-                    
-                    io.time=now-io.last;
-                    io.last=now;
-                    io.value=data.value;
-                    var evaluated=evaluate(io);
-                    
-                    data.value=io.value;
-                    data.last=now;
-                    data.time=io.time;
-                    
+                    data.eval=io.eval||null;
+                    var evaluated=evaluate(data);
                     db.ios.set(data);
-                    
                     run_actions(data,!evaluated);
                     
                     break;
