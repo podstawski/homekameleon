@@ -147,7 +147,7 @@ module.exports = function(path) {
             }
             
         } else {
-            cb();
+            if (typeof(cb)=='function') cb();
         }
 
         vacumm(table);
