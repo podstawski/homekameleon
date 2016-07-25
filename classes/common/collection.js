@@ -150,7 +150,7 @@ module.exports = function(path) {
             if (typeof(cb)=='function') cb();
         }
 
-        vacumm(table);
+        vacuum(table);
 
 
     };
