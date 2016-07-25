@@ -127,8 +127,8 @@ module.exports = function(path) {
     };
     
     var add = function(table,value,cb) {
-        if (value==null) {
-            cb();
+        if (value==null || table.length==0) {
+            if (typeof(cb)=='function') cb();
             return;
         }
         var now=Date.now();

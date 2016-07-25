@@ -114,7 +114,7 @@ var Logic = function(script,logger)
                 }
             }
             
-            if (io!=null && io.store!=null) {
+            if (io!=null && io.store!=null && io.store.length>0) {
                 var store=io.store.split('/');
             
                 if (!collection.inited(store[0])) {
