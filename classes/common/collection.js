@@ -143,7 +143,7 @@ module.exports = function(path) {
                 db.query(sql,val,cb);
                 lastsaves[table]=now;
             } catch(e) {
-                console.log('ERROR:',e,sql,val);
+                console.log('ERROR:',e,sql,val,values[table]);
             }
             
         } else {
