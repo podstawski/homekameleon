@@ -83,7 +83,8 @@ var Logic = function(script,logger)
                 case 'output':
                     io.value=data.value;
                     evaluate(io);
-                    db.ios.set(io);
+                    data.value=io.value;
+                    db.ios.set(data);
                     run_actions(data,false);
                     break;
                 
@@ -104,7 +105,12 @@ var Logic = function(script,logger)
                     io.last=now;
                     io.value=data.value;
                     var evaluated=evaluate(io);
-                    db.ios.set(io);
+                    
+                    data.value=io.value;
+                    data.last=now;
+                    data.time=io.time;
+                    
+                    db.ios.set(data);
                     
                     run_actions(data,!evaluated);
                     
