@@ -97,8 +97,9 @@ module.exports = function(path) {
                 db.query(sql,function(result){
                     var date=parseInt(result[0][0]);
                     if (isNaN(date)) date=deletebefore;
-                    while (date<now) {
+                    while (true) {
                         date+=24*3600*1000;
+                        if (date>=now) break;
                         
                         d=new Date(date);
                         if (d.getHours()==23) date+=3600*1000;
