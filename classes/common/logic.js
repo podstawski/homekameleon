@@ -79,12 +79,12 @@ var Logic = function(script,logger)
         action: function(device,type,data) {
             data.device=device;
             var io=db.ios.get(data);
-            if (io==null) return;
             var io_cp=JSON.parse(JSON.stringify(io));
             
             
             switch (type) {
                 case 'set':
+                    if (io==null) return;
                     if (io_cp.value!=data.value) script.set(io,data.value);
                     break;
                 
@@ -93,6 +93,7 @@ var Logic = function(script,logger)
                     break;
                 
                 case 'output':
+                    if (io==null) return;
                     data.last=io.last||0;
                     data.eval=io.eval||null;
                     evaluate(data);
@@ -100,7 +101,8 @@ var Logic = function(script,logger)
                     run_actions(data,false);
                     break;
                 
-                case 'input': {
+                case 'input':
+                    if (io==null) return;
                     if (data.device!==undefined) delete(data.device);
                     if (io==null) break;
                     if (!checkactive(io)) break; 
@@ -114,7 +116,7 @@ var Logic = function(script,logger)
                     break;
                     
                     
-                }
+                
             }
             
             if (io!=null && io.store!=null && io.store.length>0) {
