@@ -11,17 +11,17 @@ module.exports = function (db,condition) {
     
     switch (condition.condition[1]) {
         case '=':
-            return data[field]==condition.condition[2];
+            return data[field] == condition.condition[2];
 
         case '<>':
         case '!=':
-            return data[field]!=condition.condition[2];
+            return data[field] != condition.condition[2];
     
         case '>':
-            return data[field]>condition.condition[2];
+            return data[field] > condition.condition[2];
 
         case '<':
-            return data[field]<condition.condition[2];
+            return data[field] < condition.condition[2];
         
         default:
             return false;
