@@ -302,13 +302,16 @@ module.exports = function(com,ini,logger,callback) {
                     var adr=line[pos_src];
                     if (cmd.length==2) adr+='.'+cmd[1];
                     
+                    
+                    
                     if (typeof(origin.setval)!='undefined') {
                         state=origin.setval;
                     }
                     
                     var io=(cmd.length==2)?'o':null;
-                    var opt={haddr:address2haddr(adr,io),value:state};
-                    callback('output',opt);
+                    var opt={haddr:address2haddr(adr,io)};
+                    if (state!=null) opt.value=state;
+                    if (opt.haddr!=null) callback('output',opt);
                 }
                 
             }
@@ -332,6 +335,32 @@ module.exports = function(com,ini,logger,callback) {
                 }
 
             },1000);
+            db.ios.trigger('type',function(data){
+                if (data.device!=deviceId) return;
+                
+                var address=data.address.split('.');
+                if (address.length!=2) return;
+                
+                if (data.io=='i' && (data.type=='0' || data.type=='1')) {
+                    send({
+                        cmd: 'IM.'+address[1],
+                        dst: address[0],
+                        val: data.type,
+                        setval: null
+                    });
+                }
+                
+                if (data.io=='o' && (data.type=='0' || data.type=='1') ) {
+                    send({
+                        cmd: 'IOM.'+address[1],
+                        dst: address[0],
+                        val: data.type,
+                        setval: null
+                    });
+                }
+                
+                
+            });
         },
         
         'setId': function (id) {

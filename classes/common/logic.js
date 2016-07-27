@@ -47,6 +47,7 @@ var Logic = function(script,logger)
     }
     
     var evaluate = function (io) {
+        
         var now=Date.now();
         
         io.time=now-(io.last||0);
@@ -78,7 +79,9 @@ var Logic = function(script,logger)
         action: function(device,type,data) {
             data.device=device;
             var io=db.ios.get(data);
+            if (io==null) return;
             var io_cp=JSON.parse(JSON.stringify(io));
+            
             
             switch (type) {
                 case 'set':
