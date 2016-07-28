@@ -6,9 +6,9 @@ var Logic = function(script,logger)
     var db;
     var collection;
     
-    var run_actions = function(data,dbg_output) {
+    var run_actions = function(data,dbg_output,ctx) {
         var actions=db.actions.get(data);
-
+    
         if (actions!=null) {
             if (typeof(actions.actions)=='object') {
                 
@@ -24,7 +24,7 @@ var Logic = function(script,logger)
                         
                         for (var j=0;j<actions.actions[i].scripts.length; j++) {
                             anypass=true;
-                            script.run(actions.actions[i].scripts[j]);
+                            script.run(actions.actions[i].scripts[j],0,null,ctx);
                         }
                     }
                     
@@ -76,20 +76,20 @@ var Logic = function(script,logger)
             collection=c;
         },
         
-        action: function(device,type,data) {
+        action: function(device,type,data,ctx) {
             data.device=device;
             var io=db.ios.get(data);
             var io_cp=JSON.parse(JSON.stringify(io));
             
-            
+
             switch (type) {
                 case 'set':
                     if (io==null) return;
-                    if (io_cp.value!=data.value) script.set(io,data.value);
+                    if (io_cp.value!=data.value) script.set(io,data.value,ctx);
                     break;
                 
                 case 'script':
-                    script.run(data.script);
+                    script.run(data.script,null,null,ctx);
                     break;
                 
                 case 'output':
@@ -98,7 +98,7 @@ var Logic = function(script,logger)
                     data.eval=io.eval||null;
                     evaluate(data);
                     db.ios.set(data);
-                    run_actions(data,false);
+                    run_actions(data,false,ctx);
                     break;
                 
                 case 'input':
@@ -111,7 +111,7 @@ var Logic = function(script,logger)
                     data.eval=io.eval||null;
                     var evaluated=evaluate(data);
                     db.ios.set(data);
-                    run_actions(data,!evaluated);
+                    run_actions(data,!evaluated,ctx);
                     
                     break;
                     

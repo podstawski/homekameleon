@@ -4,6 +4,7 @@ module.exports = function(com,ini,logger,callback) {
 
     var database,deviceId;
     var arrayMath = new ArrayMath();
+    var timers={};
     
     var calculateRelated = function(data,arrayOfCalled) {
         if (data!=null && typeof(data.related)=='object' && data.related!=null) {
@@ -45,12 +46,19 @@ module.exports = function(com,ini,logger,callback) {
         
     return {
         
-        'set': function(data,delay) {
+        'set': function(data,delay,ctx) {
             if (delay==null) delay=0;
             if (data.delay==null) data.delay=0;
             delay+=data.delay;
             
-            setTimeout(function(){
+            while (true) {
+                var id=Math.random();
+                if (timers[id]==null) break;
+            }
+            
+            var timer=setTimeout(function(timerid){
+                if (timers[timerid]!=null) delete(timers[timerid]);
+                
                 database.ios.get(data,function(rec){
                     var related=rec.related||[];
                     for (var i=0; i<related.length; i++) {
@@ -64,16 +72,17 @@ module.exports = function(com,ini,logger,callback) {
                                 value: data.value
                             };
                     
-                            callback('set',set);
+                            callback('set',set,ctx);
                         });
                     }
                 });
-            },delay*1000);
+            },delay*1000,id);
             
+            if (delay>0) timers[id]={timer:timer,ctx:ctx};
         },
         
-        'data': function(data) {
-            callback('output',{haddr:data.haddr,value:data.value});
+        'data': function(data,ctx) {
+            callback('output',{haddr:data.haddr,value:data.value},ctx);
         },
         
         'setId': function (id) {
@@ -82,6 +91,17 @@ module.exports = function(com,ini,logger,callback) {
         
         'initstate': function (db) {
             database=db;
+        },
+        
+        'cancel': function (ctx,delay) {
+            setTimeout(function(){
+                for (k in timers) {
+                    if (timers[k].ctx==ctx) {
+                        clearTimeout(timers[k].timer);
+                        delete(timers[k]);
+                    }
+                }
+            },delay*1000);
         }
     }
     

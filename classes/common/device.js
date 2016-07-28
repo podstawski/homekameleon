@@ -10,8 +10,10 @@ var Device = function(id,protocol,language,options,ini,logger) {
     
 
     var com=new Protocol(options,logger);
-    var trans=new Translator(com,ini,logger,function(type,data) {
-        self.emit('data',id,type,data);
+    var trans=new Translator(com,ini,logger,function(type,data,ctx) {
+        //console.log('device',id,ctx);
+        self.emit('data',id,type,data,ctx);
+        
     });
     
     if (typeof(com.setLanguage)=='function') {
@@ -44,8 +46,8 @@ var Device = function(id,protocol,language,options,ini,logger) {
             self.on(event,fun);
         },
         
-        command: function(data,delay) {
-            if (typeof(trans.set)=='function') trans.set(data,delay);
+        command: function(data,delay,ctx) {
+            if (typeof(trans.set)=='function') trans.set(data,delay,ctx);
         },
         
         initstate: function(socket,db) {
@@ -53,6 +55,10 @@ var Device = function(id,protocol,language,options,ini,logger) {
             if (typeof(com.initstate)=='function') com.initstate(socket,db);
             if (typeof(trans.initstate)=='function') trans.initstate(db);
             
+        },
+        
+        cancel: function(ctx,delay) {
+            if (typeof(trans.cancel)=='function') trans.cancel(ctx,delay);
         },
         
         notify: function(type,data) {

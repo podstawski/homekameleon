@@ -20,6 +20,12 @@ var logic = new Logic(script,logger);
 var structureData;
 var devices=[];
 
+
+script.on('_cancel',function(ctx,delay){
+    for (var id in devices) devices[id].cancel(ctx,delay);
+});
+
+
 /*
  * overall init may be initiated by signal HUP
  * therefore afterward we push (kill) the HUP signal to ourselves
@@ -42,6 +48,8 @@ process.on('SIGHUP',function () {
         script.setdb(structure.db);
         logic.setdb(structure.db,collection);
         
+
+        
         if (typeof(structureData.calendars)!='undefined') {
             calendar.reggister(structureData.calendars);
             setTimeout(function() {
@@ -62,8 +70,8 @@ process.on('SIGHUP',function () {
             logger.log('Initializing '+structureData.devices[i].name,'init');
             devices[id] = new Device(id,structureData.devices[i].protocol,structureData.devices[i].language,structureData.devices[i].com,data,logger);
             
-            devices[id].on('data',function(id,type,data) {
-                var changed=logic.action(id,type,data);
+            devices[id].on('data',function(id,type,data,ctx) {
+                var changed=logic.action(id,type,data,ctx);
                 if (type=='set' || !changed) return; // don't notify
                 
                 for (var id2 in devices) {
@@ -77,8 +85,8 @@ process.on('SIGHUP',function () {
                 devices[id].initstate(data,structure.db);
             });
             
-            script.on(id,function(id,data,delay) {
-                devices[id].command(data,delay);
+            script.on(id,function(id,data,delay,ctx) {
+                devices[id].command(data,delay,ctx);
             });
             
             devices[id].connect();

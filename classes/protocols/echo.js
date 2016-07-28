@@ -17,8 +17,8 @@ var Echo = function(options,logger) {
             self.on(event,fun);
         },
         
-        send: function(str) {
-            self.emit('data',str);
+        send: function(str,ctx) {
+            self.emit('data',str,ctx);
         },
         
         notify: function(type,data) {

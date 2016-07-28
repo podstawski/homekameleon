@@ -49,7 +49,8 @@ var Script=function(logger) {
                     self.emit(scriptsQueue[i].script.actions[j].device,
                               scriptsQueue[i].script.actions[j].device,
                               scriptsQueue[i].script.actions[j],
-                              scriptsQueue[i].delay);
+                              scriptsQueue[i].delay,
+                              scriptsQueue[i].ctx);
                 }
             } else if (typeof(scriptsQueue[i].script.nactions)=='object' && scriptsQueue[i].script.nactions.length) {
                 logger.log('!'+scriptsQueue[i].script.name+delay_suffix,scriptsQueue[i].script.log||'script');
@@ -61,7 +62,8 @@ var Script=function(logger) {
                     self.emit(scriptsQueue[i].script.nactions[j].device,
                               scriptsQueue[i].script.nactions[j].device,
                               scriptsQueue[i].script.nactions[j],
-                              scriptsQueue[i].delay);
+                              scriptsQueue[i].delay,
+                              scriptsQueue[i].ctx);
                 }
             }
             
@@ -76,9 +78,9 @@ var Script=function(logger) {
         setTimeout(runscripts,1000);
     }
     
-    var run = function(script,delay,condition) {
+    var run = function(script,delay,condition,ctx) {
         if (delay==null) delay=0;
-        
+                
         /*
          *check if script is object and has delay defined
          */
@@ -89,6 +91,10 @@ var Script=function(logger) {
             script=script.script;
         } 
         
+        if (script=='-1' || script==-1) {
+            self.emit('_cancel',ctx,delay);
+            return;
+        }
         /*
          *get database for specified script id
          */
@@ -135,7 +141,8 @@ var Script=function(logger) {
         scriptsQueue.push({
             delay: delay,
             script: script,
-            conditions: conditions
+            conditions: conditions,
+            ctx: ctx
         });
         
         
@@ -246,17 +253,17 @@ var Script=function(logger) {
             self.on(event,fun);
         },
         
-        run: function(script,delay,condition) {
-            run(script,delay,condition);
+        run: function(script,delay,condition,ctx) {
+            run(script,delay,condition,ctx);
         },
         
         find: function(str) {
             return find(str);
         },
         
-        set: function(io,value) {
+        set: function(io,value,ctx) {
             var set={haddr:io.haddr, value:value};
-            self.emit(io.device,io.device,set);
+            self.emit(io.device,io.device,set,0,ctx);
         },
         
         get: function(s) {

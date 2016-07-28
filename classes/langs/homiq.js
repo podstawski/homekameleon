@@ -166,7 +166,8 @@ module.exports = function(com,ini,logger,callback) {
     
     self.cmd_I = function (line) {
         var cmd=line[pos_cmd].split('.');
-        if (cmd.length==2) callback('input',{haddr: address2haddr(line[pos_src]+'.'+cmd[1],'i'), value: line[pos_val]});
+        var haddr=address2haddr(line[pos_src]+'.'+cmd[1],'i');
+        if (cmd.length==2) callback('input',{haddr: haddr, value: line[pos_val]},haddr);
     }
     
     var address2haddrCache={};
@@ -196,14 +197,14 @@ module.exports = function(com,ini,logger,callback) {
         return null;
     }
     
-    var hset = function(data,delay2) {
+    var hset = function(data,delay2,ctx) {
         var address=haddr2address(data.haddr);
         if (address==null) return;
         var value=data.value;
         var delay = typeof(data.delay)=='undefined' ? 0 : data.delay;
         
         delay+=delay2||0;
-    
+
         
         switch (value) {
             case 'stop-d':
@@ -218,7 +219,8 @@ module.exports = function(com,ini,logger,callback) {
                     cmd: 'UD',
                     dst: address,
                     val: val,
-                    setval: value
+                    setval: value,
+                    ctx: ctx
                 },delay);
                 break;
             
@@ -237,7 +239,8 @@ module.exports = function(com,ini,logger,callback) {
                     send({
                         cmd: 'O.'+adr[1],
                         dst: adr[0],
-                        val: value
+                        val: value,
+                        ctx: ctx
                     },delay); 
                 }
                 
@@ -250,8 +253,8 @@ module.exports = function(com,ini,logger,callback) {
     
     return {
         
-        'set': function(data,delay2) {
-            return hset(data,delay2);
+        'set': function(data,delay,ctx) {
+            return hset(data,delay,ctx);
         },
         
         'data': function(data) {
@@ -311,7 +314,8 @@ module.exports = function(com,ini,logger,callback) {
                     var io=(cmd.length==2)?'o':null;
                     var opt={haddr:address2haddr(adr,io)};
                     if (state!=null) opt.value=state;
-                    if (opt.haddr!=null) callback('output',opt);
+                  
+                    if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
                 }
                 
             }
@@ -372,6 +376,18 @@ module.exports = function(com,ini,logger,callback) {
                 sendQueue[i].seconds2go = Math.round((sendQueue[i].when - Date.now())/1000);
             }
             console.log('Homiq:',sendQueue);
+        },
+        
+        'cancel': function(ctx,delay) {
+            setTimeout(function(){
+                for (var i=0; i<sendQueue.length; i++) {
+                    if (sendQueue[i].cmd.ctx==ctx) {
+                        sendQueue.splice(i,1);
+                        i--;
+                    }
+                }
+                
+            },delay*1000);
         }
     }
     
