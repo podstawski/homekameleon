@@ -79,7 +79,7 @@ var Logic = function(script,logger)
         setdb: function (setdb,c,setini) {
             db=setdb;
             collection=c;
-            scrlev=script.finder;
+            scrlev=script.finder();
             ini=setini;
             ioslev=new Levenshtein(db.ios,'name',ini.dictionary.synonyms||{});
         },
@@ -93,29 +93,41 @@ var Logic = function(script,logger)
             switch (type) {
                 
                 case 'command':
-                    var s=script.find(data.q);
-                    if (typeof(s)=='number') {
-                        script.run(s);
-                        db.scripts.get(s,function(s){
-                            data.cb(ini.dictionary.dict.done+': '+s.name);
-                        });
-                        break;
-                    } else {
-                        var result='';
-                        var ios=ioslev.find(data.q);
-                        if (ios) for(var i=0; i<ios.length; i++){
-                            if (ios[i].rec.unit) {
+                    var scr=scrlev.find(data.q);
+                    var ios=ioslev.find(data.q);
+                    var result='';
+                    
+                    //console.log(scr,ios);
+                    if (scr && scr.length>0) {
+                        if (ios && ios.length>0 && ios[0].count-ios[0].matches < scr[0].count-scr[0].matches) {
+                            //ios wins
+                            scr=null;
+                        } 
+                    }
+                    
+                    if (scr && scr.length>0) {
+                        for (var i=0; i<scr.length; i++){
+                            result+=ini.dictionary.dict.done+': '+scr[i].rec.name;
+                            script.run(scr[i].rec.id);    
+                        }
+                    } else if (ios && ios.length>0) {
+                        for (var i=0; i<ios.length; i++){
+                            if (ios[i].rec.unit && ios[i].rec.unit.length>0) {
                                 result+=ios[i].rec.name+' '+(Math.round(10*ios[i].rec.value)/10)+' '+ios[i].rec.unit+'. ';
+                            } else {
+                                result+=ios[i].rec.name+'. ';
+                                script.toggle(ios[i].rec,ctx);
                             }
                         }
-                        if(result.length>0) {
-                            data.cb(result);
-                            break;
-                        }
-                        
                     }
-                    data.cb(ini.dictionary.dict.command_not_found);
                     
+                    if(result.length>0) {
+                        data.cb(result);
+                        break;
+                    }
+                    
+                    
+                    data.cb(ini.dictionary.dict.command_not_found);
                     break;
                 
                 case 'set':

@@ -89,7 +89,7 @@ module.exports = function(db,field,synonyms) {
             cache[t[i]]=[];
             for (var k in index) {
                 var lev=levenshtein(k,t[i]);
-                if ((t[i].length<5 && lev<2) || (t[i].length>=5 && lev<3) ) {
+                if (lev==0 || (t[i].length==7 && lev==1) || (t[i].length>7 && lev==2) ) {
                     cache[t[i]]=cache[t[i]].concat(index[k]);
                 }
             }
@@ -127,7 +127,29 @@ module.exports = function(db,field,synonyms) {
     var matches=results[0].matches;
     while (results[results.length-1].matches<matches) results.splice(results.length-1,1);
     
-    while (results.length>1 && results[0].rec==results[1].rec) results.splice(1,results.length-1);
+    
+    results.sort(function(a,b){
+      return (a.count-count) - (b.count-count);
+    });
+    
+    var matchcount=Math.abs(results[0].matches-results[0].count);
+    
+    for (var i=0; i<results.length; i++) {
+      
+        if (Math.abs(results[i].matches-results[i].count)>matchcount) {
+            results.splice(i,1);
+            i--;
+            continue;
+        }
+      
+        for (var j=i+1; j<results.length; j++) {
+            if (results[i].rec==results[j].rec) {
+              results.splice(j,1);
+              j--;
+            }
+        }
+    }
+    
     
     return results;
   };

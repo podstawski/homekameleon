@@ -1,13 +1,20 @@
 
 
 module.exports = function(com,ini,logger,callback) {
-
+    var database;
     var timers={};
         
     return {
-        
+        'initstate': function (db) {
+            database=db;
+        },
+ 
         'set': function(data,delay,ctx) {
             if (delay==null) delay=0;
+            if (typeof(data.value)=='undefined') {
+                var rec=database.ios.get(data);
+                data.value=parseFloat(rec.value)>0?0:1;
+            }
             if (delay==0) com.send(data,ctx);
             else {
                 

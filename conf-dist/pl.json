@@ -5,7 +5,7 @@
     },
     
     "synonyms": [
-        ["włącz","zapal","on","start"],
-        ["wyłącz","zgaś","off","stop"]
+        ["włącz","zapal","on","start","początek"],
+        ["wyłącz","zgaś","off","stop","koniec"]
     ]
 }

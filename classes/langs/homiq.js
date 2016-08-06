@@ -251,9 +251,40 @@ module.exports = function(com,ini,logger,callback) {
         
     };
     
+    var toggle = function(data) {
+        var rec=database.ios.get(data);
+                       
+        if (isNaN(parseFloat(rec.value))) {
+            
+            switch (rec.value) {
+                case 'up':
+                    return 'stop-u';
+                    
+                case 'down':
+                    return 'stop-d';
+            
+                case 'stop-u':
+                    return 'down';
+
+                case 'stop-d':
+                    return 'up';
+            }
+            
+            
+        } else {
+            if (parseInt(rec.value)==0 || parseInt(rec.value)==0) {
+                return parseInt(rec.value)==0?1:0;
+            }
+        }
+        
+        return rec.value;
+    };
+    
     return {
         
         'set': function(data,delay,ctx) {
+            
+            if (typeof(data.value)=='undefined') data.value=toggle(data);
             return hset(data,delay,ctx);
         },
         

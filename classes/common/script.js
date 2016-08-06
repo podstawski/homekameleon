@@ -252,6 +252,7 @@ var Script=function(logger) {
             db=setdb;
             ini=setini;
             levenshtein=new Levenshtein(db.scripts,'name',ini.dictionary.synonyms||{});
+            
         },
         
         on: function(event,fun) {
@@ -271,11 +272,18 @@ var Script=function(logger) {
             self.emit(io.device,io.device,set,0,ctx);
         },
         
+        toggle: function(io,ctx) {
+            var set={haddr:io.haddr};
+            self.emit(io.device,io.device,set,0,ctx);
+        },
+        
         get: function(s) {
             return db.scripts.get(s);
         },
         
-        finder: levenshtein
+        finder: function() {
+            return levenshtein;
+        }
     }
     
 }

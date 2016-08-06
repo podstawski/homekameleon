@@ -51,6 +51,17 @@ module.exports = function(com,ini,logger,callback) {
             if (data.delay==null) data.delay=0;
             delay+=data.delay;
             
+            if (typeof(data.value)=='undefined') {
+                var rec=database.ios.get(data);
+                if (!isNaN(parseFloat(rec.value))) {
+                    data.value=parseFloat(rec.value)>0?0:1;
+                } else {
+                    data.value=rec.value;
+                }
+                
+            }
+            
+            
             while (true) {
                 var id=Math.random();
                 if (timers[id]==null) break;
