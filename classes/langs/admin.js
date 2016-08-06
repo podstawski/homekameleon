@@ -28,6 +28,21 @@ var Web = function(com,ini,logger,callback) {
             var path = url.parse(request.url).pathname;
  
             switch(path){
+                case '/say':    
+                    var data=JSON.parse(JSON.stringify(request.query));
+                    data.cb = function (txt) {
+                        response.write(txt);
+                        response.end(); 
+                    }
+                
+                    if ((ini.commandpass||Date.now())!=(request.query.p||0) ) {
+                        data.cb('Proszę podać hasło!');
+                        break;
+                    }                    
+                    
+                    callback('command',data);
+                    
+                    break;
                 case '/check-web':
                     response.setHeader('Access-Control-Allow-Origin', '*');
                     response.write('OK,'+request.headers.host);

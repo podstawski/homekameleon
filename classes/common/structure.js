@@ -24,7 +24,31 @@ module.exports = function (conf,logger) {
             } catch (e) {
                 logger.log('Structure parse error: '+e,'error');
                 return null;
-            }            
+            }
+            
+            if (typeof(json.lang)!='undefined') {
+                try {
+                    var lang_file_name=path.dirname(config_file)+'/'+json.lang+'.json';
+                    var lang=fs.readFileSync(lang_file_name);
+                    json.dictionary = JSON.parse(lang);
+                    
+                    if (typeof(json.dictionary.synonyms)!='undefined') {
+                        var synonyms={};
+                        for (var i=0; i<json.dictionary.synonyms.length; i++) {
+                            for (var j=0;j<json.dictionary.synonyms[i].length;j++) {
+                                var a=JSON.parse(JSON.stringify(json.dictionary.synonyms[i]));
+                                a.splice(a.indexOf(json.dictionary.synonyms[i][j]),1);
+                                synonyms[json.dictionary.synonyms[i][j]] = a;
+                            }
+                        }
+                        json.dictionary.synonyms=synonyms;
+                    }
+                    
+                } catch (e) {
+                    logger.log('Problem with file '+lang_file_name+': '+e,'error');
+                    
+                }              
+            }
             
             if (typeof(json.db)!='undefined') {
                 var jsons=0;

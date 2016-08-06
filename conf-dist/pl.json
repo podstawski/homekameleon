@@ -1,0 +1,11 @@
+{
+    "dict": {
+        "command_not_found": "Nie rozumiem, spróbuj inaczej, jestem tylko sztuczną inteligencją",
+        "done": "Wykonano"
+    },
+    
+    "synonyms": [
+        ["włącz","zapal","on","start"],
+        ["wyłącz","zgaś","off","stop"]
+    ]
+}

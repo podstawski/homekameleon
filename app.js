@@ -45,8 +45,8 @@ process.on('SIGHUP',function () {
         var collection=new Collection(__dirname + '/conf/'+(data.collection||'collection.db'));
         
         logger.loadChannels(structureData['logger']);
-        script.setdb(structure.db);
-        logic.setdb(structure.db,collection);
+        script.setdb(structure.db,structureData);
+        logic.setdb(structure.db,collection,structureData);
         
 
         

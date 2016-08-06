@@ -1,16 +1,19 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var condition=require('./condition');
-var levenshtein=require('./levenshtein');
+var Levenshtein=require('./levenshtein');
 var checkactive=require('./checkactive');
 
 var Script=function(logger) {
     var self=this;
     var db;
     var cache={};
+    var ini;
     
     var scriptsQueue=[];
     var scriptsSemaphore=false;
+    
+    var levenshtein;
     
     var runscripts=function() {
         if (scriptsQueue.length==0) return;
@@ -178,7 +181,7 @@ var Script=function(logger) {
         var result={};
         for (var id in all) {
             if ( all[id].name==null) continue;
-            var lev=levenshtein(str,all[id].name.toLowerCase());
+            var lev=levenshtein.lev(str,all[id].name.toLowerCase());
             if (lev==0) return all[id].id;
             
             if (lev>5) continue;
@@ -203,16 +206,16 @@ var Script=function(logger) {
             
             if (typeof(result[i])=='undefined') continue;
             for (j=0;j<result[i].length;j++) {
-                lev1=levenshtein(str+' on',result[i][j].name.toLowerCase());
-                lev2=levenshtein(str+' off',result[i][j].name.toLowerCase());
+                lev1=levenshtein.lev(str+' on',result[i][j].name.toLowerCase());
+                lev2=levenshtein.lev(str+' off',result[i][j].name.toLowerCase());
             
                 if (typeof(results[0][lev1])=='undefined') results[0][lev1]=[];
                 results[0][lev1].push(result[i][j]);
                 if (typeof(results[1][lev2])=='undefined') results[1][lev2]=[];
                 results[1][lev2].push(result[i][j]);
             
-                lev1=levenshtein(str+' start',result[i][j].name.toLowerCase());
-                lev2=levenshtein(str+' stop',result[i][j].name.toLowerCase());
+                lev1=levenshtein.lev(str+' start',result[i][j].name.toLowerCase());
+                lev2=levenshtein.lev(str+' stop',result[i][j].name.toLowerCase());
             
                 if (typeof(results[0][lev1])=='undefined') results[0][lev1]=[];
                 results[0][lev1].push(result[i][j]);
@@ -245,8 +248,10 @@ var Script=function(logger) {
     
     
     return {
-        setdb: function(setdb) {
+        setdb: function(setdb,setini) {
             db=setdb;
+            ini=setini;
+            levenshtein=new Levenshtein(db.scripts,'name',ini.dictionary.synonyms||{});
         },
         
         on: function(event,fun) {
@@ -268,7 +273,9 @@ var Script=function(logger) {
         
         get: function(s) {
             return db.scripts.get(s);
-        }
+        },
+        
+        finder: levenshtein
     }
     
 }

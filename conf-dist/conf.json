@@ -1,5 +1,7 @@
 {
     "uuid": "PR",
+    "commandpass": "alamakota",
+    "lang": "pl",
     "devices": [
         {
             "id": "HQP",

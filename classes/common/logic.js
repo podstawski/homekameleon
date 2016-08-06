@@ -1,10 +1,15 @@
 var condition=require('./condition');
 var checkactive=require('./checkactive');
+var Levenshtein=require('./levenshtein');
 
 var Logic = function(script,logger)
 {
     var db;
     var collection;
+    var ini;
+    
+    var scrlev,ioslev;
+ 
     
     var run_actions = function(data,dbg_output,ctx) {
         var actions=db.actions.get(data);
@@ -71,9 +76,12 @@ var Logic = function(script,logger)
     }
     
     return {
-        setdb: function (setdb,c) {
+        setdb: function (setdb,c,setini) {
             db=setdb;
             collection=c;
+            scrlev=script.finder;
+            ini=setini;
+            ioslev=new Levenshtein(db.ios,'name',ini.dictionary.synonyms||{});
         },
         
         action: function(device,type,data,ctx) {
@@ -83,6 +91,33 @@ var Logic = function(script,logger)
             
 
             switch (type) {
+                
+                case 'command':
+                    var s=script.find(data.q);
+                    if (typeof(s)=='number') {
+                        script.run(s);
+                        db.scripts.get(s,function(s){
+                            data.cb(ini.dictionary.dict.done+': '+s.name);
+                        });
+                        break;
+                    } else {
+                        var result='';
+                        var ios=ioslev.find(data.q);
+                        if (ios) for(var i=0; i<ios.length; i++){
+                            if (ios[i].rec.unit) {
+                                result+=ios[i].rec.name+' '+(Math.round(10*ios[i].rec.value)/10)+' '+ios[i].rec.unit+'. ';
+                            }
+                        }
+                        if(result.length>0) {
+                            data.cb(result);
+                            break;
+                        }
+                        
+                    }
+                    data.cb(ini.dictionary.dict.command_not_found);
+                    
+                    break;
+                
                 case 'set':
                     if (io==null) return;
                     if (io_cp.value!=data.value) script.set(io,data.value,ctx);
