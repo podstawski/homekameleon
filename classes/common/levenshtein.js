@@ -89,7 +89,7 @@ module.exports = function(db,field,synonyms) {
             cache[t[i]]=[];
             for (var k in index) {
                 var lev=levenshtein(k,t[i]);
-                if (lev==0 || (t[i].length==7 && lev==1) || (t[i].length>7 && lev==2) ) {
+                if (lev==0 || (t[i].length==7 && lev==1) || (t[i].length>3 && lev==1 && !synonyms[k] && !synonyms[t[i]]) || (t[i].length>7 && lev==2) ) {
                     cache[t[i]]=cache[t[i]].concat(index[k]);
                 }
             }
