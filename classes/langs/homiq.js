@@ -282,7 +282,8 @@ module.exports = function(com,ini,logger,callback) {
     };
     
     var t0 = function () {
-        var temps = db.ios.select([{device: deviceId, type: 'T.0', active: [true,1,'1']}]);
+        var temps = database.ios.select([{device: deviceId, type: 'T.0', active: [true,1,'1']}]);
+        
         for (var i=0;i<temps.data.length; i++) {
             send({
                     cmd: 'T.0',
@@ -377,7 +378,7 @@ module.exports = function(com,ini,logger,callback) {
         'initstate': function (db) {
             setTimeout(hb,1000);
             database=db;
-            setInterval(t0,1000*60);
+            setInterval(t0,1000*6);
         },
         
         'dbready': function(db) {
