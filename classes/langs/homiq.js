@@ -359,12 +359,12 @@ module.exports = function(com,ini,logger,callback) {
                     var io=(cmd.length==2)?'o':null;
                     
                     if (line[pos_cmd]=='T.0') {
-                        io=null;
+                        io='t';
+                        adr=line[pos_src];
+                        
                         var v=(state+'').split('.');
                         if (v[1].length==1) v[1]='0'+v[1];
                         state=parseFloat(v[0]+'.'+v[1]);
-                        
-                        console.log(line,state);
                     }
                     
                     var opt={haddr:address2haddr(adr,io)};
@@ -380,7 +380,7 @@ module.exports = function(com,ini,logger,callback) {
         'initstate': function (db) {
             setTimeout(hb,1000);
             database=db;
-            //setInterval(t0,1000*60);
+            setInterval(t0,1000*60);
         },
         
         'dbready': function(db) {
