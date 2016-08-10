@@ -356,6 +356,14 @@ module.exports = function(com,ini,logger,callback) {
                     }
                     
                     var io=(cmd.length==2)?'o':null;
+                    
+                    if (line[pos_cmd]=='T.0') {
+                        io=null;
+                        var v=(state+'').split('.');
+                        if (v[1].length==1) v[1]='0'+v[1];
+                        state=parseFloat(v[0]+'.'+v[1]);
+                    }
+                    
                     var opt={haddr:address2haddr(adr,io)};
                     if (state!=null) opt.value=state;
                   
