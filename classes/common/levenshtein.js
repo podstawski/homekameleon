@@ -121,6 +121,7 @@ module.exports = function(db,field,synonyms) {
       return b.matches-a.matches;
     });
     
+    
   
     if (results.length==0) return null;
     
