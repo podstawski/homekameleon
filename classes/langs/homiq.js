@@ -380,7 +380,7 @@ module.exports = function(com,ini,logger,callback) {
         'initstate': function (db) {
             setTimeout(hb,1000);
             database=db;
-            setInterval(t0,1000*60);
+            //setInterval(t0,1000*60);
         },
         
         'dbready': function(db) {
