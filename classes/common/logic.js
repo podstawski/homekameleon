@@ -115,7 +115,7 @@ var Logic = function(script,logger)
                             if (ios[i].rec.unit && ios[i].rec.unit.length>0) {
                                 result+=ios[i].rec.name+' '+(Math.round(10*ios[i].rec.value)/10)+' '+ios[i].rec.unit+'. ';
                             } else {
-                                result+=ios[i].rec.name+'. ';
+                                result+=ini.dictionary.dict.state_change+': '+ios[i].rec.name+'. ';
                                 script.toggle(ios[i].rec,ctx);
                             }
                         }
