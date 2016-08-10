@@ -253,7 +253,8 @@ module.exports = function(com,ini,logger,callback) {
     
     var toggle = function(data) {
         var rec=database.ios.get(data);
-                       
+        
+    
         if (isNaN(parseFloat(rec.value))) {
             
             switch (rec.value) {
@@ -272,7 +273,7 @@ module.exports = function(com,ini,logger,callback) {
             
             
         } else {
-            if (parseInt(rec.value)==0 || parseInt(rec.value)==0) {
+            if (parseInt(rec.value)==0 || parseInt(rec.value)==1) {
                 return parseInt(rec.value)==0?1:0;
             }
         }
@@ -285,6 +286,7 @@ module.exports = function(com,ini,logger,callback) {
         'set': function(data,delay,ctx) {
             
             if (typeof(data.value)=='undefined') data.value=toggle(data);
+            
             return hset(data,delay,ctx);
         },
         
