@@ -288,7 +288,7 @@ module.exports = function(com,ini,logger,callback) {
             send({
                     cmd: 'T.0',
                     dst: temps.data[i].address,
-                    val: 0
+                    val: 1
             });
         }
     }
@@ -378,7 +378,7 @@ module.exports = function(com,ini,logger,callback) {
         'initstate': function (db) {
             setTimeout(hb,1000);
             database=db;
-            setInterval(t0,1000*6);
+            setInterval(t0,1000*60);
         },
         
         'dbready': function(db) {
