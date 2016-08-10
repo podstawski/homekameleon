@@ -363,6 +363,8 @@ module.exports = function(com,ini,logger,callback) {
                         var v=(state+'').split('.');
                         if (v[1].length==1) v[1]='0'+v[1];
                         state=parseFloat(v[0]+'.'+v[1]);
+                        
+                        console.log(line,state);
                     }
                     
                     var opt={haddr:address2haddr(adr,io)};
