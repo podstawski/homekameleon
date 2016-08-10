@@ -288,7 +288,7 @@ module.exports = function(com,ini,logger,callback) {
             send({
                     cmd: 'T.0',
                     dst: temps.data[i].address,
-                    val: 1
+                    val: 0
             });
         }
     }
