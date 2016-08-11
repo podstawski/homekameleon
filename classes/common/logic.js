@@ -8,7 +8,7 @@ var Logic = function(script,logger)
     var collection;
     var ini;
     
-    var scrlev,ioslev;
+    var scrlev,ioslev,flolev;
  
     
     var run_actions = function(data,dbg_output,ctx) {
@@ -82,6 +82,8 @@ var Logic = function(script,logger)
             scrlev=script.finder();
             ini=setini;
             ioslev=new Levenshtein(db.ios,'name',ini.dictionary.synonyms||{});
+            flolev=new Levenshtein(db.floor,'name',null,[{type:'polygon'}]);
+            
         },
         
         action: function(device,type,data,ctx) {
@@ -93,9 +95,42 @@ var Logic = function(script,logger)
             switch (type) {
                 
                 case 'command':
+                    
+                    if (!data.q || data.q.length==0) {
+                        data.cb(ini.dictionary.dict.error);
+                        break;
+                    }
+                    
+                    if (data.q.toLowerCase().indexOf(ini.dictionary.dict.calibrate.toLowerCase())>=0) {
+                        
+                        var flo=flolev.find(data.q);
+                        
+                        if (!flo || flo.length!=1 || !data.l) data.cb(ini.dictionary.dict.error);
+                        else {
+                            var latlng=data.l.split(',');
+                            
+                            db.floor.set({
+                                lat: latlng[0],
+                                lng: latlng[1],
+                                alt: data.a
+                            },flo[0].rec.id);
+                            data.cb('ok');
+                        }
+                      
+                        break;
+                    }
+                    
+                    
                     var scr=scrlev.find(data.q);
                     var ios=ioslev.find(data.q);
                     var result='';
+                    
+                    if (scr.length>3) {
+                        scr=null;
+                    }
+                    if (ios.length>3) {
+                        ios=null;
+                    }
                     
                     //console.log(scr,ios);
                     if (scr && scr.length>0) {

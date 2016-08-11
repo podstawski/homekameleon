@@ -1,13 +1,16 @@
 
 
 
-module.exports = function(db,field,synonyms) {
+module.exports = function(db,field,synonyms,where) {
   
   var index,cache;
   
+  if (synonyms==null) synonyms={};
+  
   var reindex=function(){
     
-    var all=db.getAll();
+    var all = where ? db.select(where) : db.getAll();
+    
     if (all.recordsTotal==0) {
         setTimeout(reindex,200);
         return;
@@ -15,15 +18,16 @@ module.exports = function(db,field,synonyms) {
     index={};
     cache={};
     
-    
     for (var i=0; i<all.data.length; i++) {
+        if (!all.data[i][field]) continue;
+      
         var a=all.data[i][field].toLowerCase().split(' ');
         for (var j=0; j<a.length; j++) {
             var idx=a[j].trim();
             if (idx.length>1) {
                 if (!index[idx]) index[idx]=[];
                 index[idx].push(all.data[i]);
-                if (synonyms[idx]!=null) {
+                if (synonyms && synonyms[idx]!=null) {
                     for (var k=0; k<synonyms[idx].length; k++) {
                         if (!index[synonyms[idx][k]]) index[synonyms[idx][k]]=[];
                         index[synonyms[idx][k]].push(all.data[i]);
