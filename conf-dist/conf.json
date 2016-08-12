@@ -27,6 +27,12 @@
             "protocol": "echo"
         },
         {
+            "id": "SHL",
+            "name": "Shell exec",
+            "language": "echo",
+            "protocol": "shell"
+        },
+        {
             "id": "EMU",
             "name": "Homiq emulator",
             "protocol": "tcpd",

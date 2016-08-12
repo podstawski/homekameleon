@@ -13,7 +13,10 @@ module.exports = function(com,ini,logger,callback) {
             if (delay==null) delay=0;
             if (typeof(data.value)=='undefined') {
                 var rec=database.ios.get(data);
-                data.value=parseFloat(rec.value)>0?0:1;
+                if (parseFloat(rec.value)>0 && parseFloat(rec.value)<=1) data.value=0;
+                else if (parseFloat(rec.value)==0) data.value=1;
+                else data.value=parseFloat(rec.value)
+        
             }
             if (delay==0) com.send(data,ctx);
             else {
