@@ -125,10 +125,10 @@ var Logic = function(script,logger)
                     var ios=ioslev.find(data.q);
                     var result='';
                     
-                    if (scr.length>3) {
+                    if (scr && scr.length>3) {
                         scr=null;
                     }
-                    if (ios.length>3) {
+                    if (ios && ios.length>3) {
                         ios=null;
                     }
                     

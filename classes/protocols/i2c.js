@@ -5,6 +5,7 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 var I2C = function(options,logger) {
+    var self=this;
     
     var drivers={};
     var intervals={};
@@ -134,8 +135,9 @@ var I2C = function(options,logger) {
             logger.log('Initializing i2c','init');
             
             if (drivers[options.driver]==null) {
-                var obj = require (__dirname+'/_'+driver);
+                var obj = require (__dirname+'/_'+options.driver);
                 drivers[options.driver] = new obj();
+                
                 drivers[options.driver].init([options.bus,options.address],function(){
                     self.emit('connection');
                 });
