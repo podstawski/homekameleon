@@ -147,6 +147,12 @@ var I2C = function(options,logger) {
             
         },
         
+        query: function(address) {
+            drivers[options.driver].get([options.bus,options.address,address],function(value){
+                self.emit('data',{address:address,value:value});
+            });
+        },
+        
         disconnect: function() {
             drivers[options.driver]=null;
         },
