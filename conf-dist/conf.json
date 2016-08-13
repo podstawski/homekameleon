@@ -33,6 +33,18 @@
             "protocol": "shell"
         },
         {
+            "id": "TEM",
+            "name": "DS18b20 thermometers",
+            "protocol": "i2c",
+            "language": "ds18b20",
+            "com":{
+                "bus": 0,
+                "address": 24,
+                "driver": "ds2482"
+            },
+            "active": 1
+        },
+        {
             "id": "EMU",
             "name": "Homiq emulator",
             "protocol": "tcpd",
