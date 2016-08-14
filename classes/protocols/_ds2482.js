@@ -1,7 +1,7 @@
 
 try {
     require.resolve('ds2482');
-    var I2c = require('./i2c');
+    var I2c = require('./_i2c');
     var DS2482 = require('ds2482');
     
     
