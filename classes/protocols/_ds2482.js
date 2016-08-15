@@ -51,6 +51,7 @@ try {
         };
         
         var init=function(address,cb) {
+            var token='ds2482,'+address[0]+','+address[1];
             try {
                 console.log('DS2482 init',address);
                 var i2c=new I2c(address[1],address[0]);

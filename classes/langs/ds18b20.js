@@ -35,7 +35,7 @@ module.exports = function(com,ini,logger,callback) {
     return {
         'initstate': function (db) {
             database=db;
-            setInterval(temperature,1000*6);
+            setInterval(temperature,1000*60);
         },
  
         'set': function(data,delay,ctx) {
@@ -45,7 +45,6 @@ module.exports = function(com,ini,logger,callback) {
         'data': function(data,ctx) {
           
             var haddr=address2haddr(data.address);
-            console.log(data,haddr);
             if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:data.value},ctx);
         },
         
