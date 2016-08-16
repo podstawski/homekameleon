@@ -45,7 +45,7 @@ module.exports = function(com,ini,logger,callback) {
         'data': function(data,ctx) {
           
             var haddr=address2haddr(data.address);
-            if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:data.value},ctx);
+            if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:Math.round(100*data.value)/100},ctx);
         },
         
         'cancel': function(ctx,delay) {
