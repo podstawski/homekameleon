@@ -171,9 +171,23 @@ module.exports = function(com,ini,logger,callback) {
     }
 
     self.cmd_S = function(line) {
-        var ios=database.ios.select([{serial: line[pos_src]}]);
-        var modules=database.modules.select([{serial: line[pos_src]}]);
+        var ios=database.ios.select([{device: deviceId, serial: line[pos_src]}]);
+        var modules=database.modules.select([{device: deviceId,serial: line[pos_src]}]);
     
+        if (ios.data.length>0) {
+            send({
+                    cmd: 'ID.0',
+                    dst: line[pos_src],
+                    val: ios.data[0].address
+            });
+        }
+        if (modules.data.length>0) {
+            send({
+                    cmd: 'ID.0',
+                    dst: line[pos_src],
+                    val: modules.data[0].address
+            });
+        }
         console.log(line,ios,modules);
     }
     
