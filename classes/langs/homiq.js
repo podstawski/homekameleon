@@ -188,7 +188,7 @@ module.exports = function(com,ini,logger,callback) {
                     val: modules.data[0].address
             });
         }
-        console.log(line,ios,modules);
+        
     }
     
     var address2haddrCache={};
