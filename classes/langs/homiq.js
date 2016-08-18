@@ -169,6 +169,10 @@ module.exports = function(com,ini,logger,callback) {
         var haddr=address2haddr(line[pos_src]+'.'+cmd[1],'i');
         if (cmd.length==2) callback('input',{haddr: haddr, value: line[pos_val]},haddr);
     }
+
+    self.cmd_S = function(line) {
+	
+    }
     
     var address2haddrCache={};
     
