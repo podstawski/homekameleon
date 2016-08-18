@@ -171,7 +171,10 @@ module.exports = function(com,ini,logger,callback) {
     }
 
     self.cmd_S = function(line) {
-	
+        var ios=database.ios.select([{serial: line[pos_src]}]);
+        var modules=database.modules.select([{serial: line[pos_src]}]);
+    
+        console.log(line,ios,modules);
     }
     
     var address2haddrCache={};

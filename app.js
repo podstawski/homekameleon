@@ -146,6 +146,13 @@ var cron = function() {
 var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
+/*
+var memwatch = require('memwatch');
 
-
-
+memwatch.on('leak', function(info) {
+   console.log(info); 
+});
+memwatch.on('stats', function(stats) {
+    console.log(stats);
+});
+*/

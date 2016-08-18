@@ -50,14 +50,14 @@ try {
             }
         };
         
-        var init=function(address,cb) {
+        var init=function(address,cb,dont_call_cb_of_success) {
             var token='ds2482,'+address[0]+','+address[1];
             try {
                 console.log('DS2482 init',address);
                 var i2c=new I2c(address[1],address[0]);
                 wire = new DS2482({i2c:i2c});;
                 wires[token] = wire;
-                if (typeof(cb)=='function') cb();
+                if (typeof(cb)=='function' && !dont_call_cb_of_success) cb();
                 return wire;
                 
             } catch (e) {          
@@ -68,7 +68,7 @@ try {
         var get = function(address,cb) {
             var token='ds2482,'+address[0]+','+address[1];
             
-            wire = wires[token] ? wires[token] : init(address,cb);
+            wire = wires[token] ? wires[token] : init(address,cb,true);
             
             if (!wire) retrun;
             

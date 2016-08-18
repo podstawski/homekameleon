@@ -5,7 +5,7 @@ memfile=/tmp/mem.prom
 while [ "1" = "1" ]
 do
 
-	pid=`ps|grep node |grep -v grep | awk '{print $1}'`
+	pid=`ps x|grep node |grep -v grep | awk '{print $1}'`
 	mem=`cat /proc/$pid/status |grep VmSize | awk '{print $2}'`
 	prev=`cat $memfile`
 
