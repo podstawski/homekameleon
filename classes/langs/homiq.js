@@ -384,8 +384,10 @@ module.exports = function(com,ini,logger,callback) {
                         adr=line[pos_src];
                         
                         var v=(state+'').split('.');
-                        if (v[1].length==1) v[1]='0'+v[1];
-                        state=parseFloat(v[0]+'.'+v[1]);
+                        if (v.length>1 && v[1].length==1) {
+                            v[1]='0'+v[1];
+                            state=parseFloat(v[0]+'.'+v[1]);
+                        }
                     }
                     
                     var opt={haddr:address2haddr(adr,io)};

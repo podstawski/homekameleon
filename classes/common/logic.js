@@ -13,6 +13,7 @@ var Logic = function(script,logger)
     
     var run_actions = function(data,dbg_output,ctx) {
         var actions=db.actions.get(data);
+        var scripts2run=[];
     
         if (actions!=null) {
             if (typeof(actions.actions)=='object') {
@@ -29,7 +30,7 @@ var Logic = function(script,logger)
                         
                         for (var j=0;j<actions.actions[i].scripts.length; j++) {
                             anypass=true;
-                            script.run(actions.actions[i].scripts[j],0,null,ctx);
+                            scripts2run.push({script:actions.actions[i].scripts[j],ctx:ctx});
                         }
                     }
                     
@@ -48,7 +49,7 @@ var Logic = function(script,logger)
             if(dbg_output) logger.log('No action for io '+db.actions.index(data)+name,'logic');
         }
         
-        
+        for (var i=0; i<scripts2run.length; i++) script.run(scripts2run[i].script,0,null,scripts2run[i].ctx);
     }
     
     var evaluate = function (io) {
@@ -91,7 +92,7 @@ var Logic = function(script,logger)
             var io=db.ios.get(data);
             var io_cp=JSON.parse(JSON.stringify(io));
             
-
+            
             switch (type) {
                 
                 case 'command':
