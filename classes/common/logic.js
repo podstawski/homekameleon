@@ -74,7 +74,42 @@ var Logic = function(script,logger)
         io.value=value;
         io.last=now; 
         return true;
-    }
+    };
+    
+    var evaluate_temp_expected_idx=null;
+    
+    var evaluate_temp = function(data,io) {
+        if (evaluate_temp_expected_idx==null) {
+            evaluate_temp_expected_idx='';
+            var i=db.ios.select([{active:[1,true],address:['temp','temperature']}]);
+            if (i.data.length>0) evaluate_temp_expected_idx=i.data[0].haddr;
+        }
+        if (evaluate_temp_expected_idx.length==0) return;
+        
+        var temp_expected=db.ios.get(evaluate_temp_expected_idx);
+        
+        if (temp_expected.value==null || temp_expected.value.length==0) return;
+    
+        if (io['t_'+temp_expected.value]==null ) return;
+        if (io['t_'+temp_expected.value].length==0 ) return;
+        var t_expected=parseFloat(io['t_'+temp_expected.value]);
+        if (isNaN(t_expected) ) return;
+        if (t_expected==0 ) return;
+        
+        var t_hysteresis = io['t_hysteresis'];
+        if (t_hysteresis==null) t_hysteresis=0;
+        else {
+            t_hysteresis=parseFloat(t_hysteresis);
+            if (isNaN(t_hysteresis))t_hysteresis=0;
+        }
+        
+        var value=parseFloat(data.value);
+        
+        if (value >= t_expected + t_hysteresis ) data.temp_change=-1;
+        if (value <= t_expected - t_hysteresis ) data.temp_change=1;
+        
+    };
+    
     
     return {
         setdb: function (setdb,c,setini) {
@@ -180,6 +215,7 @@ var Logic = function(script,logger)
                     data.last=io.last||0;
                     data.eval=io.eval||null;
                     evaluate(data);
+                    evaluate_temp(data,io);
                     db.ios.set(data);
                     run_actions(data,false,ctx);
                     break;
@@ -193,6 +229,7 @@ var Logic = function(script,logger)
                     data.last=io.last||0;
                     data.eval=io.eval||null;
                     var evaluated=evaluate(data);
+                    evaluate_temp(data,io);
                     db.ios.set(data);
                     run_actions(data,!evaluated,ctx);
                     
