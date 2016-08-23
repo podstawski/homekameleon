@@ -2,6 +2,7 @@
     "dict": {
         "command_not_found": "Nie rozumiem, spróbuj inaczej, jestem tylko sztuczną inteligencją",
         "done": "Wykonano",
+        "notdone": "Nie wykonano",
         "state_change": "Zmiana stanu",
         "calibrate": "kalibracja",
         "error": "Błąd"

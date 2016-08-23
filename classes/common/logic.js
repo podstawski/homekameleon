@@ -178,8 +178,11 @@ var Logic = function(script,logger)
                     
                     if (scr && scr.length>0) {
                         for (var i=0; i<scr.length; i++){
-                            result+=ini.dictionary.dict.done+': '+scr[i].rec.name;
-                            script.run(scr[i].rec.id);    
+                            var run=script.run(scr[i].rec.id);
+                            if (run===true || run==null) result+=ini.dictionary.dict.done;
+                            else result+=ini.dictionary.dict.notdone;
+                            result+=': '+scr[i].rec.name;
+                              
                         }
                     } else if (ios && ios.length>0) {
                         for (var i=0; i<ios.length; i++){

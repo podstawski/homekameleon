@@ -16,8 +16,8 @@ var Script=function(logger) {
     var levenshtein;
     
     var runscripts=function() {
-        if (scriptsQueue.length==0) return;
-        if (scriptsSemaphore) return;
+        if (scriptsQueue.length==0) return null;
+        if (scriptsSemaphore) return null;
         
         scriptsSemaphore=true;
         
@@ -73,7 +73,7 @@ var Script=function(logger) {
             scriptsQueue.splice(i,1);
             scriptsSemaphore=false;
             setTimeout(runscripts,1);
-            return;
+            return pass;
         
         }
         
@@ -152,7 +152,7 @@ var Script=function(logger) {
         /*
          *run queue
          */
-        runscripts();
+        var result=runscripts();
         
         /*
          *run subscripts
@@ -163,6 +163,7 @@ var Script=function(logger) {
             }
         }
         
+        return result;
     } 
     
     var find=function(str) {
@@ -260,7 +261,7 @@ var Script=function(logger) {
         },
         
         run: function(script,delay,condition,ctx) {
-            run(script,delay,condition,ctx);
+            return run(script,delay,condition,ctx);
         },
         
         find: function(str) {
