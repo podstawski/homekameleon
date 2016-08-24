@@ -28,12 +28,17 @@ var Shell = function(options,logger) {
             var cmd=data.address;
             var cmd_args=data.value.split(' ');
             
-            var e=exec(cmd,cmd_args,function (error, stdout, stderr) {
-                if (!error) {
-                    if (stdout.length>0) data.value=stdout;
-                    self.emit('data',data,ctx);
-                }
-            });
+            try {
+                var e=exec(cmd,cmd_args,function (error, stdout, stderr) {
+                    if (!error) {
+                        if (stdout.length>0) data.value=stdout;
+                        self.emit('data',data,ctx);
+                    }
+                });   
+            } catch(e) {
+                logger.log(e,'shell-exec');
+            }
+
             
         }
         

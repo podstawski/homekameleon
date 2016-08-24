@@ -11,11 +11,13 @@ module.exports = function(com,ini,logger,callback) {
  
         'set': function(data,delay,ctx) {
             if (delay==null) delay=0;
+            
             if (typeof(data.value)=='undefined') { //toggle
                 var rec=database.ios.get(data);
+                
                 if (parseFloat(rec.value)>0 && parseFloat(rec.value)<=1) data.value=0;
-                else if (parseFloat(rec.value)==0) data.value=1;
-                else data.value=parseFloat(rec.value)
+                else if (parseFloat(rec.value)==0 && (rec.value+'').length==1) data.value=1;
+                else data.value=rec.value;
         
             }
             
