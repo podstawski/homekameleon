@@ -181,7 +181,7 @@ var Logic = function(script,logger)
                             var run=script.run(scr[i].rec.id);
                             if (run===true || run==null) result+=ini.dictionary.dict.done;
                             else result+=ini.dictionary.dict.notdone;
-                            result+=': '+scr[i].rec.name;
+                            result+=': '+scr[i].rec.name+'. ';
                               
                         }
                     } else if (ios && ios.length>0) {
