@@ -1,0 +1,18 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+mkdir /sd 2>/dev/null
+mount /dev/mmcblk0p1 /sd
+
+mkdir /sd/logs 2>/dev/null
+mkdir /sd/conf 2>/dev/null
+
+/sbin/ap_client ra0 apcli0 promienko asyouwish mediatek:orange:wifi
+sleep 5
+udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C 
+sleep 2
+
+/homekameleon/ssh4ever.sh &
+/homekameleon/promienko.sh &
+
+exit 0
