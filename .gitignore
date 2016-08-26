@@ -1,6 +1,7 @@
 node_modules/
 conf
 logs/
+logs
 app.pid
 npm-debug.log
 ini.js

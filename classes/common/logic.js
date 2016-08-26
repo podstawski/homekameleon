@@ -118,7 +118,7 @@ var Logic = function(script,logger)
             scrlev=script.finder();
             ini=setini;
             ioslev=new Levenshtein(db.ios,'name',ini.dictionary.synonyms||{});
-            flolev=new Levenshtein(db.floor,'name',null,[{type:'polygon'}]);
+            //flolev=new Levenshtein(db.floor,'name',null,[{type:'polygon'}]);
             
         },
         
@@ -137,6 +137,7 @@ var Logic = function(script,logger)
                         break;
                     }
                     
+			/*
                     if (data.q.toLowerCase().indexOf(ini.dictionary.dict.calibrate.toLowerCase())>=0) {
                         
                         var flo=flolev.find(data.q);
@@ -155,6 +156,7 @@ var Logic = function(script,logger)
                       
                         break;
                     }
+			*/
                     
                     
                     var scr=scrlev.find(data.q);

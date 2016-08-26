@@ -6,13 +6,11 @@ var Logger = require('./classes/common/logger');
 var Device = require('./classes/common/device');
 var Logic = require('./classes/common/logic');
 var Script = require('./classes/common/script');
-var Calendar = require('./classes/common/calendar');
 var Collection = require('./classes/common/collection');
 
 var logger = new Logger('./logs');
 var structure = new Structure(__dirname + '/conf/conf.json',logger);
 var script = new Script(logger);
-var calendar = new Calendar(logger,script);
 var logic = new Logic(script,logger);
 
 
@@ -39,7 +37,7 @@ process.on('SIGHUP',function () {
             if (devices[id]!=null) devices[id].dbready(structure.db);
         }
     });
-    if (typeof(data)=='object') {
+    if (typeof(data)=='object' && data!=null) {
         structureData=data;
         
         var collection=new Collection(__dirname + '/conf/'+(data.collection||'collection.db'));
@@ -50,7 +48,11 @@ process.on('SIGHUP',function () {
         
 
         
-        if (typeof(structureData.calendars)!='undefined') {
+        if (typeof(structureData.calendars)!='undefined' && structureData.calendars.length) {
+            if (calendar===undefined) {
+                var Calendar = require('./classes/common/calendar');
+		var calendar = new Calendar(logger,script);
+            }
             calendar.reggister(structureData.calendars);
             setTimeout(function() {
                 calendar.update();
@@ -119,7 +121,7 @@ process.on('SIGINT',cleanEnd);
 
 process.on('SIGTSTP',function(){
     console.log('');
-    calendar.ctrlz();
+    if (typeof(calendar)!='undefined') calendar.ctrlz();
     for (id in devices) {
         devices[id].ctrlz();
     }
@@ -134,25 +136,16 @@ var cron = function() {
 
     var now=Math.round(Date.now()/1000);
     var min=(now/60)%60;
-    calendar.run();
+    if (typeof(calendar)!='undefined') {
+        calendar.run();
     
-    //logger.log('Minutes: '+Math.floor(min),'calendar');
-    if (Math.floor(min)==0) setTimeout (function(){
-        calendar.update();
-    },10000); 
+        if (Math.floor(min)==0) setTimeout (function(){
+            calendar.update();
+        },10000); 
+    }
     
 }
 
 var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
-/*
-var memwatch = require('memwatch');
-
-memwatch.on('leak', function(info) {
-   console.log(info); 
-});
-memwatch.on('stats', function(stats) {
-    console.log(stats);
-});
-*/
