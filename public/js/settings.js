@@ -18,6 +18,21 @@ websocket.once('wifi',function(wifi) {
     $.smekta_file('views/wifi.html',wifi,'.main .panel .panel-body',function(form){
         $('form button.btn-primary').click(function(){
             websocket.emit('wifi',$('form').serializeArray());
+            
+            $('body').fadeOut(1000,function(){
+                var timer=30;
+                var showTime=function(){
+                    $('body').html('<p align="center">Proszę czekać '+timer+'s.</p>');
+                    timer--;
+                    if (timer==0) {
+                        location.href='index.html';
+                    } else {
+                        setTimeout(showTime,1000);
+                    }
+                }
+                showTime();
+                $('body').show();
+            });
            
             return false;
         });
