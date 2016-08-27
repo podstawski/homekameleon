@@ -2,10 +2,15 @@
 # the system init finished. By default this file does nothing.
 
 mkdir /sd 2>/dev/null
-mount /dev/mmcblk0p1 /sd
+mount /dev/mmcblk0p1 /sd 2>/dev/null
 
 mkdir /sd/logs 2>/dev/null
 mkdir /sd/conf 2>/dev/null
+
+if [ ! -f /homekameleon/conf/conf.json ]
+then
+	cp /homekameleon/conf-dist/homekameleon.json /homekameleon/conf/conf.json
+fi
 
 if [ -f /homekameleon/conf/wifi ]
 then

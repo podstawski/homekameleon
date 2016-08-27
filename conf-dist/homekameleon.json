@@ -1,0 +1,106 @@
+{
+    "uuid": "HK",
+    "commandpass": "trelemorele",
+    "lang": "pl",
+    "devices": [
+        {
+            "id": "VAR",
+            "name": "Local Values",
+            "language": "echo",
+            "protocol": "echo"
+        },
+        {
+            "id": "GRP",
+            "name": "Grouping IOS",
+            "language": "groups",
+            "protocol": "echo"
+        },
+        {
+            "id": "WEB",
+            "name": "Web Server",
+            "protocol": "httpd",
+            "language": "homek",
+            "com":{
+                "port": "80",
+                "xtunnel_port": "8001",
+                "xtunnel_host": "homiq@homiq.webkameleon.com"
+            },
+            "active": true
+        }
+    ],
+    "logger": {
+        "init": {
+            "console": true
+        },
+        "emulator": {
+            "console": false
+        }
+        ,
+        "frame": {
+            "console": false,
+            "file": "frame.txt"
+        },
+        "init": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "net": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "db": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "calendar": {
+            "console": true,
+            "file": "cal.txt"
+        },
+        "script": {
+            "console": true,
+            "file": "homiq.txt"
+	},
+        "error": {
+            "console": true,
+            "file": "error.txt"
+        }
+        
+    },
+    "calendars": [
+    ],
+    "db": {
+      
+        "ios": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"ios.json",
+            "index": ["haddr"]
+        },
+        "modules": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"modules.json",
+            "index": ["serial"]
+        },
+        "scripts": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"scripts.json",
+            "index": ["id"]
+        },
+        "langs": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"langs.json",
+            "index": ["label"]
+        },
+        "actions": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"actions.json",
+            "index": ["haddr"]
+        },
+        "users": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"users.json",
+            "index": ["username"]
+        }
+        
+    }
+    
+}
