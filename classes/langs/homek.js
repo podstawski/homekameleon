@@ -33,6 +33,7 @@ var Web = function(com,ini,logger,callback) {
                 
                 try {
                     var e=exec('fsync '+wifi);
+                    exec('reboot');
                 } catch(e) {
                 
                 }

@@ -18,15 +18,14 @@ then
     ssid=`echo $wifi | awk '{print $1}'`
     pass=`echo $wifi | awk '{print $2}'`
     
-    /sbin/ap_client ra0 apcli0 $ssid $pass mediatek:orange:wifi
+    /sbin/ap_client ra0 apcli0 $ssid $pass mediatek:orange:wifi 
     sleep 5
-    udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C 
-    sleep 2
+    udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
+    sleep 5
     /homekameleon/ssh4ever.sh &
-    /homekameleon/promienko.sh &
-else
-    /homekameleon/promienko.sh &   
 fi
+sleep 10
+/homekameleon/promienko.sh &   
 
 
 

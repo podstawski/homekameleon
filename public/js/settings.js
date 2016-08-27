@@ -20,12 +20,12 @@ websocket.once('wifi',function(wifi) {
             websocket.emit('wifi',$('form').serializeArray());
             
             $('body').fadeOut(1000,function(){
-                var timer=30;
+                var timer=60;
                 var showTime=function(){
                     $('body').html('<p align="center">Proszę czekać '+timer+'s.</p>');
                     timer--;
                     if (timer==0) {
-                        location.href='index.html';
+                    	$('body').html('<p align="center">Przelacz sie na siec homekameleon i sprawdz</p>');
                     } else {
                         setTimeout(showTime,1000);
                     }
