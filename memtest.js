@@ -16,7 +16,7 @@ process.on('SIGTSTP',function(){
 });
 
 process.on('SIGQUIT',function(){
-        console.log('ccc');
+        console.log('clear');
 	tab.splice(getRandomInt(0,tab.length)-1,1);
 	if (global.gc) global.gc();
 	console.log('gc done');
@@ -25,7 +25,9 @@ process.on('SIGQUIT',function(){
 
 var costam = function(){
 	setTimeout(costam,1000);
-	console.log(tab.length,process.memoryUsage());
+	console.log('Tab elements:',tab.length,'Mem:',process.memoryUsage());
 }
 
+console.log('Use Ctrl-Z & Ctrl-\ to add/remove data from table');
+if (!global.gc) console.log('No garbage collector, use --expose-gc option');
 costam();
