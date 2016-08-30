@@ -127,8 +127,8 @@ var Web = function(com,ini,logger,callback) {
                     wifipass: settings().wifipass
                     });
                 wifiscan(function(wifis){
-			websocket.emit('wifis',wifis);
-		});
+                    websocket.emit('wifis',wifis);
+                });
             } else {
                 console.log(wifi);
                 var data={};
