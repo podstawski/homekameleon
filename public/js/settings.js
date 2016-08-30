@@ -42,16 +42,14 @@ websocket.once('wifi',function(wifi) {
 });
 
 
-websocket.once('wifis',function(wifis){
+websocket.on('wifis',function(wifis){
     var ssid=$('form input[name="ssid"]').val();
     for (var k in wifis) {
-        console.log(k,$('form select[name="ssid"]'));
-        var option='<option value="'+k;
+        var option='<option value="'+k+'"';
         if(k==ssid) option+=' selected';
-        option+='>'+k+'</option';
+        option+='>'+k+'</option>';
         $('form select[name="ssid"]').append(option);
     }
     $('form select').show();
-
-    console.log(wifis);
+    $('form input[name="ssid"]').hide();
 });

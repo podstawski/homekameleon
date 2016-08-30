@@ -15,8 +15,9 @@ var Web = function(com,ini,logger,callback) {
     
 	var wifiscan = function(cb) {
 		if (wifi.last>Date.now()-60*1000) {
-			console.log('no need to scan',cb);
-			if (cb) cb(wifi.scan);
+			setTimeout(function(){
+				if (cb) cb(wifi.scan);
+			},500);
 			return;
 		}
 		exec('iwinfo apcli0 scan',function(err,out,stderr){
@@ -130,7 +131,6 @@ var Web = function(com,ini,logger,callback) {
                     websocket.emit('wifis',wifis);
                 });
             } else {
-                console.log(wifi);
                 var data={};
                 for (var i=0; i<wifi.length; i++) data[wifi[i].name]=wifi[i].value;
                 settings(data);
