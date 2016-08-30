@@ -133,6 +133,7 @@ fs.writeFile(__dirname+'/app.pid',process.pid);
 
 var cron = function() {
     setTimeout(cron,60000);    
+    if (global.gc) global.gc();
 
     var now=Math.round(Date.now()/1000);
     var min=(now/60)%60;
