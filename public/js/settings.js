@@ -11,11 +11,26 @@ $(window).on('resize', function () {
 
 websocket.emit('wifi');
 
+
 websocket.once('wifi',function(wifi) {
 
     if (wifi==null) return;
     
     $.smekta_file('views/wifi.html',wifi,'.main .panel .panel-body',function(form){
+	
+	websocket.once('wifis',function(wifis){
+		var ssid=$('form input[name="ssid"]').val();
+		for (var k in wifis) {
+			console.log(k);
+			var option='<option value="'+k;
+			if(k==ssid) option+=' selected';
+			option+='>'+k+'</option';
+			$('form select[name="ssid"]').append(option);
+		}
+		$('form select').show();
+
+		console.log(wifis);
+	});
         $('form button.btn-primary').click(function(){
             websocket.emit('wifi',$('form').serializeArray());
             

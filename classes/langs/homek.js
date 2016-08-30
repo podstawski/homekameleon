@@ -9,9 +9,34 @@ var Web = function(com,ini,logger,callback) {
     var database;
     var websocket;
     var _settings=null;
+    var wifi={last:0};
     
     com.staticContent(root_path);
     
+	var wifiscan = function(cb) {
+		if (wifi.last>Date.now()-60*1000) {
+			console.log('no need to scan',cb);
+			if (cb) cb(wifi.scan);
+			return;
+		}
+		exec('iwinfo apcli0 scan',function(err,out,stderr){
+			var res=out.match(/ESSID: "([^"]+)"/g);
+			if (!res) return;
+			wifi.last=Date.now();
+			wifi.scan={};
+			for (var i=0;i<res.length;i++) {
+				var res2=res[i].match(/ESSID: "([^"]+)"/);
+				var ssid=res2[1];
+				if (ssid=='homekameleon') continue;
+				if (ssid.toLowerCase().indexOf('linkit')>=0) continue;
+				wifi.scan[ssid]=true;
+			}	
+			if (cb) cb(wifi.scan);
+		});
+	}
+
+	wifiscan();
+
     var settings = function(s) {
         var dir=__dirname+'/../../conf';
         var file=dir+'/web.json';
@@ -62,6 +87,7 @@ var Web = function(com,ini,logger,callback) {
         database=db;
         websocket=opt.socket;
     
+        wifiscan();
         websocket.emit('lang',ini.lang,opt.session.loggedin==null?false:opt.session.loggedin);
         
         websocket.on('logout',function(){
@@ -100,12 +126,16 @@ var Web = function(com,ini,logger,callback) {
                     ssid: settings().ssid,
                     wifipass: settings().wifipass
                     });
+                wifiscan(function(wifis){
+			websocket.emit('wifis',wifis);
+		});
             } else {
                 console.log(wifi);
                 var data={};
                 for (var i=0; i<wifi.length; i++) data[wifi[i].name]=wifi[i].value;
                 settings(data);
             };
+            
         
         });
         
