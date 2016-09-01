@@ -179,23 +179,45 @@ module.exports = function(com,ini,logger,callback) {
         return rec.value;
     };
     
-    var macaddress = function(ip) {
+    
+    var macaddress = function(ip,local) {
         var ips=com.ips();
+        for (var i=0; i<ips.length; i++) {
+            if (ips[i].netmask==null) ips[i].netmask='255.255.255.0';
+            if (ips[i].mac==null) ips[i].mac=rid(12);
+        }
         
-        console.log(ips);
+        if (ips.length==1) return {ip:ips[0].address, mac: ips[0].mac};
+        
+        for (var i=0; i<ips.length; i++) {
+            if (local && ips[i].address=='192.168.100.1' ) {
+                return {ip:ips[i].address, mac: ips[i].mac};
+            }
+            if (!local && ips[i].address!='192.168.100.1' ) {
+                return {ip:ips[i].address, mac: ips[i].mac};
+            }
+        }
+        
     }
     
-    macaddress();
     
     var initack = function(data) {
         if (!data.active) return;
         
+        var mac=macaddress(data.ip,data.homekameleon);
         
+        if (data.homekameleon) {
+            var ssid='';
+            var wifipass='';
+        } else {
+            var ssid=settings().ssid;
+            var wifipass=settings().wifipass;
+        }
         
         
         com.send({
             address: data.ip,
-            data:'(ACK;MASTER_HWADDR;HASH;SSID;PASS;MASTER_IP)'
+            data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip].join(';')+')'
         });
         
         
