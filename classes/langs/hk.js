@@ -211,8 +211,7 @@ module.exports = function(com,ini,logger,callback) {
             address: data.ip,
             data:'(ACK;MASTER_HWADDR;HASH;SSID;PASS;MASTER_IP)'
         });
-	setTimeout(function(){
-
+        setTimeout(function(){
             database.buffer.remove(data.hwaddr);
         },50);
         
