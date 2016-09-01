@@ -188,13 +188,16 @@ module.exports = function(com,ini,logger,callback) {
     macaddress();
     
     var initack = function(data) {
+        if (!data.active) return;
+        
+        
+        
+        
         com.send({
             address: data.ip,
             data:'(ACK;MASTER_HWADDR;HASH;SSID;PASS;MASTER_IP)'
         });
-        setTimeout(function(){
-            database.buffer.remove(data.hwaddr);
-        },50);
+        
         
     };
     
@@ -225,14 +228,17 @@ module.exports = function(com,ini,logger,callback) {
                             ip: data.address,
                             inputs: cmd[pos_inputs],
                             outputs: cmd[pos_outputs],
-                            active: false
+                            active: false,
+                            homekameleon: false
                         });
                     } else {
-                        database.buffer.set(src,{
+                        database.buffer.set({
+                            hwaddr: src,
                             ip: data.address,
                             inputs: cmd[pos_inputs],
                             outputs: cmd[pos_outputs],
                         });
+                        if (b.active) initack(b);
                     }
                     
                 }

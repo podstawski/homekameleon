@@ -100,10 +100,10 @@ var Web = function(com,ini,logger,callback) {
 
                 for (var k in buffer) {
                     if (buffer[k]) {
-			wait=800;	
+                        wait=200;	
                         database.buffer.set({hwaddr:k, active:true});
                     } else {
-			wait=200;	
+                        wait=200;	
                         database.buffer.remove(k);
                     }
                 }
@@ -111,7 +111,7 @@ var Web = function(com,ini,logger,callback) {
             }
             
             setTimeout(function(){
-                websocket.emit('buffer',database.buffer.getAll());
+                websocket.emit('buffer',database.buffer.select([{active:false}]));
             },wait);
         });
         
