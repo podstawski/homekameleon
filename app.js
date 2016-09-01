@@ -12,7 +12,7 @@ var logger = new Logger('./logs');
 var structure = new Structure(__dirname + '/conf/conf.json',logger);
 var script = new Script(logger);
 var logic = new Logic(script,logger);
-
+var calendar=null;
 
 
 var structureData;
@@ -49,9 +49,9 @@ process.on('SIGHUP',function () {
 
         
         if (typeof(structureData.calendars)!='undefined' && structureData.calendars.length) {
-            if (calendar===undefined) {
+            if (calendar==null) {
                 var Calendar = require('./classes/common/calendar');
-		var calendar = new Calendar(logger,script);
+                calendar = new Calendar(logger,script);
             }
             calendar.reggister(structureData.calendars);
             setTimeout(function() {
@@ -121,7 +121,7 @@ process.on('SIGINT',cleanEnd);
 
 process.on('SIGTSTP',function(){
     console.log('');
-    if (typeof(calendar)!='undefined') calendar.ctrlz();
+    if (calendar!=null) calendar.ctrlz();
     for (id in devices) {
         devices[id].ctrlz();
     }
@@ -132,12 +132,16 @@ process.kill(process.pid, 'SIGHUP');
 fs.writeFile(__dirname+'/app.pid',process.pid);
 
 var cron = function() {
-    setTimeout(cron,60000);    
+    setTimeout(cron,60000);   
     if (global.gc) global.gc();
 
     var now=Math.round(Date.now()/1000);
     var min=(now/60)%60;
-    if (typeof(calendar)!='undefined') {
+
+
+
+    if (calendar!=null) {
+
         calendar.run();
     
         if (Math.floor(min)==0) setTimeout (function(){
