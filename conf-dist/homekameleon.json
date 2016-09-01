@@ -26,6 +26,16 @@
                 "xtunnel_host": "homiq@homiq.webkameleon.com"
             },
             "active": true
+        },
+        {
+            "id": "HK",
+            "name": "Homekameleon Promienko",
+            "protocol": "udp",
+            "language": "hk",
+            "com":{
+                "port": "26712",
+                "latency": 0
+            }
         }
     ],
     "logger": {
