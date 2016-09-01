@@ -31,6 +31,7 @@ var Udp = function(options,logger) {
             if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i].address);
         }
 
+        if (ips.length==0) continue;
         
         ifaces[k] = {
             ip:ips,
