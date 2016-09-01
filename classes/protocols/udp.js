@@ -19,27 +19,28 @@ var Udp = function(options,logger) {
         options.latency=0;
     }
     
-    var ifaces = os.networkInterfaces();
-    var ips=[];
+    var ips = function() {
+        var ifaces = os.networkInterfaces();
+        var ips=[];
+        
+        for (var k in ifaces) {
+            if (ifaces[k][0].internal) {
+                delete(ifaces[k]);
+                continue;
+            }
+            
+       
+            for (var i=0; i<ifaces[k].length; i++) {
+                if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i]);
+            }
     
-    for (var k in ifaces) {
-        if (ifaces[k][0].internal) {
-            delete(ifaces[k]);
-            continue;
+    
+            
         }
         
-   
-        for (var i=0; i<ifaces[k].length; i++) {
-            if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i]);
-        }
-
-
-        
+        return ips;
     }
     
-    console.log(ips);
-    
-
     
     var connect=function () {
         server.bind(options.port);
@@ -85,7 +86,7 @@ var Udp = function(options,logger) {
     
     server.on('listening', function () {
         var address = server.address();
-        logger.log('UDP Server listening on ' + address.address + ":" + address.port,'init');
+        logger.log('UDP Server listening on port '+ address.port,'init');
         self.emit('connection');
         send();
     });
@@ -95,7 +96,7 @@ var Udp = function(options,logger) {
     server.on('message', function (message, remote) {
     
         self.emit('data',{
-            raw: remote,
+            address: remote.address,
             data: message.toString('utf8').trim()
         });  
     });
@@ -117,6 +118,10 @@ var Udp = function(options,logger) {
             sendQueue.push(str);
             send();
             return connected;
+        },
+        
+        ips: function() {
+            return ips();
         }
     }
 }

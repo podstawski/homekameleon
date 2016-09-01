@@ -139,6 +139,26 @@ var Web = function(com,ini,logger,callback) {
         
         });
         
+        websocket.on('buffer',function(buffer){
+            if (!opt.session.loggedin) return;
+            if (buffer!=null) {
+
+                for (var k in buffer) {
+                    if (buffer[k]) {
+                        console.log('aktywacja');
+                        database.buffer.set({hwaddr:k, active:true});
+                    } else {
+                        database.buffer.remove(k);
+                    }
+                }
+                
+            }
+            
+            setTimeout(function(){
+                websocket.emit('buffer',database.buffer.getAll());
+            },200);
+        });
+        
     });
     
     com.on('notify',function(sockets,type,data) {        
