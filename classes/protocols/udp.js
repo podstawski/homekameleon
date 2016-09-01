@@ -27,12 +27,16 @@ var Udp = function(options,logger) {
             delete(ifaces[k]);
             continue;
         }
+        
+        continue;
         for (var i=0; i<ifaces[k].length; i++) {
             if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i].address);
         }
 
-        if (ips.length==0) continue;
-        
+        if (ips.length==0) {
+            
+            continue;
+        }
         ifaces[k] = {
             ip:ips,
             hw:fs.readFileSync('/sys/class/net/'+k+'/address').toString().trim()
