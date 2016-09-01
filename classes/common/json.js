@@ -102,7 +102,7 @@ var Model = function(opt,logger) {
     var open=function (d) {
         try {
             if (!d || d.length==0) {
-                d=[];
+                d='[]';
             }
             var json = JSON.parse(d);
             
