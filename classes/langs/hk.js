@@ -288,12 +288,7 @@ module.exports = function(com,ini,logger,callback) {
                 
             },1000);
             
-            db.buffer.trigger('active',function(data){
-                if (data.active) {
-                    initack(data);
-                }
-            });
-            
+            db.buffer.trigger('active',initack);
             
         },
         
