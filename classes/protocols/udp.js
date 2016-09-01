@@ -20,31 +20,24 @@ var Udp = function(options,logger) {
     }
     
     var ifaces = os.networkInterfaces();
+    var ips=[];
     
     for (var k in ifaces) {
-        var ips=[];
         if (ifaces[k][0].internal) {
             delete(ifaces[k]);
             continue;
         }
         
-        continue;
+   
         for (var i=0; i<ifaces[k].length; i++) {
-            if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i].address);
+            if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i]);
         }
 
-        if (ips.length==0) {
-            
-            continue;
-        }
-        ifaces[k] = {
-            ip:ips,
-            hw:fs.readFileSync('/sys/class/net/'+k+'/address').toString().trim()
-        };
+
         
     }
     
-    console.log(ifaces);
+    console.log(ips);
     
 
     
