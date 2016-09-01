@@ -2,6 +2,7 @@ var crypto = require('crypto');
 var crc8 = require('crc');
 var fs = require('fs');
 var exec = require('child_process').exec;
+var settings = require('../common/hsettings');
 
 var attempts=20;
 var attempt_delay=200;
@@ -29,6 +30,7 @@ module.exports = function(com,ini,logger,callback) {
     var database;
     var deviceId;
 
+        
     var nocolon = function(txt) {
       
         return txt.replace(/:/g,'');  
@@ -50,39 +52,10 @@ module.exports = function(com,ini,logger,callback) {
 
     }
     
-    var _settings=null;
-    var settings = function(s) {
-        var dir=__dirname+'/../../conf';
-        var file=dir+'/hk.json';
-        
-        if (s) {
-            if (!_settings) _settings=s;
-            else for (var k in s) _settings[k]=s[k];
-            
-            fs.writeFileSync(file,JSON.stringify(_settings));
-            try {
-                var e=exec('fsync '+file);
-            } catch(e) {
-                
-            }
-        }
-        
-        if (!_settings) {
-            try{
-                var d = fs.readFileSync(file);
-                _settings = JSON.parse(d);
-            } catch(e) {
-                _settings={};
-            }
-        }
-        
-        return _settings;
-
-    }
-    
     if (!settings().hash) {
         settings({hash: rid()});
     }
+
     
     var deletefuture = function (params) {
         for (var i=0; i<sendQueue.length; i++) {
@@ -205,6 +178,14 @@ module.exports = function(com,ini,logger,callback) {
         
         return rec.value;
     };
+    
+    var macaddress = function(ip) {
+        var ips=com.ips();
+        
+        console.log(ips);
+    }
+    
+    macaddress();
     
     var initack = function(data) {
         com.send({

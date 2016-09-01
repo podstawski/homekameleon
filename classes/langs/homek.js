@@ -1,14 +1,14 @@
 var url = require('url');
 var fs = require('fs');
 var exec = require('child_process').exec;
-
+var settings = require('../common/hsettings');
 
 var root_path=__dirname+'/../../public';
 
 var Web = function(com,ini,logger,callback) {
     var database;
     var websocket;
-    var _settings=null;
+    
     var wifi={last:0};
     
     com.staticContent(root_path);
@@ -37,52 +37,6 @@ var Web = function(com,ini,logger,callback) {
 	}
 
 	wifiscan();
-
-    var settings = function(s) {
-        var dir=__dirname+'/../../conf';
-        var file=dir+'/web.json';
-        var wifi=dir+'/wifi';
-        
-        if (s) {
-            if (!_settings) _settings=s;
-            else for (var k in s) _settings[k]=s[k];
-            
-            fs.writeFileSync(file,JSON.stringify(_settings));
-            try {
-                var e=exec('fsync '+file);
-            } catch(e) {
-                
-            }
-            
-            if (_settings.ssid ) {
-                fs.writeFileSync(wifi,_settings.ssid+' '+_settings.wifipass);
-                
-                try {
-                    var e=exec('fsync '+wifi);
-                    exec('reboot');
-                } catch(e) {
-                
-                }
-            } else {
-                try {
-                    fs.unlinkSync(wifi);
-                } catch(e) {
-                    
-                }
-            }
-        }
-        
-        if (!_settings) {
-            try{
-                var d = fs.readFileSync(file);
-                _settings = JSON.parse(d);
-            } catch(e) {
-                _settings={};
-            }
-        }
-        
-        return _settings;
-    }
     
     com.on('initstate',function(opt,db) {
         database=db;
