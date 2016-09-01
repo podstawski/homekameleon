@@ -101,6 +101,9 @@ var Model = function(opt,logger) {
     
     var open=function (d) {
         try {
+            if (!d || d.length==0) {
+                d=[];
+            }
             var json = JSON.parse(d);
             
             data={};

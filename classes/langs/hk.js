@@ -1,8 +1,22 @@
+var crypto = require('crypto');
+var crc8 = require('crc');
+var fs = require('fs');
+var exec = require('child_process').exec;
+
 var attempts=20;
 var attempt_delay=200;
 
+var pos_cmd=0;
+var pos_src=1;
+var pos_dev=2;
+var pos_dst=3;
+var pos_typ=4;
+var pos_val=5;
+var pos_idx=6;
+var pos_crc=7;
 
-//var hcrc = require('../common/hcrc8');
+var pos_inputs = 2;
+var pos_outputs = 3;
 
 
 module.exports = function(com,ini,logger,callback) {
@@ -15,9 +29,59 @@ module.exports = function(com,ini,logger,callback) {
     var database;
     var deviceId;
 
+    var nocolon = function(txt) {
+      
+        return txt.replace(/:/g,'');  
+    };
+    
+    var md5=function(txt) {
+        var md5sum = crypto.createHash('md5');
+        md5sum.update(txt);
+        return md5sum.digest('hex');
+    };
+    
+    var rid=function(len) {
+        if (len==null) len=8;
+        var ret=md5(''+Date.now()).substr(0,len);
+        return ret;
+    }
     
     var crc = function (cmd) {
 
+    }
+    
+    var _settings=null;
+    var settings = function(s) {
+        var dir=__dirname+'/../../conf';
+        var file=dir+'/hk.json';
+        
+        if (s) {
+            if (!_settings) _settings=s;
+            else for (var k in s) _settings[k]=s[k];
+            
+            fs.writeFileSync(file,JSON.stringify(_settings));
+            try {
+                var e=exec('fsync '+file);
+            } catch(e) {
+                
+            }
+        }
+        
+        if (!_settings) {
+            try{
+                var d = fs.readFileSync(file);
+                _settings = JSON.parse(d);
+            } catch(e) {
+                _settings={};
+            }
+        }
+        
+        return _settings;
+
+    }
+    
+    if (!settings().hash) {
+        settings({hash: rid()});
     }
     
     var deletefuture = function (params) {
@@ -153,7 +217,36 @@ module.exports = function(com,ini,logger,callback) {
         },
         
         'data': function(data) {
-            console.log(data);            
+            if (!data.data) return;
+            
+            if (data.data.substr(0,1)=='(' && data.data.substr(-1)==')') {
+                var cmd=data.data.substr(1,data.data.length-2).split(';');
+                
+                
+                if (cmd[pos_cmd]=='INIT') {
+                    var src=deviceId+'-'+nocolon(cmd[pos_src]);
+                    
+                    var b=database.buffer.get(src);
+                    if (b==null) {
+                        database.buffer.add({
+                            hwaddr: src,
+                            ip: data.address,
+                            inputs: cmd[pos_inputs],
+                            outputs: cmd[pos_outputs],
+                            active: false
+                        });
+                    } else {
+                        database.buffer.set(src,{
+                            ip: data.address,
+                            inputs: cmd[pos_inputs],
+                            outputs: cmd[pos_outputs],
+                        });
+                    }
+                    
+                }
+                
+            }
+                     
         },
         'initstate': function (db) {
             database=db;
@@ -172,6 +265,15 @@ module.exports = function(com,ini,logger,callback) {
 
             },1000);
             
+            db.buffer.trigger('active',function(data){
+                if (data.active) {
+                    com.send({
+                        address: data.ip,
+                        data:'(ACK;MASTER_HWADDR;HASH;SSID;PASS;MASTER_IP)'
+                    });
+                    db.buffer.remove(data.hwaddr);
+                }
+            });
         },
         
         'setId': function (id) {
