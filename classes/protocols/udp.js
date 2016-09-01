@@ -22,13 +22,20 @@ var Udp = function(options,logger) {
     var ifaces = os.networkInterfaces();
     
     for (var k in ifaces) {
+        var ips=[];
         if (ifaces[k][0].internal) {
             delete(ifaces[k]);
             continue;
         }
+        for (var i=0; i<ifaces[k].length; i++) {
+            if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i].address);
+        }
+
         
-        ifaces[k] = {ip:ifaces[k]};
-        ifaces[k].hw = fs.readFileSync('/sys/class/net/'+k+'/address').toString().trim();
+        ifaces[k] = {
+            ip:ips,
+            hw:fs.readFileSync('/sys/class/net/'+k+'/address').toString().trim()
+        };
         
     }
     
