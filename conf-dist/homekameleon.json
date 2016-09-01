@@ -99,6 +99,11 @@
             "model": "/homekameleon/classes/common/json",
             "file":"users.json",
             "index": ["username"]
+        },
+        "buffer": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"buffer.json",
+            "index": ["hwaddr"]
         }
         
     }
