@@ -205,9 +205,7 @@ module.exports = function(com,ini,logger,callback) {
         if (!data.active) return;
         
         var mac=macaddress(data.ip,data.homekameleon);
-        
-        console.log(data,mac);
-        
+                
         if (data.homekameleon) {
             var ssid='';
             var wifipass='';
@@ -246,7 +244,7 @@ module.exports = function(com,ini,logger,callback) {
                     var src=deviceId+'-'+nocolon(cmd[pos_src]);
                     
                     var homekameleon = cmd[pos_inputs]>0;
-                    console.log(homekameleon);
+                    
                     var b=database.buffer.get(src);
                     if (b==null) {
                         database.buffer.add({
