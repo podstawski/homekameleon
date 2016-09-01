@@ -243,6 +243,7 @@ module.exports = function(com,ini,logger,callback) {
                 if (cmd[pos_cmd]=='INIT') {
                     var src=deviceId+'-'+nocolon(cmd[pos_src]);
                     
+                    var homekameleon = cmd[pos_inputs]>0;
                     var b=database.buffer.get(src);
                     if (b==null) {
                         database.buffer.add({
@@ -251,7 +252,7 @@ module.exports = function(com,ini,logger,callback) {
                             inputs: cmd[pos_inputs],
                             outputs: cmd[pos_outputs],
                             active: false,
-                            homekameleon: false
+                            homekameleon: homekameleon
                         });
                     } else {
                         database.buffer.set({
@@ -259,6 +260,7 @@ module.exports = function(com,ini,logger,callback) {
                             ip: data.address,
                             inputs: cmd[pos_inputs],
                             outputs: cmd[pos_outputs],
+                            homekameleon: homekameleon
                         });
                         if (b.active) initack(b);
                     }
