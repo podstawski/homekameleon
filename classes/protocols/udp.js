@@ -49,7 +49,6 @@ var Udp = function(options,logger) {
     var send = function() {
         if (sendQueue.length==0) return;
         
-        
         for (var i=0; i<sendTimers.length; i++) {
             clearTimeout(sendTimers[i]);
         }
@@ -88,6 +87,7 @@ var Udp = function(options,logger) {
         var address = server.address();
         logger.log('UDP Server listening on port '+ address.port,'init');
         self.emit('connection');
+	connected=true;
         send();
     });
     

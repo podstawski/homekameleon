@@ -207,12 +207,14 @@ module.exports = function(com,ini,logger,callback) {
     };
     
     var initack = function(data) {
-        console.log('ack to',data.ip);
         com.send({
             address: data.ip,
             data:'(ACK;MASTER_HWADDR;HASH;SSID;PASS;MASTER_IP)'
         });
-        database.buffer.remove(data.hwaddr);
+	setTimeout(function(){
+
+            database.buffer.remove(data.hwaddr);
+        },50);
         
     };
     
@@ -273,10 +275,6 @@ module.exports = function(com,ini,logger,callback) {
                     logger.log(outputs.data[i].name+' ON','init');
                 }
                 
-                
-                var buf=db.buffer.getAll();
-                if (buf.data.length>0) initack(buf.data[0]);
-
             },1000);
             
             db.buffer.trigger('active',function(data){

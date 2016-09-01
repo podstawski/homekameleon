@@ -1,5 +1,6 @@
-var fs = require('fs');
 var exec = require('child_process').execFile;
+var fs = require('fs');
+var path = require('path');
 
 var instances=[];
 
@@ -79,7 +80,7 @@ var Model = function(opt,logger) {
         saveState=true;
         
         
-        var bak=file+'.bak';
+        var bak=path.dirname(file)+'/bak_'+path.basename(file);
         fs.renameSync(file, bak);
         fs.writeFileSync(file,JSON.stringify(getData()));
         

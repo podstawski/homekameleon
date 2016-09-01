@@ -141,13 +141,15 @@ var Web = function(com,ini,logger,callback) {
         
         websocket.on('buffer',function(buffer){
             if (!opt.session.loggedin) return;
+            var wait=0;
             if (buffer!=null) {
 
                 for (var k in buffer) {
                     if (buffer[k]) {
-                        console.log('aktywacja');
+			wait=800;	
                         database.buffer.set({hwaddr:k, active:true});
                     } else {
+			wait=200;	
                         database.buffer.remove(k);
                     }
                 }
@@ -156,7 +158,7 @@ var Web = function(com,ini,logger,callback) {
             
             setTimeout(function(){
                 websocket.emit('buffer',database.buffer.getAll());
-            },200);
+            },wait);
         });
         
     });
