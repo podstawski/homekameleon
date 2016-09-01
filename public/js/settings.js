@@ -27,7 +27,7 @@ websocket.once('wifi',function(wifi) {
                     $('body').html('<p align="center">Proszę czekać '+timer+'s.</p>');
                     timer--;
                     if (timer==0) {
-                    	$('body').html('<p align="center">Przełącz się do sieci homekameleon, a następnie <a href="index.html">sprawdź</a></p>');
+                    	$('body').html('<p align="center">Przełącz się do sieci homekameleon, a następnie <a href="index.html?check='+Math.random()+'">sprawdź</a></p>');
                     } else {
                         setTimeout(showTime,1000);
                     }
