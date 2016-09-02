@@ -267,13 +267,13 @@ module.exports = function(com,ini,logger,callback) {
     }
 
     var mac2hwaddr = function(mac) {
-
+        return deviceId+'-'+nocolon(mac);
     }
     
     var restore_ios = function(address,inputoroutput,subaddr) {
     
         var haddr=address2haddr(address,subaddr,inputoroutput);
-	var hwaddress=deviceId+'-'+address;
+        var hwaddress=mac2hwaddr(address);
         
         var ios=database.ios.get(haddr);
         if (ios==null) {
@@ -327,8 +327,8 @@ module.exports = function(com,ini,logger,callback) {
         
     };
     
-    var address2haddr = function(hwaddr,dev,type) {
-        return deviceId + '-' + nocolon(hwaddr) + '-' + type+dev;
+    var address2haddr = function(addr,dev,type) {
+        return mac2hwaddr(addr) + '-' + type+dev;
     };
     
     
@@ -352,7 +352,7 @@ module.exports = function(com,ini,logger,callback) {
                 
                 if (line[pos_cmd]=='INIT') {
                     var address=nocolon(line[pos_src]);
-                    var src=deviceId+'-'+address;
+                    var src=mac2hwaddr(address);
                     
                     var homekameleon = line[pos_inputs]>0;
                     
