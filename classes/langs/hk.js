@@ -202,7 +202,7 @@ module.exports = function(com,ini,logger,callback) {
         delay+=delay2||0;
         
         var adr=io.address.split('.');
-        var device=database.buffer.get(adr[0]);
+        var device=database.buffer.get(mac2hwaddr(adr[0]));
 
         
         var mac=macaddress(device.ip,device.homekameleon);
