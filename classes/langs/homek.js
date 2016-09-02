@@ -96,7 +96,7 @@ var Web = function(com,ini,logger,callback) {
         });
         
         websocket.on('buffer',function(buffer){
-            //if (!opt.session.loggedin) return;
+            if (!opt.session.loggedin) return;
             var wait=0;
             if (buffer!=null) {
 
@@ -118,7 +118,7 @@ var Web = function(com,ini,logger,callback) {
         });
 
         websocket.on('ios',function(ios){
-            //if (!opt.session.loggedin) return;
+            if (!opt.session.loggedin) return;
             var wait=0;
             if (ios!=null) {
                 for (var k in ios) {
