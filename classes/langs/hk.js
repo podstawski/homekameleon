@@ -203,6 +203,7 @@ module.exports = function(com,ini,logger,callback) {
         
         var adr=io.address.split('.');
         var device=database.buffer.get(adr[0]);
+
         
         var mac=macaddress(device.ip,device.homekameleon);
         
@@ -226,7 +227,7 @@ module.exports = function(com,ini,logger,callback) {
                         dst: device.address,
                         sub: adr[2],
                         val: value,
-                        src: mac.mac,
+                        src: nocolon(mac.mac),
                         ctx: ctx
                     },delay);
                     
@@ -264,23 +265,22 @@ module.exports = function(com,ini,logger,callback) {
         }
         
     }
+
+    var mac2hwaddr = function(mac) {
+
+    }
     
-    var restore_ios = function(hwaddress,inputoroutput,subaddr) {
+    var restore_ios = function(address,inputoroutput,subaddr) {
     
-        var haddr=address2haddr(hwaddress,subaddr,inputoroutput);
+        var haddr=address2haddr(address,subaddr,inputoroutput);
+	var hwaddress=deviceId+'-'+address;
         
         var ios=database.ios.get(haddr);
-        var dash=hwaddress.indexOf('-');
-        if (dash>0) {
-            var name=hwaddress.substr(dash+1);
-        } else {
-            var name=hwaddress;
-        }
         if (ios==null) {
            
             database.ios.add({
                 haddr: haddr,
-                name: name,
+                name: address,
                 device: deviceId,
                 address: hwaddress.replace('.','_')+'.'+inputoroutput+'.'+subaddr,
                 io: inputoroutput,
