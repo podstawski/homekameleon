@@ -20,7 +20,7 @@ var Web = function(com,ini,logger,callback) {
 			},500);
 			return;
 		}
-		exec('iwinfo apcli0 scan',function(err,out,stderr){
+		exec('iwinfo ra0 scan',function(err,out,stderr){
 			var res=out.match(/ESSID: "([^"]+)"/g);
 			if (!res) return;
 			wifi.last=Date.now();
@@ -30,6 +30,7 @@ var Web = function(com,ini,logger,callback) {
 				var ssid=res2[1];
 				if (ssid=='homekameleon') continue;
 				if (ssid.toLowerCase().indexOf('linkit')>=0) continue;
+                
 				wifi.scan[ssid]=true;
 			}	
 			if (cb) cb(wifi.scan);
