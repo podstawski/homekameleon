@@ -282,7 +282,7 @@ module.exports = function(com,ini,logger,callback) {
                 haddr: haddr,
                 name: address,
                 device: deviceId,
-                address: hwaddress.replace('.','_')+'.'+inputoroutput+'.'+subaddr,
+                address: nocolon(address)+'.'+inputoroutput+'.'+subaddr,
                 io: inputoroutput,
                 value: 0,
                 active: true
