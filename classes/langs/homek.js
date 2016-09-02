@@ -42,6 +42,7 @@ var Web = function(com,ini,logger,callback) {
     com.on('initstate',function(opt,db) {
         database=db;
         websocket=opt.socket;
+        
     
         wifiscan();
         websocket.emit('lang',ini.lang,opt.session.loggedin==null?false:opt.session.loggedin);
@@ -95,7 +96,7 @@ var Web = function(com,ini,logger,callback) {
         });
         
         websocket.on('buffer',function(buffer){
-            if (!opt.session.loggedin) return;
+            //if (!opt.session.loggedin) return;
             var wait=0;
             if (buffer!=null) {
 
@@ -115,8 +116,43 @@ var Web = function(com,ini,logger,callback) {
                 websocket.emit('buffer',database.buffer.select([{active:false}]));
             },wait);
         });
+
+        websocket.on('ios',function(ios){
+            //if (!opt.session.loggedin) return;
+            var wait=0;
+            if (ios!=null) {
+                for (var k in ios) {
+                    
+                    if (typeof(ios[k])=='object') {
+                        //code
+                    } else {
+
+                        if (ios[k]) {
+                            wait=1000;
+                            io=database.ios.get(k);
+                            if (io.io=='i') callback('input',{haddr: io.haddr, value: io.value},io.haddr);
+                            if (io.io=='o' || io.io=='r') callback('set',{haddr: io.haddr},io.haddr);
+                        } else {
+                            wait=100;	
+                            database.ios.remove(k);
+                        }
+                            
+                    }
+
+                }
+            }
+            
+            setTimeout(function(){
+                websocket.emit('ios',database.ios.select());
+            },wait);  
+        });
+
+
         
     });
+
+
+
     
     com.on('notify',function(sockets,type,data) {        
         

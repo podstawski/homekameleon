@@ -5,7 +5,7 @@ var exec = require('child_process').exec;
 var settings = require('../common/hsettings');
 
 var attempts=20;
-var attempt_delay=200;
+var attempt_delay=300;
 
 var pos_cmd=0;
 var pos_src=1;
@@ -49,7 +49,10 @@ module.exports = function(com,ini,logger,callback) {
     }
     
     var crc = function (cmd) {
-
+        
+        var str=cmd[pos_cmd]+cmd[pos_src]+cmd[pos_dev]+cmd[pos_dst]+cmd[pos_typ]+cmd[pos_val]+cmd[pos_idx]+settings().hash;
+        var res=crc8.crc8(str);
+        return res;
     }
     
     if (!settings().hash) {
@@ -75,12 +78,16 @@ module.exports = function(com,ini,logger,callback) {
             }
         }
         
-    }
+    };
     
-    var pkt = function() {
+    var search_str = function (arr,to) {
+        return arr[pos_cmd]+':'+arr[to?pos_dst:pos_src]+':'+arr[pos_dev]+':'+arr[pos_idx];  
+    };
+    
+    var idx = function() {
         counter=(counter%255)+1;
         return counter;
-    }
+    };
     
     var send = function(cmd,delay) {
 
@@ -92,7 +99,7 @@ module.exports = function(com,ini,logger,callback) {
         var now=Date.now();
         
         if (delay==null) delay=0;
-        
+                
         if (cmd!=null) {    
             sendQueue.push({str: '', sent: 0, count: 0, when:now+1000*parseFloat(delay), search: '', cmd: cmd});
         }
@@ -121,25 +128,35 @@ module.exports = function(com,ini,logger,callback) {
             }
             if ( sendQueue[i].count>=attempts) continue;
             
+            var device=database.buffer.get(sendQueue[i].cmd.dev);
+            
             if (sendQueue[i].str.length==0) {
                 var arr=new Array;
                 
-                /*
                 arr[pos_cmd]=sendQueue[i].cmd.cmd;
                 arr[pos_val]=sendQueue[i].cmd.val;
-                arr[pos_src]='0';
+                arr[pos_src]=sendQueue[i].cmd.src;
                 arr[pos_dst]=sendQueue[i].cmd.dst;
-                arr[pos_pkt]=pkt();
-                arr[pos_top]='s';
+                arr[pos_dev]=sendQueue[i].cmd.sub;
+                arr[pos_idx]=idx();
+                arr[pos_typ]='C';
                 arr[pos_crc]=crc(arr);
                 
-                sendQueue[i].str='<;'+arr.join(';')+';>';
-                sendQueue[i].search = arr[pos_cmd]+':'+arr[pos_dst]+':'+arr[pos_pkt];
-                */
+                sendQueue[i].str='('+arr.join(';')+')';
+                sendQueue[i].search = search_str(arr,true);
+            
             }
+            sendQueue[i].ip=device.ip;
+            
                 
             var msg=sendQueue[i].str;
-            var res=com.send(msg+"\r\n");
+            
+            var res=com.send({
+                data: msg+"\r\n",
+                address: sendQueue[i].ip
+            });
+            
+
             if (!res) {
                 sendQueue[i].when=now+1000;
                 if (nextHop>1000) nextHop=1000;
@@ -148,6 +165,7 @@ module.exports = function(com,ini,logger,callback) {
                 sendQueue[i].sent=now;
                 logger.log('Sending: '+msg,'frame');
             }
+            
             
             
         }
@@ -164,6 +182,9 @@ module.exports = function(com,ini,logger,callback) {
              
         }
         
+        if (sendQueue.length>0 && nextHop>attempt_delay) nextHop=attempt_delay;
+        
+
         sendSemaphore=false;
         if (sendQueue.length>0) sendTimers.push(setTimeout(send,nextHop));
         
@@ -171,12 +192,56 @@ module.exports = function(com,ini,logger,callback) {
     
     
     
+    
     var hset = function(data,delay2,ctx) {
+        var io=database.ios.get(data.haddr);
+        if (io==null) return;
+        var value=data.value;
+        var delay = typeof(data.delay)=='undefined' ? 0 : data.delay;
+        
+        delay+=delay2||0;
+        
+        var adr=io.address.split('.');
+        var device=database.buffer.get(adr[0]);
+        
+        var mac=macaddress(device.ip,device.homekameleon);
+        
+        switch (value) {
+            default:
+                
+                if (!isNaN(parseFloat(value))) {
+                    
+                    /*
+                    if (delay==0) {
+                        deletefuture({
+                            cmd: 'O.'+adr[1],
+                            dst: adr[0],
+                        });
+                    }
+                    */
+                    
+                    send({
+                        cmd: 'O',
+                        dev: device.hwaddr,
+                        dst: device.address,
+                        sub: adr[2],
+                        val: value,
+                        src: mac.mac,
+                        ctx: ctx
+                    },delay);
+                    
+                }
+                
+                break;
+
+        }
+        
+        
     };
     
     var toggle = function(data) {
-        
-        return rec.value;
+        var io=database.ios.get(data.haddr);
+        return parseFloat(io.value)>0?0:1;
     };
     
     
@@ -200,6 +265,37 @@ module.exports = function(com,ini,logger,callback) {
         
     }
     
+    var restore_ios = function(hwaddress,inputoroutput,subaddr) {
+    
+        var haddr=address2haddr(hwaddress,subaddr,inputoroutput);
+        
+        var ios=database.ios.get(haddr);
+        var dash=hwaddress.indexOf('-');
+        if (dash>0) {
+            var name=hwaddress.substr(dash+1);
+        } else {
+            var name=hwaddress;
+        }
+        if (ios==null) {
+           
+            database.ios.add({
+                haddr: haddr,
+                name: name,
+                device: deviceId,
+                address: hwaddress.replace('.','_')+'.'+inputoroutput+'.'+subaddr,
+                io: inputoroutput,
+                value: 0,
+                active: true
+            });
+        } else {
+           
+            database.ios.set({
+                haddr: haddr,
+                value: 0
+            });
+        }
+        
+    };
     
     var initack = function(data) {
         if (!data.active) return;
@@ -215,12 +311,24 @@ module.exports = function(com,ini,logger,callback) {
         }
         
         
+        for (var i=0; i<parseInt(data.inputs); i++) {
+            restore_ios(data.address,'i',i+1);
+        }
+        
+        for (var i=0; i<parseInt(data.outputs); i++) {
+            restore_ios(data.address,'o',i+1);
+        }
+        
         com.send({
             address: data.ip,
-            data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip].join(';')+')'
+            data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip].join(';')+')'+"\r\n"
         });
         
         
+    };
+    
+    var address2haddr = function(hwaddr,dev,type) {
+        return deviceId + '-' + nocolon(hwaddr) + '-' + type+dev;
     };
     
     
@@ -236,34 +344,73 @@ module.exports = function(com,ini,logger,callback) {
         'data': function(data) {
             if (!data.data) return;
             
+            
             if (data.data.substr(0,1)=='(' && data.data.substr(-1)==')') {
-                var cmd=data.data.substr(1,data.data.length-2).split(';');
+                var line=data.data.substr(1,data.data.length-2).split(';');
                 
+                logger.log('Received: '+line.join(';'),'frame');
                 
-                if (cmd[pos_cmd]=='INIT') {
-                    var src=deviceId+'-'+nocolon(cmd[pos_src]);
+                if (line[pos_cmd]=='INIT') {
+                    var address=nocolon(line[pos_src]);
+                    var src=deviceId+'-'+address;
                     
-                    var homekameleon = cmd[pos_inputs]>0;
+                    var homekameleon = line[pos_inputs]>0;
                     
                     var b=database.buffer.get(src);
                     if (b==null) {
                         database.buffer.add({
                             hwaddr: src,
+                            address: address,
                             ip: data.address,
-                            inputs: cmd[pos_inputs],
-                            outputs: cmd[pos_outputs],
+                            inputs: line[pos_inputs],
+                            outputs: line[pos_outputs],
                             active: false,
                             homekameleon: homekameleon
                         });
                     } else {
                         database.buffer.set({
                             hwaddr: src,
+                            address: address,
                             ip: data.address,
-                            inputs: cmd[pos_inputs],
-                            outputs: cmd[pos_outputs],
+                            inputs: line[pos_inputs],
+                            outputs: line[pos_outputs],
                             homekameleon: homekameleon
                         });
                         if (b.active) initack(b);
+                    }
+                    
+                } else {
+                    var crc2=crc(line);
+                    
+                    if (crc2!=line[pos_crc]) {
+                        console.log('Dupa, a nie CRC');
+                    }
+                    
+                    if (line[pos_typ]=='A') {
+                        var search = search_str(line,false);
+                    
+                        var origin={};
+                        for (var i=0;i<sendQueue.length; i++) {
+                            if (sendQueue[i].search==search && sendQueue[i].sent>0) {
+                                sendQueue[i].count=attempts;
+                                origin=sendQueue[i].cmd;
+                                break;
+                            }
+                        }
+                        
+                        var state=line[pos_val];
+                                
+                        
+                        if (typeof(origin.setval)!='undefined') {
+                            state=origin.setval;
+                        }
+                        
+                        
+                        
+                        var opt={haddr:address2haddr(line[pos_src],line[pos_dev],'o')};
+                        if (state!=null) opt.value=state;
+                      
+                        if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);   
                     }
                     
                 }

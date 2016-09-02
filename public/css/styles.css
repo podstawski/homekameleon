@@ -1033,8 +1033,14 @@ form .series {
 	padding-top: 10px;
 }
 
+
+.iostable svg,
 .buffertable svg {
 	width: 25px;
 	height: 25px;
 	cursor: pointer;
+}
+
+.iostable svg.on {
+	color: red;
 }

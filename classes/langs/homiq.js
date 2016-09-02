@@ -133,6 +133,7 @@ module.exports = function(com,ini,logger,callback) {
              
         }
         
+        if (sendQueue.length>0 && nextHop>attempt_delay) nextHop=attempt_delay;
         sendSemaphore=false;
         if (sendQueue.length>0) sendTimers.push(setTimeout(send,nextHop));
         
