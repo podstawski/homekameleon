@@ -203,7 +203,10 @@ module.exports = function(com,ini,logger,callback) {
         
         var adr=io.address.split('.');
         var device=database.buffer.get(mac2hwaddr(adr[0]));
+        if (device==null) device=database.buffer.get(adr[0]);
 
+        if (device==null) return;
+        
         
         var mac=macaddress(device.ip,device.homekameleon);
         
