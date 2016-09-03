@@ -125,10 +125,37 @@ var Logic = function(script,logger)
         action: function(device,type,data,ctx) {
             data.device=device;
             var io=db.ios.get(data);
-            var io_cp=JSON.parse(JSON.stringify(io));
+            var io_cp=global.clone(io);
             
             
             switch (type) {
+                
+                case 'read':
+                    if (!data.io || data.io.length==0) {
+                        data.cb(ini.dictionary.dict.error);
+                        break;
+                    }
+         
+                    
+                    io=db.ios.get(data.io);
+                    
+                    if (!io) {
+                        data.cb(ini.dictionary.dict.error);
+                        break;
+                    }
+                    
+                    var io2=global.clone(io);
+                    io2.last=io.last||0;
+                    evaluate(io2);
+                    
+                    var res=io2.value;
+                    if (io2.unit && io2.unit.length>0) {
+                        res+=' '+io2.unit;
+                    }
+                 
+                    data.cb(res);
+                    
+                    break;
                 
                 case 'command':
                     

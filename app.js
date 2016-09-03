@@ -18,6 +18,9 @@ var calendar=null;
 var structureData;
 var devices=[];
 
+global.clone=function(o) {
+    return JSON.parse(JSON.stringify(o));
+}
 
 script.on('_cancel',function(ctx,delay){
     for (var id in devices) devices[id].cancel(ctx,delay);

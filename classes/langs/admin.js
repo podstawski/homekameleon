@@ -28,7 +28,8 @@ var Web = function(com,ini,logger,callback) {
             var path = url.parse(request.url).pathname;
  
             switch(path){
-                case '/say':    
+                case '/say':
+                case '/read':
                     var data=JSON.parse(JSON.stringify(request.query));
                     data.cb = function (txt) {
                         response.write(txt);
@@ -38,10 +39,9 @@ var Web = function(com,ini,logger,callback) {
                     if ((ini.commandpass||Date.now())!=(request.query.p||0) ) {
                         data.cb('Proszę podać hasło!');
                         break;
-                    }                    
-                    
-                    callback('command',data);
-                    
+                    }
+
+                    callback((path=='/say')?'command':'read',data);
                     break;
                 case '/check-web':
                     response.setHeader('Access-Control-Allow-Origin', '*');
