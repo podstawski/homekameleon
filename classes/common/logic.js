@@ -146,7 +146,7 @@ var Logic = function(script,logger)
                     
                     var io2=global.clone(io);
                     io2.last=io.last||0;
-                    evaluate(io2);
+                    if(data.e) evaluate(io2);
                     
                     var res=io2.value;
                     if (io2.unit && io2.unit.length>0) {
