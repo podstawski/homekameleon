@@ -135,9 +135,24 @@ var Logic = function(script,logger)
                         data.cb(ini.dictionary.dict.error);
                         break;
                     }
-         
                     
                     io=db.ios.get(data.io);
+                    if (!io) {
+                        var a=data.io.split('.');
+                        if (a.length==1) {
+                            var ios=db.ios.select([{address:data.io}]);
+                            if (ios.data.length==1) {
+                                io=ios.data[0];
+                            }
+                        } else {
+                            var dev=a[0];
+                            a.splice(0,1);
+                            var ios=db.ios.select([{device: dev,address:a.join('.')}]);
+                            if (ios.data.length==1) {
+                                io=ios.data[0];
+                            }
+                        }
+                    }
                     
                     if (!io) {
                         data.cb(ini.dictionary.dict.error);
