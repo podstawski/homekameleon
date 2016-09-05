@@ -32,7 +32,7 @@ var Web = function(com,ini,logger,callback) {
                 case '/read':
                     var data=JSON.parse(JSON.stringify(request.query));
                     data.cb = function (txt) {
-                        response.write(txt);
+                        response.write(txt+'');
                         response.end(); 
                     }
                 
