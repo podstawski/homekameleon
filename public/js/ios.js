@@ -85,7 +85,15 @@ $(document).on('click','.iostable svg',function(e){
         alert('nie tak szybko, cwaniaczku, za chwilkę!');
     } else {
         ios[id]=this.className.baseVal.indexOf('trash')<0;
-        websocket.emit('ios',ios);        
+        websocket.emit('ios',ios);
+        
+        if (ios[id]) {
+            var me=$(this);
+            me.fadeOut(500,function(){
+                me.fadeIn(500);
+            });
+        }
+        
     }
 
 

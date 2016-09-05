@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HomeKameleon - akcje</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/select2.css" rel="stylesheet">
+
+<!--Icons-->
+<script src="js/lumino.glyphs.js"></script>
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="index.html"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li class="active">Akcje</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row hidden-xs">
+			<div class="col-lg-12">
+				<h1 class="page-header">Akcje</h1>
+			</div>
+		</div><!--/.row-->
+				
+		<table class="table table-striped table-bordered scriptstable">
+
+        </table>
+		
+		
+	</div><!--/.main-->
+	
+	
+	<!-- Modal -->
+	<div id="edit-script" class="modal fade" role="dialog" data-backdrop="static" >
+	  <div class="modal-dialog">
+	
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">
+				<input type="text" name="name" placeholder="tu wpisz nazwę skryptu"/>
+			</h4>
+		  </div>
+		  <form>
+			<div class="modal-body"></div>
+		  </form>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default " data-dismiss="modal">Zamknij</button>
+			<button type="button" class="btn btn-info ">Zapisz zmiany</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4></h4>
+				</div>
+				<div class="modal-body ">Czy na pewno usunąć ?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default " data-dismiss="modal">Nie usuwaj</button>
+					<a class="btn btn-danger btn-ok ">Usuń</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/select2.min.js"></script>
+
+	<script src="js/nav.js"></script>
+	
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/smekta.js"></script>
+	<script src="js/homekameleon.js"></script>
+	<script src="js/scripts.js"></script>
+
+</body>
+
+</html>

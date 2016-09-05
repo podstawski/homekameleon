@@ -141,13 +141,44 @@ var Web = function(com,ini,logger,callback) {
 
                 }
             }
-            
-            setTimeout(function(){
-                websocket.emit('ios',database.ios.select());
-            },wait);  
+  
+            if (wait>=0) {          
+                setTimeout(function(){
+                    websocket.emit('ios',database.ios.select());
+                },wait);
+            }
         });
 
+        websocket.on('scripts',function(scripts){
+            //if (!opt.session.loggedin) return;
+            var wait=0;
+            if (scripts!=null) {
+                for (var k in scripts) {
+                    
+                    if (typeof(scripts[k])=='object') {
+                        //code
+                    } else {
 
+                        if (scripts[k]) {
+                            wait=-1;
+                            callback('script',{script:k});
+        
+                        } else {
+                            wait=100;	
+                            database.scripts.remove(k);
+                        }
+                            
+                    }
+
+                }
+            }
+  
+            if (wait>=0) {          
+                setTimeout(function(){
+                    websocket.emit('scripts',database.scripts.select());
+                },wait);
+            }
+        });
         
     });
 
