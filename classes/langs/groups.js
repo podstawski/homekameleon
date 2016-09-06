@@ -6,6 +6,10 @@ module.exports = function(com,ini,logger,callback) {
     var arrayMath = new ArrayMath();
     var timers={};
     
+    var array_diff = function (a,b) {
+        return a.filter(function(x) {return b.indexOf(x)<0});
+    }
+    
     var calculateRelated = function(data,arrayOfCalled) {
         if (data!=null && typeof(data.related)=='object' && data.related!=null) {
             if (arrayOfCalled.indexOf(data.haddr)>=0) return;
@@ -102,6 +106,32 @@ module.exports = function(com,ini,logger,callback) {
         
         'initstate': function (db) {
             database=db;
+            database.ios.trigger('related',function(d,oldval){
+                                    
+                var added=array_diff(d.related||[] , oldval||[]);
+                var removed=array_diff(oldval||[] , d.related||[]);
+                var me=d.haddr;
+                
+                for (var i=0; i<added.length; i++) {
+                    database.ios.get(added[i],function(rec){
+                        var related=rec.related||[];
+                        if (related.indexOf(me)<0) related.push(me);
+                        rec.related=related;
+                        database.ios.set(rec);
+                    });
+                }
+                for (var i=0; i<removed.length; i++) {
+                    database.ios.get(removed[i],function(rec){
+                        var related=rec.related||[];
+                        var i=related.indexOf(me);
+                        if (i>=0) {
+                            rec.related.splice(i,1);
+                        }
+                        database.ios.set(rec);
+                    });
+                }
+
+            });
         },
         
         'cancel': function (ctx,delay) {

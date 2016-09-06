@@ -38,14 +38,14 @@
                 <li class="item">
                     <select rel="[haddr]" class="inputoroutput"></select>
                     <input type="text" value="[value]" class="translate value" placeholder="value"/>
-                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="delay"/>
+                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="opóźnij"/>
                 </li>
             [endloop:actions]
             [endif:actions]
                 <li class="new-item">
                     <select rel="" class="inputoroutput"></select>
                     <input type="text" class="translate value" placeholder="value"/>
-                    <input type="text" class="translate delay" placeholder="delay"/>
+                    <input type="text" class="translate delay" placeholder="opóźnij"/>
                 </li>
                 
                 <li class="add plus-last">
@@ -62,14 +62,14 @@
                 <li class="item">
                     <select rel="[haddr]" class="inputoroutput"></select>
                     <input type="text" value="[value]" class="translate value" placeholder="value"/>
-                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="delay"/>
+                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="opóźnij"/>
                 </li>
             [endloop:nactions]
             [endif:nactions]
                 <li class="new-item">
                     <select rel="" class="inputoroutput"></select>
                     <input type="text" class="translate value" placeholder="value"/>
-                    <input type="text" class="translate delay" placeholder="delay"/>
+                    <input type="text" class="translate delay" placeholder="opóźnij"/>
                 </li>
                 
                 <li class="add plus-last">
@@ -94,13 +94,13 @@
             [loop:scripts]
                 <li class="item">
                     <select rel="[script]" class="scripts"></select>
-                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="delay"/>
+                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="opóźnij"/>
                 </li>
             [endloop:scripts]
             [endif:scripts]
                 <li class="new-item">
                     <select rel="" class="scripts"></select>
-                    <input type="text" class="translate delay" placeholder="delay"/>
+                    <input type="text" class="translate delay" placeholder="opóźnij"/>
                 </li>
                 
                 <li class="add plus-last">

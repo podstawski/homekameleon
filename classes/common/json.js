@@ -210,10 +210,11 @@ var Model = function(opt,logger) {
 
         for (var k in d) {
             if (typeof(data[idx][k])=='undefined' || data[idx][k]!=d[k]) {
+                var oldval=data[idx][k];
                 data[idx][k]=d[k];
                 if (triggers[k]!=null) {
                     for (var i=0;i<triggers[k].length;i++) {
-                        triggers[k][i](data[idx]);
+                        triggers[k][i](data[idx],oldval);
                     }
                 }
                 anythingChanged=true;

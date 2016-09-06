@@ -124,7 +124,7 @@ $(document).on('click','.scriptstable svg',function(e){
             });
             websocket.emit('scripts',scripts);
         } else {
-            $('#confirm-delete h4').text($(this).closest('tr').first().text());
+            $('#confirm-delete h4').text($(this).closest('tr').children().first().text());
             $('#confirm-delete').attr('rel',id);
             $('#confirm-delete').modal('show');
             

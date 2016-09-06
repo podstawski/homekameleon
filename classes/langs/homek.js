@@ -1,7 +1,9 @@
 var url = require('url');
 var fs = require('fs');
+var crypto = require('crypto');
 var exec = require('child_process').exec;
 var settings = require('../common/hsettings');
+
 
 var root_path=__dirname+'/../../public';
 
@@ -12,6 +14,18 @@ var Web = function(com,ini,logger,callback) {
     var wifi={last:0};
     
     com.staticContent(root_path);
+    
+    var md5=function(txt) {
+        var md5sum = crypto.createHash('md5');
+        md5sum.update(txt);
+        return md5sum.digest('hex');
+    };
+    
+    var rid=function(len) {
+        if (len==null) len=8;
+        var ret=md5(''+Date.now()).substr(0,len);
+        return ret;
+    }
     
 	var wifiscan = function(cb) {
 		if (wifi.last>Date.now()-60*1000) {
@@ -124,7 +138,8 @@ var Web = function(com,ini,logger,callback) {
                 for (var k in ios) {
                     
                     if (typeof(ios[k])=='object') {
-                        //code
+                        database.ios.set(ios[k]);
+                     
                     } else {
 
                         if (ios[k]) {
@@ -188,6 +203,39 @@ var Web = function(com,ini,logger,callback) {
             });
             websocket.emit('scripts',database.scripts.select());
         });
+        
+        websocket.on('actions',function(a){
+            if (!opt.session.loggedin) return;
+            if (typeof(a)=='string') websocket.emit('actions',database.actions.get(a));
+            else {
+                database.actions.set(a)
+            }
+        });
+        
+        websocket.on('ios-device',function(d){
+            if (d==null) {
+                var devices={};
+                for(var i=0; i<ini.devices.length; i++) {
+                    if (ini.devices[i].useradd) {
+                        devices[ini.devices[i].id] = ini.devices[i].name;
+                    }
+                }
+                websocket.emit('ios-device',devices);
+            } else {
+                var ioss=database.ios.select([{device:d}]);
+                
+                var ios={
+                    active: true,
+                    haddr: ini.uuid+'.'+d+'.'+rid(),
+                    device: d,
+                    io: 'o',
+                    address: ioss.data.length+1
+                };
+                database.ios.add(ios);
+                websocket.emit('ios',database.ios.select());
+            }
+        });       
+        
         
     });
 

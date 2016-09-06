@@ -1,5 +1,4 @@
-var charts={};
-var chartsObj = new chartsClass();
+
 
 var navReady = function () {
     $('.dashboard').addClass('active');
