@@ -153,7 +153,7 @@ var Logic = function(script,logger)
             switch (type) {
                 
                 case 'read':
-                case 'toogle':
+                case 'toggle':
                     if (!data.io || data.io.length==0) {
                         data.cb(ini.dictionary.dict.error);
                         break;
