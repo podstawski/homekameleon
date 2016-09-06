@@ -29,6 +29,7 @@ module.exports = function(com,ini,logger,callback) {
     var sendTimers=[];
     var database;
     var deviceId;
+    var lastIdx={};
 
         
     var nocolon = function(txt) {
@@ -335,6 +336,19 @@ module.exports = function(com,ini,logger,callback) {
     };
     
     
+    self.lineIn_IP = function(line,buffer) {
+        database.buffer.set({
+            hwaddr: buffer.hwaddr,
+            ip: line[pos_val]
+        });
+    };
+    
+    self.lineIn_I = function(line,buffer) {
+        var haddr=address2haddr(line[pos_src],line[pos_dev],'i');
+        callback('input',{haddr: haddr, value: line[pos_val]},haddr);
+    };
+    
+    
     return {
         
         'set': function(data,delay,ctx) {
@@ -403,17 +417,43 @@ module.exports = function(com,ini,logger,callback) {
                         
                         var state=line[pos_val];
                                 
-                        
                         if (typeof(origin.setval)!='undefined') {
                             state=origin.setval;
                         }
                         
-                        
-                        
                         var opt={haddr:address2haddr(line[pos_src],line[pos_dev],'o')};
                         if (state!=null) opt.value=state;
                       
-                        if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);   
+                        if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
+                        
+                    } else if (line[pos_typ]=='C') {
+                        var ack=[];
+                        ack[pos_cmd]=line[pos_cmd];
+                        ack[pos_src]=line[pos_dst];
+                        ack[pos_dst]=line[pos_src];
+                        ack[pos_dev]=line[pos_dev];
+                        ack[pos_idx]=line[pos_idx];
+                        ack[pos_typ]='A';
+                        ack[pos_val]=line[pos_val];
+                        ack[pos_crc]=crc(ack);
+                        
+                        var buffer=database.buffer.get(mac2hwaddr(line[pos_src]));
+                        if (buffer==null) return;
+                        
+                        com.send({
+                            address: buffer.ip,
+                            data: '('+ack.join(';')+')'+"\r\n"
+                        });
+                        
+                        if (lastIdx[line[pos_src]]==null) lastIdx[line[pos_src]]=-1;
+                        if ( lastIdx[line[pos_src]] == line[pos_idx]) return;
+                        lastIdx[line[pos_src]]=line[pos_idx];
+                        
+                        
+                        if (typeof(self['lineIn_'+line[pos_cmd]])=='function') {
+                            self['lineIn_'+line[pos_cmd]](line,buffer);
+                        }
+                        
                     }
                     
                 }
