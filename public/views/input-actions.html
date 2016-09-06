@@ -1,0 +1,222 @@
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Typ</span>
+                <select id="io" value="[io]" name="io" class="form-control value">
+                    <option value="">typ</option>
+                    <option value="i">wejście</option>
+                    <option value="o">wyjście</option>
+                    <option value="t">termometr</option>
+                </select>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Address</span>
+                <input type="text" id="address" [if:address]value="[address]"[endif:address] name="address"
+                       class="form-control translate" placeholder="Address">
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Jednostka</span>
+                <input type="text" id="unit" [if:unit]value="[unit]"[endif:unit] name="unit"
+                       class="form-control translate" placeholder="jednostka">
+            </div>
+        </div>
+    </div> 
+
+    <div class="col-md-6 related">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Relacje</span>
+                <select name="related" id="related" class="form-control inputoroutput" multiple></select>
+            </div>
+        </div>
+    </div> 
+
+
+</div>
+ 
+<div class="row" style="display: none">
+   <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Evaluate</span>
+                <input type="text" id="eval" [if:eval]value="[eval]"[endif:eval] name="eval"
+                       class="form-control translate" placeholder="Evaluate value">
+            </div>
+        </div>
+    </div> 
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Save value</span>
+                <input type="text" id="store" [if:store]value="[store]"[endif:store] name="store"
+                       class="form-control translate" placeholder="name_of_collection[/time]">
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+</div>
+
+<div class="row temps">
+   <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Comfort</span>
+                <input type="number" id="t_comfort" [if:t_comfort]value="[t_comfort]"[endif:t_comfort] name="t_comfort"
+                       class="form-control temp" step="0.1" placeholder="℃" title="℃">
+            </div>
+        </div>
+    </div> 
+
+   <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Eco</span>
+                <input type="number" id="t_eco" [if:t_eco]value="[t_eco]"[endif:t_eco] name="t_eco"
+                       class="form-control temp" step="0.1" placeholder="℃" title="℃">
+            </div>
+        </div>
+    </div> 
+
+   <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Nofrost</span>
+                <input type="number" id="t_nofrost" [if:t_nofrost]value="[t_nofrost]"[endif:t_nofrost] name="t_nofrost"
+                       class="form-control temp" step="0.1" placeholder="℃" title="℃">
+            </div>
+        </div>
+    </div> 
+
+   <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Cool</span>
+                <input type="number" id="t_cool" [if:t_cool]value="[t_cool]"[endif:t_cool] name="t_cool"
+                       class="form-control temp" step="0.1" placeholder="℃" title="℃">
+            </div>
+        </div>
+    </div> 
+
+   <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Hysteresis</span>
+                <input type="number" id="t_hysteresis" [if:t_hysteresis]value="[t_hysteresis]"[endif:t_hysteresis] name="t_hysteresis"
+                       class="form-control temp" step="0.1" placeholder="℃" title="Hysteresis ℃">
+            </div>
+        </div>
+    </div> 
+
+
+</div>
+
+
+<div class="container-fluid">
+[loop:actions]
+    <div class="row">
+        
+        <div class="conditions col-md-7">
+            <ul>
+            [loop:conditions]
+                <li class="item">
+                    <select class="inputoroutput" rel="[haddr]"></select>
+                    <condition>[condition]</condition>
+                </li>
+            [endloop:conditions]
+                <li class="new-item">
+                    <select class="inputoroutput" rel="[haddr]"></select>
+                    <condition></condition>
+                </li>
+                <li class="add plus-last">+</li>
+            </ul>
+        </div>
+        
+        <div class="scripts col-md-5">
+            <ul>
+            [loop:scripts]
+                <li class="item">
+                    <select rel="[script]" class="scripts">
+                        
+                    </select>
+                    <input type="text" [if:delay]value="[delay]"[endif:delay] class="translate delay" placeholder="opóźnij"/>
+                </li>
+            [endloop:scripts]
+
+                <li class="new-item">
+                    <select rel="" class="scripts">
+                        
+                    </select>
+                    <input type="text" class="translate delay" placeholder="opóźnij"/>
+                </li>
+                
+                <li class="add plus-last">+</li>
+            </ul>
+        </div>
+    </div>
+    
+[endloop:actions]
+
+</div>
+
+<div class="add plus-action">+</div>
+
+
+<div class="row new-row" style="display: none">
+    <div class="activity col-md-1">
+        <label class="switch switch-default switch-success">
+            <input type="checkbox" class="switch-input" value="1" checked/>
+            <span class="switch-label"></span>
+            <span class="switch-handle"></span>
+        </label>
+    </div>
+    
+    <div class="conditions col-md-7">
+        <ul>
+            <li class="item">
+                <select class="inputoroutput" rel="[haddr]"></select>
+                <condition></condition>
+            </li>
+            <li class="new-item">
+                <select class="inputoroutput" rel="[haddr]"></select>
+                <condition></condition>
+            </li>
+            <li class="add plus-last">+</li>
+        </ul>
+    </div>
+    
+    <div class="scripts col-md-4">
+        <ul>
+            <li class="item">
+                <select class="scripts"></select>
+                <input type="text" class="delay translate" placeholder="opóźnij"/>
+            </li>
+            <li class="new-item">
+                <select class="scripts"></select>
+                <input type="text" class="delay translate" placeholder="opóźnij"/>
+            </li>
+
+            <li class="add plus-last">+</li>
+        </ul>
+    </div>
+</div>
+
+
+
