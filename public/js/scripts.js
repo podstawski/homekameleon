@@ -45,11 +45,14 @@ $('.scriptstable').DataTable({
     columns: scriptsColumns
 });
 
-var scriptsData,scriptsDataArray,iosDataArray;
+var scriptsData,scriptsDataArray,iosDataArray,iosData={};
 
 websocket.emit('ios');
 websocket.on('ios',function(ios){
     iosDataArray=ios.data;
+    for (var i=0;i<ios.data.length; i++) {
+        iosData[ios.data[i].haddr]=ios.data[i];
+    }
 });
 
 websocket.emit('scripts');
@@ -138,3 +141,115 @@ $(document).on('click','#confirm-delete .btn-danger',function(e){
     websocket.emit('scripts',scripts);
     $('#confirm-delete').modal('hide');
 });
+
+
+$(document).on('click','#edit-script .modal-body .plus-last',function(e){
+    var newobj=$(this).parent().find('.new-item').last().clone();
+    
+    $(this).parent().find('.add').before(newobj);
+    
+    newobj.show().removeClass('new-item').addClass('item');
+    
+    drawScriptSelects(newobj,scriptsDataArray);
+    drawIOSelects(newobj,iosDataArray);
+    drawConditions(newobj);
+
+});
+
+
+$(document).on('click','#edit-script .modal-body li a.x', function(e){
+    $(this).parent().remove();
+});
+
+$(document).on('click','.add-script', function(e){
+    websocket.emit('new-script');
+    $("html, body").animate({ scrollTop: $('.scriptstable').offset().top-160 }, 1000);
+});
+
+
+/*
+ *save button in input edit
+ */
+$('#edit-script .btn-info').click(function(e){
+    $('#edit-script').modal('hide');
+    var id=$('#edit-script').attr('rel');
+    var data={'id':id};
+    
+    data.name=$('#edit-script input[name="name"]').val();
+    
+    var sa=$('#edit-script form').serializeArray();
+    for(var i=0;i <sa.length; i++) {
+        data[sa[i].name] = sa[i].value;
+    }
+
+    data.conditions=[];
+    data.actions=[];
+    data.nactions=[];
+    data.scripts=[];
+    
+    $('#edit-script form .row').not('.new-row').find('.conditions li.item').each(function(){
+        var cond={};
+
+        cond.haddr=$(this).find('select.inputoroutput').val();
+
+        cond.condition=[
+            $(this).find('.cond_what').val(),
+            $(this).find('.cond_eq').val(),
+            $(this).find('.cond_value').val()
+        ];
+        
+        data.conditions.push(cond);
+    });
+    
+    $('#edit-script form .row').not('.new-row').find('.actions li.item').each(function(){
+        var a={
+            haddr: $(this).find('select.inputoroutput').val()
+        };
+        
+        a.device=iosData[a.haddr].device;
+        a.address=iosData[a.haddr].address;
+        a.value=$(this).find('input.value').val();
+        
+        var delay=parseInt($(this).find('input.delay').val());
+        if (!isNaN(delay) && delay>0) a.delay=delay;
+        
+        data.actions.push(a);
+    });
+    
+    $('#edit-script form .row').not('.new-row').find('.nactions li.item').each(function(){
+        var a={
+            haddr: $(this).find('select.inputoroutput').val()
+        };
+        
+        a.device=iosData[a.haddr].device;
+        a.address=iosData[a.haddr].address;
+        a.value=$(this).find('input.value').val();
+        
+        var delay=parseInt($(this).find('input.delay').val());
+        if (!isNaN(delay) && delay>0) a.delay=delay;
+        
+        data.nactions.push(a);
+    });
+    
+    
+    $('#edit-script form .row').not('.new-row').find('.scripts li.item').each(function(){
+        var s={
+            script: $(this).find('select.scripts').val()
+        };
+        
+        var delay=parseInt($(this).find('input.delay').val());
+        if (!isNaN(delay) && delay>0) s.delay=delay;
+        
+        if (s.script.length>0) data.scripts.push(s);
+    });
+    
+    
+    
+
+    var id=data['id'];
+    var scr={};
+    scr[id]=data;
+    websocket.emit('scripts',scr);
+    
+});
+

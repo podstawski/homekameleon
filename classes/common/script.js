@@ -41,7 +41,7 @@ var Script=function(logger) {
             if (scriptsQueue[i].delay>0) {
                 delay_suffix=' (in '+scriptsQueue[i].delay+' s.)';
             }
-            if (pass) {
+            if (pass && typeof(scriptsQueue[i].script.actions)=='object') {
                 
                 logger.log(scriptsQueue[i].script.name+delay_suffix,scriptsQueue[i].script.log||'script');
                 

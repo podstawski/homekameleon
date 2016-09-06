@@ -150,13 +150,14 @@ var Web = function(com,ini,logger,callback) {
         });
 
         websocket.on('scripts',function(scripts){
-            //if (!opt.session.loggedin) return;
+            if (!opt.session.loggedin) return;
             var wait=0;
             if (scripts!=null) {
                 for (var k in scripts) {
                     
                     if (typeof(scripts[k])=='object') {
-                        //code
+                        database.scripts.set(scripts[k]);
+                        wait=100;
                     } else {
 
                         if (scripts[k]) {
@@ -178,6 +179,14 @@ var Web = function(com,ini,logger,callback) {
                     websocket.emit('scripts',database.scripts.select());
                 },wait);
             }
+        });
+        
+        websocket.on('new-script',function(){
+            if (!opt.session.loggedin) return;
+            database.scripts.add({
+                active: true
+            });
+            websocket.emit('scripts',database.scripts.select());
         });
         
     });
