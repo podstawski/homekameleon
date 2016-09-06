@@ -30,6 +30,7 @@ var Web = function(com,ini,logger,callback) {
             switch(path){
                 case '/say':
                 case '/read':
+                case '/toggle':    
                     var data=JSON.parse(JSON.stringify(request.query));
                     data.cb = function (txt) {
                         response.write(txt+'');
@@ -41,7 +42,19 @@ var Web = function(com,ini,logger,callback) {
                         break;
                     }
 
-                    callback((path=='/say')?'command':'read',data);
+                    var cmd;
+                    switch (path) {
+                        case '/say':
+                            cmd='command';
+                            break;
+                        case '/read':
+                            cmd='read';
+                            break;
+                        case '/toggle':
+                            cmd='toggle';
+                            break;
+                    }
+                    callback(cmd,data);
                     break;
                 case '/check-web':
                     response.setHeader('Access-Control-Allow-Origin', '*');

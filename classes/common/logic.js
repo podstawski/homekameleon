@@ -110,6 +110,28 @@ var Logic = function(script,logger)
         
     };
     
+    var getio=function(txt) {
+        io=db.ios.get(txt);
+        if (!io) {
+            var a=txt.split('.');
+            if (a.length==1) {
+                var ios=db.ios.select([{address:txt}]);
+                if (ios.data.length==1) {
+                    io=ios.data[0];
+                }
+            } else {
+                var dev=a[0];
+                a.splice(0,1);
+                var ios=db.ios.select([{device: dev,address:a.join('.')}]);
+                if (ios.data.length==1) {
+                    io=ios.data[0];
+                }
+            }
+        }
+        return io;
+        
+    };
+    
     
     return {
         setdb: function (setdb,c,setini) {
@@ -131,28 +153,13 @@ var Logic = function(script,logger)
             switch (type) {
                 
                 case 'read':
+                case 'toogle':
                     if (!data.io || data.io.length==0) {
                         data.cb(ini.dictionary.dict.error);
                         break;
                     }
                     
-                    io=db.ios.get(data.io);
-                    if (!io) {
-                        var a=data.io.split('.');
-                        if (a.length==1) {
-                            var ios=db.ios.select([{address:data.io}]);
-                            if (ios.data.length==1) {
-                                io=ios.data[0];
-                            }
-                        } else {
-                            var dev=a[0];
-                            a.splice(0,1);
-                            var ios=db.ios.select([{device: dev,address:a.join('.')}]);
-                            if (ios.data.length==1) {
-                                io=ios.data[0];
-                            }
-                        }
-                    }
+                    io=getio(data.io);
                     
                     if (!io) {
                         data.cb(ini.dictionary.dict.error);
@@ -160,15 +167,21 @@ var Logic = function(script,logger)
                     }
                     
                     var io2=global.clone(io);
-                    io2.last=io.last||0;
-                    if(data.e) evaluate(io2);
                     
-                    var res=io2.value;
-                    if (io2.unit && io2.unit.length>0) {
-                        res+=' '+io2.unit;
+                    if (type=='read') {
+                        io2.last=io.last||0;
+                        if(data.e) evaluate(io2);
+                        var res=io2.value;
+                        if (io2.unit && io2.unit.length>0) {
+                            res+=' '+io2.unit;
+                        }
+                        data.cb(res);
                     }
-                 
-                    data.cb(res);
+                    
+                    if (type=='toggle') {
+                        script.toggle(io2);
+                        data.cb('OK');
+                    }
                     
                     break;
                 
