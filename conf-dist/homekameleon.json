@@ -5,13 +5,13 @@
     "devices": [
         {
             "id": "VAR",
-            "name": "Local Values",
+            "name": "Zmienna",
             "language": "echo",
             "protocol": "echo"
         },
         {
             "id": "GRP",
-            "name": "Grouping IOS",
+            "name": "Grupa",
             "language": "groups",
             "protocol": "echo"
         },
