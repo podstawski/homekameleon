@@ -30,6 +30,8 @@ module.exports = function(com,ini,logger,callback) {
     var database;
     var deviceId;
     var lastIdx={};
+    var my_lan_ip='192.168.100.1';
+    var my_wan_ip='';
 
         
     var nocolon = function(txt) {
@@ -153,7 +155,7 @@ module.exports = function(com,ini,logger,callback) {
             var msg=sendQueue[i].str;
             
             var res=com.send({
-                data: msg+"\r\n",
+                data: msg,
                 address: sendQueue[i].ip
             });
             
@@ -260,10 +262,10 @@ module.exports = function(com,ini,logger,callback) {
         if (ips.length==1) return {ip:ips[0].address, mac: ips[0].mac};
         
         for (var i=0; i<ips.length; i++) {
-            if (local && ips[i].address=='192.168.100.1' ) {
+            if (local && ips[i].address==my_lan_ip ) {
                 return {ip:ips[i].address, mac: ips[i].mac};
             }
-            if (!local && ips[i].address!='192.168.100.1' ) {
+            if (!local && ips[i].address!=my_lan_ip ) {
                 return {ip:ips[i].address, mac: ips[i].mac};
             }
         }
@@ -302,10 +304,11 @@ module.exports = function(com,ini,logger,callback) {
     };
     
     var initack = function(data) {
-        if (!data.active) return;
-        
+
+        if (!data.active) return;        
         var mac=macaddress(data.ip,data.homekameleon);
                 
+        
         if (data.homekameleon) {
             var ssid='';
             var wifipass='';
@@ -325,7 +328,7 @@ module.exports = function(com,ini,logger,callback) {
         
         com.send({
             address: data.ip,
-            data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip].join(';')+')'+"\r\n"
+            data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip].join(';')+')'
         });
         
         
@@ -347,6 +350,36 @@ module.exports = function(com,ini,logger,callback) {
         var haddr=address2haddr(line[pos_src],line[pos_dev],'i');
         callback('input',{haddr: haddr, value: line[pos_val]},haddr);
     };
+    
+    var checkIp = function() {
+        var ips=com.ips();
+        
+        for (var i=0; i<ips.length; i++) {
+            if (ips[i].address == my_lan_ip) continue;
+            
+            if (ips[i].address!=my_wan_ip) {
+                
+                my_wan_ip=ips[i].address;
+                var mac=macaddress(my_wan_ip,false);
+                
+                var slaves=database.buffer.select([{active: true, homekameleon: false}]);
+                
+                for (var j=0; j<slaves.data.length; j++) {
+                    send({
+                        cmd: 'IP',
+                        dev: slaves.data[j].hwaddr,
+                        dst: slaves.data[j].address,
+                        sub: 0,
+                        val: my_wan_ip,
+                        src: nocolon(mac.mac)
+                    });
+                    
+                }
+                
+            }
+            
+        }
+    }
     
     
     return {
@@ -406,7 +439,7 @@ module.exports = function(com,ini,logger,callback) {
                     if (line[pos_typ]=='A') {
                         var search = search_str(line,false);
                     
-                        var origin={};
+                        var origin=null;
                         for (var i=0;i<sendQueue.length; i++) {
                             if (sendQueue[i].search==search && sendQueue[i].sent>0) {
                                 sendQueue[i].count=attempts;
@@ -415,18 +448,24 @@ module.exports = function(com,ini,logger,callback) {
                             }
                         }
                         
-                        var state=line[pos_val];
-                                
-                        if (typeof(origin.setval)!='undefined') {
-                            state=origin.setval;
+                        if (origin!=null) {   
+                            var state=line[pos_val];
+                            if (typeof(origin.setval)!='undefined') {
+                                state=origin.setval;
+                            }
+                            
+                            var opt={haddr:address2haddr(line[pos_src],line[pos_dev],'o')};
+                            if (state!=null) opt.value=state;
+                          
+                            if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
+                            
                         }
                         
-                        var opt={haddr:address2haddr(line[pos_src],line[pos_dev],'o')};
-                        if (state!=null) opt.value=state;
-                      
-                        if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
-                        
                     } else if (line[pos_typ]=='C') {
+                        
+                        var buffer=database.buffer.get(mac2hwaddr(line[pos_src]));
+                        if (buffer==null || !buffer.active) return;                        
+                        
                         var ack=[];
                         ack[pos_cmd]=line[pos_cmd];
                         ack[pos_src]=line[pos_dst];
@@ -437,12 +476,11 @@ module.exports = function(com,ini,logger,callback) {
                         ack[pos_val]=line[pos_val];
                         ack[pos_crc]=crc(ack);
                         
-                        var buffer=database.buffer.get(mac2hwaddr(line[pos_src]));
-                        if (buffer==null) return;
+
                         
                         com.send({
                             address: buffer.ip,
-                            data: '('+ack.join(';')+')'+"\r\n"
+                            data: '('+ack.join(';')+')'
                         });
                         
                         if (lastIdx[line[pos_src]]==null) lastIdx[line[pos_src]]=-1;
@@ -479,7 +517,9 @@ module.exports = function(com,ini,logger,callback) {
             },1000);
             
             db.buffer.trigger('active',initack);
+            db.buffer.trigger('homekameleon',initack);
             
+            setInterval(checkIp,2000);
         },
         
         'setId': function (id) {

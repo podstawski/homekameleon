@@ -164,6 +164,21 @@ var Web = function(com,ini,logger,callback) {
             }
         });
 
+        websocket.on('register',function(buffer){
+            if (!opt.session.loggedin) return;
+            var wait=0;
+            if (buffer!=null && buffer.hwaddr!=null) {
+                database.buffer.set(buffer);
+                wait=200;
+            }
+            
+            setTimeout(function(){
+                websocket.emit('register',database.buffer.select([{active:true}]));
+            },wait);
+        });
+
+        
+        
         websocket.on('scripts',function(scripts){
             if (!opt.session.loggedin) return;
             var wait=0;

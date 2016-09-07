@@ -10,7 +10,8 @@ form .series {
 
 .iostable svg,
 .scriptstable svg,
-.buffertable svg {
+.buffertable svg,
+.registertable svg {
 	width: 25px;
 	height: 25px;
 	cursor: pointer;
@@ -273,4 +274,12 @@ form .series {
 
 .ios-add button {
 	margin-left: 10px;
+}
+
+.registertable input.name {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    outline: none; 
 }
