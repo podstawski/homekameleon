@@ -154,25 +154,22 @@ form .series {
 }
 
 .add-script {
-	position: relative;
 	float: right;
 	cursor: pointer;
+	margin: 20px 0 20px 20px;
 }
 .add-script svg {
-	width: 50px;
-	height: 50px;
+	width: 16px;
+	height: 16px;
+	color: #fff;
+	margin-bottom: 4px;
+	stroke-width: 3px;
 }
 
-.add-script div {
-	position: absolute;
-	right: 11px;
-	bottom: 10px;
-	color: red;
+.add-script span {
 	font-size: 20px;
 	font-weight: bold;
-	border-radius: 50%;
-	border: solid 2px red;
-	padding: 0 7px;
+
 }
 
 
@@ -273,7 +270,7 @@ form .series {
 }
 
 .ios-add button {
-	margin-left: 10px;
+	margin: 20px 0 20px 10px;
 }
 
 .registertable input.name {
@@ -282,4 +279,8 @@ form .series {
     border: 0;
     padding: 0;
     outline: none; 
+}
+
+.registertable td.name {
+    cursor: text; 
 }

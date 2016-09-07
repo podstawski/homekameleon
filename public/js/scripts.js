@@ -162,7 +162,7 @@ $(document).on('click','#edit-script .modal-body li a.x', function(e){
 });
 
 $(document).on('click','.add-script', function(e){
-    websocket.emit('new-script');
+    websocket.emit('new-script',$('.dataTables_filter input').val());
     $("html, body").animate({ scrollTop: $('.scriptstable').offset().top-160 }, 1000);
 });
 

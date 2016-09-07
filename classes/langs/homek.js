@@ -211,10 +211,11 @@ var Web = function(com,ini,logger,callback) {
             }
         });
         
-        websocket.on('new-script',function(){
+        websocket.on('new-script',function(name){
             if (!opt.session.loggedin) return;
             database.scripts.add({
-                active: true
+                active: true,
+                name: name
             });
             websocket.emit('scripts',database.scripts.select());
         });
@@ -237,14 +238,15 @@ var Web = function(com,ini,logger,callback) {
                 }
                 websocket.emit('ios-device',devices);
             } else {
-                var ioss=database.ios.select([{device:d}]);
+                var ioss=database.ios.select([{device:d.device}]);
                 
                 var ios={
                     active: true,
                     haddr: ini.uuid+'.'+d+'.'+rid(),
-                    device: d,
+                    device: d.device,
                     io: 'o',
-                    address: ioss.data.length+1
+                    address: ioss.data.length+1,
+                    name: d.name
                 };
                 database.ios.add(ios);
                 websocket.emit('ios',database.ios.select());

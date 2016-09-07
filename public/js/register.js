@@ -15,10 +15,7 @@ var registerColumns=[
     {
         title: "Nazwa",
         data: "name",
-        sortable: false,
-        render: function ( data, type, full, meta ) {
-            return '<input value="'+data+'" type="text" class="name" placeholder="tu wpisz nazwę"/>';
-        }
+        className: 'name',
     },
 	
     { title: "Wejścia",data: "inputs", width: "5%"},
@@ -87,6 +84,12 @@ $(document).on('click','.registertable svg',function(e){
 $(document).on('click','.registertable input[type="radio"]',function(e){
     var id=$(this).closest('tr').attr('id');
     websocket.emit('register',{hwaddr: id, homekameleon: $(this).val()=='1'});
+});
+
+$(document).on('click','.registertable td.name', function(e) {
+    var text=$(this).html();
+    if (text.indexOf('<input')==-1) 
+        $(this).html('<input value="'+text+'" type="text" class="name" placeholder="tu wpisz nazwę"/>');
 });
 
 $(document).on('change','.registertable input[type="text"]',function(e){

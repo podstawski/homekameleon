@@ -288,6 +288,6 @@ $('#edit-input .btn-info').click(function(e){
 });
 
 $(document).on('click','.ios-add button', function(){
-    websocket.emit('ios-device',$(this).attr('rel'));
+    websocket.emit('ios-device',{device:$(this).attr('rel'),name:$('.dataTables_filter input').val()});
     $("html, body").animate({ scrollTop: $('.iostable').offset().top-160 }, 1000);    
 });
