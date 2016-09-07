@@ -19,19 +19,25 @@ module.exports = function(com,ini,logger,callback) {
                 database.ios.get(data.related[i],function(rec){
                     if (rec.device!=deviceId) return;
                     
+                    var recur=[];
                     var values=[];
                     for (var i=0;i<rec.related.length;i++) {
                         var rel=database.ios.get(rec.related[i]);
                         
                         if (rel.device==deviceId && parseInt(rel.address) < parseInt(rec.address) ) {
-                            calculateRelated(rec,arrayOfCalled); 
+                            recur.push(rec);
                         } else
                             values.push(rel.value);
                         
                     }
                     rec.value=arrayMath.avg(values);
+                    
                     if(typeof(rec.value)=='number') rec.value=Math.round(100*rec.value)/100;
+                    
                     callback('output',rec);
+                    for (var i=0; i<recur.length; i++) {
+                        calculateRelated(recur[i],arrayOfCalled); 
+                    }
                 });
             }
         }
