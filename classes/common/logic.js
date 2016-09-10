@@ -245,7 +245,7 @@ var Logic = function(script,logger)
                         for (var i=0; i<ios.length; i++){
                             if (ios[i].rec.unit && ios[i].rec.unit.length>0) {
                                 result+=ios[i].rec.name+' '+(Math.round(10*ios[i].rec.value)/10)+' '+ios[i].rec.unit+'. ';
-                            } else {
+                            } else if (ios[i].rec.io=='o'){
                                 result+=ini.dictionary.dict.state_change+': '+ios[i].rec.name+'. ';
                                 script.toggle(ios[i].rec,ctx);
                             }
