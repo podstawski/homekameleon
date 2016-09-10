@@ -235,10 +235,15 @@ var Logic = function(script,logger)
                     
                     if (scr && scr.length>0) {
                         for (var i=0; i<scr.length; i++){
-                            var run=script.run(scr[i].rec.id);
-                            if (run===true || run==null) result+=ini.dictionary.dict.done;
-                            else result+=ini.dictionary.dict.notdone;
-                            result+=': '+scr[i].rec.name+'. ';
+                            if (!data.dont) {
+                                var run=script.run(scr[i].rec.id);
+                                if (run===true || run==null) result+=ini.dictionary.dict.done;
+                                else result+=ini.dictionary.dict.notdone;
+                                result+=': '+scr[i].rec.name+'. ';
+                            } else {
+                                result+='Gdyby nie testowanko, to wykonałabym: ' +scr[i].rec.name+'. ';
+                            }
+
                               
                         }
                     } else if (ios && ios.length>0) {
@@ -247,7 +252,7 @@ var Logic = function(script,logger)
                                 result+=ios[i].rec.name+' '+(Math.round(10*ios[i].rec.value)/10)+' '+ios[i].rec.unit+'. ';
                             } else if (ios[i].rec.io=='o'){
                                 result+=ini.dictionary.dict.state_change+': '+ios[i].rec.name+'. ';
-                                script.toggle(ios[i].rec,ctx);
+                                if (!data.dont) script.toggle(ios[i].rec,ctx);
                             }
                         }
                     }
