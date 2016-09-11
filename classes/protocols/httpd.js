@@ -28,26 +28,32 @@ var Httpd = function(options,logger) {
     var self=this;
     var httpServer,io;
     var httpClients=[];
-    var ips=[];
+    
     var tunnel_pid=0;
     var session={};
     var connected=false;
     var language;
     
     var app = express();
-    var ifaces = os.networkInterfaces();
     
-    Object.keys(ifaces).forEach(function (ifname) {
-      var alias = 0;
-    
-      ifaces[ifname].forEach(function (iface) {
-        if ('IPv4' !== iface.family || iface.internal !== false) {
-          return;
-        }
-        ips.push(iface.address);
+    var getIps=function(){
+        var ips=[];
+        var ifaces = os.networkInterfaces();
+        Object.keys(ifaces).forEach(function (ifname) {
+          var alias = 0;
         
-      });
-    });
+          ifaces[ifname].forEach(function (iface) {
+            if ('IPv4' !== iface.family || iface.internal !== false) {
+              return;
+            }
+            ips.push(iface.address);
+            
+          });
+        });
+        return ips;
+    };
+    
+    
     
     var tunnel = function (userhost,localport,remoteport,script) {
         
@@ -156,7 +162,7 @@ var Httpd = function(options,logger) {
                 
                 
                 httpClients.push({socket:httpSocket,session:session[hash]});
-                httpSocket.emit('web', {ips: ips, port:options.port});       
+                httpSocket.emit('web', {ips: getIps(), port:options.port});       
                 self.emit('connection',{socket:httpSocket,session:session,hash:hash});
                 
                 
