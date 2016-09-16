@@ -161,7 +161,7 @@ setTimeout(cron, 1000*(60-(now%60)));
 if (global.gc) {
 	setInterval(function(){
 		var load=os.loadavg()[0];
-		console.log(load);
-		if (load<0.15) global.gc();
+		//console.log(load);
+		if (load<0.2) global.gc();
 	},5000);
 }
