@@ -1,4 +1,5 @@
 var fs = require('fs');
+var os = require('os');
 var checkactive=require('./classes/common/checkactive');
 
 var Structure = require('./classes/common/structure');
@@ -136,7 +137,7 @@ fs.writeFile(__dirname+'/app.pid',process.pid);
 
 var cron = function() {
     setTimeout(cron,60000);   
-    if (global.gc) global.gc();
+    //if (global.gc) global.gc();
 
     var now=Math.round(Date.now()/1000);
     var min=(now/60)%60;
@@ -157,3 +158,10 @@ var cron = function() {
 var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
+if (global.gc) {
+	setInterval(function(){
+		var load=os.loadavg()[0];
+		console.log(load);
+		if (load<0.15) global.gc();
+	},5000);
+}
