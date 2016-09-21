@@ -162,6 +162,6 @@ if (global.gc) {
 	setInterval(function(){
 		var load=os.loadavg()[0];
 		//console.log(load);
-		if (load<0.2) global.gc();
+		if (load<0.4) global.gc();
 	},5000);
 }
