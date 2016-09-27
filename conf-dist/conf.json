@@ -59,13 +59,14 @@
             "id": "WEB",
             "name": "Web Server",
             "protocol": "httpd",
-            "language": "web",
+            "language": "homek",
             "com":{
-                "port": "8002",
-                "tunnel_port": "8001",
-                "tunnel_host": "homiq@homiq.webkameleon.com"
+                "port": "8000",
+                "xtunnel_port": "9001",
+                "xtunnel_host": "homiq@homiq.webkameleon.com",
+                "xtunnel_script": "/home/homiq/homiq.sh 9001"
             },
-            "active": false
+            "active": true
         },
         {
             "id": "ADM",

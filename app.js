@@ -163,5 +163,5 @@ if (global.gc) {
 		var load=os.loadavg()[0];
 		//console.log(load);
 		if (load<0.4) global.gc();
-	},5000);
+	},10000);
 }
