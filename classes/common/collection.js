@@ -127,35 +127,47 @@ module.exports = function(path) {
 
     };
     
-    var add = function(table,value,cb) {
+    var add = function(table,value,cb,ts) {
         if (value==null || table.length==0) {
             if (typeof(cb)=='function') cb();
             return;
         }
-        var now=Date.now();
-        values[table].push(value);
-
-        if (now-lastsaves[table] >= saves[table]*1000) {
-            
+        
+        if (ts) {
             var sql="INSERT INTO "+name(table)+" VALUES (?,?)";
-            var val=[now,avg(values[table])];
+            var val=[ts,value];
             
             try {
-                db.query(sql,val,cb);
-                lastsaves[table]=now;
-                
-                while (values[table].length>avgs[table]) {
-                    values[table].splice(0,1);
-                }
-                
+                    db.query(sql,val,cb);
             } catch(e) {
-                console.log('ERROR:',e,sql,val,values[table]);
+                console.log('ERROR:',e,sql,val);
             }
             
-        } else {
-            if (typeof(cb)=='function') cb();
+        } else {   
+            var now=Date.now();
+            values[table].push(value);
+    
+            if (now-lastsaves[table] >= saves[table]*1000) {
+                
+                var sql="INSERT INTO "+name(table)+" VALUES (?,?)";
+                var val=[now,avg(values[table])];
+                
+                try {
+                    db.query(sql,val,cb);
+                    lastsaves[table]=now;
+                    
+                    while (values[table].length>avgs[table]) {
+                        values[table].splice(0,1);
+                    }
+                    
+                } catch(e) {
+                    console.log('ERROR:',e,sql,val,values[table]);
+                }
+                
+            } else {
+                if (typeof(cb)=='function') cb();
+            }
         }
-
         vacuum(table);
 
 
@@ -185,8 +197,8 @@ module.exports = function(path) {
     
     
     return {
-        add: function (table,v,cb) {
-            add(table,v,cb);
+        add: function (table,v,cb,ts) {
+            add(table,v,cb,ts);
         },
         init: function (table,avg,save,cb) {
             init(table,avg,save,cb);
