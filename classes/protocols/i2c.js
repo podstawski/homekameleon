@@ -85,7 +85,7 @@ var I2C = function(options,logger) {
                 try {
                     fs.statSync('/dev/i2c-'+bus);
                     var i2c=new mraa.I2c(bus);
-                    for (var i=1; i<255; i++) {
+                    for (var i=1; i<128; i++) {
                         i2c.address(i);
                         var reg0=i2c.readReg(0x00);
                         if (reg0<255) {
