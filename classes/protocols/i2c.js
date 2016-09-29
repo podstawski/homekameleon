@@ -153,7 +153,7 @@ var I2C = function(options,logger) {
                 driver: drivers[options.driver],
                 address: [options.bus,options.address,address],
                 cb: function(value,table,cb) {
-                    self.emit('data',{address:address,value:value});
+                    self.emit('data',{address:address,value:parseFloat(value)});
                     cb();
                 }
             });
