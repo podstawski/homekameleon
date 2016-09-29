@@ -2,6 +2,7 @@
 
 module.exports = function(com,ini,logger,callback) {
     var database,deviceId;
+    var sem=0;
     
     var temperature = function () {
         var temps = database.ios.select([{device: deviceId, active: [true,1,'1']}]);
@@ -9,6 +10,7 @@ module.exports = function(com,ini,logger,callback) {
         
         for (var i=0;i<temps.data.length; i++) {
             com.query(temps.data[i].address);
+            sem++;
         }
     }
     
@@ -39,11 +41,13 @@ module.exports = function(com,ini,logger,callback) {
         },
  
         'set': function(data,delay,ctx) {
-            
+
+		            
         },
         
         'data': function(data,ctx) {
           
+	    sem--;
             var haddr=address2haddr(data.address);
             if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:Math.round(100*data.value)/100},ctx);
         },
