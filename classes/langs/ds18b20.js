@@ -46,9 +46,23 @@ module.exports = function(com,ini,logger,callback) {
                     setTimeout(this._onTimeout,100);
                     return;
                 }
-                console.log(data);
-                com.discovery('ds18b20',function(d){
-                    console.log(d);
+                com.discovery('ds18b20',function(name,d){
+			if(d.drivers.ds2482) {
+				for (var i=0; i<d.drivers.ds2482.length; i++) {
+					var sel=database.ios.select([{device: deviceId, address: d.drivers.ds2482[i]}]);
+					if (sel.recordsTotal==0) {
+						database.ios.add({
+							haddr: deviceId+'-'+d.drivers.ds2482[i],
+							active: true,
+							device: deviceId,
+							address: d.drivers.ds2482[i],
+							io: 't',
+							type: 'T'
+						});
+					}
+				}
+
+			}
                 });
             },0);
 		            

@@ -42,7 +42,7 @@
                 "address": 24,
                 "driver": "ds2482"
             },
-            "active": false
+            "active": true
         },
         {
             "id": "EMU",
