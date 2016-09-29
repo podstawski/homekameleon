@@ -148,9 +148,22 @@ var I2C = function(options,logger) {
         },
         
         query: function(address) {
+            
+            queue.push({
+                driver: drivers[options.driver],
+                address: [options.bus,options.address,address],
+                cb: function(value,table,cb) {
+                    console.log('JEST', value);
+                    self.emit('data',{address:address,value:value});
+                    cb();
+                }
+            });
+            
+            /*
             drivers[options.driver].get([options.bus,options.address,address],function(value){
                 self.emit('data',{address:address,value:value});
             });
+            */
         },
         
         disconnect: function() {
