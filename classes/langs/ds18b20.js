@@ -41,13 +41,23 @@ module.exports = function(com,ini,logger,callback) {
         },
  
         'set': function(data,delay,ctx) {
-
+            setTimeout(function(){
+                if (sem>0) {
+                    setTimeout(this._onTimeout,100);
+                    return;
+                }
+                console.log(data);
+                com.discovery('ds18b20',function(d){
+                    console.log(d);
+                });
+            },0);
 		            
+            
         },
         
         'data': function(data,ctx) {
           
-	    sem--;
+            sem--;
             var haddr=address2haddr(data.address);
             if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:Math.round(100*data.value)/100},ctx);
         },
