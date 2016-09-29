@@ -3,6 +3,7 @@
 module.exports = function(com,ini,logger,callback) {
     var database,deviceId;
     var sem=0;
+    var avgs={};
     
     var temperature = function () {
         var temps = database.ios.select([{device: deviceId, active: [true,1,'1']}]);
@@ -32,7 +33,13 @@ module.exports = function(com,ini,logger,callback) {
         }
         return null;
         
-    }
+    };
+
+    var avg = function (a) {
+        var total=0;
+        for (var i=0; i< a.length; i++) total+=parseFloat(a[i]);
+        return round(total/a.length);
+    };
         
     return {
         'initstate': function (db) {
@@ -70,10 +77,13 @@ module.exports = function(com,ini,logger,callback) {
         },
         
         'data': function(data,ctx) {
-          
             sem--;
             var haddr=address2haddr(data.address);
-            if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:Math.round(100*data.value)/100},ctx);
+            if (!avgs[haddr]) avgs[haddr]=[];
+            avgs[haddr].push(data.value);
+            while (avgs[haddr].length>10) avgs[haddr].splice(0,1);
+            
+            if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:Math.round(100*avg(avgs[haddr]))/100},ctx);
         },
         
         'cancel': function(ctx,delay) {
