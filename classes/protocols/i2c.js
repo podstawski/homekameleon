@@ -153,7 +153,6 @@ var I2C = function(options,logger) {
                 driver: drivers[options.driver],
                 address: [options.bus,options.address,address],
                 cb: function(value,table,cb) {
-                    console.log('JEST', value);
                     self.emit('data',{address:address,value:value});
                     cb();
                 }
