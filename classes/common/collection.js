@@ -62,7 +62,7 @@ module.exports = function(path) {
     
     var avg = function (a) {
         var total=0;
-        for (var i=0; i< a.length; i++) total+=a[i];
+        for (var i=0; i< a.length; i++) total+=parseFloat(a[i]);
         return round(total/a.length);
     };
     
@@ -138,7 +138,7 @@ module.exports = function(path) {
             var val=[ts,value];
             
             try {
-                    db.query(sql,val,cb);
+                db.query(sql,val,cb);
             } catch(e) {
                 console.log('ERROR:',e,sql,val);
             }
