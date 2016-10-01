@@ -36,9 +36,10 @@ module.exports = function(com,ini,logger,callback) {
     };
 
     var avg = function (a) {
+        if (a.length==0) return 0;
         var total=0;
         for (var i=0; i< a.length; i++) total+=parseFloat(a[i]);
-        return round(total/a.length);
+        return Math.round(100*total/a.length)/100;
     };
         
     return {
