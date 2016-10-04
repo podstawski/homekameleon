@@ -164,6 +164,9 @@ $(document).on('click','.iostable svg',function(e){
         
         if (ios[id]) {
             var me=$(this);
+            var d={};
+            d[id]=true;
+            websocket.emit('ios',d);
             me.fadeOut(500,function(){
                 me.fadeIn(500);
             });
