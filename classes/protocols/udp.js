@@ -101,6 +101,21 @@ var Udp = function(options,logger) {
         });  
     });
     
+    var checkIP = function(ip) {
+        return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ip);
+    };
+    
+    var intToIP = function (iIP) {
+        iIP=parseInt(iIP);
+        
+        var part1 = iIP & 255;
+        var part2 = ((iIP >> 8) & 255);
+        var part3 = ((iIP >> 16) & 255);
+        var part4 = ((iIP >> 24) & 255);
+    
+        return part1 + "." + part2 + "." + part3 + "." + part4;
+    }
+    
     return {
         connect: function() {
             connect();
@@ -115,8 +130,14 @@ var Udp = function(options,logger) {
         },
         
         send: function(str) {
+            if (!checkIP(str.address)) {
+                str.address=intToIP(str.address);
+                if (!checkIP(str.address)) return;
+            }
+        
             sendQueue.push(str);
             send();
+		
             return connected;
         },
         

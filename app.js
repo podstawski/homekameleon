@@ -88,7 +88,7 @@ process.on('SIGHUP',function () {
             });
             
             devices[id].on('connection',function(id,data) {
-                devices[id].initstate(data,structure.db);
+                devices[id].initstate(data,structure.db,collection);
             });
             
             script.on(id,function(id,data,delay,ctx) {
@@ -163,6 +163,7 @@ setTimeout(cron, 1000*(60-(now%60)));
 
 /*
 if (global.gc) {
+	console.log('Global GC');
 	setInterval(function(){
 		var load=os.loadavg()[0];
 		//console.log(load);
