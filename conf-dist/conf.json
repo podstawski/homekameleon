@@ -61,13 +61,23 @@
             "protocol": "httpd",
             "language": "homek",
             "com":{
-                "port": "8000",
+                "port": "80",
                 "xtunnel_port": "9001",
                 "xtunnel_host": "homiq@homiq.webkameleon.com",
                 "xtunnel_script": "/home/homiq/homiq.sh 9001"
             },
             "active": true
         },
+	{
+		"id": "WHK",
+		"name": "Homekameleon Promienko",
+		"protocol": "udp",                               
+            	"language": "hk",                                
+            	"com":{                                          
+                	"port": "26712",                             
+                	"latency": 0                                 
+            	}  
+	},
         {
             "id": "ADM",
             "name": "Admin Web Server",
