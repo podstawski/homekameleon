@@ -88,7 +88,7 @@ process.on('SIGHUP',function () {
             });
             
             devices[id].on('connection',function(id,data) {
-                devices[id].initstate(data,structure.db);
+                devices[id].initstate(data,structure.db,collection);
             });
             
             script.on(id,function(id,data,delay,ctx) {
