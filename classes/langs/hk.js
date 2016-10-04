@@ -330,8 +330,8 @@ module.exports = function(com,ini,logger,callback) {
                 
         
         if (data.homekameleon) {
-            var ssid='';
-            var wifipass='';
+            var ssid='homekameleon';
+            var wifipass='homekameleon';
         } else {
             var ssid=settings().ssid;
             var wifipass=settings().wifipass;

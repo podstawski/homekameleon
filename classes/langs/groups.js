@@ -126,8 +126,10 @@ module.exports = function(com,ini,logger,callback) {
                         database.ios.set(rec);
                     });
                 }
+                
                 for (var i=0; i<removed.length; i++) {
                     database.ios.get(removed[i],function(rec){
+                        if (rec==null) return;
                         var related=rec.related||[];
                         var i=related.indexOf(me);
                         if (i>=0) {
