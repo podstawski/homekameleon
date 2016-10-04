@@ -159,6 +159,7 @@ var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
 if (global.gc) {
+	console.log('Global GC');
 	setInterval(function(){
 		var load=os.loadavg()[0];
 		//console.log(load);
