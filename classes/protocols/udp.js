@@ -106,7 +106,7 @@ var Udp = function(options,logger) {
     };
     
     var intToIP = function (iIP) {
-        iIP=parseIntr(iIP);
+        iIP=parseInt(iIP);
         
         var part1 = iIP & 255;
         var part2 = ((iIP >> 8) & 255);
