@@ -115,8 +115,10 @@ var Udp = function(options,logger) {
         },
         
         send: function(str) {
+		if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(str.address)){
             sendQueue.push(str);
             send();
+		}
             return connected;
         },
         
