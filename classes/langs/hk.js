@@ -1,5 +1,5 @@
 var crypto = require('crypto');
-var crc8 = require('crc');
+//var crc8 = require('crc');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var settings = require('../common/hsettings');
@@ -51,10 +51,30 @@ module.exports = function(com,ini,logger,callback) {
         return ret;
     }
     
-    var crc = function (cmd) {
+    var crc8 = function (data) {
+        var crc = 0x00;
         
+        for (var i=0; i<data.length; i++) {
+            var extract = data.charCodeAt(i);
+            
+            for (var tempI = 8; tempI; tempI--) {
+                var sum = (crc ^ extract) & 0x01;
+                crc >>= 1;
+                if (sum!=0) {
+                    crc ^= 0x8C;
+                }
+                extract >>= 1;
+            }            
+            
+        }
+        
+        return crc;
+}
+    
+    
+    var crc = function (cmd) {
         var str=cmd[pos_cmd]+cmd[pos_src]+cmd[pos_dev]+cmd[pos_dst]+cmd[pos_typ]+cmd[pos_val]+cmd[pos_idx]+settings().hash;
-        var res=crc8.crc8(str);
+        var res=crc8(str);
         return res;
     }
     
