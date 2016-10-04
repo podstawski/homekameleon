@@ -113,7 +113,7 @@ var Udp = function(options,logger) {
         var part3 = ((iIP >> 16) & 255);
         var part4 = ((iIP >> 24) & 255);
     
-        return part4 + "." + part3 + "." + part2 + "." + part1;
+        return part1 + "." + part2 + "." + part3 + "." + part4;
     }
     
     return {
@@ -131,9 +131,8 @@ var Udp = function(options,logger) {
         
         send: function(str) {
             if (!checkIP(str.address)) {
-                
-                console.log(intToIP(str.address));
-                return;
+                str.address=intToIP(str.address);
+                if (!checkIP(str.address)) return;
             }
         
             sendQueue.push(str);
