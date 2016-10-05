@@ -128,7 +128,8 @@ module.exports = function(path) {
     };
     
     var add = function(table,value,cb,ts) {
-        if (value==null || table.length==0) {
+       
+        if (value==null || table.length==0 || isNaN(value)) {
             if (typeof(cb)=='function') cb();
             return;
         }

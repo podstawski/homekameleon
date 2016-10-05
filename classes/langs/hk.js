@@ -365,6 +365,7 @@ module.exports = function(com,ini,logger,callback) {
             ip: line[pos_val]
         });
     };
+        
     
     self.lineIn_I = function(line,buffer) {
         var haddr=address2haddr(line[pos_src],line[pos_dev],'i');
@@ -444,8 +445,7 @@ module.exports = function(com,ini,logger,callback) {
                             address: address,
                             ip: data.address,
                             inputs: line[pos_inputs],
-                            outputs: line[pos_outputs],
-                            homekameleon: homekameleon
+                            outputs: line[pos_outputs]
                         });
                         if (b.active) initack(b);
                     }
@@ -455,6 +455,7 @@ module.exports = function(com,ini,logger,callback) {
                     
                     if (crc2!=line[pos_crc]) {
                         console.log('Dupa, a nie CRC');
+                        return;
                     }
                     
                     if (line[pos_typ]=='A') {
