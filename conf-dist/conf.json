@@ -186,7 +186,12 @@
             "model": "../../admin/models/json",
             "file":"users.json",
             "index": ["username"]
-        }
+        },
+	"buffer": {                                      
+            "model": "../../admin/models/json",
+            "file":"buffer.json",
+            "index": ["hwaddr"]
+        }   
         
     }
     

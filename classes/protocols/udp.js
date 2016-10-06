@@ -28,6 +28,10 @@ var Udp = function(options,logger) {
                 delete(ifaces[k]);
                 continue;
             }
+		if (ifaces[k][0].netmask && ifaces[k][0].netmask=='255.0.0.0') {
+	                delete(ifaces[k]);
+			continue;
+		}
             
        
             for (var i=0; i<ifaces[k].length; i++) {

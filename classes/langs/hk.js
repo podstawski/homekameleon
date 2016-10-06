@@ -375,7 +375,6 @@ module.exports = function(com,ini,logger,callback) {
     var checkIp = function() {
         var ips=com.ips();
 
-        
         for (var i=0; i<ips.length; i++) {
             if (ips[i].address == my_lan_ip) continue;
             
