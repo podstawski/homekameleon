@@ -10,8 +10,11 @@ module.exports = function(com,ini,logger,callback) {
 
         
         for (var i=0;i<temps.data.length; i++) {
-            com.query(temps.data[i].address);
-            sem++;
+            setTimeout(function(){
+                com.query(temps.data[i].address);
+                sem++;
+            },i*1500);
+            
         }
     }
     
