@@ -4,16 +4,17 @@ module.exports = function(com,ini,logger,callback) {
     var database,deviceId;
     var sem=0;
     var avgs={};
+    var tInterval=90000;
     
     var temperature = function () {
         var temps = database.ios.select([{device: deviceId, active: [true,1,'1']}]);
 
         
         for (var i=0;i<temps.data.length; i++) {
-            setTimeout(function(){
-                com.query(temps.data[i].address);
+            setTimeout(function(a){
+                com.query(temps.data[a].address);
                 sem++;
-            },i*1500);
+            },i*(tInterval/temps.data.length),i);
             
         }
     }
@@ -48,7 +49,7 @@ module.exports = function(com,ini,logger,callback) {
     return {
         'initstate': function (db) {
             database=db;
-            setInterval(temperature,1000*60);
+            setInterval(temperature,tInterval);
         },
  
         'set': function(data,delay,ctx) {
@@ -84,7 +85,7 @@ module.exports = function(com,ini,logger,callback) {
             sem--;
             var haddr=address2haddr(data.address);
             if (!avgs[haddr]) avgs[haddr]=[];
-            if (data.value!=null && parseFloat(data.value)<85 )
+            if (data.value!=null && !isNaN(data.value) && parseFloat(data.value)<85 )
                 avgs[haddr].push(parseFloat(data.value));
             while (avgs[haddr].length>10) avgs[haddr].splice(0,1);
             

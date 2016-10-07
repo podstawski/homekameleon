@@ -153,16 +153,12 @@ var I2C = function(options,logger) {
                 driver: drivers[options.driver],
                 address: [options.bus,options.address,address],
                 cb: function(value,table,cb) {
-                    self.emit('data',{address:address,value:parseFloat(value)});
+			logger.log(table+': '+value,'frame');
+                    self.emit('data',{address:address,value:value==null?null:parseFloat(value)});
                     cb();
                 }
             });
             
-            /*
-            drivers[options.driver].get([options.bus,options.address,address],function(value){
-                self.emit('data',{address:address,value:value});
-            });
-            */
         },
         
         disconnect: function() {
