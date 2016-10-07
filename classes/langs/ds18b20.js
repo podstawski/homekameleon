@@ -81,10 +81,12 @@ module.exports = function(com,ini,logger,callback) {
             sem--;
             var haddr=address2haddr(data.address);
             if (!avgs[haddr]) avgs[haddr]=[];
-            avgs[haddr].push(data.value);
+            if (data.value!=null && parseFloat(data.value)<85 )
+                avgs[haddr].push(parseFloat(data.value));
             while (avgs[haddr].length>10) avgs[haddr].splice(0,1);
             
-            if (data.value!=null && haddr!=null) callback('input',{haddr:haddr,value:Math.round(100*avg(avgs[haddr]))/100},ctx);
+            if (data.value!=null && haddr!=null)
+                callback('input',{haddr:haddr,value:Math.round(100*avg(avgs[haddr]))/100},ctx);
         },
         
         'cancel': function(ctx,delay) {
