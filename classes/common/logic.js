@@ -100,13 +100,21 @@ var Logic = function(script,logger)
         if (t_hysteresis==null) t_hysteresis=0;
         else {
             t_hysteresis=parseFloat(t_hysteresis);
-            if (isNaN(t_hysteresis))t_hysteresis=0;
+            if (isNaN(t_hysteresis)) t_hysteresis=0;
         }
         
         var value=parseFloat(data.value);
         
-        if (value >= t_expected + t_hysteresis ) data.temp_change=-1;
-        if (value <= t_expected - t_hysteresis ) data.temp_change=1;
+        if (t_hysteresis>=0) {
+            if (value >= t_expected + t_hysteresis ) data.temp_change=-1;
+            if (value <= t_expected - t_hysteresis ) data.temp_change=1;        
+        } else {
+            var prev=parseFloat(io.value);
+            
+            if (value >= t_expected + t_hysteresis && value>prev) data.temp_change=-1;
+            if (value <= t_expected - t_hysteresis && value<prev)  data.temp_change=1;  
+        }
+
         
     };
     
