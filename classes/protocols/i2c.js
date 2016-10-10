@@ -152,6 +152,7 @@ var I2C = function(options,logger) {
             queue.push({
                 driver: drivers[options.driver],
                 address: [options.bus,options.address,address],
+		table: address,
                 cb: function(value,table,cb) {
 			logger.log(table+': '+value,'frame');
                     self.emit('data',{address:address,value:value==null?null:parseFloat(value)});
