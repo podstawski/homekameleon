@@ -121,9 +121,12 @@ var Web = function(com,ini,logger,callback) {
                 var counter=collections.data.length;
                 for (var i=0; i<collections.data.length; i++) {
                     var store=collections.data[i].store.split('/')[0];
+                    var temp_change=collections.data[i].temp_change;
+                    if (temp_change==null) temp_change=0;
                     ret[store]={
                         name: collections.data[i].name,
-                        value: collections.data[i].value
+                        value: collections.data[i].value,
+                        temp: temp_change
                     };
                     if (collections.data[i].unit) {
                         ret[store].value+=' '+collections.data[i].unit;
