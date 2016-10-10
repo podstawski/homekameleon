@@ -129,7 +129,7 @@ var Web = function(com,ini,logger,callback) {
                         ret[store].value+=' '+collections.data[i].unit;
                     }
                     
-                    collection.get(store,Date.now()-24*3600*1000,Date.now(),function(res){
+                    collection.get(store,Date.now()-6*3600*1000,Date.now(),function(res){
                         ret[res.table].data = res.data;
                         counter--;
                     });
