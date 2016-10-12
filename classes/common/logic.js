@@ -317,10 +317,10 @@ var Logic = function(script,logger)
             
                 if (!collection.inited(store[0])) {
                     collection.init(store[0],10,store[1]||60,function(){
-                        collection.add(store[0],io.value);
+                        collection.add(store[0],io.value,null,null,io.temp_change==null?null:io.temp_change);
                     });
                 } else {
-                    collection.add(store[0],io.value);
+                    collection.add(store[0],io.value,null,null,io.temp_change==null?null:io.temp_change);
                 }
             }
             

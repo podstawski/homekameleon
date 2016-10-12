@@ -48,6 +48,19 @@ module.exports = function(path) {
                             if (typeof(cb)=='function') cb(table,round(parseFloat(data[0][0])));
                         } else if (typeof(cb)=='function') cb(table,null);
                     });
+                    
+                    var sql="PRAGMA table_info("+name(table)+")";
+                    db.query(sql,function(data) {
+                        var value2=false;
+                        for (var i=0; i<data.length; i++) {
+                            if (data[i][1]=='value2') value2=true;
+                        }
+                        if (!value2) {
+                            var sql="ALTER TABLE "+name(table)+" ADD value2 REAL";
+                            db.query(sql);
+                        }
+                    });
+                    
                 }
                 else if (typeof(cb)=='function') cb(table,null);
             });
@@ -127,16 +140,19 @@ module.exports = function(path) {
 
     };
     
-    var add = function(table,value,cb,ts) {
+    var add = function(table,value,cb,ts,value2) {
        
         if (value==null || table.length==0 || isNaN(value)) {
             if (typeof(cb)=='function') cb();
             return;
         }
         
+        if (value2==null || isNaN(value2)) value2=null;
+        
+        
         if (ts) {
-            var sql="INSERT INTO "+name(table)+" VALUES (?,?)";
-            var val=[ts,value];
+            var sql="INSERT INTO "+name(table)+" VALUES (?,?,?)";
+            var val=[ts,value,value2];
             
             try {
                 db.query(sql,val,cb);
@@ -150,8 +166,8 @@ module.exports = function(path) {
     
             if (now-lastsaves[table] >= saves[table]*1000) {
                 
-                var sql="INSERT INTO "+name(table)+" VALUES (?,?)";
-                var val=[now,avg(values[table])];
+                var sql="INSERT INTO "+name(table)+" VALUES (?,?,?)";
+                var val=[now,avg(values[table]),value2];
                 
                 try {
                     db.query(sql,val,cb);
@@ -198,8 +214,8 @@ module.exports = function(path) {
     
     
     return {
-        add: function (table,v,cb,ts) {
-            add(table,v,cb,ts);
+        add: function (table,v,cb,ts,value2) {
+            add(table,v,cb,ts,value2);
         },
         init: function (table,avg,save,cb) {
             init(table,avg,save,cb);
