@@ -18,6 +18,8 @@ var pos_crc=7;
 
 var pos_inputs = 2;
 var pos_outputs = 3;
+var pos_temps = 4;
+
 
 
 module.exports = function(com,ini,logger,callback) {
@@ -346,6 +348,10 @@ module.exports = function(com,ini,logger,callback) {
             restore_ios(data.address,'o',i+1);
         }
         
+        for (var i=0; i<parseInt(data.temps); i++) {
+            restore_ios(data.address,'t',i+1);
+        }
+        
         com.send({
             address: data.ip,
             data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip].join(';')+')'
@@ -371,6 +377,33 @@ module.exports = function(com,ini,logger,callback) {
         var haddr=address2haddr(line[pos_src],line[pos_dev],'i');
         callback('input',{haddr: haddr, value: line[pos_val]},haddr);
     };
+    
+    var temperature = function () {
+        var temps = database.ios.select([{device: deviceId, io: 't', active: [true,1,'1']}]);
+
+        
+        
+        for (var i=0;i<temps.data.length; i++) {
+            var io=database.ios.get(temps.data[i].haddr);
+            if (io==null) continue;
+            var adr=io.address.split('.');
+            var device=database.buffer.get(mac2hwaddr(adr[0]));
+            if (device==null) device=database.buffer.get(adr[0]);
+            if (device==null) continue;
+            var mac=macaddress(device.ip,device.homekameleon);
+         
+            send({
+                cmd: 'T',
+                dev: device.hwaddr,
+                dst: device.address,
+                sub: adr[2],
+                val: 0,
+                src: nocolon(mac.mac),
+                ctx: null
+            });   
+        }
+    }
+    
     
     var checkIp = function() {
         var ips=com.ips();
@@ -425,7 +458,7 @@ module.exports = function(com,ini,logger,callback) {
                     var address=nocolon(line[pos_src]);
                     var src=mac2hwaddr(address);
                     
-                    var homekameleon = line[pos_inputs]>0;
+                    var homekameleon = false;
                     
                     var b=database.buffer.get(src);
                     if (b==null) {
@@ -435,6 +468,7 @@ module.exports = function(com,ini,logger,callback) {
                             ip: data.address,
                             inputs: line[pos_inputs],
                             outputs: line[pos_outputs],
+                            temps: line[pos_temps],
                             active: false,
                             homekameleon: homekameleon
                         });
@@ -444,7 +478,8 @@ module.exports = function(com,ini,logger,callback) {
                             address: address,
                             ip: data.address,
                             inputs: line[pos_inputs],
-                            outputs: line[pos_outputs]
+                            outputs: line[pos_outputs],
+                            temps: line[pos_temps],
                         });
                         if (b.active) initack(b);
                     }
@@ -453,7 +488,7 @@ module.exports = function(com,ini,logger,callback) {
                     var crc2=crc(line);
                     
                     if (crc2!=line[pos_crc]) {
-                        console.log('Dupa, a nie CRC');
+                        logger.log('Wrong CRC','error');
                         return;
                     }
                     
@@ -477,6 +512,7 @@ module.exports = function(com,ini,logger,callback) {
                             
                             var opt={haddr:address2haddr(line[pos_src],line[pos_dev],'o')};
                             if (state!=null) opt.value=state;
+                            
                           
                             if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
                             
