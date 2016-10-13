@@ -242,7 +242,7 @@ var Web = function(com,ini,logger,callback) {
                 
                 var ios={
                     active: true,
-                    haddr: ini.uuid+'.'+d+'.'+rid(),
+                    haddr: ini.uuid+'.'+d.device+'.'+rid(),
                     device: d.device,
                     io: 'o',
                     address: ioss.data.length+1,
