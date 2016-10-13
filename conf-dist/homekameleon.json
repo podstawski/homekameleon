@@ -2,6 +2,7 @@
     "uuid": "HK",
     "commandpass": "trelemorele",
     "lang": "pl",
+    "collection": "colct.db",
     "devices": [
         {
             "id": "VAR",

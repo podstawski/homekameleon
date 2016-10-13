@@ -511,7 +511,8 @@ module.exports = function(com,ini,logger,callback) {
                                 state=origin.setval;
                             }
                             
-                            var opt={haddr:address2haddr(line[pos_src],line[pos_dev],'o')};
+                            var opt={haddr:address2haddr(line[pos_src],line[pos_dev],line[pos_cmd]=='T'?'t':'o')};
+
                             if (state!=null) {
                                 opt.value=state;
                                 if (line[pos_cmd]=='T') {
