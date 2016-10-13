@@ -58,6 +58,7 @@ module.exports = function(path) {
                         if (!value2) {
                             var sql="ALTER TABLE "+name(table)+" ADD value2 REAL";
                             db.query(sql);
+				console.log(sql);
                         }
                     });
                     
