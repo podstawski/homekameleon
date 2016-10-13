@@ -38,38 +38,45 @@ module.exports = function(path) {
         var fields=" (date INTEGER PRIMARY KEY NOT NULL,value REAL NOT NULL)";
         var sql="CREATE TABLE IF NOT EXISTS "+name(table)+fields;
         db.query(sql,function(){
-            var sql="SELECT max(date) FROM "+name(table);
+            
+            var sql="PRAGMA table_info("+name(table)+")";
             db.query(sql,function(data) {
-                if (data[0]!=null && data[0][0]!=null && data[0][0].length>0) {
-                    lastsaves[table]=parseInt(data[0][0]);
-                    var sql="SELECT value FROM "+name(table)+" WHERE date="+lastsaves[table];
+                var value2=false;
+                for (var i=0; i<data.length; i++) {
+                    if (data[i][1]=='value2') value2=true;
+                }
+                
+                var sql=value2 ? "CREATE TABLE IF NOT EXISTS "+name(table)+'_daily'+fields :"ALTER TABLE "+name(table)+" ADD value2 REAL";
+                
+                db.query(sql,function(){
+                    
+                    var sql="SELECT max(date) FROM "+name(table);
                     db.query(sql,function(data) {
                         if (data[0]!=null && data[0][0]!=null && data[0][0].length>0) {
-                            if (typeof(cb)=='function') cb(table,round(parseFloat(data[0][0])));
-                        } else if (typeof(cb)=='function') cb(table,null);
+                            lastsaves[table]=parseInt(data[0][0]);
+                            var sql="SELECT value FROM "+name(table)+" WHERE date="+lastsaves[table];
+                            db.query(sql,function(data) {
+                                if (data[0]!=null && data[0][0]!=null && data[0][0].length>0) {
+                                    if (typeof(cb)=='function') cb(table,round(parseFloat(data[0][0])));
+                                } else if (typeof(cb)=='function') cb(table,null);
+                            });
+                            
+        
+                            
+                        }
+                        else if (typeof(cb)=='function') cb(table,null);
                     });
                     
-                    var sql="PRAGMA table_info("+name(table)+")";
-                    db.query(sql,function(data) {
-                        var value2=false;
-                        for (var i=0; i<data.length; i++) {
-                            if (data[i][1]=='value2') value2=true;
-                        }
-                        if (!value2) {
-                            var sql="ALTER TABLE "+name(table)+" ADD value2 REAL";
-                            db.query(sql);
-				console.log(sql);
-                        }
-                    });
                     
-                }
-                else if (typeof(cb)=='function') cb(table,null);
-            });
+                });     
+            });            
+            
+            
         });
-        var sql="CREATE TABLE IF NOT EXISTS "+name(table)+'_daily'+fields;
-        db.query(sql,function(){
+        
+        setTimeout(function(){
             vacuum(table);
-        });
+        },2000);
         
         
     };
