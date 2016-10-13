@@ -2,6 +2,7 @@ var url = require('url');
 var fs = require('fs');
 var crypto = require('crypto');
 var exec = require('child_process').exec;
+var request = require('request');
 var settings = require('../common/hsettings');
 
 
@@ -52,6 +53,21 @@ var Web = function(com,ini,logger,callback) {
 	}
 
 	wifiscan();
+
+    var flash = function(ip,file,cb) {
+	var url='http://'+ip+'firmware';
+	var req = request.post(url, function (err, resp, body) {
+  if (err) {
+    console.log('Error!');
+  } else {
+    console.log('URL: ' + body);
+  }
+});	
+
+	var form = req.form();
+        form.append('file', fs.createReadStream(file));
+    }
+
     
     com.on('initstate',function(opt,db) {
         database=db;
