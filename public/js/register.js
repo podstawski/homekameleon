@@ -91,6 +91,7 @@ $(document).on('click','.registertable svg.trash',function(e){
 $(document).on('click','.registertable svg.upload',function(e){
     var id=$(this).closest('tr').attr('id');
     websocket.emit('flash',{hwaddr: id});
+    $(this).fadeOut(500);
 });
 
 
