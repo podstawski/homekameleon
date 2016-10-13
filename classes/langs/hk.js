@@ -511,8 +511,14 @@ module.exports = function(com,ini,logger,callback) {
                             }
                             
                             var opt={haddr:address2haddr(line[pos_src],line[pos_dev],'o')};
-                            if (state!=null) opt.value=state;
-                            
+                            if (state!=null) {
+                                opt.value=state;
+                                if (line[pos_cmd]=='T') {
+                                    opt.value=parseFloat(state)/100;
+                                }
+                            }
+                          
+                        
                           
                             if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
                             
@@ -558,6 +564,7 @@ module.exports = function(com,ini,logger,callback) {
         },
         'initstate': function (db) {
             database=db;
+            setInterval(temperature,60000);
         },
         
         'dbready': function(db) {
