@@ -8,13 +8,15 @@
             "id": "VAR",
             "name": "Zmienna",
             "language": "echo",
-            "protocol": "echo"
+            "protocol": "echo",
+            "useradd": true
         },
         {
             "id": "GRP",
             "name": "Grupa",
             "language": "groups",
-            "protocol": "echo"
+            "protocol": "echo",
+            "useradd": true
         },
         {
             "id": "WEB",
