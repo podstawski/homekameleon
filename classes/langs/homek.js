@@ -55,10 +55,10 @@ var Web = function(com,ini,logger,callback) {
 	wifiscan();
 
     var flash = function(ip,file,cb) {
-	var url='http://'+ip+'firmware';
+	var url='http://admin:'+settings().hash+'@'+ip+'firmware';
 	var req = request.post(url, function (err, resp, body) {
   if (err) {
-    console.log('Error!');
+    console.log('Error!',url);
   } else {
     console.log('URL: ' + body);
   }
