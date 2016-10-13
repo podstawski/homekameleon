@@ -7,6 +7,8 @@ var settings = require('../common/hsettings');
 
 
 var root_path=__dirname+'/../../public';
+var flash_path=__dirname+'/../../flash';
+var flash_file=flash_path+'/hk.bin';
 
 var Web = function(com,ini,logger,callback) {
     var database;
@@ -55,19 +57,18 @@ var Web = function(com,ini,logger,callback) {
 	wifiscan();
 
     var flash = function(ip,file,cb) {
-	var url='http://admin:'+settings().hash+'@'+ip+'firmware';
-	var req = request.post(url, function (err, resp, body) {
-  if (err) {
-    console.log('Error!',url);
-  } else {
-    console.log('URL: ' + body);
-  }
-});	
+        var url='http://admin:'+settings().hash+'@'+ip+'/firmware';
+        var req = request.post(url, function (err, resp, body) {
+            if (err) {
+                console.log('Error =',err,url);
+            } else {
+                console.log('URL: ' + body);
+            }
+        });	
 
-	var form = req.form();
+        var form = req.form();
         form.append('file', fs.createReadStream(file));
-    }
-
+    };
     
     com.on('initstate',function(opt,db) {
         database=db;
@@ -179,6 +180,37 @@ var Web = function(com,ini,logger,callback) {
                 },wait);
             }
         });
+        
+        var emitRegister = function (wait) {
+            var flash=fs.statSync(flash_file);
+            var flash_file_mtime=new Date(flash.mtime).getTime();
+            
+            
+            setTimeout(function(){
+                var buffer=database.buffer.select([{active:true}]);
+                for (var i=0;i<buffer.data.length; i++) {
+                    if (!buffer.data[i].flash || buffer.data[i].flash<flash_file_mtime) {
+                        buffer.data[i].needFlash = true;
+                    } else {
+                        buffer.data[i].needFlash = false;
+                    }
+                    
+                }
+                websocket.emit('register',buffer);
+            },wait);
+
+        };
+        
+        websocket.on('flash',function(buffer){
+            if (!opt.session.loggedin) return;
+            if (buffer==null || buffer.hwaddr==null) return;
+            var b=database.buffer.set(buffer);
+            if (b!=null) {
+                flash(b.ip,flash_file,function(){
+                });
+            }
+            
+        });
 
         websocket.on('register',function(buffer){
             if (!opt.session.loggedin) return;
@@ -187,10 +219,8 @@ var Web = function(com,ini,logger,callback) {
                 database.buffer.set(buffer);
                 wait=200;
             }
-            
-            setTimeout(function(){
-                websocket.emit('register',database.buffer.select([{active:true}]));
-            },wait);
+
+            emitRegister(wait);            
         });
 
         

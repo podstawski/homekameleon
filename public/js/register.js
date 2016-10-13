@@ -18,8 +18,9 @@ var registerColumns=[
         className: 'name',
     },
 	
-    { title: "Wejścia",data: "inputs", width: "5%"},
-    { title: "Wyjścia",data: "outputs", width: "5%"},
+    { title: "We",data: "inputs", width: "5%"},
+    { title: "Wy",data: "outputs", width: "5%"},
+    { title: "Te",data: "temps", width: "5%"},
     {
 		title: 'WiFi',
 		data: "homekameleon",
@@ -33,11 +34,17 @@ var registerColumns=[
 		}
 	},
     {
-		title: 'Wyrejestruj',
+		title: 'Opcje',
 		orderable: false,
 		data: null,
 		width: "10%",
-		defaultContent: '<svg class="glyph stroked trash"><use xlink:href="#stroked-trash"/></svg>'
+        render: function ( data, type, full, meta ) {
+            var flash='';
+            
+            if (full.needFlash) flash='<svg class="glyph stroked upload"><use xlink:href="#stroked-upload"/></svg>';
+            return flash+'<svg class="glyph stroked trash"><use xlink:href="#stroked-trash"/></svg>';
+        }
+
 	}
 ];
 
@@ -75,11 +82,17 @@ websocket.on('register',function(register){
 });
 
 
-$(document).on('click','.registertable svg',function(e){
+$(document).on('click','.registertable svg.trash',function(e){
     var id=$(this).closest('tr').attr('id');
     websocket.emit('register',{hwaddr: id, active: false});
 
 });
+
+$(document).on('click','.registertable svg.upload',function(e){
+    var id=$(this).closest('tr').attr('id');
+    websocket.emit('flash',{hwaddr: id});
+});
+
 
 $(document).on('click','.registertable input[type="radio"]',function(e){
     var id=$(this).closest('tr').attr('id');
