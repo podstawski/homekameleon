@@ -18,13 +18,13 @@ var iosColumns=[
 		title: 'Stan',
 		data: "value",
 		sortable: false,
-		width: "7%",		
+		width: "10%",		
 		render: function ( data, type, full, meta ) {
             if (data==1 || data==0) {
                 var cl=data==1?' on':'';
                 return '<svg class="glyph stroked flag'+cl+'"><use xlink:href="#stroked-flag"/></svg>';
             } else {
-                return data;  
+                return data+' '+(full.unit?full.unit:'');  
             }
             
 		}
