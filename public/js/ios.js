@@ -20,8 +20,13 @@ var iosColumns=[
 		sortable: false,
 		width: "7%",		
 		render: function ( data, type, full, meta ) {
-            var cl=data==1?' on':'';
-			return '<svg class="glyph stroked flag'+cl+'"><use xlink:href="#stroked-flag"/></svg>';
+            if (data==1 || data==0) {
+                var cl=data==1?' on':'';
+                return '<svg class="glyph stroked flag'+cl+'"><use xlink:href="#stroked-flag"/></svg>';
+            } else {
+                return data;  
+            }
+            
 		}
 	},
     {
