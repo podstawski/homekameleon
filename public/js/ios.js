@@ -147,7 +147,7 @@ $(document).on('click','.iostable svg',function(e){
                 drawIOSelects('#edit-input .modal-body .related',iosDataArray,data.related||[]);
                 
                 drawConditions('#edit-input .modal-body .container-fluid .item');
-                io_input_toggle();
+                setTimeout(io_input_toggle,500);
                 $('#edit-input select.value:not([value=""])').each(function(){
                     $(this).val($(this).attr('value'));
                 });

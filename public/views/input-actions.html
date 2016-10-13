@@ -98,7 +98,7 @@
    <div class="col-md-2">
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon translate">Nofrost</span>
+                <span class="input-group-addon translate">Bez lodu</span>
                 <input type="number" id="t_nofrost" [if:t_nofrost]value="[t_nofrost]"[endif:t_nofrost] name="t_nofrost"
                        class="form-control temp" step="0.1" placeholder="℃" title="℃">
             </div>
@@ -108,23 +108,32 @@
    <div class="col-md-2">
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon translate">Cool</span>
+                <span class="input-group-addon translate">Chłodzenie</span>
                 <input type="number" id="t_cool" [if:t_cool]value="[t_cool]"[endif:t_cool] name="t_cool"
                        class="form-control temp" step="0.1" placeholder="℃" title="℃">
             </div>
         </div>
     </div> 
 
-   <div class="col-md-3">
+   <div class="col-md-2">
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon translate">Hysteresis</span>
+                <span class="input-group-addon translate">Histereza</span>
                 <input type="number" id="t_hysteresis" [if:t_hysteresis]value="[t_hysteresis]"[endif:t_hysteresis] name="t_hysteresis"
                        class="form-control temp" step="0.1" placeholder="℃" title="Hysteresis ℃">
             </div>
         </div>
     </div> 
 
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Zapisz</span>
+                <input type="text" id="store" [if:store]value="[store]"[endif:store] name="store"
+                       class="form-control translate" placeholder="nazwa[/sek]">
+            </div>
+        </div>
+    </div>
 
 </div>
 

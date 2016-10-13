@@ -313,7 +313,8 @@ module.exports = function(com,ini,logger,callback) {
                 address: nocolon(address)+'.'+inputoroutput+'.'+subaddr,
                 io: inputoroutput,
                 value: 0,
-                active: true
+                active: true,
+                unit: inputoroutput=='t'?'°C':''
             });
         } else {
            
