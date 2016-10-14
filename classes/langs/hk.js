@@ -440,6 +440,21 @@ module.exports = function(com,ini,logger,callback) {
         
         'set': function(data,delay,ctx) {
             
+            if (ctx=='firmware') {
+                var mac=macaddress(data.ip,data.homekameleon);
+                send({
+                    cmd: 'U',
+                    dev: data.hwaddr,
+                    dst: data.address,
+                    sub: 0,
+                    val: data.httpport,
+                    src: nocolon(mac.mac),
+                    ctx: ctx
+                },delay);
+                
+                return;
+            }
+            
             if (typeof(data.value)=='undefined') data.value=toggle(data);
             
             return hset(data,delay,ctx);

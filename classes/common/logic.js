@@ -153,12 +153,17 @@ var Logic = function(script,logger)
         },
         
         action: function(device,type,data,ctx) {
+            var original_device=data.device||'';
             data.device=device;
             var io=db.ios.get(data);
             var io_cp=global.clone(io);
             
             
             switch (type) {
+                
+                case 'firmware':
+                    script.firmware(original_device,data);
+                    break;
                 
                 case 'read':
                 case 'toggle':

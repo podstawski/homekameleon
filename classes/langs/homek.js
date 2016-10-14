@@ -55,9 +55,6 @@ var Web = function(com,ini,logger,callback) {
 
 	wifiscan();
 
-        
-    };
-
     com.on('initstate',function(opt,db) {
         database=db;
         websocket=opt.socket;
@@ -192,11 +189,10 @@ var Web = function(com,ini,logger,callback) {
         websocket.on('flash',function(buffer){
             if (!opt.session.loggedin) return;
             if (buffer==null || buffer.hwaddr==null) return;
-            var b=database.buffer.set(buffer);
+            var b=global.clone(database.buffer.set(buffer));
             if (b!=null) {
-		b.httpport=com.options().port;
-		callback('firmware',b);
-                });
+                b.httpport=com.options().port;
+                callback('firmware',b);
             }
             
         });
@@ -328,7 +324,6 @@ var Web = function(com,ini,logger,callback) {
                     response.write('OK,'+request.headers.host);
                     response.end();            
                     break;
-
                 default:
                     //response.writeHead(404);
                     response.write("opps this doesn't exist - 404");

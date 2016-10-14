@@ -284,6 +284,10 @@ var Script=function(logger) {
         
         finder: function() {
             return levenshtein;
+        },
+        
+        firmware: function(device,module) {
+            self.emit(device,device,module,0,'firmware');
         }
     }
     
