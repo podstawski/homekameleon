@@ -57,17 +57,25 @@ var Web = function(com,ini,logger,callback) {
 	wifiscan();
 
     var flash = function(ip,file,cb) {
-        var url='http://admin:'+settings().hash+'@'+ip+'/firmware';
-        var req = request.post(url, function (err, resp, body) {
+        var url='http://'+ip+'/firmware';
+
+	var auth= "Basic "+new Buffer("admin:" + settings().hash).toString("base64");
+
+        var req = request.post({
+		url: url,
+		headers : {
+			"Authorization" : auth
+		}
+	}, function (err, resp, body) {
             if (err) {
                 console.log('Error =',err,url);
             } else {
-                console.log('URL: ' + body);
+                console.log(url,auth,resp,':',body);
             }
         });	
 
         var form = req.form();
-        form.append('file', fs.createReadStream(file));
+        form.append('update', fs.createReadStream(file));
     };
     
     com.on('initstate',function(opt,db) {
