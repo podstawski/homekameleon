@@ -17,7 +17,7 @@ var registerColumns=[
         data: "name",
         className: 'name',
     },
-	
+	{ title: "IP",data: "ip"},
     { title: "We",data: "inputs", width: "5%"},
     { title: "Wy",data: "outputs", width: "5%"},
     { title: "Te",data: "temps", width: "5%"},
