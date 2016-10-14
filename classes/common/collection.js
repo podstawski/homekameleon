@@ -36,7 +36,8 @@ module.exports = function(path) {
         lastvacuums[table]=0;
         
         var fields=" (date INTEGER PRIMARY KEY NOT NULL,value REAL NOT NULL)";
-        var sql="CREATE TABLE IF NOT EXISTS "+name(table)+fields;
+        var fields2=" (date INTEGER PRIMARY KEY NOT NULL,value REAL NOT NULL, value2 REAL)";
+        var sql="CREATE TABLE IF NOT EXISTS "+name(table)+fields2;
         db.query(sql,function(){
             
             var sql="PRAGMA table_info("+name(table)+")";
