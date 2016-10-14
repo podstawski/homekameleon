@@ -485,7 +485,7 @@ module.exports = function(com,ini,logger,callback) {
                             outputs: line[pos_outputs],
                             temps: line[pos_temps],
                             active: false,
-				device: deviceId,
+                            device: deviceId,
                             homekameleon: homekameleon
                         });
                     } else {
@@ -496,7 +496,7 @@ module.exports = function(com,ini,logger,callback) {
                             inputs: line[pos_inputs],
                             outputs: line[pos_outputs],
                             temps: line[pos_temps],
-				device: deviceId
+                            device: deviceId
                         });
                         if (b.active) initack(b);
                     }
@@ -527,23 +527,23 @@ module.exports = function(com,ini,logger,callback) {
                                 state=origin.setval;
                             }
 
-				if (line[pos_cmd]=='F') {
-					database.buffer.set({hwaddr:mac2hwaddr(line[pos_src]), flash: Date.now()}); 
-				} else {
+                            if (line[pos_cmd]=='F') {
+                                database.buffer.set({hwaddr:mac2hwaddr(line[pos_src]), flash: Date.now()}); 
+                            } else {
                             
-                            var opt={haddr:address2haddr(line[pos_src],line[pos_dev],line[pos_cmd]=='T'?'t':'o')};
-
-                            if (state!=null) {
-                                opt.value=state;
-                                if (line[pos_cmd]=='T') {
-                                    opt.value=parseFloat(state)/100;
+                                var opt={haddr:address2haddr(line[pos_src],line[pos_dev],line[pos_cmd]=='T'?'t':'o')};
+    
+                                if (state!=null) {
+                                    opt.value=state;
+                                    if (line[pos_cmd]=='T') {
+                                        opt.value=parseFloat(state)/100;
+                                    }
                                 }
-                            }
                           
                         
                           
-                            if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
-				}
+                                if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
+                            }
                             
                         }
                         
@@ -561,9 +561,7 @@ module.exports = function(com,ini,logger,callback) {
                         ack[pos_typ]='A';
                         ack[pos_val]=line[pos_val];
                         ack[pos_crc]=crc(ack);
-                        
-
-                        
+ 
                         com.send({
                             address: buffer.ip,
                             data: '('+ack.join(';')+')'
