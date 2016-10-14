@@ -2,12 +2,11 @@ var url = require('url');
 var fs = require('fs');
 var crypto = require('crypto');
 var exec = require('child_process').exec;
-var request = require('request');
 var settings = require('../common/hsettings');
 
 
 var root_path=__dirname+'/../../public';
-var flash_path=__dirname+'/../../flash';
+var flash_path=root_path+'/firmware';
 var flash_file=flash_path+'/hk.bin';
 
 var Web = function(com,ini,logger,callback) {
@@ -56,36 +55,9 @@ var Web = function(com,ini,logger,callback) {
 
 	wifiscan();
 
-    var flash = function(ip,file,cb) {
-        var url='http://'+ip+'/firmware';
-        var auth= "Basic "+new Buffer("admin:" + settings().hash).toString("base64");
-        var url_fake='http://127.0.0.1:'+com.options().port+'/firmware';
-        
-        var formData = {
-            update: fs.createReadStream(file)
-        };
-        
-        request.post({
-                url: url_fake,
-                formData: formData
-            },function (err, resp, body){
-                
-                console.log(resp.toJSON());
-                
-                var req = request.post({
-                        url: url,
-                        formData: formData
-                    }, function (err, resp, body){
-                        
-                        console.log(resp.toJSON());
-                        
-                });
-                req.headers['Authorization'] = auth;
-                //req.headers['Content-Length']='271772';
-        });
         
     };
-    
+
     com.on('initstate',function(opt,db) {
         database=db;
         websocket=opt.socket;
@@ -222,7 +194,8 @@ var Web = function(com,ini,logger,callback) {
             if (buffer==null || buffer.hwaddr==null) return;
             var b=database.buffer.set(buffer);
             if (b!=null) {
-                flash(b.ip,flash_file,function(){
+		b.httpport=com.options().port;
+		callback('firmware',b);
                 });
             }
             
@@ -355,6 +328,7 @@ var Web = function(com,ini,logger,callback) {
                     response.write('OK,'+request.headers.host);
                     response.end();            
                     break;
+
                 default:
                     //response.writeHead(404);
                     response.write("opps this doesn't exist - 404");

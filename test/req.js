@@ -7,6 +7,9 @@ var fs = require('fs');
 	var formData = {
 		update: fs.createReadStream(file)
 	};
+	var formData2 = {
+		update: fs.createReadStream(file)
+	};
 
 	url = {
 		url: url,
@@ -18,30 +21,30 @@ var fs = require('fs');
 	url.formData=formData;
 
 
-	request.post('http://127.0.0.1/alamakota' , function (err, resp, body) {
+	//request.post({url:'http://www.gammanet.pl/alamakota',formData:formData2} , function (err, resp2, body) {
 
-		console.log(err,resp); 
+	//	console.log(err,resp2.request.headers['content-length']); 
 
 	        var req = request.post(url , function (err, resp, body) {
         	    if (err) {
                 	console.log('Error =',err,url);
             	    } else {
-                	console.log(resp.toJSON());
+                	//console.log(resp.toJSON(),body);
+			console.log(body);
             	    }
         	});	
+
+		console.log(req.formData);
 		
-		//req.headers['Content-Length']='271772';
+		req.headers['Content-Length']='271751';
 
-                console.log(req.headers);
-                console.log(req.formData);
 
-	});
-
+	//});
     };
     
 
 
 
-//flash('192.168.0.11','../flash/hk.bin','firmware/');
-flash('192.168.0.44','../flash/hk.bin','firmware');
+flash('192.168.0.11','../flash/hk.bin','firmware/');
+//flash('192.168.0.44','../flash/hk.bin','firmware');
     
