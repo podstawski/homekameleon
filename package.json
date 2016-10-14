@@ -19,7 +19,6 @@
     "express": "",
     "socket.io": "",
     "ical": "",
-    "request": "",
     "dblite": ""
   }
 }
