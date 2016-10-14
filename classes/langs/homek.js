@@ -58,24 +58,32 @@ var Web = function(com,ini,logger,callback) {
 
     var flash = function(ip,file,cb) {
         var url='http://'+ip+'/firmware';
-
-	var auth= "Basic "+new Buffer("admin:" + settings().hash).toString("base64");
-
-        var req = request.post({
-		url: url,
-		headers : {
-			"Authorization" : auth
-		}
-	}, function (err, resp, body) {
-            if (err) {
-                console.log('Error =',err,url);
-            } else {
-                console.log(url,auth,resp,':',body);
-            }
-        });	
-
-        var form = req.form();
-        form.append('update', fs.createReadStream(file));
+        var auth= "Basic "+new Buffer("admin:" + settings().hash).toString("base64");
+        var url_fake='http://127.0.0.1:'+com.options().port+'/firmware';
+        
+        var formData = {
+            update: fs.createReadStream(file)
+        };
+        
+        request.post({
+                url: url_fake,
+                formData: formData
+            },function (err, resp, body){
+                
+                console.log(resp.toJSON());
+                
+                var req = request.post({
+                        url: url,
+                        formData: formData
+                    }, function (err, resp, body){
+                        
+                        console.log(resp.toJSON());
+                        
+                });
+                req.headers['Authorization'] = auth;
+                //req.headers['Content-Length']='271772';
+        });
+        
     };
     
     com.on('initstate',function(opt,db) {

@@ -200,6 +200,10 @@ var Httpd = function(options,logger) {
         notify: function(type,data) {
             self.emit('notify',httpClients,type,data);
     
+        },
+        
+        options: function() {
+            return options;
         }
         
 
