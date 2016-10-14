@@ -1,5 +1,4 @@
 var crypto = require('crypto');
-//var crc8 = require('crc');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var settings = require('../common/hsettings');
