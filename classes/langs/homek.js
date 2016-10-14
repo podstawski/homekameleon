@@ -165,11 +165,9 @@ var Web = function(com,ini,logger,callback) {
                 },wait);
             }
         });
-        
         var emitRegister = function (wait) {
             var flash=fs.statSync(flash_file);
             var flash_file_mtime=new Date(flash.mtime).getTime();
-            
             
             setTimeout(function(){
                 var buffer=database.buffer.select([{active:true}]);
