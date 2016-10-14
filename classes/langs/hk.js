@@ -443,7 +443,7 @@ module.exports = function(com,ini,logger,callback) {
             if (ctx=='firmware') {
                 var mac=macaddress(data.ip,data.homekameleon);
                 send({
-                    cmd: 'U',
+                    cmd: 'F',
                     dev: data.hwaddr,
                     dst: data.address,
                     sub: 0,
@@ -485,6 +485,7 @@ module.exports = function(com,ini,logger,callback) {
                             outputs: line[pos_outputs],
                             temps: line[pos_temps],
                             active: false,
+				device: deviceId,
                             homekameleon: homekameleon
                         });
                     } else {
@@ -495,6 +496,7 @@ module.exports = function(com,ini,logger,callback) {
                             inputs: line[pos_inputs],
                             outputs: line[pos_outputs],
                             temps: line[pos_temps],
+				device: deviceId
                         });
                         if (b.active) initack(b);
                     }
@@ -524,6 +526,10 @@ module.exports = function(com,ini,logger,callback) {
                             if (typeof(origin.setval)!='undefined') {
                                 state=origin.setval;
                             }
+
+				if (line[pos_cmd]=='F') {
+					database.buffer.set({hwaddr:mac2hwaddr(line[pos_src]), flash: Date.now()}); 
+				} else {
                             
                             var opt={haddr:address2haddr(line[pos_src],line[pos_dev],line[pos_cmd]=='T'?'t':'o')};
 
@@ -537,6 +543,7 @@ module.exports = function(com,ini,logger,callback) {
                         
                           
                             if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
+				}
                             
                         }
                         
