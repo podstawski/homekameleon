@@ -18,19 +18,22 @@
             "id": "VAR",
             "name": "Local Values",
             "language": "echo",
-            "protocol": "echo"
+            "protocol": "echo",
+            "useradd": true
         },
         {
             "id": "GRP",
             "name": "Grouping IOS",
             "language": "groups",
-            "protocol": "echo"
+            "protocol": "echo",
+            "useradd": true
         },
         {
             "id": "SHL",
             "name": "Shell exec",
             "language": "echo",
-            "protocol": "shell"
+            "protocol": "shell",
+            "useradd": true
         },
         {
             "id": "TEM",
