@@ -282,6 +282,32 @@ var Web = function(com,ini,logger,callback) {
             }
         });       
         
+        websocket.on('collections',function(){
+            var collections=database.ios.select([{store:['!=','']}]);
+            
+            var ret={};
+            for (var i=0; i<collections.data.length; i++) {
+                var store=collections.data[i].store.split('/')[0];
+                var temp_change=collections.data[i].temp_change;
+                if (temp_change==null) temp_change=0;
+           
+                ret[store]={
+                    name: collections.data[i].name,
+                    value: collections.data[i].value,
+                    code: store,
+                    temp: temp_change
+                };
+                if (collections.data[i].unit) {
+                    ret[store].value+=' '+collections.data[i].unit;
+                }
+            }
+            
+            websocket.emit('collections',ret);
+        
+        });
+
+        
+        
         
     });
 

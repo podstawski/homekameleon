@@ -284,3 +284,12 @@ form .series {
 .registertable td.name {
     cursor: text; 
 }
+
+.large {
+	font-size: 1.4em;
+}
+
+.text-muted {
+	line-height: 1.1em;
+	font-size: 13px;
+}

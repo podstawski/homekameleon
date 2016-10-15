@@ -16,3 +16,5 @@ websocket.once('ping2',function(stdout,stderr){
     }
    
 });
+
+websocket.emit('collections');
