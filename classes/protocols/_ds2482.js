@@ -87,8 +87,10 @@ try {
                                             wire.readData(9,function(e,d){
                                                 if (e) return error(token,e,cb);
                                                 else {
+                                                    
                                                     var t=tempFromBuffer(d);
-                                                    if (t==85) cb(null);
+                                                    console.log(d,DS2482.checkCRC(d),t);
+                                                    if (t>=85 || t<-100) cb(null);
                                                     else cb(t);
                                                 }
                                             });
