@@ -65,7 +65,7 @@ var chartsClass = function() {
             
             
         } else if (delta<=25) {
-            var step=3600*1000;
+            var step=1200*1000;
             if (d.getMinutes()%60!=0) {
                 start+=60*(60-d.getMinutes()%60);
             }
