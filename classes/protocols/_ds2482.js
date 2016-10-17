@@ -19,9 +19,8 @@ try {
             if (SignBit) { // negative
                 TReading = (TReading ^ 0xffff) + 1; // 2's comp
             }
-            Tc_100 = (6 * TReading) + TReading / 4;    // multiply by (100 * 0.0625) or 6.25
-            Tc=Tc_100 / 100;
-            return Tc;
+            return TReading/16;
+            
         }
     
         

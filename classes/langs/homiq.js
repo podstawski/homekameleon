@@ -21,6 +21,7 @@ module.exports = function(com,ini,logger,callback) {
     var sendTimers=[];
     var database;
     var deviceId;
+    var lastIdx={};
 
     
     var crc = function (cmd) {
@@ -350,6 +351,10 @@ module.exports = function(com,ini,logger,callback) {
                     var cmd='<;'+ack.join(';')+';>';
                     logger.log('Sending ack: '+cmd,'frame');
                     com.send(cmd+"\r\n");
+                    
+                    if (lastIdx[line[pos_src]]==null) lastIdx[line[pos_src]]=-1;
+                    if (lastIdx[line[pos_src]] == line[pos_pkt]) continue;
+                    lastIdx[line[pos_src]]=line[pos_pkt];
                     
                     linein(line);    
                 }
