@@ -73,6 +73,37 @@ var drawBlock = function(data,tables_dest,charts) {
 
 };
 
+var findElementUnderHelper = function(helper,elements) {
+    var helper_height=80;
+    var helper_width=helper.width();
+    
+    for (var i=0;i<elements.length;i++) {
+        if (
+            helper.offset().top+helper_height > elements[i].offset().top
+            && helper.offset().top < elements[i].offset().top+elements[i].height()
+            && helper.offset().left+helper_width > elements[i].offset().left
+            && helper.offset().left < elements[i].offset().left+elements[i].width()
+        ) {
+            return elements[i];
+        }
+    }
+    
+    return null;
+}
+
+
+var requestChart = function(chart_array,from,period,id,update_from) {
+    websocket.emit('chart',chart_array,from,period,id);
+    if (update_from) {
+        if (from==null) from=Date.now();
+        if (typeof(from)=='object') from=new Date(from).getTime();
+        update_from.attr('from',from);
+        update_from.find('.navi a span').removeClass('vis');        
+    }
+    
+    //console.log(from,new Date(from),typeof(from));
+};
+
 
 
 
@@ -97,9 +128,214 @@ websocket.once('collections',function(tables){
                 tables[id].panel='red';
             }
             drawBlock(tables[id],tables_dest,charts_dest.length>0);
-            if (charts_dest.length>0) requestChart([id]);
+            if (charts_dest.length>0) setTimeout(function(charts){
+                requestChart(charts);
+            },500,[id])
         }    
     }
     
 });
 
+
+
+
+var drawChart=function(data,id,newid,title,from) {
+    var month='MMM';
+    var day='ddd, D MMM';
+    var hour='H:mm';
+    var title_s='';
+    
+    switch (data.period) {
+        case 'm12':
+            var unit='month';
+            var title_f='YYYY';
+            break;
+        case 'm1':
+            var unit='day';
+            var title_f='MMMM YYYY';
+            day='D';
+            break;
+        case 'd7':
+            var unit='day';
+            var title_f='MMM YYYY, ww. ';
+            title_s=$.translate('week');
+            break;
+        
+        default: 
+            var unit='hour';
+            var title_f='D MMM YYYY';
+            break;
+    }
+    
+    $('#'+id).attr('ids',newid).attr('to',data.to).attr('period',data.period);
+    
+    if (!$('#'+id).attr('from')) {
+        $('#'+id).attr('from',data.from);
+    }
+    
+    if (title!=null) $('#'+id+' .panel-heading .title').text(title);
+    var title_date='<span>'+moment(new Date(from)).format(title_f)+title_s+'</span>';
+    //$('#'+id+' .panel-heading .view').html($.translate('view-'+data.period)+title_date);
+    
+    
+    
+    var anydata=false;
+    for (var i=0;i<data.datasets.length;i++) {
+        for (var j=0; j<data.datasets[i].data.length; j++) {
+            if (data.datasets[i].data[j]==null) {
+                data.datasets[i].data[j]=undefined;
+            }
+            if (data.datasets[i].data[j]!=undefined) {
+                anydata=true;
+            }
+        }
+    }
+    
+    $('.chart-shadow').fadeOut(400,function(){
+        $(this).remove();
+    });
+    
+    var holder = document.getElementById(id+"-chart");
+    var ctx = holder.getContext("2d");
+    
+    var chrt = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        unit: unit,
+                        displayFormats: {
+                            month: month,
+                            hour: hour,
+                            day: day
+                            
+                        }
+                    },
+                    ticks: {
+                        fontSize: 10
+                    }
+                }]}
+        }
+    });
+    
+    
+    for (var i=0; i<chrt.config.data.labels.length; i++ ) {
+        var col='rgba(255,255,0,0.5)';
+        if(chrt.config.data.datasets[0].data2[i]>0) col='rgba(255,0,0,0.5)';
+        if(chrt.config.data.datasets[0].data2[i]<0) col='rgba(0,0,255,0.5)';
+        chrt.config.data.datasets[0].pointBackgroundColor.push(col);
+    }
+    chrt.update();
+    
+    var par=$(holder).closest('.chart-container');
+    
+    if (!anydata) {
+        add_shadow(par,$.translate('No data'));
+    }
+    
+    holder.onclick = function (e) {
+        if (e.clientX-$(holder).offset().left < parseInt(chrt.chartArea.left)) return;
+        var prc=(e.clientX-$(holder).offset().left - parseInt(chrt.chartArea.left))/chrt.chartArea.right;
+        
+        var multiplier=1;
+        if (data.period=='m12') multiplier=1.05;
+        
+        var idx=Math.round(multiplier*prc*data.labels.length);
+        if (idx>=data.labels.length) idx=data.labels.length-1;
+        
+        var selected_date=data.labels[idx];
+        var pass=false;
+        
+        //console.log(selected_date,prc,data);
+        for(var i=0; i<data.datasets.length; i++) {
+            if (data.datasets[i].data[idx]) pass=true;
+        }
+        if (!pass) return;
+        
+        var period=null;
+        if (data.period=='d7') period='d1';
+        if (data.period=='m1') period='d7';
+        if (data.period=='m12') period='m1';
+        
+        if (period==null) return;
+        
+        
+        add_shadow(par);      
+        requestChart(par.attr('ids').split('|'),selected_date,period,par.attr('id'),par);
+    
+        
+    };
+    return chrt;
+
+};
+
+websocket.on('chart',function(rawdata,tables,from,to,period,id){
+    
+    if (id!=null) {
+        $('#'+id+' .today').removeClass('active');
+        $('#'+id+' .period').removeClass('active');
+        $('#'+id+' .period[rel="'+period+'"]').addClass('active');
+        if (period=='d1') {
+            var delta=(Date.now()-from)/(1000*3600);
+            if (delta>0 && delta<24) $('#'+id+' .today').addClass('active');
+        }    
+    }
+
+    
+    
+    var data=chartsObj.prepareData(rawdata,tables,from,to);
+    data.period=period;
+    
+    
+    var title='';
+    var newid='';
+    for (var i=0; i< data.datasets.length; i++) {
+        if (title.length>0) {
+            title+=' + ';
+            newid+='|';
+        }
+        title+=data.datasets[i].label;
+        newid+=data.datasets[i].id;
+    }
+    
+    
+    if (id==null) {
+        id=newid.replace(/[,|]/g,'_');
+        var x=600,y=220;
+        if ($('body').width()<900) y=350;
+        
+        
+        $.smekta_file('views/chart.html',{title:title, id:id, x:x, y:y},null,function(html){
+            $('.charts').append(html);         
+            charts[id]=drawChart(data,id,newid,null,from);
+            //$('#'+id+' .translate').translate();
+        
+            if (typeof(chartReady)=='function') chartReady(id);
+        });
+    } else {
+        charts[id].destroy();
+        charts[id]=drawChart(data,id,newid,title,from);
+    }
+});
+
+var add_shadow = function(container,txt) {
+    
+    var shadow=$('<div class="chart-shadow">'+(txt?'<span>'+txt+'</span>':'')+'</did>').appendTo('body');
+    var panel=container.find('.panel-body');
+    var navi=container.find('.navi a span');
+    shadow.css({
+        width: panel.width(),
+        height: panel.height()+15,
+        top: panel.offset().top+'px',
+        left: (panel.offset().left + 15)+'px'
+    }).fadeIn(500)
+    if (txt) {
+        navi.addClass('vis');
+        shadow.click(function(){
+            $(this).fadeOut(500);
+        });
+    }
+}

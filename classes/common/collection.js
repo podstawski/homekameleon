@@ -203,7 +203,7 @@ module.exports = function(path) {
     var get = function(table,from,to,cb) {
         
         var table_suffix = to-from > 10*24*3600*1000 ? '_daily' : '';
-        var sql="SELECT date,value FROM "+name(table)+table_suffix+" WHERE date>=? AND date<=?";
+        var sql="SELECT * FROM "+name(table)+table_suffix+" WHERE date>=? AND date<=?";
         db.query(sql,[from,to],function(data){
         
             var result={table:table,
@@ -215,7 +215,7 @@ module.exports = function(path) {
                 data:[]
             };
             for (var i=0; i<data.length; i++) {
-                result.data.push({date: parseInt(data[i][0]), value: round(parseFloat(data[i][1]))});
+                result.data.push({date: parseInt(data[i][0]), value: round(parseFloat(data[i][1])), value2: round(parseFloat(data[i][2]))});
             }
             cb(result);
         });

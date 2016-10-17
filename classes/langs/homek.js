@@ -4,6 +4,7 @@ var crypto = require('crypto');
 var exec = require('child_process').exec;
 var settings = require('../common/hsettings');
 
+var Charts = require('../../public/js/charts-calc');
 
 var root_path=__dirname+'/../../public';
 var flash_path=root_path+'/firmware';
@@ -12,8 +13,11 @@ var flash_file=flash_path+'/hk.bin';
 var Web = function(com,ini,logger,callback) {
     var database;
     var websocket;
+    var collection;
     
     var wifi={last:0};
+    var charts = new Charts();
+
     
     com.staticContent(root_path);
     
@@ -59,7 +63,7 @@ var Web = function(com,ini,logger,callback) {
         database=db;
         websocket=opt.socket;
         
-    
+        var collection_tables={};
         wifiscan();
         websocket.emit('lang',ini.lang,opt.session.loggedin==null?false:opt.session.loggedin);
         
@@ -285,25 +289,133 @@ var Web = function(com,ini,logger,callback) {
         websocket.on('collections',function(){
             var collections=database.ios.select([{store:['!=','']}]);
             
-            var ret={};
             for (var i=0; i<collections.data.length; i++) {
                 var store=collections.data[i].store.split('/')[0];
                 var temp_change=collections.data[i].temp_change;
                 if (temp_change==null) temp_change=0;
            
-                ret[store]={
+                var color='rgba(0,0,0,0)';
+                switch (temp_change) {
+                    case -1:
+                        color='rgba(0,0,255,0.2)';
+                        break;
+                    case 1:
+                        color='rgba(255,0,0,0.2)';
+                        break;
+                    case 0:
+                        color='rgba(255,255,0,0.2)';
+                        break;
+
+                    
+                }
+                collection_tables[store]={
                     name: collections.data[i].name,
                     value: collections.data[i].value,
-                    code: store,
-                    temp: temp_change
+                    id: store,
+                    temp: temp_change,
+                    color: color
                 };
+  
+              
                 if (collections.data[i].unit) {
-                    ret[store].value+=' '+collections.data[i].unit;
+                    collection_tables[store].value+=' '+collections.data[i].unit;
                 }
             }
             
-            websocket.emit('collections',ret);
+            websocket.emit('collections',collection_tables);
         
+        });
+
+        
+        websocket.on('chart',function(tabs,from,period,id){
+            var now=Date.now();    
+            if (from==null) from=now;
+            else from=charts.strtotime(from);
+            
+            var d=new Date(from);
+    
+            from-=d.getMilliseconds();
+            
+            
+            switch (period) {
+                case 'm12':
+                    from = new Date(d.getFullYear(), 0, 1).getTime();
+                    break;
+                case 'm1':
+                    var day=d.getDate()-1;
+                    from-=1000*60*60*24*day - 4000*1000; // 4000 - summertime
+                    break;                            
+                
+                
+                case 'd7':
+                    var day=d.getDay()-1;
+                    if (day==-1) day=6;
+                    from-=1000*60*60*24*day - 4000*1000; // 4000 - summertime
+                    break;
+                
+                default: //24h
+                    period='d1';  
+
+            }
+            
+            d=new Date(from);
+            from-=d.getMilliseconds();
+            from-=1000*d.getSeconds();
+            from-=1000*60*d.getMinutes();                    
+            from-=1000*60*60*d.getHours();
+            
+            d=new Date(from);
+
+
+            switch (period) {
+                case 'm12':
+                    to=new Date(new Date(from).getFullYear()+1, 0, 1).getTime()-1000;
+                    break;
+                case 'm1':
+                    to=from+32*24*3600*1000;
+                    d=new Date(to);
+                    to-=1000*60*60*24*(d.getDate()-1);
+                    d=new Date(to);
+                    to-=d.getMilliseconds();
+                    to-=1000*d.getSeconds();
+                    to-=1000*60*d.getMinutes();                    
+                    to-=1000*60*60*d.getHours();
+                    
+                    to-=1000; //one second before = yesterday
+                    break;
+                
+                case 'd7':
+                    to=from+7*24*3600*1000 - 3600*1000;
+                    break;
+                
+                default: //24h
+                    to=from+24*3600*1000;
+            }
+
+            
+            var chartdata={};
+            for (var i=0;i<tabs.length; i++) {
+                collection.get(tabs[i],from,to,function(data){
+                    chartdata[data.table]=data;
+                    
+                    for(var k in collection_tables[data.table])
+                        chartdata[data.table][k] = collection_tables[data.table][k];
+                    
+                });
+            }
+            
+            setTimeout(function(){
+                var c=0;
+                for(x in chartdata) c++;
+                if (c<tabs.length) {
+                    setTimeout(this._onTimeout,100);
+                    return;
+                }
+
+                websocket.emit('chart',chartdata,collection_tables,from,to,period,id);
+                
+            },100);
+            
         });
 
         
@@ -356,6 +468,10 @@ var Web = function(com,ini,logger,callback) {
             }        
     
         
+        },
+        
+        initstate: function(db,_collection) {
+            collection=_collection;
         },
         
         'data': function(data) {
