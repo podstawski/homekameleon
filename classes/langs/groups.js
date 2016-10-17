@@ -23,7 +23,7 @@ module.exports = function(com,ini,logger,callback) {
                     var values=[];
                     for (var i=0;i<rec.related.length;i++) {
                         var rel=database.ios.get(rec.related[i]);
-                        
+                       	if (rel==null) continue; 
                         if (rel.device==deviceId && parseInt(rel.address) < parseInt(rec.address) ) {
                             recur.push(rec);
                         } else
