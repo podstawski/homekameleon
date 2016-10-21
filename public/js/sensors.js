@@ -5,11 +5,12 @@ var drawBlock = function(data,tables_dest,charts) {
         var table=$(html).appendTo(tables_dest);
         
         if (!charts) return;
-        table.css('cursor','move');
+        //table.css('cursor','move');
+        table.css('cursor','pointer');
         table.click(function(){
             //console.log(data.id,$('#'+data.id).offset());
             $("html, body").animate({scrollTop: $('#'+data.id).offset().top-50}, 1000);
-        }).draggable({
+        });/*draggable({
             helper: "clone",
             appendTo: ".tables-chart",
             containment: "parent",
@@ -67,7 +68,9 @@ var drawBlock = function(data,tables_dest,charts) {
                 }
                 
             }
-        }); 
+        });
+        
+        */
     });
 
 
@@ -202,6 +205,10 @@ var drawChart=function(data,id,newid,title,from) {
         type: 'line',
         data: data,
         options: {
+            responsive: true,
+            legend: {
+                display: false  
+            },
             scales: {
                 xAxes: [{
                     type: 'time',
@@ -285,21 +292,105 @@ websocket.on('chart',function(rawdata,tables,from,to,period,id){
     }
 
     
-    
     var data=chartsObj.prepareData(rawdata,tables,from,to);
     data.period=period;
     
     
     var title='';
     var newid='';
-    for (var i=0; i< data.datasets.length; i++) {
+    var dslen=data.datasets.length;
+    for (var i=0; i<dslen; i++) {
         if (title.length>0) {
             title+=' + ';
             newid+='|';
         }
         title+=data.datasets[i].label;
         newid+=data.datasets[i].id;
+        var sym=data.datasets[i].id;
+        var showNoFrost=false;
+        if (tables[sym].t_nofrost && tables[sym].t_eco) {
+            
+            
+            for (var j=0;j<data.datasets[i].data.length; j++) {
+                if (Math.abs(data.datasets[i].data[j] - tables[sym].t_nofrost) < Math.abs(data.datasets[i].data[j] - tables[sym].t_eco)) {
+                    showNoFrost=true;
+                    break;
+                }
+            }
+        }
+        
+        
+        if (showNoFrost) {
+            data.datasets.push({
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor:"rgba(0,0,255,0.8)",
+                borderWidth: 1,
+                pointStyle: 'line',
+                pointBorderWidth: 0,
+                label: 'nofrost '+sym,
+                data: new Array(data.datasets[i].data.length).fill(tables[sym].t_nofrost+tables[sym].t_hysteresis)
+            });
+            data.datasets.push({
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor:"rgba(0,0,255,0.8)",
+                borderWidth: 1,
+                pointStyle: 'line',
+                pointBorderWidth: 0,
+                label: 'nofrost '+sym,
+                data: new Array(data.datasets[i].data.length).fill(tables[sym].t_nofrost-tables[sym].t_hysteresis)
+            });
+            
+        }
+        
+        if (tables[sym].t_comfort) {
+            data.datasets.push({
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor:"rgba(255,0,0,0.8)",
+                borderWidth: 1,
+                pointStyle: 'line',
+                pointBorderWidth: 0,
+                label: 'comfort '+sym,
+                data: new Array(data.datasets[i].data.length).fill(tables[sym].t_comfort+tables[sym].t_hysteresis)
+            });
+            data.datasets.push({
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor:"rgba(255,0,0,0.8)",
+                borderWidth: 1,
+                pointStyle: 'line',
+                pointBorderWidth: 0,
+                label: 'comfort '+sym,
+                data: new Array(data.datasets[i].data.length).fill(tables[sym].t_comfort-tables[sym].t_hysteresis)
+            });
+            
+        }
+        
+        if (tables[sym].t_eco) {
+            data.datasets.push({
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor:"rgba(0,255,0,0.8)",
+                borderWidth: 1,
+                pointStyle: 'line',
+                pointBorderWidth: 0,
+                label: 'eco '+sym,
+                data: new Array(data.datasets[i].data.length).fill(tables[sym].t_eco+tables[sym].t_hysteresis)
+            });
+            data.datasets.push({
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor:"rgba(0,255,0,0.8)",
+                borderWidth: 1,
+                pointStyle: 'line',
+                pointBorderWidth: 0,
+                label: 'eco '+sym,
+                data: new Array(data.datasets[i].data.length).fill(tables[sym].t_eco-tables[sym].t_hysteresis)
+            });
+            
+        }
+        
     }
+    
+
+    
+    
     
     
     if (id==null) {

@@ -319,7 +319,11 @@ var Web = function(com,ini,logger,callback) {
                     value: collections.data[i].value,
                     id: store,
                     temp: temp_change,
-                    color: color
+                    color: color,
+                    t_comfort: collections.data[i].t_comfort?parseFloat(collections.data[i].t_comfort):null,
+                    t_eco: collections.data[i].t_eco?parseFloat(collections.data[i].t_eco):null,
+                    t_nofrost: collections.data[i].t_nofrost?parseFloat(collections.data[i].t_nofrost):null,
+                    t_hysteresis: collections.data[i].t_hysteresis?parseFloat(collections.data[i].t_hysteresis):null
                 };
   
               
