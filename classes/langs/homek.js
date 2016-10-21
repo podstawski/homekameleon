@@ -21,6 +21,11 @@ var Web = function(com,ini,logger,callback) {
     
     com.staticContent(root_path);
     
+    var getRandomInt = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    
     var md5=function(txt) {
         var md5sum = crypto.createHash('md5');
         md5sum.update(txt);
@@ -165,7 +170,7 @@ var Web = function(com,ini,logger,callback) {
   
             if (wait>=0) {          
                 setTimeout(function(){
-                    websocket.emit('ios',database.ios.select());
+                    websocket.emit('ios',database.ios.getAll());
                 },wait);
             }
         });
@@ -239,7 +244,7 @@ var Web = function(com,ini,logger,callback) {
   
             if (wait>=0) {          
                 setTimeout(function(){
-                    websocket.emit('scripts',database.scripts.select());
+                    websocket.emit('scripts',database.scripts.getAll());
                 },wait);
             }
         });
@@ -297,10 +302,10 @@ var Web = function(com,ini,logger,callback) {
                 var color='rgba(0,0,0,0)';
                 switch (temp_change) {
                     case -1:
-                        color='rgba(0,0,255,0.2)';
+                        color='rgba('+getRandomInt(0,150)+','+getRandomInt(0,150)+','+getRandomInt(100,255)+',0.2)';
                         break;
                     case 1:
-                        color='rgba(255,0,0,0.2)';
+                        color='rgba('+getRandomInt(100,255)+','+getRandomInt(0,150)+','+getRandomInt(0,150)+',0.2)';
                         break;
                     case 0:
                         color='rgba(255,255,0,0.2)';
@@ -308,6 +313,7 @@ var Web = function(com,ini,logger,callback) {
 
                     
                 }
+    
                 collection_tables[store]={
                     name: collections.data[i].name,
                     value: collections.data[i].value,

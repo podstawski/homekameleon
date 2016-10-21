@@ -175,7 +175,7 @@ var drawChart=function(data,id,newid,title,from) {
     
     if (title!=null) $('#'+id+' .panel-heading .title').text(title);
     var title_date='<span>'+moment(new Date(from)).format(title_f)+title_s+'</span>';
-    //$('#'+id+' .panel-heading .view').html($.translate('view-'+data.period)+title_date);
+    $('#'+id+' .panel-heading .view').html($.translate('view-'+data.period)+title_date);
     
     
     
@@ -339,3 +339,59 @@ var add_shadow = function(container,txt) {
         });
     }
 }
+
+$(document).on('click','.chart-container .navi a span',function(e){
+
+    var par=$(this).closest('.chart-container');
+    
+    var from=parseInt(par.attr('from'));
+    var period=par.attr('period');
+    switch (period) {
+        case 'm12':
+            var plus=366*24*3600*1000 ;
+            var minus=364*24*3600*1000 ;
+            break; 
+        case 'm1':
+            var plus=32*24*3600*1000 ;
+            var minus=27*24*3600*1000 ;
+            break; 
+        case 'd7':
+            var plus=7*24*3600*1000 + 3601*1000;
+            var minus=7*24*3600*1000 - 3601*1000;
+            break;            
+        default:
+            var plus=25*3600*1000;
+            var minus=23*3600*1000;
+            break;
+    }
+    
+    
+    if ($(this).parent().hasClass('previous')) {
+        add_shadow(par);
+        requestChart(par.attr('ids').split('|'),from-minus,period,par.attr('id'),par);
+    }
+    
+    if ($(this).parent().hasClass('next')) {
+        add_shadow(par);
+        requestChart(par.attr('ids').split('|'),from+plus,period,par.attr('id'),par);
+    }
+    
+    
+});
+
+$(document).on('click','.chart-container .today',function(e){
+    var par=$(this).closest('.chart-container');
+    add_shadow(par);
+    $('.chart-container .period[rel="d1"]').addClass('active');
+    requestChart(par.attr('ids').split('|'),null,'d1',par.attr('id'),par);
+});
+
+
+$(document).on('click','.chart-container .period',function(e){
+    var par=$(this).closest('.chart-container');
+    var from=parseInt(par.attr('from'));
+    var period=par.attr('period');
+    
+    add_shadow(par);
+    requestChart(par.attr('ids').split('|'),from,$(this).attr('rel'),par.attr('id'));
+});
