@@ -111,8 +111,8 @@ var Logic = function(script,logger)
         } else {
             var prev=parseFloat(io.value);
             
-            if (value >= t_expected + t_hysteresis && value>prev) data.temp_change=-1;
-            if (value <= t_expected - t_hysteresis && value<prev)  data.temp_change=1;  
+            if ((value >= t_expected + t_hysteresis && value>prev) || value >= t_expected - t_hysteresis) data.temp_change=-1;
+            if ((value <= t_expected - t_hysteresis && value<prev) || value <= t_expected + t_hysteresis) data.temp_change=1;  
         }
 
         
