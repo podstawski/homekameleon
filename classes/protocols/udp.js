@@ -23,8 +23,9 @@ var Udp = function(options,logger) {
         var ifaces = os.networkInterfaces();
         var ips=[];
         
-        console.log(ifaces);
+        
         for (var k in ifaces) {
+            if (k.indexOf('tun')>=0) continue;
             if (ifaces[k][0].internal) {
                 delete(ifaces[k]);
                 continue;
