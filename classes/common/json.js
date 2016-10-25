@@ -9,7 +9,7 @@ var modelSaveTimer=null;
 var saveModel=function(stop) {
     if(modelSaveTimer!=null) clearTimeout(modelSaveTimer);
     for (var k in instances) instances[k].save();
-    if (stop==null) modelSaveTimer=setTimeout(saveModel,5000);
+    if (stop==null) modelSaveTimer=setTimeout(saveModel,1000);
 }
 
 modelSaveTimer=setTimeout(saveModel,1000);
@@ -84,6 +84,12 @@ var Model = function(opt,logger) {
         fs.renameSync(file, bak);
         fs.writeFileSync(file,JSON.stringify(getData()));
         
+        logger.log("Saved "+file,'db');
+        fs.unlink(bak);
+        lastSave=Date.now();
+        saveState=false; 
+        
+        /*
         try {
             var e=exec('fsync',[file],function(error,stdout,stderr){
                 logger.log("Saved "+file,'db');
@@ -96,7 +102,7 @@ var Model = function(opt,logger) {
             saveState=false;
             fs.unlink(bak);
         }
-        
+        */
     
     }
     
