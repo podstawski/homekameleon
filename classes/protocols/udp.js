@@ -23,18 +23,15 @@ var Udp = function(options,logger) {
         var ifaces = os.networkInterfaces();
         var ips=[];
         
-        
         for (var k in ifaces) {
-            if (k.indexOf('tun')>=0) continue;
             if (ifaces[k][0].internal) {
                 delete(ifaces[k]);
                 continue;
             }
-            if (ifaces[k][0].netmask && ifaces[k][0].netmask=='255.0.0.0') {
-                        delete(ifaces[k]);
-                continue;
-            }
-            
+		if (ifaces[k][0].netmask && ifaces[k][0].netmask=='255.0.0.0') {
+	                delete(ifaces[k]);
+			continue;
+		}
             
        
             for (var i=0; i<ifaces[k].length; i++) {

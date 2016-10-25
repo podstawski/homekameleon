@@ -133,7 +133,7 @@ process.on('SIGTSTP',function(){
 
 
 process.kill(process.pid, 'SIGHUP');
-fs.writeFile(__dirname+'/app.pid',process.pid);
+fs.writeFile('/tmp/homekameleon.pid',process.pid);
 
 var cron = function() {
 
