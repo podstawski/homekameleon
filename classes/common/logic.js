@@ -9,6 +9,8 @@ var Logic = function(script,logger)
     var ini;
     
     var scrlev,ioslev,flolev;
+    
+    var startTime=Date.now();
  
  
     var store_data={};
@@ -159,6 +161,12 @@ var Logic = function(script,logger)
         },
         
         action: function(device,type,data,ctx) {
+            
+            if (Date.now() - startTime < 1000*10) {
+                logger.log('Waiting 10 seconds before serving logic','init');
+                return;
+            }
+            
             var original_device=data.device||'';
             data.device=device;
             var io=db.ios.get(data);
