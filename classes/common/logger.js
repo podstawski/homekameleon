@@ -21,7 +21,7 @@ module.exports = function(logdir) {
                 file[f]='';
             }
         }
-        if (stop==null) saveTimer=setTimeout(save,1000);
+        if (stop==null) saveTimer=setTimeout(save,5000);
         
     }
     

@@ -9,7 +9,7 @@ var modelSaveTimer=null;
 var saveModel=function(stop) {
     if(modelSaveTimer!=null) clearTimeout(modelSaveTimer);
     for (var k in instances) instances[k].save();
-    if (stop==null) modelSaveTimer=setTimeout(saveModel,1000);
+    if (stop==null) modelSaveTimer=setTimeout(saveModel,5000);
 }
 
 modelSaveTimer=setTimeout(saveModel,1000);
