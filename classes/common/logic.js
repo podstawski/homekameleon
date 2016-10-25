@@ -10,6 +10,12 @@ var Logic = function(script,logger)
     
     var scrlev,ioslev,flolev;
  
+ 
+    var store_data={};
+    var store_add = function() {
+        logger.log(store_data.store[0]+': '+store_data.io.value,'store');
+        collection.add(store_data.store[0],store_data.io.value,null,null,store_data.io.temp_change==null?null:store_data.io.temp_change);
+    };
     
     var run_actions = function(data,dbg_output,ctx) {
         var actions=db.actions.get(data);
@@ -319,13 +325,14 @@ var Logic = function(script,logger)
             
             if (io!=null && io.store!=null && io.store.length>0) {
                 var store=io.store.split('/');
+                
             
+                store_data.store=store;
+                store_data.io=io;                              
                 if (!collection.inited(store[0])) {
-                    collection.init(store[0],10,store[1]||60,function(){
-                        collection.add(store[0],io.value,null,null,io.temp_change==null?null:io.temp_change);
-                    });
+                    collection.init(store[0],store[2]||10,store[1]||60,store_add);
                 } else {
-                    collection.add(store[0],io.value,null,null,io.temp_change==null?null:io.temp_change);
+                    store_add();
                 }
             }
             

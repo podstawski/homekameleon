@@ -90,7 +90,7 @@ module.exports = function(path) {
     
     var avgvalue = function(a) {
         var total=0;
-        for (var i=0; i< a.length; i++) total+=a[i].value;
+        for (var i=0; i< a.length; i++) total+=parseFloat(a[i].value);
         return round(total/a.length);
     };
     
