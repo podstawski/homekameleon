@@ -450,20 +450,33 @@ var Web = function(com,ini,logger,callback) {
             var path = url.parse(request.url).pathname;
  
             switch(path){
-                case '/say':    
+                case '/say':
+                case '/read':
+                case '/toggle':    
                     var data=JSON.parse(JSON.stringify(request.query));
                     data.cb = function (txt) {
-                        response.write(txt);
+                        response.write(txt+'');
                         response.end(); 
                     }
                 
                     if ((ini.commandpass||Date.now())!=(request.query.p||0) ) {
                         data.cb('Proszę podać hasło!');
                         break;
-                    }                    
-                    
-                    callback('command',data);
-                    
+                    }
+
+                    var cmd;
+                    switch (path) {
+                        case '/say':
+                            cmd='command';
+                            break;
+                        case '/read':
+                            cmd='read';
+                            break;
+                        case '/toggle':
+                            cmd='toggle';
+                            break;
+                    }
+                    callback(cmd,data);
                     break;
                 case '/check-web':
                     response.setHeader('Access-Control-Allow-Origin', '*');
