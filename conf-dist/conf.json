@@ -92,7 +92,7 @@
                 "tunnel_host": "homiq@homiq.webkameleon.com",
 		"tunnel_script": "/home/homiq/homiq.sh 3023"
             },
-            "active": true
+            "active": false
         }
     ],
     "logger": {
@@ -130,7 +130,11 @@
         "error": {
             "console": true,
             "file": "error.txt"
-        }
+        },
+        "store": {
+            "console": false,
+            "file": "store.txt"
+        }            
         
     },
     "calendars": [
@@ -141,57 +145,57 @@
     "db": {
       
         "ios": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"ios.json",
             "index": ["haddr"]
         },
         "modules": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"modules.json",
             "index": ["serial"]
         },
         "scripts": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"scripts.json",
             "index": ["id"]
         },
         "langs": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"langs.json",
             "index": ["label"]
         },
         "devices": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"devices.json",
             "index": ["id"]
         },        
         "floor": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"floor.json",
             "index": ["id"]
         },
         "structure": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"structure.json",
             "index": ["id"]
         },
         "projects": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"projects.json",
             "index": ["id"]
         },
         "actions": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"actions.json",
             "index": ["haddr"]
         },
         "users": {
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"users.json",
             "index": ["username"]
         },
 	"buffer": {                                      
-            "model": "../../admin/models/json",
+            "model": "/homekameleon/classes/common/json",
             "file":"buffer.json",
             "index": ["hwaddr"]
         }   

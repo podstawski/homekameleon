@@ -26,7 +26,7 @@ then
     /homekameleon/ssh4ever.sh &
 fi
 sleep 10
-/homekameleon/promienko.sh &   
+/homekameleon/homekameleon.sh &   
 
 
 
