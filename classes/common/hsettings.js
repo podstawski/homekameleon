@@ -13,13 +13,12 @@ module.exports = function(s) {
         else for (var k in s) _settings[k]=s[k];
         
         fs.writeFileSync(file,JSON.stringify(_settings));
-        /*
+        
         try {
             var e=exec('fsync '+file);
         } catch(e) {
             
         }
-        */
         
         if (s.ssid ) {
             fs.writeFileSync(wifi,_settings.ssid+' '+_settings.wifipass);

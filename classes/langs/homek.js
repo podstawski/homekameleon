@@ -132,6 +132,7 @@ var Web = function(com,ini,logger,callback) {
                     } else {
                         wait=200;	
                         database.buffer.remove(k);
+                        logger.log('Remove buffer: '+k,'db')
                     }
                 }
                 
