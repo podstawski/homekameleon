@@ -55,10 +55,10 @@ opkg install sqlite3-cli
 opkg install openvpn-openssl
 
 cd $HOMEKAMELEON
-npm install dblite
-npm install express
-npm install socket.io
-npm install ical
+npm install 
+
+ln -s /sd/conf
+ln -s /sd/logs
 
 
 
