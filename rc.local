@@ -13,17 +13,18 @@ then
 	cp /homekameleon/conf-dist/pl.json /homekameleon/conf
 fi
 
-if [ -f /homekameleon/conf/wifi ]
+if [ -f /homekameleon/wifi ]
 then
-    wifi=`cat /homekameleon/conf/wifi`
+    wifi=`cat /homekameleon/wifi`
     ssid=`echo $wifi | awk '{print $1}'`
     pass=`echo $wifi | awk '{print $2}'`
     
     /sbin/ap_client ra0 apcli0 $ssid $pass mediatek:orange:wifi 
     sleep 5
     udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
-    sleep 5
-    /homekameleon/ssh4ever.sh &
+    
+	//sleep 5
+    ///homekameleon/ssh4ever.sh &
 fi
 sleep 10
 /homekameleon/homekameleon.sh &   

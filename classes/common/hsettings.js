@@ -6,7 +6,7 @@ var _settings=null;
 module.exports = function(s) {
     var dir=__dirname+'/../../conf';
     var file=dir+'/web.json';
-    var wifi=dir+'/wifi';
+    var wifi=__dirname+'/../../wifi';
     
     if (s) {
         if (!_settings) _settings=s;
