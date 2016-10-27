@@ -59,9 +59,6 @@ opkg install openvpn-openssl
 cd $HOMEKAMELEON
 npm install 
 
-ln -s /sd/conf
 ln -s /sd/logs
-
-
-
+mkdir conf
 
