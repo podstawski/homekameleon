@@ -43,8 +43,9 @@ process.on('SIGHUP',function () {
     });
     if (typeof(data)=='object' && data!=null) {
         structureData=data;
-        
-        var collection=new Collection(__dirname + '/conf/'+(data.collection||'collection.db'));
+        var collectionFile=data.collection||'collection.db';
+        if (collectionFile.indexOf('/')<0) collectionFile=__dirname + '/conf/'+collectionFile;
+        var collection=new Collection(collectionFile);
         
         logger.loadChannels(structureData['logger']);
         script.setdb(structure.db,structureData);
