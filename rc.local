@@ -37,7 +37,7 @@ then
 fi
 sleep 10
 /homekameleon/homekameleon.sh &   
-
+git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
 
 
 
