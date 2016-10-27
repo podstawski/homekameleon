@@ -32,13 +32,12 @@ then
     sleep 5
     udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
     
-	//sleep 5
-    ///homekameleon/ssh4ever.sh &
+    echo "nameserver 8.8.8.8" >>/etc/resolv.conf
+    sleep 5
+    git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
 fi
 sleep 10
 /homekameleon/homekameleon.sh &   
-git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
-
 
 
 exit 0
