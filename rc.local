@@ -32,7 +32,6 @@ then
     sleep 5
     udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
     
-    echo "nameserver 8.8.8.8" >>/etc/resolv.conf
     sleep 5
     git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
 fi

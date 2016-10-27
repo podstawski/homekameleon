@@ -19,6 +19,7 @@ mv $TMP /etc/config/uhttpd
 
 sed 's/DNS_SERVERS=""/DNS_SERVERS="8.8.8.8"/g' </etc/init.d/dnsmasq > $TMP
 mv $TMP /etc/init.d/dnsmasq
+chmod 755 /etc/init.d/dnsmasq
 
 sed "s/option hostname 'mylinkit'/option hostname 'homekameleon'/g" < /etc/config/system > $TMP
 mv $TMP /etc/config/system
