@@ -353,7 +353,10 @@ module.exports = function(com,ini,logger,callback) {
                     com.send(cmd+"\r\n");
                     
                     if (lastIdx[line[pos_src]]==null) lastIdx[line[pos_src]]=-1;
-                    if (lastIdx[line[pos_src]] == line[pos_pkt]) continue;
+                    if (lastIdx[line[pos_src]] == line[pos_pkt]) {
+                         logger.log('Ignored','frame');
+                         continue;
+                    }
                     lastIdx[line[pos_src]]=line[pos_pkt];
                     
                     linein(line);    
