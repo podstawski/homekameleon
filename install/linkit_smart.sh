@@ -30,8 +30,6 @@ mv $TMP /etc/config/system
 sed "/config wifi-iface 'ap'/,/option seq '1'/d" </etc/config/wireless >$TMP
 if [ "`cmp /etc/config/wireless $TMP`" ]
 then
-	epoch=`date '%s'`
-	rand=`expr $epoch % 10`
 
 	echo "
 config wifi-iface 'ap'
@@ -39,7 +37,7 @@ config wifi-iface 'ap'
         option mode 'ap'
         option network 'lan'
         option ifname 'ra0'
-        option ssid 'homekameleon$rand'
+        option ssid 'homekameleon'
         option key 'homekameleon'
 	option encryption 'psk2'
 	option seq '1'
