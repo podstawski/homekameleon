@@ -343,23 +343,23 @@ module.exports = function(com,ini,logger,callback) {
                 }
                 
                 if (line[pos_top]=='s') {
+                    var ignore='';
+                    if (lastIdx[line[pos_src]]==null) lastIdx[line[pos_src]]=-1;
+                    if (line[pos_cmd]!='PG' && lastIdx[line[pos_src]] != line[pos_pkt]) {
+                        lastIdx[line[pos_src]]=line[pos_pkt];
+                        linein(line);    
+                    } else {
+                        ignore=' logic ignored';
+                    }
+
                     var ack=line.slice(0);
                     ack[pos_top]='a';
                     ack[pos_dst]=line[pos_src];
                     ack[pos_src]=line[pos_dst];
                     ack[pos_crc]=crc(ack);
                     var cmd='<;'+ack.join(';')+';>';
-                    logger.log('Sending ack: '+cmd,'frame');
+                    logger.log('Sending ack: '+cmd+ignore,'frame');
                     com.send(cmd+"\r\n");
-                    
-                    if (lastIdx[line[pos_src]]==null) lastIdx[line[pos_src]]=-1;
-                    if (lastIdx[line[pos_src]] == line[pos_pkt]) {
-                         logger.log('Ignored','frame');
-                         continue;
-                    }
-                    lastIdx[line[pos_src]]=line[pos_pkt];
-                    
-                    linein(line);    
                 }
                 
                 if (line[pos_top]=='a') {

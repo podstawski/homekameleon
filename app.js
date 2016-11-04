@@ -173,6 +173,6 @@ if (global.gc) {
         if (global.inputEventCounter==0) global.gc();
 		//var load=os.loadavg()[0];
 		//if (load<0.4) global.gc();
-	},5000);
+	},10000);
 }
 

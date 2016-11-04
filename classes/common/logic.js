@@ -332,7 +332,7 @@ var Logic = function(script,logger)
                         break;
                     }
                     
-                    startInputTimer(100);
+                    startInputTimer(300);
                     
                     if (io==null) return;
                     if (data.device!==undefined) delete(data.device);
