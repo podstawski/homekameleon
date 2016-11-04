@@ -23,6 +23,8 @@ global.clone=function(o) {
     return JSON.parse(JSON.stringify(o));
 }
 
+global.inputEventCounter=0;
+
 script.on('_cancel',function(ctx,delay){
     for (var id in devices) devices[id].cancel(ctx,delay);
 });
@@ -141,10 +143,12 @@ var cron = function() {
     var now=Math.round(Date.now()/1000);
     var min=(now/60)%60;
 
+    
 	if (global.gc && Math.floor(min)==0) {
 		var hour=new Date().getHours();
 		if (hour==0 || hour==4) global.gc();
 	}
+	
 
 
     if (calendar!=null) {
@@ -162,13 +166,13 @@ var cron = function() {
 var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
-/*
+
 if (global.gc) {
-	console.log('Global GC');
 	setInterval(function(){
-		var load=os.loadavg()[0];
-		//console.log(load);
-		if (load<0.4) global.gc();
-	},10000);
+        //console.log(global.inputEventCounter);
+        if (global.inputEventCounter==0) global.gc();
+		//var load=os.loadavg()[0];
+		//if (load<0.4) global.gc();
+	},5000);
 }
-*/
+

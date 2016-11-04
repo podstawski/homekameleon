@@ -19,6 +19,16 @@ var Logic = function(script,logger)
         collection.add(store_data.store[0],store_data.io.value,null,null,store_data.io.temp_change==null?null:store_data.io.temp_change);
     };
     
+    var globalTimerDecrease = function() {
+        global.inputEventCounter--;  
+    };
+    
+    var startInputTimer = function(timeout) {
+        global.inputEventCounter++;
+        setTimeout(globalTimerDecrease,timeout);
+    }
+    
+    
     var run_actions = function(data,dbg_output,ctx) {
         var actions=db.actions.get(data);
         var scripts2run=[];
@@ -56,7 +66,7 @@ var Logic = function(script,logger)
             }
             if(dbg_output) logger.log('No action for io '+db.actions.index(data)+name,'logic');
         }
-        
+        startInputTimer(scripts2run.length*300);
         for (var i=0; i<scripts2run.length; i++) script.run(scripts2run[i].script,0,null,scripts2run[i].ctx);
     }
     
@@ -161,12 +171,7 @@ var Logic = function(script,logger)
         },
         
         action: function(device,type,data,ctx) {
-            
-            if (Date.now() - startTime < 1000*10) {
-                logger.log('Waiting 10 seconds before serving logic','init');
-                return;
-            }
-            
+                        
             var original_device=data.device||'';
             data.device=device;
             var io=db.ios.get(data);
@@ -177,6 +182,7 @@ var Logic = function(script,logger)
                 
                 case 'firmware':
                     script.firmware(original_device,data);
+                    startInputTimer(15*1000);
                     break;
                 
                 case 'read':
@@ -206,6 +212,7 @@ var Logic = function(script,logger)
                     }
                     
                     if (type=='toggle') {
+                        startInputTimer(500);
                         script.toggle(io2);
                         data.cb('OK');
                     }
@@ -218,6 +225,8 @@ var Logic = function(script,logger)
                         data.cb(ini.dictionary.dict.error);
                         break;
                     }
+                    
+                    startInputTimer(3000);
                     
 			/*
                     if (data.q.toLowerCase().indexOf(ini.dictionary.dict.calibrate.toLowerCase())>=0) {
@@ -295,10 +304,14 @@ var Logic = function(script,logger)
                 
                 case 'set':
                     if (io==null) return;
-                    if (io_cp.value!=data.value) script.set(io,data.value,ctx);
+                    if (io_cp.value!=data.value) {
+                        startInputTimer(300);
+                        script.set(io,data.value,ctx);
+                    }
                     break;
                 
                 case 'script':
+                    startInputTimer(500);
                     script.run(data.script,null,null,ctx);
                     break;
                 
@@ -313,6 +326,14 @@ var Logic = function(script,logger)
                     break;
                 
                 case 'input':
+                    
+                    if (Date.now() - startTime < 1000*10) {
+                        logger.log('Waiting 10 seconds before serving logic','init');
+                        break;
+                    }
+                    
+                    startInputTimer(100);
+                    
                     if (io==null) return;
                     if (data.device!==undefined) delete(data.device);
                     if (io==null) break;
