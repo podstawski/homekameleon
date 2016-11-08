@@ -323,7 +323,7 @@ var Logic = function(script,logger)
                     if (ctx!=null && ctxs[ctx]!=null) {
                         var lg=ctx+'->'+io.haddr+':'+data.value;
                         lg+=', time delta '+(Date.now()-ctxs[ctx])+' ms.';
-                        if (global.gcTime.start>=ctxs[ctx]) lg+=' with GC';
+                        if (global.gcTime.start>=ctxs[ctx]) lg+=' with GC ('+(global.gcTime.stop-global.gcTime.start)+'ms.)';
                         lg+=', load='+os.loadavg()[0];
                         logger.log(lg,'perf');
                     }
