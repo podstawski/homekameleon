@@ -320,7 +320,7 @@ var Logic = function(script,logger)
                 case 'output':
                     if (io==null) return;
                     
-                    if (ctx!=null && ctxs[ctx]!=null) {
+                    if (ctx!=null && ctxs[ctx]!=null && Date.now()-ctxs[ctx]<10000) {
                         var lg=ctx+'->'+io.haddr+':'+data.value;
                         lg+=', time delta '+(Date.now()-ctxs[ctx])+' ms.';
                         if (global.gcTime.start>=ctxs[ctx]) lg+=' with GC ('+(global.gcTime.stop-global.gcTime.start)+'ms.)';
