@@ -166,12 +166,17 @@ var cron = function() {
 var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
+global.gcTime={start: 0, stop: 0};
 
 if (global.gc) {
 	setInterval(function(){
         //console.log(global.inputEventCounter);
-        if (global.inputEventCounter==0) global.gc();
-		//var load=os.loadavg()[0];
+        if (global.inputEventCounter==0) {
+            global.gcTime.start=Date.now();
+            global.gc();
+            global.gcTime.stop=Date.now();
+        }
+        //var load=os.loadavg()[0];
 		//if (load<0.4) global.gc();
 	},10000);
 }

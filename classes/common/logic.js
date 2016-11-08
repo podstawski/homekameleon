@@ -1,12 +1,14 @@
 var condition=require('./condition');
 var checkactive=require('./checkactive');
 var Levenshtein=require('./levenshtein');
+var os = require('os');
 
 var Logic = function(script,logger)
 {
     var db;
     var collection;
     var ini;
+    var ctxs={};
     
     var scrlev,ioslev,flolev;
     
@@ -317,6 +319,13 @@ var Logic = function(script,logger)
                 
                 case 'output':
                     if (io==null) return;
+                    
+                    if (ctx!=null && ctxs[ctx]!=null) {
+                        var lg=ctx+', time delta '+(Date.now()-ctxs[ctx])+' ms.';
+                        if (global.gcTime.start>=ctxs[ctx]) lg+=' with GC';
+                        lg+=', load='+os.loadavg()[0];
+                        logger.log(lg,'perf');
+                    }
                     data.last=io.last||0;
                     data.eval=io.eval||null;
                     evaluate(data);
@@ -332,6 +341,7 @@ var Logic = function(script,logger)
                         break;
                     }
                     
+                    if (ctx!=null) ctxs[ctx]=Date.now();
                     startInputTimer(300);
                     
                     if (io==null) return;
