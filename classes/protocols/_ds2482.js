@@ -14,10 +14,11 @@ try {
             LowByte = data[0];
             HighByte = data[1];
         
-            TReading = (HighByte << 8) + LowByte;
+            var TReading = (HighByte << 8) + LowByte;
             SignBit = TReading & 0x8000;  // test most sig bit
             if (SignBit) { // negative
                 TReading = (TReading ^ 0xffff) + 1; // 2's comp
+                if (TReading>0) TReading*=-1;
             }
             return TReading/16;
             
