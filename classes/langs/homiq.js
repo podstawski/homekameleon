@@ -350,6 +350,7 @@ module.exports = function(com,ini,logger,callback) {
                         linein(line);    
                     } else {
                         ignore=' logic ignored';
+                        logger.log('Multiple message '+buf,'perf');
                     }
 
                     var ack=line.slice(0);
