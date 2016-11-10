@@ -348,9 +348,9 @@ module.exports = function(com,ini,logger,callback) {
                     if (line[pos_cmd]!='PG' && lastIdx[line[pos_src]] != line[pos_pkt]) {
                         lastIdx[line[pos_src]]=line[pos_pkt];
                         linein(line);    
-                    } else {
+                    } else if (line[pos_cmd]!='PG') {
                         ignore=' logic ignored';
-                        if (line[pos_cmd]!='PG') logger.log('Multiple message '+buf.trim(),'perf');
+                        logger.log('Multiple message '+buf.trim(),'perf');
                     }
 
                     var ack=line.slice(0);
