@@ -354,7 +354,7 @@ module.exports = function(com,ini,logger,callback) {
         
         com.send({
             address: data.ip,
-            data:'('+['ACK',nocolon(mac.mac),settings().hash,nocolon(data.hwaddr),ssid,wifipass,mac.ip].join(';')+')'
+            data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip,nocolon(data.address)].join(';')+')'
         });
         
         
