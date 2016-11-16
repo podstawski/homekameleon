@@ -135,6 +135,10 @@
         "store": {
             "console": false,
             "file": "store.txt"
+        },
+        "perf": {
+            "console": false,
+            "file": "perform.txt"
         }            
         
     },
