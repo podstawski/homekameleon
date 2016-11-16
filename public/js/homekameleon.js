@@ -42,7 +42,8 @@ websocket.on('lang',function(lng,login){
     }
 });
 
-$('.logout a').click(function(){
+$(document).on('click','.logout a', function(){
+    
     $('.loggedin').hide();
     $('.loggedout').show();
     $('.username').text('Guest');
@@ -50,6 +51,7 @@ $('.logout a').click(function(){
     $('body').fadeOut(1000,function(){
         location.href='index.html';
     });
+    
 });
 
 

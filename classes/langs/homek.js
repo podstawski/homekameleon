@@ -67,13 +67,15 @@ var Web = function(com,ini,logger,callback) {
     com.on('initstate',function(opt,db) {
         database=db;
         websocket=opt.socket;
+        var session=opt.session[opt.hash];
+        
         
         var collection_tables={};
         wifiscan();
-        websocket.emit('lang',ini.lang,opt.session.loggedin==null?false:opt.session.loggedin);
+        websocket.emit('lang',ini.lang,session.loggedin==null?false:session.loggedin);
         
         websocket.on('logout',function(){
-            opt.session.loggedin=false;
+            session.loggedin=false;
         });
         
         websocket.on('password',function(){
@@ -89,7 +91,7 @@ var Web = function(com,ini,logger,callback) {
                 pass=true;
             }
             websocket.emit('login',pass);
-            opt.session.loggedin=pass;
+            session.loggedin=pass;
         });
         
         websocket.on('ping2',function(host) {
@@ -101,7 +103,7 @@ var Web = function(com,ini,logger,callback) {
         });
         
         websocket.on('wifi',function(wifi){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             
             if (!wifi) {
                 websocket.emit('wifi',{
@@ -121,7 +123,7 @@ var Web = function(com,ini,logger,callback) {
         });
         
         websocket.on('buffer',function(buffer){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             var wait=0;
             if (buffer!=null) {
 
@@ -144,7 +146,7 @@ var Web = function(com,ini,logger,callback) {
         });
 
         websocket.on('ios',function(ios){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             var wait=0;
             if (ios!=null) {
                 for (var k in ios) {
@@ -195,7 +197,7 @@ var Web = function(com,ini,logger,callback) {
         };
         
         websocket.on('flash',function(buffer){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             if (buffer==null || buffer.hwaddr==null) return;
             var b=global.clone(database.buffer.set(buffer));
             if (b!=null) {
@@ -206,7 +208,7 @@ var Web = function(com,ini,logger,callback) {
         });
 
         websocket.on('register',function(buffer){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             var wait=0;
             if (buffer!=null && buffer.hwaddr!=null) {
                 database.buffer.set(buffer);
@@ -219,7 +221,7 @@ var Web = function(com,ini,logger,callback) {
         
         
         websocket.on('scripts',function(scripts){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             var wait=0;
             if (scripts!=null) {
                 for (var k in scripts) {
@@ -251,7 +253,7 @@ var Web = function(com,ini,logger,callback) {
         });
         
         websocket.on('new-script',function(name){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             database.scripts.add({
                 active: true,
                 name: name
@@ -260,7 +262,7 @@ var Web = function(com,ini,logger,callback) {
         });
         
         websocket.on('actions',function(a){
-            if (!opt.session.loggedin) return;
+            if (!session.loggedin) return;
             if (typeof(a)=='string') websocket.emit('actions',database.actions.get(a));
             else {
                 database.actions.set(a)
