@@ -328,6 +328,7 @@ module.exports = function(com,ini,logger,callback) {
         'data': function(data) {
             buf+=data.trim();
             
+		if(buf.indexOf(';>')<0) logger.log('Data with no end: '+buf,'perf');
             while (buf.indexOf(';>')>0) {
                 var begin=buf.indexOf('<;');
                 var end=buf.indexOf(';>');
@@ -406,7 +407,7 @@ module.exports = function(com,ini,logger,callback) {
                     if (opt.haddr!=null) callback('output',opt,origin.ctx||opt.haddr);
                 }
                 
-            }
+            } 
             
             
         },

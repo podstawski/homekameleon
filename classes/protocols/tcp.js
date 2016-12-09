@@ -10,6 +10,7 @@ var Tcp = function(options,logger) {
     var sendSemaphore=false;
     var sendLast=0;
     var sendTimers=[];
+    var buf='';
     
     if (typeof(options.latency)=='undefined') {
         options.latency=0;
@@ -19,6 +20,7 @@ var Tcp = function(options,logger) {
         logger.log('Connecting to '+options.host+':'+options.port,'init');
         client.connect(options.port, options.host, function() {
             if (!connected) {
+		client.setNoDelay();
                 connected=true;
                 logger.log('Connected to '+options.host+':'+options.port,'init');
                 self.emit('connection');
@@ -69,10 +71,22 @@ var Tcp = function(options,logger) {
         client.end();
         setTimeout(connect,10*1000);
     });
-    
+   
+    var last=Date.now(); 
     client.on('data', function(data) {
         var line=data.toString('ascii');
-        self.emit('data',line.trim());    
+	//logger.log(line+', time='+(Date.now()-last),'raw');
+	last=Date.now();
+
+	if (options.wait4nl!=null && options.wait4nl) {
+		buf+=line;
+		var pos=buf.indexOf('\n');
+		if (pos>0) {
+			self.emit('data',buf.substr(0,pos).trim())
+			buf=buf.substr(pos).trim();
+		}
+		
+        } else self.emit('data',line.trim());
     });
     
     client.on('end',function() {

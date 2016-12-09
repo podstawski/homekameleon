@@ -12,6 +12,7 @@
             "com":{
                 "host": "homiqmaster",
                 "port": "4001",
+		"wait4nl": true,
                 "latency": 20
             }
         },
@@ -139,7 +140,11 @@
         "perf": {
             "console": false,
             "file": "perform.txt"
-        }            
+        },
+	"raw": {
+		"console": false,
+		"file": "raw.txt"            
+	}
         
     },
     "calendars": [
