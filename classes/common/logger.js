@@ -1,5 +1,6 @@
 var fs = require('fs');
 
+
 module.exports = function(logdir) {
     var channels=null;
     var file={};
@@ -14,6 +15,12 @@ module.exports = function(logdir) {
     var save = function(stop) {
         
         if (saveTimer!=null) clearTimeout(saveTimer);
+
+	if (global.inputEventCounter>0 && stop==null) 
+	{
+		saveTimer=setTimeout(save,1000);
+		return;
+	}
         
         for (f in file) {
             if (file[f].length) {
