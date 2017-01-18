@@ -98,9 +98,6 @@
         }
     ],
     "logger": {
-        "init": {
-            "console": true
-        },
         "emulator": {
             "console": false
         }
@@ -114,19 +111,19 @@
             "file": "homiq.txt"
         },
         "net": {
-            "console": true,
+            "console": false,
             "file": "homiq.txt"
         },
         "db": {
-            "console": true,
+            "console": false,
             "file": "homiq.txt"
         },
         "calendar": {
-            "console": true,
+            "console": false,
             "file": "cal.txt"
         },
         "script": {
-            "console": true,
+            "console": false,
             "file": "homiq.txt"
 	},
         "error": {

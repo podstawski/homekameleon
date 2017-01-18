@@ -351,11 +351,15 @@ module.exports = function(com,ini,logger,callback) {
         for (var i=0; i<parseInt(data.temps); i++) {
             restore_ios(data.address,'t',i+1);
         }
+
+	var line=['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip,nocolon(data.address)];
         
         com.send({
             address: data.ip,
-            data:'('+['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip,nocolon(data.address)].join(';')+')'
+            data:'('+line.join(';')+')'
         });
+
+        logger.log('Sending: '+line.join(';'),'frame');
         
         
     };
