@@ -8,7 +8,7 @@ var modelSaveTimer=null;
 
 var saveModel=function(stop) {
     if(modelSaveTimer!=null) clearTimeout(modelSaveTimer);
-    for (var k in instances) instances[k].save();
+    for (var k in instances) instances[k].save(stop);
     if (stop==null) modelSaveTimer=setTimeout(saveModel,1000);
 }
 
@@ -18,6 +18,7 @@ modelSaveTimer=setTimeout(saveModel,1000);
 
 var Model = function(opt,logger) {
     var file=opt.file;
+    var bak;
     var index=opt.index;
     var data=[];
     var lastSave=0;
@@ -70,8 +71,15 @@ var Model = function(opt,logger) {
         for (var k in data) d.push(data[k]);
         return d;        
     };
+
+    var afterSave=function() {
+        logger.log("Saved "+file,'db');
+        fs.unlink(bak);
+        lastSave=Date.now();
+        saveState=false; 
+    }
     
-    this.save = function() {
+    this.save = function(ultimateState) {
 
         if (saveState) return;
         if (lastSave>lastSet) return;
@@ -79,31 +87,19 @@ var Model = function(opt,logger) {
         
         saveState=true;
         
+        bak=path.dirname(file)+'/bak_'+path.basename(file);
+
+	if (ultimateState) { 
+        	fs.renameSync(file, bak);
+        	fs.writeFileSync(file,JSON.stringify(getData()));
+		afterSave();
+	} else {
+		fs.rename(file, bak, function () {
+			fs.writeFile(file,JSON.stringify(getData()),afterSave);
+		});
+	}
         
-        var bak=path.dirname(file)+'/bak_'+path.basename(file);
-        fs.renameSync(file, bak);
-        fs.writeFileSync(file,JSON.stringify(getData()));
         
-        logger.log("Saved "+file,'db');
-        fs.unlink(bak);
-        lastSave=Date.now();
-        saveState=false; 
-        
-        /*
-        try {
-            var e=exec('fsync',[file],function(error,stdout,stderr){
-                logger.log("Saved "+file,'db');
-                fs.unlink(bak);
-                lastSave=Date.now();
-                saveState=false;        
-            });
-        } catch(e) {
-            logger.log('fsync: '+e,'error');
-            saveState=false;
-            fs.unlink(bak);
-        }
-        */
-    
     }
     
     var open=function (d) {

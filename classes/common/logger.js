@@ -24,8 +24,14 @@ module.exports = function(logdir) {
         
         for (f in file) {
             if (file[f].length) {
-                fs.appendFileSync(logdir+'/'+f,file[f]);
-                file[f]='';
+		if (stop) {
+                	fs.appendFileSync(logdir+'/'+f,file[f]);
+                	file[f]='';
+		} else {
+			fs.appendFile(logdir+'/'+f,file[f],function(){
+				file[f]='';
+			});
+		}
             }
         }
         if (stop==null) saveTimer=setTimeout(save,5000);
