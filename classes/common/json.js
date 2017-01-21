@@ -89,7 +89,7 @@ var Model = function(opt,logger) {
         
         bak=path.dirname(file)+'/bak_'+path.basename(file);
 
-	if (ultimateState) { 
+	if (ultimateState!=null) { 
         	fs.renameSync(file, bak);
         	fs.writeFileSync(file,JSON.stringify(getData()));
 		afterSave();

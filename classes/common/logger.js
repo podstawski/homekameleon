@@ -11,6 +11,17 @@ module.exports = function(logdir) {
         for(i=0;i<s;i++) ret+=' ';
         return ret;
     }
+
+    var saveFile = function (stop,f) {
+	if (stop!=null) {
+		fs.appendFileSync(logdir+'/'+f,file[f]);
+		file[f]='';
+	} else {
+		fs.appendFile(logdir+'/'+f,file[f],function(err){
+			file[f]='';
+		});		
+	}
+    }
     
     var save = function(stop) {
         
@@ -24,14 +35,7 @@ module.exports = function(logdir) {
         
         for (f in file) {
             if (file[f].length) {
-		if (stop) {
-                	fs.appendFileSync(logdir+'/'+f,file[f]);
-                	file[f]='';
-		} else {
-			fs.appendFile(logdir+'/'+f,file[f],function(){
-				file[f]='';
-			});
-		}
+		saveFile(stop,f);
             }
         }
         if (stop==null) saveTimer=setTimeout(save,5000);
