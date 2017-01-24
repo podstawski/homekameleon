@@ -1,1 +1,1 @@
-0 7 * * * wget -O /dev/null http://gold.webkameleon.com/startmebaby >/dev/null 2>/dev/null
+0	1	*	*	*	rm -f /sd/logs/frame.txt
