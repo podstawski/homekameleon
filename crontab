@@ -1,1 +1,1 @@
-0	1	*	*	*	rm -f /sd/logs/frame.txt
+0	1	*	*	*	rm -f /sd/logs/frame.txt /sd/logs/perform.txt /sd/logs/homiq.txt /sd/logs/store.txt /sd/logs/cal.txt 

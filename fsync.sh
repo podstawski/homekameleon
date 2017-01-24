@@ -3,4 +3,4 @@ fsync /sd/logs/*
 cp /sd/conf/*.db /homekameleon/conf
 cp /sd/conf/ios.json /homekameleon/conf
 fscync /homekameleon/conf
-touch /tmp/homehameleon.fsync
+touch /tmp/homekameleon.fsync
