@@ -48,6 +48,7 @@ $(document).on('click','.logout a', function(){
     $('.loggedout').show();
     $('.username').text('Guest');
     websocket.emit('logout');
+    $('body').append('<iframe src="/logout"></iframe>');
     $('body').fadeOut(1000,function(){
         location.href='index.html';
     });

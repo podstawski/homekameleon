@@ -453,6 +453,11 @@ var Web = function(com,ini,logger,callback) {
             var path = url.parse(request.url).pathname;
  
             switch(path){
+		case '/logout':
+			response.statusCode = 401;
+			response.setHeader('Location','index.html');			
+                    response.end();            
+			break;
                 case '/say':
                 case '/read':
                 case '/toggle':    
