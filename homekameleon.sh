@@ -2,6 +2,11 @@
 
 cd `dirname $0`
 
+if [ -d /sd/conf ]
+then 
+	cp ./conf/ios.conf /sd/conf
+fi
+
 while [ "1" = "1" ]
 do
 	# --max_old_space_size=30
