@@ -84,6 +84,8 @@ var Model = function(opt,logger) {
         if (saveState) return;
         if (lastSave>lastSet) return;
         if (lastSet==0) return;
+
+	if (global.inputEventCounter>0 && ultimateState==null) return;
         
         saveState=true;
         
