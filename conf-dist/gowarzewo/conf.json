@@ -1,0 +1,124 @@
+{
+    "uuid": "HK",
+    "commandpass": "trelemorele",
+    "lang": "pl",
+    "collection": "/sd/conf/colct.db",
+    "devices": [
+        {
+            "id": "VAR",
+            "name": "Zmienna",
+            "language": "echo",
+            "protocol": "echo",
+            "useradd": true
+        },
+        {
+            "id": "GRP",
+            "name": "Grupa",
+            "language": "groups",
+            "protocol": "echo",
+            "useradd": true
+        },
+        {
+            "id": "WEB",
+            "name": "Web Server",
+            "protocol": "httpd",
+            "language": "homek",
+            "com":{
+                "port": "80",
+                "xtunnel_port": "8001",
+                "xtunnel_host": "homiq@homiq.webkameleon.com"
+            },
+            "active": true
+        },
+        {
+            "id": "HK",
+            "name": "Homekameleon Promienko",
+            "protocol": "udp",
+            "language": "hk",
+            "com":{
+                "port": "26712",
+                "latency": 0
+            }
+        }
+    ],
+    "logger": {
+        "init": {
+            "console": true
+        },
+        "emulator": {
+            "console": false
+        }
+        ,
+        "frame": {
+            "console": false,
+            "file": "frame.txt"
+        },
+        "init": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "net": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "db": {
+            "console": true,
+            "file": "homiq.txt"
+        },
+        "calendar": {
+            "console": true,
+            "file": "cal.txt"
+        },
+        "script": {
+            "console": true,
+            "file": "homiq.txt"
+	},
+        "error": {
+            "console": true,
+            "file": "error.txt"
+        }
+        
+    },
+    "calendars": [
+    ],
+    "db": {
+      
+        "ios": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"/sd/conf/ios.json",
+            "index": ["haddr"]
+        },
+        "modules": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"modules.json",
+            "index": ["serial"]
+        },
+        "scripts": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"scripts.json",
+            "index": ["id"]
+        },
+        "langs": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"langs.json",
+            "index": ["label"]
+        },
+        "actions": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"actions.json",
+            "index": ["haddr"]
+        },
+        "users": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"users.json",
+            "index": ["username"]
+        },
+        "buffer": {
+            "model": "/homekameleon/classes/common/json",
+            "file":"buffer.json",
+            "index": ["hwaddr"]
+        }
+        
+    }
+    
+}
