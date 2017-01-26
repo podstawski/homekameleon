@@ -90,7 +90,6 @@ var Logic = function(script,logger)
         }
         var e='value='+io['eval']+';';
         eval(e);
-        //console.log(e,value,io);
         io.value=value;
         io.last=now; 
         return true;
@@ -102,11 +101,18 @@ var Logic = function(script,logger)
         if (evaluate_temp_expected_idx==null) {
             evaluate_temp_expected_idx='';
             var i=db.ios.select([{active:[1,true],address:['temp','temperature']}]);
-            if (i.data.length>0) evaluate_temp_expected_idx=i.data[0].haddr;
+            if (i.data.length>0) {
+		evaluate_temp_expected_idx=i.data[0].haddr;
+		logger.log('Temperature expected: '+evaluate_temp_expected_idx,'logic');
+	    }
         }
-        if (evaluate_temp_expected_idx.length==0) return;
+        if (evaluate_temp_expected_idx==null || evaluate_temp_expected_idx.length==0) 
+	{
+		return;
+	}
         
         var temp_expected=db.ios.get(evaluate_temp_expected_idx);
+
         
         if (temp_expected.value==null || temp_expected.value.length==0) return;
     
