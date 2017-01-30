@@ -5,6 +5,7 @@ cd `dirname $0`
 if [ -d /sd/conf ]
 then 
 	cp ./conf/ios.conf /sd/conf
+	cp ./conf/colct.db /sd/conf
 fi
 
 while [ "1" = "1" ]
