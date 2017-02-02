@@ -42,7 +42,8 @@ var registerColumns=[
             var flash='';
             
             if (full.needFlash) flash='<svg class="glyph stroked upload"><use xlink:href="#stroked-upload"/></svg>';
-            return flash+'<svg class="glyph stroked trash"><use xlink:href="#stroked-trash"/></svg>';
+            var rst='<svg class="glyph stroked pen tip"><use xlink:href="#stroked-pen-tip"/></svg>';
+            return flash+rst+'<svg class="glyph stroked trash"><use xlink:href="#stroked-trash"/></svg>';
         }
 
 	}
@@ -85,6 +86,12 @@ websocket.on('register',function(register){
 $(document).on('click','.registertable svg.trash',function(e){
     var id=$(this).closest('tr').attr('id');
     websocket.emit('register',{hwaddr: id, active: false});
+
+});
+
+$(document).on('click','.registertable svg.pen',function(e){
+    var id=$(this).closest('tr').attr('id');
+    websocket.emit('reset',{hwaddr: id});
 
 });
 

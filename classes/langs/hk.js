@@ -458,6 +458,21 @@ module.exports = function(com,ini,logger,callback) {
                 
                 return;
             }
+            if (ctx=='reset') {
+                var mac=macaddress(data.ip,data.homekameleon);
+                send({
+                    cmd: 'R',
+                    dev: data.hwaddr,
+                    dst: data.address,
+                    sub: 0,
+                    val: data.httpport,
+                    src: nocolon(mac.mac),
+                    ctx: ctx
+                },delay);
+                
+                return;
+            }
+
             
             if (typeof(data.value)=='undefined') data.value=toggle(data);
             

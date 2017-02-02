@@ -206,6 +206,17 @@ var Web = function(com,ini,logger,callback) {
             }
             
         });
+        
+        websocket.on('reset',function(buffer){
+            if (!session.loggedin) return;
+            if (buffer==null || buffer.hwaddr==null) return;
+            var b=global.clone(database.buffer.set(buffer));
+            if (b!=null) {
+                b.httpport=com.options().port;
+                callback('reset',b);
+            }
+            
+        });
 
         websocket.on('register',function(buffer){
             if (!session.loggedin) return;

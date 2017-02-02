@@ -288,6 +288,10 @@ var Script=function(logger) {
         
         firmware: function(device,module) {
             self.emit(device,device,module,0,'firmware');
+        },
+        
+        reset: function(device,module) {
+            self.emit(device,device,module,0,'reset');
         }
     }
     

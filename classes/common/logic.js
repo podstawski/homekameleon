@@ -193,6 +193,10 @@ var Logic = function(script,logger)
                     startInputTimer(15*1000);
                     break;
                 
+                case 'reset':
+                    script.reset(original_device,data);
+                    break;
+                
                 case 'read':
                 case 'toggle':
                     if (!data.io || data.io.length==0) {
