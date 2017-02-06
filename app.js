@@ -181,3 +181,7 @@ if (global.gc) {
 	},10000);
 }
 
+setInterval(function(){
+	fs.closeSync(fs.openSync('/tmp/homekameleon.hb', 'w'));
+},5000);
+
