@@ -38,5 +38,5 @@ fi
 sleep 10
 /homekameleon/homekameleon.sh &   
 
-touch /tmp/bucik
+
 exit 0

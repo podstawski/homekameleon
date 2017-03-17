@@ -136,6 +136,7 @@ var drawConditions = function (selection) {
 		html+='<option value="value" '+(cond[0]=='value'?'selected':'')+'>stan</option>';
 		html+='<option value="time" '+(cond[0]=='time'?'selected':'')+'>czas</option>';
 		html+='<option value="temp_change" '+(cond[0]=='temp_change'?'selected':'')+'>T: 1,-1</option>';
+		html+='<option value="temp_change_inv" '+(cond[0]=='temp_change_inv'?'selected':'')+'>T!: 1,-1</option>';
 		
 		
 		

@@ -1,9 +1,6 @@
 fsync /sd/conf/*
 fsync /sd/logs/*
-if [ -s /sd/conf/ios.json ]
-then
-	cp /sd/conf/*.db /homekameleon/conf
-	cp /sd/conf/ios.json /homekameleon/conf
-	fsync /homekameleon/conf
-fi
+cp /sd/conf/*.db /homekameleon/conf
+cp /sd/conf/ios.json /homekameleon/conf
+fsync /homekameleon/conf
 touch /tmp/homekameleon.fsync
