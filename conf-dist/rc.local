@@ -1,0 +1,25 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+
+mkdir /tmp/.npm
+mkdir /sd 2>/dev/null
+#mount /dev/mmcblk0p1 /sd 2>/dev/null
+
+if [ ! "`df|grep mmcblk0p1`" ]
+then
+	mv /sd /sd2
+	mkdir /tmp/sd 2>/dev/null 
+	ln -s /tmp/sd /sd
+fi
+
+mkdir /sd/logs 2>/dev/null
+mkdir /sd/conf 2>/dev/null
+
+ifconfig eth0:1 10.10.20.10
+cp /homekameleon/conf/ios.json /sd/conf
+cp /homekameleon/conf/colct.db /sd/conf
+/homekameleon/homekameleon.sh &   
+sleep 60
+git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
+exit 0
