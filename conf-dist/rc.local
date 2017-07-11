@@ -20,6 +20,6 @@ ifconfig eth0:1 10.10.20.10
 cp /homekameleon/conf/ios.json /sd/conf
 cp /homekameleon/conf/colct.db /sd/conf
 /homekameleon/homekameleon.sh &   
-sleep 60
+sleep 300 
 git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
 exit 0
