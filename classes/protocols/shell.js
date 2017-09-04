@@ -30,6 +30,7 @@ var Shell = function(options,logger) {
             
             try {
                 var e=exec(cmd,cmd_args,function (error, stdout, stderr) {
+			logger.log(cmd+' '+data.value+(error?' FAIL':' OK'),'shell-exec');
                     if (!error) {
                         if (stdout.length>0) data.value=stdout;
                         self.emit('data',data,ctx);

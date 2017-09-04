@@ -6,6 +6,11 @@ done
 wait
 
 ip=`cat /proc/net/arp | grep $1 | awk '{print $1}'`
+echo "$1 = $ip" >/tmp/piwnica
+
 etherwake $1
 
-ssh -o ConnectTimeout=3 pudel@$ip sudo halt -p
+if [ "$ip" ]
+then
+	ssh -o ConnectTimeout=3 pudel@$ip sudo halt -p
+fi
