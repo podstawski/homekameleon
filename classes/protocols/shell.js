@@ -34,7 +34,9 @@ var Shell = function(options,logger) {
                     if (!error) {
                         if (stdout.length>0) data.value=stdout;
                         self.emit('data',data,ctx);
-                    }
+                    } else {
+				logger.log(error,'shell-exec');
+			}
                 });   
             } catch(e) {
                 logger.log(e,'shell-exec');
