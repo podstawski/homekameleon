@@ -14,7 +14,8 @@
                 "port": "4001",
 		"wait4nl": true,
                 "latency": 20
-            }
+            },
+	    "useradd": true
         },
         {
             "id": "VAR",
