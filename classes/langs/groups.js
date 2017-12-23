@@ -83,18 +83,20 @@ module.exports = function(com,ini,logger,callback) {
                 database.ios.get(data,function(rec){
                     var related=rec.related||[];
                     for (var i=0; i<related.length; i++) {
-                        database.ios.get(related[i],function(rec2){
-                            if (rec2.device==deviceId && parseInt(rec2.address)<parseInt(rec.address) ) return; 
+			setTimeout(function(i){
+                        	database.ios.get(related[i],function(rec2){
+                            		if (rec2.device==deviceId && parseInt(rec2.address)<parseInt(rec.address) ) return; 
                             
                             
-                            var set={
-                                haddr: rec2.haddr,
-                                device: rec2.device,
-                                value: data.value
-                            };
+                            		var set={
+                                		haddr: rec2.haddr,
+                                		device: rec2.device,
+                                		value: data.value
+                            		};
                     
-                            callback('set',set,ctx);
-                        });
+                            		callback('set',set,ctx);
+                        	});
+			},i*200,i);
                     }
                 });
             },delay*1000,id);
