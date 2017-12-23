@@ -316,11 +316,12 @@ module.exports = function(com,ini,logger,callback) {
                 unit: inputoroutput=='t'?'°C':''
             });
         } else {
-           
+          /* 
             database.ios.set({
                 haddr: haddr,
                 value: 0
             });
+	  */
         }
         
     };

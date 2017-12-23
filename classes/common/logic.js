@@ -316,10 +316,10 @@ var Logic = function(script,logger)
                 
                 case 'set':
                     if (io==null) return;
-                    //if (io_cp.value!=data.value) {
+                    if (io_cp.value!=data.value) {
                         startInputTimer(300);
                         script.set(io,data.value,ctx);
-                    //}
+                    }
                     break;
                 
                 case 'script':
