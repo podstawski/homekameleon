@@ -14,7 +14,7 @@ module.exports = function(com,ini,logger,callback) {
             setTimeout(function(a){
                 com.query(temps.data[a].address);
                 sem++;
-            },i*(tInterval/temps.data.length),i);
+            },i*(tInterval/(temps.data.length)),i);
             
         }
     }
