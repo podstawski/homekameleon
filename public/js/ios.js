@@ -15,17 +15,23 @@ var iosColumns=[
     { title: "Urządzenie",data: "device"},
     { title: "Adres",data: "address"}, 
     {
-		title: 'Stan',
+	title: 'Stan<span class="hidden-xs"><br/>obecny/poprzedni/czas</span>',
 		data: "value",
 		sortable: false,
 		width: "10%",		
 		render: function ( data, type, full, meta ) {
-            if (data==1 || data==0) {
-                var cl=data==1?' on':'';
-                return '<svg class="glyph stroked flag'+cl+'"><use xlink:href="#stroked-flag"/></svg>';
-            } else {
-                return data+' '+(full.unit?full.unit:'');  
-            }
+
+			t=(Date.now()-full.last)/1000;
+			if (t>600) t=Math.round(t/60)+'m';
+			else t=Math.round(t)+'s';
+			let state='<span class="hidden-xs"><br/>'+full.value+'/'+(full.lastValue||'?')+'/'+t+'</span>';
+
+			if (data==1 || data==0) {
+                		var cl=data==1?' on':'';
+                		return '<svg class="glyph stroked flag'+cl+'"><use xlink:href="#stroked-flag"/></svg>'+state;
+            		} else {
+                		return data+' '+(full.unit?full.unit:'')+'state';  
+            		}
             
 		}
 	},

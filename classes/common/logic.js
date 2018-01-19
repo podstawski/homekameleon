@@ -340,6 +340,7 @@ var Logic = function(script,logger)
                     }
                     data.last=io.last||0;
                     data.eval=io.eval||null;
+                    data.lastValue=io.value||null;
                     evaluate(data);
                     evaluate_temp(data,io);
                     db.ios.set(data);
@@ -363,6 +364,7 @@ var Logic = function(script,logger)
                     
                     data.last=io.last||0;
                     data.eval=io.eval||null;
+                    data.lastValue=io.value||null;
                     var evaluated=evaluate(data);
                     evaluate_temp(data,io);
                     db.ios.set(data);
