@@ -22,7 +22,8 @@ var iosColumns=[
 		render: function ( data, type, full, meta ) {
 
 			t=(Date.now()-full.last)/1000;
-			if (t>600) t=Math.round(t/60)+'m';
+			if (t>3600) t=Math.round(t/3600)+'h';
+			else if (t>600) t=Math.round(t/60)+'m';
 			else t=Math.round(t)+'s';
 			let state='<span class="hidden-xs"><br/>'+full.value+'/'+(full.lastValue||'?')+'/'+t+'</span>';
 
