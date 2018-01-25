@@ -9,7 +9,8 @@ then
 fi
 
 # --max_old_space_size=30
-node --expose-gc --max_old_space_size=45 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err 
+node --expose-gc --max_old_space_size=45 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+sleep 10
 
 while [ "1" = "1" ]
 do
@@ -23,7 +24,7 @@ do
 		kill -9 $pid
 		sleep 1
 		echo "Restart `date`" >>/tmp/homekameleon.err
-		node --expose-gc --max_old_space_size=45 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err 
+		node --expose-gc --max_old_space_size=45 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
 		sleep 10
 	fi
 
