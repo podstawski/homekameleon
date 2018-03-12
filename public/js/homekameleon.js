@@ -145,7 +145,9 @@ var drawConditions = function (selection) {
 		html+='<select class="cond_eq">';
 		html+='<option value="=" '+(cond[1]=='='?'selected':'')+'>=</option>';
 		html+='<option value=">" '+(cond[1]=='>'?'selected':'')+'>&gt;</option>';
+		html+='<option value=">=" '+(cond[1]=='>='?'selected':'')+'>&gt;=</option>';
 		html+='<option value="<" '+(cond[1]=='<'?'selected':'')+'>&lt;</option>';
+		html+='<option value="<=" '+(cond[1]=='<='?'selected':'')+'>&lt;=</option>';
 		html+='<option value="!=" '+(cond[1]=='!='?'selected':'')+'>!=</option>';
 		
 		html+='</select>';
