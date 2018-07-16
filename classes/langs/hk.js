@@ -18,6 +18,7 @@ var pos_crc=7;
 var pos_inputs = 2;
 var pos_outputs = 3;
 var pos_temps = 4;
+var pos_temps_addrs = 5;
 
 
 
@@ -349,11 +350,17 @@ module.exports = function(com,ini,logger,callback) {
             restore_ios(data.address,'o',i+1);
         }
         
+        var temps_addrs;
+        if (typeof(data.temps_addrs)!='undefined')
+            temps_addrs = data.temps_addrs.split(',');
+        else
+            temps_addrs = [1,2,3,4,5,6,7,8,9];
+            
         for (var i=0; i<parseInt(data.temps); i++) {
-            restore_ios(data.address,'t',i+1);
+            restore_ios(data.address,'t',temps_addrs[i]);
         }
 
-	var line=['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip,nocolon(data.address)];
+        var line=['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip,nocolon(data.address)];
         
         com.send({
             address: data.ip,
@@ -504,6 +511,7 @@ module.exports = function(com,ini,logger,callback) {
                             inputs: line[pos_inputs],
                             outputs: line[pos_outputs],
                             temps: line[pos_temps],
+                            temps_addrs: typeof(line[pos_temps_addrs])=='undefined'?'1,2,3,4':line[pos_temps_addrs],
                             active: false,
                             device: deviceId,
                             homekameleon: homekameleon
@@ -516,10 +524,13 @@ module.exports = function(com,ini,logger,callback) {
                             inputs: line[pos_inputs],
                             outputs: line[pos_outputs],
                             temps: line[pos_temps],
+                            temps_addrs: typeof(line[pos_temps_addrs])=='undefined'?'1,2,3,4':line[pos_temps_addrs],
                             device: deviceId
                         });
                         if (b.active) initack(b);
                     }
+                    
+                    
                     
                 } else {
                     var crc2=crc(line);
