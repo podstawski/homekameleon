@@ -120,7 +120,7 @@ websocket.once('collections',function(tables){
         for (var id in tables) {
             tables[id].id=id.replace(/[,]/g,'_');
             tables[id].rel=id;
-            tables[id].icon=tables[id].value.indexOf('°C')>0?'temp.png':'pressure.png';
+            tables[id].icon=typeof(tables[id].value)==='string' && tables[id].value.indexOf('°C')>0?'temp.png':'pressure.png';
             if (tables[id].temp==-1) {
                 tables[id].panel='blue';
             }

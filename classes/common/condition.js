@@ -8,21 +8,32 @@ module.exports = function (db,condition) {
     
     var field=condition.condition[0];
     if (typeof(data[field])=='undefined') data[field]='';
+    var comp = condition.condition[2];
     
+    if (typeof(comp)=='string' && comp.substr(0,1)=='$') {
+	var data2 = db[table].get(comp.substr(1));
+	if (typeof(data2.value)!='undefined') comp=data2.value;
+    }
     switch (condition.condition[1]) {
         case '=':
-            return data[field] == condition.condition[2];
+            return data[field] == comp;
 
         case '<>':
         case '!=':
-            return data[field] != condition.condition[2];
+            return data[field] != comp;
     
         case '>':
-            return data[field] > condition.condition[2];
+            return data[field] > comp;
 
         case '<':
-            return data[field] < condition.condition[2];
+            return data[field] < comp;
         
+        case '>=':
+            return data[field] >= comp;
+
+        case '<=':
+            return data[field] <= comp;
+
         default:
             return false;
     }
