@@ -48,7 +48,7 @@
                 "address": 24,
                 "driver": "ds2482"
             },
-            "active": true
+            "active": false
         },
         {
             "id": "EMU",
@@ -59,7 +59,7 @@
                 "port": "4001",
                 "latency": 20
             },
-            "active": 1
+            "active": false
         },
         {
             "id": "WEB",
