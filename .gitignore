@@ -1,9 +1,9 @@
-node_modules/
 conf
+node_modules/
+node_modules
 logs/
 logs
 app.pid
 npm-debug.log
 ini.js
 app.pid
-wifi

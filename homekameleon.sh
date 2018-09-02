@@ -2,10 +2,10 @@
 
 cd `dirname $0`
 
-if [ -d /sd/conf ]
+if [ -d /tmp/conf ]
 then 
-	cp ./conf/ios.json /sd/conf
-	cp ./conf/colct.db /sd/conf
+	cp ./conf/ios.json /tmp/conf
+	cp ./conf/colct.db /tmp/conf
 fi
 
 # --max_old_space_size=30

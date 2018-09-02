@@ -6,6 +6,8 @@ mkdir /tmp/.npm
 mkdir /sd 2>/dev/null
 mount /dev/mmcblk0p1 /sd 2>/dev/null
 
+sleep 3
+
 if [ ! "`df|grep mmcblk0p1`" ]
 then
 	mv /sd /sd2
@@ -13,8 +15,8 @@ then
 	ln -s /tmp/sd /sd
 fi
 
-mkdir /sd/logs 2>/dev/null
-mkdir /sd/conf 2>/dev/null
+mkdir /tmp/logs 2>/dev/null
+mkdir /tmp/conf 2>/dev/null
 
 if [ ! -f /homekameleon/conf/conf.json ]
 then
@@ -32,11 +34,12 @@ then
     sleep 5
     udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
     
-    sleep 5
-    git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
+    sleep 20
+    #git clone https://github.com/podstawski/homekameleon /tmp/homekameleon
 fi
 sleep 10
-/homekameleon/homekameleon.sh &   
+#/homekameleon/homekameleon.sh &   
+
 
 
 exit 0

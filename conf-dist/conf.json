@@ -2,7 +2,7 @@
     "uuid": "PR",
     "commandpass": "tOjestMoJdom",
     "lang": "pl",
-    "collection" : "/sd/conf/colct.db",
+    "collection" : "/tmp/conf/colct.db",
     "devices": [
         {
             "id": "HQP",
@@ -154,7 +154,7 @@
       
         "ios": {
             "model": "/homekameleon/classes/common/json",
-            "file":"/sd/conf/ios.json",
+            "file":"/tmp/conf/ios.json",
             "index": ["haddr"]
         },
         "modules": {

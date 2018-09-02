@@ -1,2 +1,2 @@
-0	1	*	*	*	rm -f /sd/logs/frame.txt /sd/logs/perform.txt /sd/logs/homiq.txt /sd/logs/store.txt /sd/logs/cal.txt 
-5	0	*	*	*	/homekameleon/fsync.sh
+0	1	*	*	*	rm -f /tmp/logs/frame.txt /tmp/logs/perform.txt /tmp/logs/homiq.txt /tmp/logs/store.txt /tmp/logs/cal.txt 
+5	0,8,10,16,22	*	*	*	/homekameleon/fsync.sh
