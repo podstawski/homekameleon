@@ -81,7 +81,8 @@
             	"language": "hk",                                
             	"com":{                                          
                 	"port": "26712",                             
-                	"latency": 0                                 
+                	"latency": 0,
+			"ip_exclude": ["10.10.20.100"]                                 
             	}  
 	},
         {

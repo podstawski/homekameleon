@@ -42,7 +42,14 @@ var Udp = function(options,logger) {
             
        
             for (var i=0; i<ifaces[k].length; i++) {
-                if (ifaces[k][i].family=='IPv4') ips.push(ifaces[k][i]);
+                if (ifaces[k][i].family=='IPv4') 
+		{
+			if (options.ip_exclude && options.ip_exclude.indexOf(ifaces[k][i].address)!=-1) {
+				delete(ifaces[k]);
+				break;
+			}
+			ips.push(ifaces[k][i]);
+		}
             }
     
     

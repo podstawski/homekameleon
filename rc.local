@@ -24,6 +24,11 @@ then
 	cp /homekameleon/conf-dist/pl.json /homekameleon/conf
 fi
 
+if [ -f /homekameleon/eth0.inet ]
+then
+	ifconfig eth0 `cat /homekameleon/eth0.inet`
+fi
+
 if [ -f /homekameleon/wifi ]
 then
     wifi=`cat /homekameleon/wifi`
@@ -32,17 +37,14 @@ then
     
     /sbin/ap_client ra0 apcli0 $ssid $pass mediatek:orange:wifi 
     sleep 5
-    udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
-    sleep 2
     if [ -f /homekameleon/static.inet ]
     then
-        ifconfig apcli0:1 `cat /homekameleon/static.inet`
+        /homekameleon/static.inet
+    else
+        udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
     fi
     
 fi
-sleep 10
-#/homekameleon/homekameleon.sh &   
+sleep 5
+/homekameleon/homekameleon.sh &   
 
-
-
-exit 0
