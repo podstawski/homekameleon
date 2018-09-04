@@ -1,0 +1,2 @@
+ifconfig apcli0 192.168.0.1
+route add default gateway 192.168.0.254
