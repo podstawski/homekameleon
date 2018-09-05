@@ -18,13 +18,25 @@ var registerColumns=[
         className: 'name',
     },
 	{ title: "IP",data: "ip"},
+    {
+		title: 'HB',
+		data: "hb",
+        width: "13%",
+		sortable: false,		
+		render: function ( data, type, full, meta ) {
+			
+            if (!data) return '';
+            return new moment(data).format('DD-MM-YYYY, HH:mm:ss');
+		}
+	},
     { title: "We",data: "inputs", width: "5%"},
     { title: "Wy",data: "outputs", width: "5%"},
     { title: "Te",data: "temps", width: "5%"},
     {
 		title: 'WiFi',
 		data: "homekameleon",
-		sortable: false,		
+		sortable: false,
+        width: "16%",
 		render: function ( data, type, full, meta ) {
 			//var ch=data==1?'checked':'';
             

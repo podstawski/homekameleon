@@ -35,6 +35,7 @@ module.exports = function(com,ini,logger,callback) {
     var my_lan_ip='192.168.100.1';
     var my_wan_ip='';
 
+
         
     var nocolon = function(txt) {
       
@@ -62,7 +63,7 @@ module.exports = function(com,ini,logger,callback) {
             for (var tempI = 8; tempI; tempI--) {
                 var sum = (crc ^ extract) & 0x01;
                 crc >>= 1;
-                if (sum!=0) {
+                if (sum!==0) {
                     crc ^= 0x8C;
                 }
                 extract >>= 1;
@@ -84,6 +85,14 @@ module.exports = function(com,ini,logger,callback) {
         settings({hash: rid()});
     }
 
+    
+    var hb_received = function(line) {
+        var slave=database.buffer.get({
+            hwaddr: deviceId+'-'+line[pos_src]
+        });
+        
+        slave.hb = Date.now();
+    }
     
     var deletefuture = function (params) {
         for (var i=0; i<sendQueue.length; i++) {
@@ -539,6 +548,7 @@ module.exports = function(com,ini,logger,callback) {
                         logger.log('Wrong CRC','error');
                         return;
                     }
+                    hb_received(line);
                     
                     if (line[pos_typ]=='A') {
                         var search = search_str(line,false);
