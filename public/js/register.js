@@ -26,7 +26,7 @@ var registerColumns=[
 		render: function ( data, type, full, meta ) {
 			
             if (!data) return '';
-            return new moment(data).format('DD-MM-YYYY, HH:mm:ss');
+            return new moment(data).format('DD-MM-YY, HH:mm:ss');
 		}
 	},
     { title: "We",data: "inputs", width: "5%"},
