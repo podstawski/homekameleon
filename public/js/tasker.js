@@ -17,6 +17,8 @@ $.post(url,data,function(data){
     for (var i=0; i<vars.length; i++ ) {
         var k=vars[i];
         var postfix = '';
+        if (typeof(data[k])=='undefined')
+            continue;
         
         if (k=='idle' && data[k]) {
             postfix=' sek.';
@@ -34,7 +36,7 @@ $.post(url,data,function(data){
             }
             data[k]=data[k].toString()+postfix;
         }
-        if (data[k]) result.push(k+'='+data[k]);
+        result.push(k+'='+data[k]);
         result.push( 'PROG='+Math.round(40+50*(i/vars.length)).toString() );
     }
     setGlobal("ZooperData",result.join('|'));
