@@ -32,6 +32,7 @@ $.post(url,data,function(data){
                 data[k]=Math.round(parseFloat(data[k])/24);
                 postfix=' dni';
             }
+            data[k]=data[k].toString()+postfix;
         }
         if (data[k]) result.push(k+'='+data[k]);
         result.push( 'PROG='+Math.round(40+50*(i/vars.length)).toString() );
