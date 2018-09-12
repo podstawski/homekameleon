@@ -9,7 +9,7 @@ var data = {
 
 var url='http://'+global('Homiq_host')+'/read';
 $.post(url,data,function(data){
-    var result=["PROG=20"];
+    var result=["PROG=30"];
     if (typeof(data)=='string')
         data=JSON.parse(data);
 
@@ -33,7 +33,8 @@ $.post(url,data,function(data){
                 postfix=' dni';
             }
         }
-        result.push(data[k]?k+'='+data[k]+postfix:'');
+        if (data[k]) result.push(k+'='+data[k]);
+        result.push('PROG='+Math.round(40+50*(i/vars.length)));
     }
     setGlobal("ZooperData",result.join('|'));
     exit();
