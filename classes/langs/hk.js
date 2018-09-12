@@ -91,7 +91,7 @@ module.exports = function(com,ini,logger,callback) {
             hwaddr: deviceId+'-'+line[pos_src]
         });
         
-        slave.hb = Date.now();
+        if (slave) slave.hb = Date.now();
     }
     
     var deletefuture = function (params) {
