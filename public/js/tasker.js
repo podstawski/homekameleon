@@ -6,9 +6,24 @@ var data = {
     io: vars
 };
 
+var host=global('Homiq_host');
+var hosta=host.split('@');
+var auth=null;
+if (hosta.length==2) {
+    auth=hosta[0].split(':');
+    host=hosta[1];
+}
+var url='http://'+host+'/read';
 
-var url='http://'+global('Homiq_host')+'/read';
-$.post(url,data,function(data){
+
+$.ajax({
+    url: url,
+    data: data,
+    beforeSend: function( xhr ) {
+        if (auth!==null)
+            xhr.setRequestHeader('Authorization', 'Basic '+btoa(auth[0]+':'+auth[1])); 
+    }
+}).done(function(data){
     var result=["PROG=30"];
     if (typeof(data)=='string')
         data=JSON.parse(data);
