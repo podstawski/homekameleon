@@ -28,6 +28,7 @@ var Model = function(opt,logger) {
     self=this;
     var inited=false;
     var triggers={};
+    var aliastab={};
     
     if (logger==null) logger=console;
     
@@ -114,6 +115,8 @@ var Model = function(opt,logger) {
             data={};
             for (var i=0;i<json.length;i++) {
                 data[createIndex(json[i])] = json[i];
+                if (json[i]._alias)
+                    aliastab[json[i]._alias] = json[i];
             }
             lastSave=Date.now();
         } catch (e) {
@@ -261,6 +264,26 @@ var Model = function(opt,logger) {
     };
     
     
+    var getAll = function(cb){
+        var ret={recordsTotal:0,data:getData()};
+        ret.recordsTotal=ret.data.length;
+        if (cb!=null) cb(ret);
+        else return ret;  
+    };
+    
+    var data_get = function (idx,cb) {
+        var ret=null;
+        
+        if (aliastab[idx]) {
+            ret=aliastab[idx];
+        } else {
+            idx=createIndex(idx);
+            if (typeof(data[idx])!='undefined') ret=data[idx];
+        }
+        if (cb) cb(ret);
+        return ret;
+    };
+    
     return {
         init: function (cb) {
             self.save();
@@ -288,23 +311,9 @@ var Model = function(opt,logger) {
             
         },
         
-        getAll: function(cb) {
-            var ret={recordsTotal:0,data:getData()};
-            ret.recordsTotal=ret.data.length;
-            if (cb!=null) cb(ret);
-            else return ret;    
-        },
-        
-        get: function(idx,cb) {
-            idx=createIndex(idx);
-            
-            
-            var ret=null;
-            if (typeof(data[idx])!='undefined') ret=data[idx];
-            
-            
-            if (cb) cb(ret);
-            else return ret;
+        getAll: getAll,
+        get:  function (idx,cb){
+            return data_get(idx,cb);
         },
         
         select: function (where,order,cb,ctx) {
@@ -394,6 +403,19 @@ var Model = function(opt,logger) {
         
         trigger: function(field,cb){
             return trigger(field,cb);
+        },
+        
+        alias: function(id,alias,cb) {
+            data_get(id,function(r){
+                if (!r) return;
+                if (r.alias && aliastab[r.alias])
+                    delete(aliastab[r.alias]);
+                
+                data_set({_alias:alias},id,function(r){
+                    aliastab[alias] = r;
+                    if (cb) cb(r);
+                });
+            });
         }
  
         

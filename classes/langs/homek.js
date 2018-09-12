@@ -350,6 +350,12 @@ var Web = function(com,ini,logger,callback) {
         
         });
 
+        websocket.on('alias',function(ch){
+            if (!database[ch.d]) return;
+            database[ch.d].alias(ch.id,ch.a,function(r){
+                websocket.emit('alias',r,ch.d);
+            });
+        });
         
         websocket.on('chart',function(tabs,from,period,id){
             var now=Date.now();    
@@ -462,19 +468,21 @@ var Web = function(com,ini,logger,callback) {
         //Web router
         'request': function(request,response) {
             var path = url.parse(request.url).pathname;
+            
  
             switch(path){
-		case '/logout':
-			response.statusCode = 401;
-			response.setHeader('Location','index.html');			
+                case '/logout':
+                    response.statusCode = 401;
+                    response.setHeader('Location','index.html');			
                     response.end();            
-			break;
+                    break;
                 case '/say':
                 case '/read':
                 case '/toggle':    
                     var data=JSON.parse(JSON.stringify(request.query));
                     data.cb = function (txt) {
-                        response.write(txt+'');
+                        if (typeof(txt)=='string') response.write(txt+'');
+                        else response.write(JSON.stringify(txt));
                         response.end(); 
                     }
                 

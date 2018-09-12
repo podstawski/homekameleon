@@ -12,7 +12,14 @@ $(window).on('resize', function () {
 
 var iosColumns=[
 	{ title: "Nazwa",data: "name"},
-    { title: "Urządzenie",data: "device"},
+    {
+        title: "Identyfikator<br/>alias",
+        data: "haddr",
+        render: function ( data, type, full, meta ) {
+            var alias = full._alias?full._alias:data;
+            return data+'<br/><span class="haddr">'+alias+'</span>';
+        }
+    },
     { title: "Adres",data: "address"}, 
     {
 	title: 'Stan<span class="hidden-xs"><br/>obecny/poprzedni/czas</span>',
@@ -306,3 +313,32 @@ $(document).on('click','.ios-add button', function(){
     websocket.emit('ios-device',{device:$(this).attr('rel'),name:$('.dataTables_filter input').val()});
     $("html, body").animate({ scrollTop: $('.iostable').offset().top-160 }, 1000);    
 });
+
+$(document).on('click','.iostable span.haddr', function(e) {
+    var text=$(this).html();
+    if (text.indexOf('<input')==-1) {
+        var inp = $(this).html('<input value="'+text+'" old="'+text+'" type="text" class="haddr" />');
+        setTimeout(function(){
+            inp.find('input').trigger('click');
+        },300);
+        
+    }
+});
+
+$(document).on('focusout','.iostable input.haddr',function(e){
+    var v=$(this).val();
+    var o=$(this).attr('old');
+    if (v.trim()==o.trim()) $(this).parent().html(v);
+    else {
+        var id=$(this).closest('tr').attr('id');
+        $(this).css('border','red solid 1px');
+        var ch={d:'ios',id: id, a: v};
+        websocket.emit('alias',ch);
+    }
+});
+
+websocket.on('alias',function(d){
+    var inp=$('.iostable #'+d.haddr+' input');
+    inp.parent().html(inp.val());
+});
+

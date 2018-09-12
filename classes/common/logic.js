@@ -2,6 +2,7 @@ var condition=require('./condition');
 var checkactive=require('./checkactive');
 var Levenshtein=require('./levenshtein');
 var os = require('os');
+var async = require('async');
 
 var Logic = function(script,logger)
 {
@@ -204,31 +205,40 @@ var Logic = function(script,logger)
                         break;
                     }
                     
-                    io=getio(data.io);
-                    
-                    if (!io) {
-                        data.cb(ini.dictionary.dict.error);
-                        break;
-                    }
-                    
-                    var io2=global.clone(io);
-                    
-                    if (type=='read') {
-                        io2.last=io.last||0;
-                        if(data.e) evaluate(io2);
-                        var res=io2.value;
-                        if (io2.unit && io2.unit.length>0) {
-                            res+=' '+io2.unit;
+                    var ios = data.io.split(',');
+                    var result={};
+                    async.map(ios,function(_io,next){
+                        io=getio(_io);
+                        
+                        if (!io) {
+                            return next(data.cb(ini.dictionary.dict.error));
                         }
-                        data.cb(res);
-                    }
-                    
-                    if (type=='toggle') {
-                        startInputTimer(500);
-                        script.toggle(io2);
-                        data.cb('OK');
-                    }
-                    
+                        
+                        var io2=global.clone(io);
+                        
+                        if (type=='read') {
+                            io2.last=io.last||0;
+                            if(data.e) evaluate(io2);
+                            var res=io2.value;
+                            if (io2.unit && io2.unit.length>0) {
+                                res+=' '+io2.unit;
+                            }
+                            result[_io] = res;
+                            return next();
+                        }
+                        
+                        if (type=='toggle') {
+                            startInputTimer(500);
+                            script.toggle(io2);
+                            result[_io] = 'OK';
+                        }
+                                            
+                    },function(err){
+                        if (err)
+                            return data.cb(err);
+                        data.cb(result);
+                    });
+
                     break;
                 
                 case 'command':

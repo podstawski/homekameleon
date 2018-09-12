@@ -7,6 +7,7 @@ var express = require('express');
 var crypto = require('crypto');
 
 
+
 function parseCookies (rc) {
     var list = {};
     rc && rc.split(';').forEach(function( cookie ) {
@@ -120,7 +121,22 @@ var Httpd = function(options,logger) {
             app.get('/*', function (request, response) {
                 language.request(request, response);
             });
+    
             
+            app.post('/*', function (request, response) {
+                request.body='';
+                request.on('data',function(chunk){
+                    request.body+=chunk;
+                });
+                request.on('end',function(chunk){
+                    var body = request.body;
+                    request.query = JSON.parse('{"' + body.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value)
+                               { return key===""?value:decodeURIComponent(value) }
+                    );
+                    language.request(request, response);
+                });
+                
+            });
             
             httpServer=app.listen(options.port, function () {
                 logger.log('Listening on http://localhost:'+options.port,'net');

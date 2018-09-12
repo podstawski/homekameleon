@@ -21,6 +21,15 @@ form .series {
 	color: red;
 }
 
+.iostable .haddr {
+	font-size: 10px;
+}
+
+.iostable .haddr input {
+	outline: none;
+	width: 100%
+}
+
 
 #edit-script .modal-header input {
     width: 100%;
