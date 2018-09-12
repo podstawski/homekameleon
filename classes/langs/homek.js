@@ -481,13 +481,15 @@ var Web = function(com,ini,logger,callback) {
                 case '/toggle':    
                     var data=JSON.parse(JSON.stringify(request.query));
                     data.cb = function (txt) {
-			try {
-                        	if (typeof(txt)=='string') response.write(txt+'');
-                        	else response.write(JSON.stringify(txt));
+                        try {
+                        	if (typeof(txt)=='string') response.write(txt);
+                        	else if(typeof(txt)=='object') response.write(JSON.stringify(txt));
+                            else response.write(txt.toString());
                         	response.end(); 
-			} catch (e) {
-			}
-                    }
+                        } catch (e) {
+                            console.log(e);
+                        }
+                    };
                 
                     if ((ini.commandpass||Date.now())!=(request.query.p||0) ) {
                         data.cb('Proszę podać hasło!');
