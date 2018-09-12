@@ -208,6 +208,7 @@ var Logic = function(script,logger)
                     var ios = data.io.split(',');
                     var result={};
                     async.map(ios,function(_io,next){
+			_io=_io.trim();
                         io=getio(_io);
                         
                         if (!io) {
