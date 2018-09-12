@@ -36,18 +36,19 @@ $.ajax({
         if (typeof(data[k])=='undefined')
             continue;
         
-        if (k=='idle' && data[k]) {
+        if (k=='idle') {
             postfix=' sek.';
-            if (parseFloat(data[k])>60) {
-                data[k]=Math.round(parseFloat(data[k])/60);
+	    data[k]=parseFloat(data[k]);
+            if (data[k]>60) {
+                data[k]=Math.round(data[k]/60);
                 postfix=' min.';
             }
-            if (parseFloat(data[k])>60) {
-                data[k]=Math.round(parseFloat(data[k])/60);
+            if (data[k]>60) {
+                data[k]=Math.round(data[k]/60);
                 postfix=' godz.';
             }
-            if (parseFloat(data[k])>24) {
-                data[k]=Math.round(parseFloat(data[k])/24);
+            if (data[k]>24) {
+                data[k]=Math.round(data[k]/24);
                 postfix=' dni';
             }
             data[k]=data[k].toString()+postfix;
