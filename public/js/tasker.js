@@ -34,7 +34,7 @@ $.post(url,data,function(data){
             }
         }
         if (data[k]) result.push(k+'='+data[k]);
-        result.push('PROG='+Math.round(40+50*(i/vars.length)));
+        result.push( 'PROG='+Math.round(40+50*(i/vars.length)).toString() );
     }
     setGlobal("ZooperData",result.join('|'));
     exit();

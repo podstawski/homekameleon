@@ -224,14 +224,15 @@ var Logic = function(script,logger)
                                 res+=' '+io2.unit;
                             }
                             result[_io] = res;
-                            return next();
                         }
                         
                         if (type=='toggle') {
                             startInputTimer(500);
                             script.toggle(io2);
                             result[_io] = 'OK';
+                        
                         }
+                        return next();
                                             
                     },function(err){
                         if (err)
