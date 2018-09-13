@@ -18,6 +18,7 @@ var url='http://'+host+'/read';
 
 $.ajax({
     url: url,
+    method: 'POST',
     data: data,
     beforeSend: function( xhr ) {
         if (auth!==null)
@@ -35,8 +36,9 @@ $.ajax({
         if (typeof(data[k])=='undefined')
             continue;
         
-        if (k=='idle') {
+        if (k==='idle') {
             postfix=' sek.';
+		var orig=data[k];
 	    data[k]=parseFloat(data[k]);
             if (data[k]>60) {
                 data[k]=Math.round(data[k]/60);
@@ -46,17 +48,19 @@ $.ajax({
                 data[k]=Math.round(data[k]/60);
                 postfix=' godz.';
             }
-            if (data[k]>24) {
+            if (data[k]>24 && postfix===' godz.') {
                 data[k]=Math.round(data[k]/24);
                 postfix=' dni';
             }
             data[k]=data[k].toString()+postfix;
+		//$.get('http://vc.webkameleon.com/tasker.php?o='+orig+'&n='+data[k]);
         }
         result.push(k+'='+data[k]);
         result.push( 'PROG='+Math.round(40+50*(i/vars.length)).toString() );
     }
     setGlobal("ZooperData",result.join('|'));
-    exit();
+    //exit();
+    setTimeout(exit,5);
     
 });
 
