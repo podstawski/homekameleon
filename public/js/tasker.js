@@ -3,7 +3,6 @@ var vars = global('Homiq_variables');
 
 var data = {
     p:global('Homiq_pass'),
-    e:1,
     io: vars
 };
 
@@ -33,26 +32,32 @@ $.ajax({
     vars=vars.split(',');
     for (var i=0; i<vars.length; i++ ) {
         var k=vars[i];
+        if (k.indexOf(':')>0) {
+            var _k=k.split(':');
+            k=_k[0];
+        }
         var postfix = '';
         if (typeof(data[k])=='undefined')
             continue;
         
         if (k==='idle') {
             postfix=' sek.';
-		var orig=data[k];
-	    data[k]=parseFloat(data[k]);
+            var orig=data[k];
+            data[k]=parseFloat(data[k]);
             if (data[k]>60) {
                 data[k]=Math.round(data[k]/60);
                 postfix=' min.';
+                if (data[k]>60) {
+                    data[k]=Math.round(data[k]/60);
+                    postfix=' godz.';
+                    if (data[k]>24) {
+                        data[k]=Math.round(data[k]/24);
+                        postfix=' dni';
+                    }
+                }                
             }
-            if (data[k]>60) {
-                data[k]=Math.round(data[k]/60);
-                postfix=' godz.';
-            }
-            if (data[k]>24 && postfix===' godz.') {
-                data[k]=Math.round(data[k]/24);
-                postfix=' dni';
-            }
+
+
             data[k]=data[k].toString()+postfix;
 		//$.get('http://vc.webkameleon.com/tasker.php?o='+orig+'&n='+data[k]);
         }
