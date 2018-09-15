@@ -62,7 +62,7 @@ $.ajax({
 		//$.get('http://vc.webkameleon.com/tasker.php?o='+orig+'&n='+data[k]);
         }
         result.push(k+'='+data[k]);
-        result.push( 'PROG='+Math.round(40+50*(i/vars.length)).toString() );
+        if (i%2==0) result.push( 'PROG='+Math.round(40+50*(i/vars.length)).toString() );
     }
     setGlobal("ZooperData",result.join('|'));
     //exit();
