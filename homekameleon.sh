@@ -17,15 +17,12 @@ while [ "1" = "1" ]
 do
 	echo "$counter" > /tmp/homekameleon.hb.test
 	touch /tmp/homekameleon.hb.test
-	sleep 20
+	sleep 30
 	if [ /tmp/homekameleon.hb.test -nt /tmp/homekameleon.hb ]
 	then
 		counter=`expr $counter + 1`
-		pid=`cat /tmp/homekameleon.pid`
-		#kill -TERM $pid
 		killall -TERM node
-		sleep 2
-		#kill -9 $pid
+		sleep 5
 		killall -9 node
 		sleep 1
 		echo "Restart `date`" >>/tmp/homekameleon.err
@@ -34,6 +31,13 @@ do
 			/homekameleon/fsync.sh 1
 			exit
 		fi
+		storage_size=`ls -al ./conf/ios.json |awk '{print $5}'`
+		tmp_size=`ls -al /tmp/conf/ios.json |awk '{print $5}'`
+		if [ $storage_size -gt $tmp_size ]
+		then
+			git chechout ./conf/buffer.json
+			cp ./conf/ios.json /tmp/conf
+		fi	
 		node --expose-gc --max_old_space_size=45 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
 		sleep 60
 	fi

@@ -209,6 +209,12 @@ var Logic = function(script,logger)
                     var result={};
                     async.map(ios,function(_io,next){
                         _io=_io.trim();
+			var f=false;
+			if (_io.indexOf(':')>0) {
+				var __io=_io.split(':');
+				_io=__io[0];
+				f=__io[1];
+			}
                         io=getio(_io);
                         
                         if (!io) {
@@ -220,7 +226,7 @@ var Logic = function(script,logger)
                         
                         if (type=='read') {
                             io2.last=io.last||0;
-                            if(data.e) evaluate(io2);
+                            if(data.e || f=='e') evaluate(io2);
                             var res=io2.value;
                             if (io2.unit && io2.unit.length>0) {
                                 res+=' '+io2.unit;
