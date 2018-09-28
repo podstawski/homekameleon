@@ -170,6 +170,7 @@ global.gcTime={start: 0, stop: 0, timers:{}};
 
 if (global.gc) {
 	setInterval(function(){
+		//console.log(global.gcTime.timers,global.inputEventCounter);
 		for (var k in global.gcTime.timers) 
 			if (global.gcTime.timers[k]>0) 
 				return;
@@ -178,9 +179,9 @@ if (global.gc) {
             		global.gcTime.start=Date.now();
             		global.gc();
             		global.gcTime.stop=Date.now();
+			global.gcTime.totalTime = global.gcTime.stop - global.gcTime.start;
+			//console.log('GC OK in',global.gcTime.totalTime,'ms.');
         	}
-        	//var load=os.loadavg()[0];
-		//if (load<0.4) global.gc();
 	},10000);
 }
 
