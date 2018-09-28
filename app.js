@@ -166,22 +166,25 @@ var cron = function() {
 var now=Math.round(Date.now()/1000);
 setTimeout(cron, 1000*(60-(now%60)));
 
-global.gcTime={start: 0, stop: 0};
+global.gcTime={start: 0, stop: 0, timers:{}};
 
 if (global.gc) {
 	setInterval(function(){
-        //console.log(global.inputEventCounter);
-        if (global.inputEventCounter==0) {
-            global.gcTime.start=Date.now();
-            global.gc();
-            global.gcTime.stop=Date.now();
-        }
-        //var load=os.loadavg()[0];
+		for (var k in global.gcTime.timers) 
+			if (global.gcTime.timers[k]>0) 
+				return;
+
+        	if (global.inputEventCounter==0) {
+            		global.gcTime.start=Date.now();
+            		global.gc();
+            		global.gcTime.stop=Date.now();
+        	}
+        	//var load=os.loadavg()[0];
 		//if (load<0.4) global.gc();
 	},10000);
 }
 
 setInterval(function(){
 	fs.closeSync(fs.openSync('/tmp/homekameleon.hb', 'w'));
-},5000);
+},10000);
 

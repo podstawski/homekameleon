@@ -31,7 +31,10 @@ var Tcp = function(options,logger) {
     }
     
     var send = function() {
-        if (sendQueue.length==0) return;
+	global.gcTime.timers.tcp = sendQueue.length;
+        if (sendQueue.length==0) {
+		return;
+	}
         
         
         for (var i=0; i<sendTimers.length; i++) {
@@ -40,22 +43,19 @@ var Tcp = function(options,logger) {
         sendTimers=[];
         
         if (!connected) {
-            sendTimers.push(setTimeout(send,100));
-            return;
+            return sendTimers.push(setTimeout(send,100));
         }
         
         if (sendSemaphore) {
-            sendTimers.push(setTimeout(send,options.latency));
-            return;
+            return sendTimers.push(setTimeout(send,options.latency));
         }
         
         if (sendLast>0 && Date.now()-sendLast<=options.latency && options.latency>0) {
-            sendTimers.push(setTimeout(send,options.latency-Date.now()+sendLast+1));
-            return;
+            return sendTimers.push(setTimeout(send,options.latency-Date.now()+sendLast+1));
         }
         
         sendSemaphore=true;
-        //console.log('Sendingg',Date.now(),Date.now()-sendLast,sendQueue[0].trim());
+        //console.log('Sending',Date.now(),Date.now()-sendLast,sendQueue[0].trim());
         sendLast=Date.now();
         client.write(sendQueue[0],'utf-8',function() {
             sendQueue.shift();

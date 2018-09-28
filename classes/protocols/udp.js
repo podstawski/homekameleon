@@ -65,6 +65,7 @@ var Udp = function(options,logger) {
     }
     
     var send = function() {
+	global.gcTime.timers.udp = sendQueue.length;
         if (sendQueue.length==0) return;
         
         for (var i=0; i<sendTimers.length; i++) {

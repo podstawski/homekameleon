@@ -9,7 +9,7 @@ then
 fi
 
 # --max_old_space_size=30
-node --expose-gc --max_old_space_size=45 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+node --expose-gc --max_old_space_size=50 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
 sleep 60
 counter=0
 
@@ -17,7 +17,7 @@ while [ "1" = "1" ]
 do
 	echo "$counter" > /tmp/homekameleon.hb.test
 	touch /tmp/homekameleon.hb.test
-	sleep 30
+	sleep 45 
 	if [ /tmp/homekameleon.hb.test -nt /tmp/homekameleon.hb ]
 	then
 		counter=`expr $counter + 1`
@@ -38,7 +38,7 @@ do
 			git chechout ./conf/buffer.json
 			cp ./conf/ios.json /tmp/conf
 		fi	
-		node --expose-gc --max_old_space_size=45 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+		node --expose-gc --max_old_space_size=50 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
 		sleep 60
 	fi
 
