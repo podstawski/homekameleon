@@ -35,7 +35,9 @@ do
 		tmp_size=`ls -al /tmp/conf/ios.json |awk '{print $5}'`
 		if [ $storage_size -gt $tmp_size ]
 		then
-			git chechout ./conf/buffer.json
+			cd ./conf
+			git checkout buffer.json
+			cd `dirname $0`
 			cp ./conf/ios.json /tmp/conf
 		fi	
 		node --expose-gc --max_old_space_size=50 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
