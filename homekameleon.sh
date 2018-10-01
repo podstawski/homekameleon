@@ -26,7 +26,7 @@ do
 		killall -9 node
 		sleep 1
 		echo "Restart `date`" >>/tmp/homekameleon.err
-		if [ "$counter" = "500" ]
+		if [ "$counter" = "10" ]
 		then
 			/homekameleon/fsync.sh 1
 			exit
