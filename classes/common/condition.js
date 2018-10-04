@@ -6,6 +6,7 @@ module.exports = function (db,condition) {
     
     var data=db[table].get(condition);
     
+    if (data==null) return false;
     var field=condition.condition[0];
     if (typeof(data[field])=='undefined') data[field]='';
     var comp = condition.condition[2];

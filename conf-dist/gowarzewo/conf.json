@@ -2,7 +2,7 @@
     "uuid": "HK",
     "commandpass": "trelemorele",
     "lang": "pl",
-    "collection": "/sd/conf/colct.db",
+    "collection": "/tmp/conf/colct.db",
     "devices": [
         {
             "id": "VAR",
@@ -86,7 +86,7 @@
       
         "ios": {
             "model": "/homekameleon/classes/common/json",
-            "file":"/sd/conf/ios.json",
+            "file":"/tmp/conf/ios.json",
             "index": ["haddr"]
         },
         "modules": {
