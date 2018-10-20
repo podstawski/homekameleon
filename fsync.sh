@@ -7,5 +7,6 @@ touch /tmp/homekameleon.fsync
 
 if [ "$1" = "1" ]
 then
+	echo `date` >> /homekameleon/reboot.log
 	reboot
 fi
