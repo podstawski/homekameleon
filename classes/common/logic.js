@@ -230,8 +230,8 @@ var Logic = function(script,logger)
                             var res=io2.value;
                             if (io2.unit && io2.unit.length>0) {
 				var unit=io2.unit;
-				if (io2.last>io2.value) unit=unit.replace('⇆','↘');
-				if (io2.last<io2.value) unit=unit.replace('⇆','↗');
+				if (io2.lastValue>io2.value) unit=unit.replace('⇆','↘');
+				if (io2.lastValue<io2.value) unit=unit.replace('⇆','↗');
                                 res+=' '+unit;
                             }
                             result[_io] = res;
