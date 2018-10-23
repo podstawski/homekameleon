@@ -29,6 +29,8 @@ do
 		if [ "$counter" = "10" ]
 		then
 			/homekameleon/fsync.sh 1
+			echo `date` >> /homekameleon/reboot.log
+			reboot
 			exit
 		fi
 		storage_size=`ls -al ./conf/ios.json |awk '{print $5}'`
