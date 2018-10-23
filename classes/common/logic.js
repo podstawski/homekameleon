@@ -229,7 +229,10 @@ var Logic = function(script,logger)
                             if(data.e || f=='e') evaluate(io2);
                             var res=io2.value;
                             if (io2.unit && io2.unit.length>0) {
-                                res+=' '+io2.unit;
+				var unit=io2.unit;
+				if (io2.last>io2.value) unit=unit.replace('⇆','↘');
+				if (io2.last<io2.value) unit=unit.replace('⇆','↗');
+                                res+=' '+unit;
                             }
                             result[_io] = res;
                         }
