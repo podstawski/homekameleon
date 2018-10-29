@@ -43,6 +43,7 @@ do
 			cp ./conf/ios.json /tmp/conf
 		fi	
 		node --expose-gc --max_old_space_size=50 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+		echo `date` >> /homekameleon/restart.log
 		sleep 60
 	fi
 

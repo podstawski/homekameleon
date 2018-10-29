@@ -232,6 +232,7 @@ var Logic = function(script,logger)
 				var unit=io2.unit;
 				if (io2.lastValue>io2.value) unit=unit.replace('⇆','↘');
 				if (io2.lastValue<io2.value) unit=unit.replace('⇆','↗');
+				unit=unit.replace('⇆','').trim();
                                 res+=' '+unit;
                             }
                             result[_io] = res;
