@@ -337,8 +337,10 @@ module.exports = function(com,ini,logger,callback) {
     };
     
     var initack = function(data) {
-
-        if (!data.active) return;        
+        var now=Date.now();
+        if (!data.active) return;
+        if (data.lastAck && now-data.lastAck<2000) return;
+        
         var mac=macaddress(data.ip,data.homekameleon);
                 
         
@@ -368,8 +370,17 @@ module.exports = function(com,ini,logger,callback) {
         for (var i=0; i<parseInt(data.temps); i++) {
             restore_ios(data.address,'t',temps_addrs[i]);
         }
+        
+
 
         var line=['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip,nocolon(data.address)];
+
+        data.lastAck=now;
+        if (data.ioset) {
+            line.push(data.ioset);
+            data.ioset=null;
+        }
+        database.buffer.set(data);
         
         com.send({
             address: data.ip,
@@ -644,6 +655,7 @@ module.exports = function(com,ini,logger,callback) {
             
             db.buffer.trigger('active',initack);
             db.buffer.trigger('homekameleon',initack);
+            db.buffer.trigger('ioset',initack);
             
             setInterval(checkIp,2000);
         },

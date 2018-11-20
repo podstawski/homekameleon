@@ -29,8 +29,8 @@ var registerColumns=[
             return new moment(data).format('DD-MM-YY, HH:mm:ss');
 		}
 	},
-    { title: "We",data: "inputs", width: "5%"},
-    { title: "Wy",data: "outputs", width: "5%"},
+    { title: "We",data: "inputs", width: "5%",className: 'inputs' },
+    { title: "Wy",data: "outputs", width: "5%",className: 'outputs'},
     { title: "Te",data: "temps", width: "5%"},
     {
 		title: 'WiFi',
@@ -128,4 +128,16 @@ $(document).on('click','.registertable td.name', function(e) {
 $(document).on('change','.registertable input[type="text"]',function(e){
     var id=$(this).closest('tr').attr('id');
     websocket.emit('register',{hwaddr: id, name: $(this).val()});
+});
+
+$(document).on('click','.registertable .inputs',function(e){
+    var id=$(this).closest('tr').attr('id');
+    var ios=prompt('Podaj numer wejścia w formacie 1:4, czyli wejście 1 ma być skojarzone z pinem 4, aby usunąć wejście nr 2 wpisz "2:"','1:4');
+    if (ios && ios.match(/^[0-9:]+$/)) websocket.emit('register',{hwaddr: id, ioset: 'i:'+ios});
+});
+
+$(document).on('click','.registertable .outputs',function(e){
+    var id=$(this).closest('tr').attr('id');
+    var ios=prompt('Podaj numer wyjścia w formacie 3:15, czyli wyjście 3 ma być skojarzone z pinem 15, aby usunąć wyjście nr 3 wpisz "3:"','3:15');
+    if (ios && ios.match(/^[0-9:]+$/)) websocket.emit('register',{hwaddr: id, ioset: 'o:'+ios});
 });

@@ -25,9 +25,10 @@ var iosColumns=[
 	title: 'Stan<span class="hidden-xs"><br/>obecny/poprzedni/czas</span>',
 		data: "value",
 		sortable: false,
+        className: 'state',
 		width: "10%",		
 		render: function ( data, type, full, meta ) {
-
+            if (!full.active) return '';
 			t=(Date.now()-full.last)/1000;
 			if (t>3600) t=Math.round(t/3600)+'h';
 			else if (t>600) t=Math.round(t/60)+'m';
@@ -51,11 +52,11 @@ var iosColumns=[
 		defaultContent: '<svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>'
 	},
     {
-		title: 'Usuń',
+		title: 'Usuń/NieA',
 		orderable: false,
 		data: null,
-		width: "7%",
-		defaultContent: '<svg class="glyph stroked trash"><use xlink:href="#stroked-trash"/></svg>'
+		width: "10%",
+		defaultContent: '<svg class="glyph stroked trash"><use xlink:href="#stroked-trash"/></svg><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"/></svg>'
 	}
 ];
 
@@ -180,6 +181,12 @@ $(document).on('click','.iostable svg',function(e){
         });
 
     
+    } else if (this.className.baseVal.indexOf('cancel')>=0) {
+        
+        ios[id]={haddr:id,active:$(this).closest('tr').find('.state').html().length>0?false:true};
+        websocket.emit('ios',ios);
+        
+        
     } else {
         ios[id]=this.className.baseVal.indexOf('trash')<0;
      
@@ -206,7 +213,7 @@ $(document).on('click','.iostable svg',function(e){
 
 $(document).on('click','#confirm-delete .btn-danger',function(e){
     ios={};
-    ios[$('#confirm-delete').attr('rel')]=false
+    ios[$('#confirm-delete').attr('rel')]=false;
     websocket.emit('ios',ios);
     $('#confirm-delete').modal('hide');
 });
