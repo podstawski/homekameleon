@@ -339,7 +339,7 @@ module.exports = function(com,ini,logger,callback) {
     var initack = function(data) {
         var now=Date.now();
         if (!data.active) return;
-        if (data.lastAck && now-data.lastAck<2000) return;
+        
         
         var mac=macaddress(data.ip,data.homekameleon);
                 
@@ -371,7 +371,7 @@ module.exports = function(com,ini,logger,callback) {
             restore_ios(data.address,'t',temps_addrs[i]);
         }
         
-
+        if (data.lastAck && now-data.lastAck<2000) return;
 
         var line=['ACK',nocolon(mac.mac),settings().hash,ssid,wifipass,mac.ip,nocolon(data.address)];
 
