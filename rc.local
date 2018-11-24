@@ -43,6 +43,10 @@ then
     else
         udhcpc -p /var/run/udhcpc-apcli0.pid -f -t 0 -i apcli0 -C &
     fi
+    if [ -f /homekameleon/static.alias ]
+    then
+        /homekameleon/static.alias
+    fi
     
 fi
 sleep 5
