@@ -72,10 +72,12 @@ $('.iostable').DataTable({
 var io_input_toggle = function () {
 	if ($('#edit-input .modal-body #io').val().toLowerCase()=='t') {
 		$('#edit-input .modal-body .temps').fadeIn(1000);
+        $('#edit-input .modal-body .t_rel').fadeIn(1000);
 		$('#edit-input .modal-body .eval').fadeOut(1000);
 
 	} else {
 		$('#edit-input .modal-body .temps').fadeOut(1000);
+        $('#edit-input .modal-body .t_rel').fadeOut(1000);
 		$('#edit-input .modal-body .eval').fadeIn(1000);
 	}
 }
@@ -168,6 +170,7 @@ $(document).on('click','.iostable svg',function(e){
                 drawIOSelects('#edit-input .modal-body .container-fluid .item',iosDataArray);
                 
                 drawIOSelects('#edit-input .modal-body .related',iosDataArray,data.related||[]);
+                drawIOSelects('#edit-input .modal-body .t_rel',iosDataArray,data.t_rel||null);
                 
                 drawConditions('#edit-input .modal-body .container-fluid .item');
                 setTimeout(io_input_toggle,500);
@@ -265,6 +268,7 @@ $('#edit-input .btn-info').click(function(e){
         data[sa[i].name] = sa[i].value;
     }
     data.related=$('#edit-input form .related select').val();
+    data.t_rel=$('#edit-input form .t_rel select').val();
     
 
     var iosdata={};

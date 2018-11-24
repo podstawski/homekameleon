@@ -26,21 +26,30 @@
     </div>
     
     
-    <div class="col-md-2">
+    <div class="col-md-1">
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon translate">Jednostka</span>
+                <span class="input-group-addon translate" title="Jednostka">J</span>
                 <input type="text" id="unit" [if:unit]value="[unit]"[endif:unit] name="unit"
                        class="form-control translate" placeholder="jednostka">
             </div>
         </div>
     </div> 
 
-    <div class="col-md-6 related">
+    <div class="col-md-4 related">
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon translate">Relacje</span>
                 <select name="related" id="related" class="form-control inputoroutput" multiple></select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 t_rel">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">T</span>
+                <select name="t_rel" id="t_rel" class="form-control inputoroutput"></select>
             </div>
         </div>
     </div> 

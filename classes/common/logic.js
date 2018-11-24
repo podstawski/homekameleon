@@ -99,21 +99,24 @@ var Logic = function(script,logger)
     var evaluate_temp_expected_idx=null;
     
     var evaluate_temp = function(data,io) {
-        if (evaluate_temp_expected_idx==null) {
-            evaluate_temp_expected_idx='';
-            var i=db.ios.select([{active:[1,true],address:['temp','temperature']}]);
-            if (i.data.length>0) {
-		evaluate_temp_expected_idx=i.data[0].haddr;
-		logger.log('Temperature expected: '+evaluate_temp_expected_idx,'logic');
-	    }
+        var temp_expected;
+        if (io.t_rel) {
+            temp_expected=db.ios.get(io.t_rel);
+        } else {
+            if (evaluate_temp_expected_idx==null) {
+                evaluate_temp_expected_idx='';
+                var i=db.ios.select([{active:[1,true],address:['temp','temperature']}]);
+                if (i.data.length>0) {
+                    evaluate_temp_expected_idx=i.data[0].haddr;
+                    logger.log('Temperature expected: '+evaluate_temp_expected_idx,'logic');
+                }
+            }
+            if (evaluate_temp_expected_idx==null || evaluate_temp_expected_idx.length==0) {
+                return;
+            }
+            
+            temp_expected=db.ios.get(evaluate_temp_expected_idx);
         }
-        if (evaluate_temp_expected_idx==null || evaluate_temp_expected_idx.length==0) 
-	{
-		return;
-	}
-        
-        var temp_expected=db.ios.get(evaluate_temp_expected_idx);
-
         
         if (temp_expected.value==null || temp_expected.value.length==0) return;
     
@@ -229,10 +232,10 @@ var Logic = function(script,logger)
                             if(data.e || f=='e') evaluate(io2);
                             var res=io2.value;
                             if (io2.unit && io2.unit.length>0) {
-				var unit=io2.unit;
-				if (io2.lastValue>io2.value) unit=unit.replace('⇆','↘');
-				if (io2.lastValue<io2.value) unit=unit.replace('⇆','↗');
-				unit=unit.replace('⇆','').trim();
+                                var unit=io2.unit;
+                                if (io2.lastValue>io2.value) unit=unit.replace('⇆','↘');
+                                if (io2.lastValue<io2.value) unit=unit.replace('⇆','↗');
+                                unit=unit.replace('⇆','').trim();
                                 res+=' '+unit;
                             }
                             result[_io] = res;
