@@ -1,6 +1,7 @@
 var condition=require('./condition');
 var checkactive=require('./checkactive');
 var Levenshtein=require('./levenshtein');
+var utils=require('./utils');
 var os = require('os');
 var async = require('async');
 
@@ -230,22 +231,13 @@ var Logic = function(script,logger)
                         if (type=='read') {
                             io2.last=io.last||0;
                             if(data.e || f=='e') evaluate(io2);
-                            var res=io2.value;
-                            if (io2.unit && io2.unit.length>0) {
-                                var unit=io2.unit;
-                                if (io2.lastValue>io2.value) unit=unit.replace('⇆','↘');
-                                if (io2.lastValue<io2.value) unit=unit.replace('⇆','↗');
-                                unit=unit.replace('⇆','').trim();
-                                res+=' '+unit;
-                            }
-                            result[_io] = res;
+                            result[_io] = io2.unit && io2.unit.length>0 && io2.unitValue ? io2.unitValue : io2.value;
                         }
                         
                         if (type=='toggle') {
                             startInputTimer(500);
                             script.toggle(io2);
                             result[_io] = 'OK';
-                        
                         }
                         return next();
                                             
@@ -366,15 +358,22 @@ var Logic = function(script,logger)
                     }
                     data.last=io.last||0;
                     data.eval=io.eval||null;
-                    data.lastValue=io.value||null;
+                    data.lastValue=io.value!=null?io.value:null;
                     evaluate(data);
                     evaluate_temp(data,io);
+			data.change=io.change||0;
+			if (io.unit && io.unit.length>0) {
+				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue>io.value) data.change=1;
+				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue<io.value) data.change=-1;
+                    		data.unit=io.unit;
+				data.unitValue = io.value+utils.unit(data);
+			}
+
                     db.ios.set(data);
                     run_actions(data,false,ctx);
                     break;
                 
                 case 'input':
-                    
                     if (Date.now() - startTime < 1000*10) {
                         logger.log('Waiting 10 seconds before serving logic','init');
                         break;
@@ -387,12 +386,18 @@ var Logic = function(script,logger)
                     if (data.device!==undefined) delete(data.device);
                     if (io==null) break;
                     if (!checkactive(io)) break; 
-                    
                     data.last=io.last||0;
                     data.eval=io.eval||null;
-                    data.lastValue=io.value||null;
+                    data.lastValue=io.value!=null?io.value:null;
                     var evaluated=evaluate(data);
                     evaluate_temp(data,io);
+			data.change=io.change||0;
+			if (io.unit && io.unit.length>0) {
+				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue>io.value) data.change=1;
+				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue<io.value) data.change=-1;
+				data.unit=io.unit;
+				data.unitValue = io.value+utils.unit(data);
+			}
                     db.ios.set(data);
                     run_actions(data,!evaluated,ctx);
                     

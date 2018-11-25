@@ -25,10 +25,10 @@ var iosColumns=[
 	title: 'Stan<span class="hidden-xs"><br/>obecny/poprzedni/czas</span>',
 		data: "value",
 		sortable: false,
-        className: 'state',
+        	className: 'state',
 		width: "10%",		
 		render: function ( data, type, full, meta ) {
-            if (!full.active) return '';
+            		if (!full.active) return '';
 			t=(Date.now()-full.last)/1000;
 			if (t>3600) t=Math.round(t/3600)+'h';
 			else if (t>600) t=Math.round(t/60)+'m';
@@ -39,7 +39,7 @@ var iosColumns=[
                 		var cl=data==1?' on':'';
                 		return '<svg class="glyph stroked flag'+cl+'"><use xlink:href="#stroked-flag"/></svg>'+state;
             		} else {
-                		return data+' '+(full.unit?full.unit:'')+state;  
+                		return (full.unit && full.unit.length ? full.unitValue : data)+state;  
             		}
             
 		}

@@ -341,8 +341,9 @@ var Web = function(com,ini,logger,callback) {
                 };
   
               
-                if (collections.data[i].unit) {
-                    collection_tables[store].value+=' '+collections.data[i].unit;
+                if (collections.data[i].unit && collections.data[i].unit.length>0) {
+                    //collection_tables[store].value+=' '+collections.data[i].unit;
+                    collection_tables[store].value=collections.data[i].unitValue;
                 }
             }
             
