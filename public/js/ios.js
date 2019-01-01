@@ -39,7 +39,7 @@ var iosColumns=[
                 		var cl=data==1?' on':'';
                 		return '<svg class="glyph stroked flag'+cl+'"><use xlink:href="#stroked-flag"/></svg>'+state;
             		} else {
-                		return (full.unit && full.unit.length ? full.unitValue : data)+state;  
+                		return (full.unit && full.unit.length>0 && full.unit!='typ' ? full.unitValue : full.value)+state;  
             		}
             
 		}
