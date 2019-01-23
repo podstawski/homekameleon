@@ -14,6 +14,8 @@ if (hosta.length==2) {
     host=hosta[1];
 }
 var url='http://'+host+'/read';
+if (host.indexOf('192')==-1)
+	url='https://'+host+'/read';
 
 
 $.ajax({
