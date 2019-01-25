@@ -7,15 +7,19 @@ var data = {
 };
 
 var host=global('Homiq_host');
+var dblslash=host.indexOf('://');
+var protocol='http';
+if (dblslash>-1){
+	protocol=host.substr(0,dblslash);
+	host=host.substr(dblslash+3);
+}
 var hosta=host.split('@');
 var auth=null;
 if (hosta.length==2) {
     auth=hosta[0].split(':');
     host=hosta[1];
 }
-var url='http://'+host+'/read';
-if (host.indexOf('192')==-1)
-	url='https://'+host+'/read';
+var url=protocol+'://'+host+'/read';
 
 
 $.ajax({
