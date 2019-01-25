@@ -2,7 +2,7 @@
 
 touch /tmp/piwnica
 
-for i in $(seq 2 50)
+for i in $(seq 2 95)
 do
 	ping -c 1 -w 1 192.168.0.$i >/dev/null &
 done
