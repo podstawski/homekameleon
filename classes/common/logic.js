@@ -232,6 +232,8 @@ var Logic = function(script,logger)
                             io2.last=io.last||0;
                             if(data.e || f=='e') evaluate(io2);
                             result[_io] = io2.unit && io2.unit.length>0 && io2.unitValue ? io2.unitValue : io2.value;
+				if (data.v && data.v==='last')
+					result[_io] = Math.round((Date.now()-io2.last)/1000);
                         }
                         
                         if (type=='toggle') {
