@@ -80,6 +80,36 @@
 
 </div>
 
+<div class="row smarthome">
+   <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Type</span>
+                <input type="text" id="sh_type" [if:sh_type]value="[sh_type]"[endif:sh_type] name="sh_type"
+                       class="form-control" step="0.1" placeholder="LIGHT|BLINDS" title="SmartHome type">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Traits</span>
+                <input type="text" id="sh_traits" [if:sh_traits]value="[sh_traits]"[endif:sh_traits] name="sh_traits"
+                       class="form-control" step="0.1" placeholder="OnOff|OpenClose" title="SmartHome traits">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon translate">Nicks</span>
+                <input type="text" id="sh_nicks" [if:sh_nicks]value="[sh_nicks]"[endif:sh_nicks] name="sh_nicks"
+                       class="form-control" step="0.1" placeholder="comma separated nicknamed" title="SmartHome nicknames">
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row temps">
    <div class="col-md-2">
         <div class="form-group">
