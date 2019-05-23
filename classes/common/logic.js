@@ -213,12 +213,12 @@ var Logic = function(script,logger)
                     var result={};
                     async.map(ios,function(_io,next){
                         _io=_io.trim();
-			var f=false;
-			if (_io.indexOf(':')>0) {
-				var __io=_io.split(':');
-				_io=__io[0];
-				f=__io[1];
-			}
+                        var f=false;
+                        if (_io.indexOf(':')>0) {
+                            var __io=_io.split(':');
+                            _io=__io[0];
+                            f=__io[1];
+                        }
                         io=getio(_io);
                         
                         if (!io) {
@@ -232,8 +232,8 @@ var Logic = function(script,logger)
                             io2.last=io.last||0;
                             if(data.e || f=='e') evaluate(io2);
                             result[_io] = io2.unit && io2.unit.length>0 && io2.unitValue ? io2.unitValue : io2.value;
-				if (data.v && data.v==='last')
-					result[_io] = Math.round((Date.now()-io2.last)/1000);
+                            if (data.v && data.v==='last')
+                                result[_io] = Math.round((Date.now()-io2.last)/1000);
                         }
                         
                         if (type=='toggle') {
@@ -363,13 +363,13 @@ var Logic = function(script,logger)
                     data.lastValue=io.value!=null?io.value:null;
                     evaluate(data);
                     evaluate_temp(data,io);
-			data.change=io.change||0;
-			if (io.unit && io.unit.length>0) {
-				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue>io.value) data.change=1;
-				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue<io.value) data.change=-1;
-                    		data.unit=io.unit;
-				data.unitValue = io.value+utils.unit(data);
-			}
+                    data.change=io.change||0;
+                    if (io.unit && io.unit.length>0) {
+                        if (!isNaN(parseFloat(io.lastValue)) && io.lastValue>io.value) data.change=1;
+                        if (!isNaN(parseFloat(io.lastValue)) && io.lastValue<io.value) data.change=-1;
+                                    data.unit=io.unit;
+                        data.unitValue = io.value+utils.unit(data);
+                    }
 
                     db.ios.set(data);
                     run_actions(data,false,ctx);
@@ -393,13 +393,13 @@ var Logic = function(script,logger)
                     data.lastValue=io.value!=null?io.value:null;
                     var evaluated=evaluate(data);
                     evaluate_temp(data,io);
-			data.change=io.change||0;
-			if (io.unit && io.unit.length>0) {
-				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue>io.value) data.change=1;
-				if (!isNaN(parseFloat(io.lastValue)) && io.lastValue<io.value) data.change=-1;
-				data.unit=io.unit;
-				data.unitValue = io.value+utils.unit(data);
-			}
+                    data.change=io.change||0;
+                    if (io.unit && io.unit.length>0) {
+                        if (!isNaN(parseFloat(io.lastValue)) && io.lastValue>io.value) data.change=1;
+                        if (!isNaN(parseFloat(io.lastValue)) && io.lastValue<io.value) data.change=-1;
+                        data.unit=io.unit;
+                        data.unitValue = io.value+utils.unit(data);
+                    }
                     db.ios.set(data);
                     run_actions(data,!evaluated,ctx);
                     

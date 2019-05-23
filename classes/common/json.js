@@ -75,9 +75,10 @@ var Model = function(opt,logger) {
 
     var afterSave=function() {
         logger.log("Saved "+file,'db');
-        fs.unlink(bak);
-        lastSave=Date.now();
-        saveState=false; 
+        fs.unlink(bak,function(){
+		lastSave=Date.now();
+		saveState=false;
+	});
     }
     
     this.save = function(ultimateState) {

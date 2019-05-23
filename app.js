@@ -6,6 +6,7 @@ var Structure = require('./classes/common/structure');
 var Logger = require('./classes/common/logger');
 var Device = require('./classes/common/device');
 var Logic = require('./classes/common/logic');
+var Smarthome = require('./classes/common/smarthome');
 var Script = require('./classes/common/script');
 var Collection = require('./classes/common/collection');
 
@@ -79,6 +80,10 @@ process.on('SIGHUP',function () {
             logger.log('Initializing '+structureData.devices[i].name,'init');
             devices[id] = new Device(id,structureData.devices[i].protocol,structureData.devices[i].language,structureData.devices[i].com,data,logger);
             
+            if (devices[id].smarthome) {
+                new Smarthome(devices[id].smarthome,script,logger).setdb(structure.db,collection,structureData);
+            }
+            
             devices[id].on('data',function(id,type,data,ctx) {
                 var changed=logic.action(id,type,data,ctx);
                 if (type=='set' || !changed) return; // don't notify
@@ -136,7 +141,7 @@ process.on('SIGTSTP',function(){
 
 
 process.kill(process.pid, 'SIGHUP');
-fs.writeFile('/tmp/homekameleon.pid',process.pid);
+fs.writeFileSync('/tmp/homekameleon.pid',process.pid);
 
 var cron = function() {
 

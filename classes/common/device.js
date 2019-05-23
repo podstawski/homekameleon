@@ -46,6 +46,8 @@ var Device = function(id,protocol,language,options,ini,logger) {
             self.on(event,fun);
         },
         
+        smarthome: com.smarthome,
+        
         command: function(data,delay,ctx) {
             if (typeof(trans.set)=='function') trans.set(data,delay,ctx);
         },
