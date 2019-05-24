@@ -92,7 +92,11 @@ var Udp = function(options,logger) {
         
         sendLast=Date.now();
         
-        var message=Buffer.from(sendQueue[0].data.trim()+"\r\n");
+	var message;
+	if(parseFloat(process.version.replace(/[^0-9.]*/g,''))>6)
+        	message=Buffer.from(sendQueue[0].data.trim()+"\r\n");
+	else
+		message=new Buffer(sendQueue[0].data.trim()+"\r\n");
         server.send(message,0,message.length,options.port,sendQueue[0].address,function(err,bytes) {
             sendQueue.shift();
             sendSemaphore=false;

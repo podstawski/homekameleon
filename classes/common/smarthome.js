@@ -154,7 +154,7 @@ var Smarthome = function(app,script,logger)
      
         return {
           requestId: body.requestId,
-          payload
+          payload:payload
         }
     }
     
