@@ -1,0 +1,19 @@
+#!/bin/sh
+
+
+mkdir /tmp/logs 2>/dev/null
+mkdir /tmp/conf 2>/dev/null
+
+if [ ! -f /homekameleon/conf/conf.json ]
+then
+	cp /homekameleon/conf-dist/homekameleon.json /homekameleon/conf/conf.json
+	cp /homekameleon/conf-dist/pl.json /homekameleon/conf
+fi
+
+if [ -f /homekameleon/static.inet ]
+then
+	/homekameleon/static.inet
+fi
+
+#/homekameleon/homekameleon.sh &   
+
