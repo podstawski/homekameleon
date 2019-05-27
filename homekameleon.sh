@@ -8,8 +8,8 @@ then
 	cp ./conf/colct.db /tmp/conf
 fi
 
-# --max_old_space_size=30
-node --expose-gc --max_old_space_size=50 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+# --expose-gc --max_old_space_size=30
+sudo node app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
 sleep 60
 counter=0
 
@@ -21,9 +21,9 @@ do
 	if [ /tmp/homekameleon.hb.test -nt /tmp/homekameleon.hb ]
 	then
 		counter=`expr $counter + 1`
-		killall -TERM node
+		sudo killall -TERM node
 		sleep 5
-		killall -9 node
+		sudo killall -9 node
 		sleep 1
 		echo "Restart `date`" >>/tmp/homekameleon.err
 		if [ "$counter" = "10" ]
@@ -42,7 +42,7 @@ do
 			cd `dirname $0`
 			cp ./conf/ios.json /tmp/conf
 		fi	
-		node --expose-gc --max_old_space_size=50 app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+		sudo node app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
 		echo `date` >> /homekameleon/restart.log
 		sleep 60
 	fi

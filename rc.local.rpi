@@ -12,8 +12,8 @@ fi
 
 if [ -f /homekameleon/static.inet ]
 then
-	/homekameleon/static.inet
+	sudo /homekameleon/static.inet
 fi
 
-#/homekameleon/homekameleon.sh &   
+sudo /homekameleon/homekameleon.sh &   
 

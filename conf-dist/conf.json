@@ -68,6 +68,7 @@
             "language": "homek",
             "com":{
                 "port": "80",
+		"smarthome": "/promienko",
                 "xtunnel_port": "9001",
                 "xtunnel_host": "homiq@homiq.webkameleon.com",
                 "xtunnel_script": "/home/homiq/homiq.sh 9001"

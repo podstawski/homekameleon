@@ -1,3 +1,3 @@
 0 7 * * * wget -O /dev/null http://gold.webkameleon.com/startmebaby >/dev/null 2>/dev/null
 0	1	*	*	*	rm -f /tmp/logs/frame.txt /tmp/logs/perform.txt /tmp/logs/homiq.txt /tmp/logs/store.txt /tmp/logs/cal.txt 
-@reboot touch /tmp/alamakota
+@reboot /homekameleon/rc.local.rpi
