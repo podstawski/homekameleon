@@ -16,7 +16,7 @@
     "url": "https://github.com/podstawski/promienko/issues"
   },
   "dependencies": {
-    "actions-on-google": "",
+    "actions-on-google": "^2.7.0",
     "async": "",
     "body-parser": "",
     "dblite": "",
