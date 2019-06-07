@@ -1,4 +1,5 @@
-var dblite = require('dblite').withSQLite('3.8.6');
+//var dblite = require('dblite').withSQLite('3.8.6');
+var dblite = require('dblite');
 var fs = require('fs');
 
 module.exports = function(path) {
@@ -11,6 +12,7 @@ module.exports = function(path) {
     });
     
     var db=dblite(path);
+	db.query('.databases');
     
     var round=function(n) {
         return Math.round(100*n)/100;  

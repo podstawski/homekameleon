@@ -22,6 +22,7 @@ var Udp = function(options,logger) {
     var ips = function() {
         var ifaces = os.networkInterfaces();
         var ips=[];
+	var mac={};
         
         for (var k in ifaces) {
             if (ifaces[k][0].internal) {
@@ -44,6 +45,9 @@ var Udp = function(options,logger) {
             for (var i=0; i<ifaces[k].length; i++) {
                 if (ifaces[k][i].family=='IPv4') 
 		{
+			if (ifaces[k][i].mac && mac[ifaces[k][i].mac])
+                                continue;
+                        mac[ifaces[k][i].mac]=true;
 			if (options.ip_exclude && options.ip_exclude.indexOf(ifaces[k][i].address)!=-1) {
 				delete(ifaces[k]);
 				break;

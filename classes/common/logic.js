@@ -401,7 +401,8 @@ var Logic = function(script,logger)
                         data.unitValue = io.value+utils.unit(data);
                     }
                     db.ios.set(data);
-                    run_actions(data,!evaluated,ctx);
+                    //run_actions(data,!evaluated,ctx);
+                    run_actions(data,false,ctx);
                     
                     break;
                     

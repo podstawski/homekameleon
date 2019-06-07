@@ -12,7 +12,7 @@ wait
 ip=`cat /proc/net/arp | grep $1 | awk '{print $1}'`
 echo "$1 = $ip" >/tmp/piwnica
 
-etherwake $1
+sudo etherwake $1
 
 if [ "$ip" ]
 then
