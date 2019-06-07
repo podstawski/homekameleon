@@ -8,3 +8,4 @@ npm-debug.log
 ini.js
 app.pid
 wifi
+package-lock.json
