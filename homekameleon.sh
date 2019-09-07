@@ -9,7 +9,7 @@ then
 fi
 
 # --expose-gc --max_old_space_size=30
-sudo node app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+sudo node app 2>&1 |grep -v "unknown database" >/tmp/homekameleon.log 
 sleep 60
 counter=0
 
@@ -42,7 +42,7 @@ do
 			cd `dirname $0`
 			cp ./conf/ios.json /tmp/conf
 		fi	
-		sudo node app >/tmp/homekameleon.log 2>>/tmp/homekameleon.err &
+		sudo node app 2>&1 |grep -v "unknown database" >>/tmp/homekameleon.log 
 		echo `date` >> /homekameleon/restart.log
 		sleep 60
 	fi
