@@ -4,7 +4,7 @@ var exec = require('child_process').exec;
 var settings = require('../common/hsettings');
 
 var attempts=20;
-var attempt_delay=300;
+var attempt_delay=3000;
 
 var pos_cmd=0;
 var pos_src=1;
@@ -589,6 +589,8 @@ module.exports = function(com,ini,logger,callback) {
                                     opt.value=state;
                                     if (line[pos_cmd]=='T') {
                                         opt.value=parseFloat(state)/100;
+                                        if (opt.value>85)
+                                            opt.haddr=null; //nie wysylaj
                                     }
                                 }
                           
