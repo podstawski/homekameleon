@@ -510,11 +510,10 @@ module.exports = function(com,ini,logger,callback) {
         'data': function(data) {
             if (!data.data) return;
             
-            
             if (data.data.substr(0,1)=='(' && data.data.substr(-1)==')') {
                 var line=data.data.substr(1,data.data.length-2).split(';');
                 
-                logger.log('Received: '+line.join(';'),'frame');
+                logger.log('Received: ('+line.join(';')+')','frame');
                 
                 if (line[pos_cmd]=='INIT') {
                     var address=nocolon(line[pos_src]);
@@ -634,8 +633,9 @@ module.exports = function(com,ini,logger,callback) {
                     
                 }
                 
+            } else {
+                logger.log('Strange received: '+data.data,'frame'); 
             }
-                     
         },
         'initstate': function (db) {
             database=db;
