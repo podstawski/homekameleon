@@ -345,9 +345,12 @@ module.exports = function(com,ini,logger,callback) {
                 
                 if (line[pos_top]=='s') {
                     var ignore='';
-                    if (lastIdx[line[pos_src]]==null) lastIdx[line[pos_src]]=-1;
-                    if (line[pos_cmd]!='PG' && lastIdx[line[pos_src]] != line[pos_pkt]) {
-                        lastIdx[line[pos_src]]=line[pos_pkt];
+		    var tokenPkt=line[pos_src]+line[pos_cmd];
+                    if (lastIdx[tokenPkt]==null) 
+			lastIdx[tokenPkt]=-1;
+
+                    if (line[pos_cmd]!='PG' && lastIdx[tokenPkt] != line[pos_pkt]) {
+                        lastIdx[tokenPkt]=line[pos_pkt];
                         linein(line);    
                     } else if (line[pos_cmd]!='PG') {
                         ignore=' logic ignored';
