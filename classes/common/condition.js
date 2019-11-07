@@ -24,16 +24,16 @@ module.exports = function (db,condition) {
             return data[field] != comp;
     
         case '>':
-            return data[field] > comp;
+            return parseFloat(data[field]) > parseFloat(comp);
 
         case '<':
-            return data[field] < comp;
+            return parseFloat(data[field]) < parseFloat(comp);
         
         case '>=':
-            return data[field] >= comp;
+            return parseFloat(data[field]) >= parseFloat(comp);
 
         case '<=':
-            return data[field] <= comp;
+            return parseFloat(data[field]) <= parseFloat(comp);
 
         default:
             return false;
