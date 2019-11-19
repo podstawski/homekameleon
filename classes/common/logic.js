@@ -77,9 +77,8 @@ var Logic = function(script,logger)
     var evaluate = function (io) {
         
         var now=Date.now();
-        
         io.time=now-(io.last||0);
-
+        
         if (io['eval'] == null || io['eval'].length==0){
             io.last=now; 
             return false;
