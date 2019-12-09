@@ -1,13 +1,16 @@
 
-module.exports = function (db,condition) {
+module.exports = function (db,condition,calcluateTime) {
     var table=condition.db||'ios';
     
     if (typeof(db[table])=='undefined') return false;
     
     var data=db[table].get(condition);
-    data.time=Date.now()-(data.last||0);
+    if (data==null) 
+       return false;
+
+    if (calcluateTime)
+       data.time=Date.now()-(data.last||0);
     
-    if (data==null) return false;
     var field=condition.condition[0];
     if (typeof(data[field])=='undefined') data[field]='';
     var comp = condition.condition[2];

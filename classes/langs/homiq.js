@@ -1,5 +1,5 @@
 var attempts=8;
-var attempt_delay=500;
+var attempt_delay=1000;
 
 var pos_cmd=0;
 var pos_val=1;

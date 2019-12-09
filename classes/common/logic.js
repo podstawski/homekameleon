@@ -44,7 +44,7 @@ var Logic = function(script,logger)
                 for (var i=0; i<actions.actions.length; i++) {
                     var pass=true;
                     for (var j=0; j<actions.actions[i].conditions.length; j++) {
-                        pass*=condition(db,actions.actions[i].conditions[j]);
+                        pass*=condition(db,actions.actions[i].conditions[j],data.haddr!=actions.actions[i].conditions[j].haddr);
                         if (!pass) break;
                     }
                     

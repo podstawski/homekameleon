@@ -24,7 +24,7 @@ do
 		sudo killall -TERM node
 		sleep 5
 		sudo killall -9 node
-		sleep 1
+		sleep 3
 		echo "Restart `date`" >>/tmp/homekameleon.err
 		if [ "$counter" = "10" ]
 		then
