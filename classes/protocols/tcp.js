@@ -58,6 +58,7 @@ var Tcp = function(options,logger) {
         //console.log('Sending',Date.now(),Date.now()-sendLast,sendQueue[0].trim());
         sendLast=Date.now();
         client.write(sendQueue[0],'utf-8',function() {
+            logger.log('Sent: '+sendQueue[0],'frame');
             sendQueue.shift();
             sendSemaphore=false;
             sendLast=Date.now();

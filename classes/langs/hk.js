@@ -424,6 +424,9 @@ module.exports = function(com,ini,logger,callback) {
             if (device==null) continue;
             var mac=macaddress(device.ip,device.homekameleon);
          
+	    if (!mac)
+		continue;
+
             send({
                 cmd: 'T',
                 dev: device.hwaddr,
