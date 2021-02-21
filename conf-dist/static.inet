@@ -1,2 +1,5 @@
-ifconfig apcli0 192.168.0.1
+#route add default gateway 192.168.0.254
+#ifconfig wlan0:0 192.168.0.1
+ifconfig wlan0 192.168.0.1
 route add default gateway 192.168.0.254
+ifconfig eth0 10.10.20.11
